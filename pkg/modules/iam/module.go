@@ -2,14 +2,14 @@
 //
 // 本模块包含：
 //   - Domain: 用户、角色、权限、认证、双因素认证、PAT
-//   - Application: 用例处理器
+//   - App: 用例处理器
 //   - Infrastructure: JWT、TOTP、仓储实现、缓存服务、种子数据
-//   - Transport: HTTP 适配器、中间件、测试工具
+//   - Adapters: HTTP 适配器、中间件、测试工具
 //
 // 模块化设计：
 //   - persistence.RepositoryModule: 仓储层（包括缓存装饰器）
 //   - cache.CacheModule: IAM 专属缓存服务
-//   - application.UseCaseModule: 用例层（业务逻辑编排）
+//   - app.UseCaseModule: 用例层（业务逻辑编排）
 //   - handler.HandlerModule: HTTP 处理器层
 //
 // 使用方式：
@@ -25,10 +25,10 @@ package iam
 import (
 	"go.uber.org/fx"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/cache"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/persistence"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/transport/gin/handler"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/cache"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
 )
 
 // Module 返回 IAM 模块的完整 Fx 配置。
@@ -42,14 +42,14 @@ import (
 //  6. HandlerModule (本模块) - HTTP 处理器层
 //
 // 注意：
-//   - 认证中间件（Auth, RBAC）在 transport/gin/middleware 包中
+//   - 认证中间件（Auth, RBAC）在 adapters/gin/middleware 包中
 //   - 路由注册由顶层容器处理，不在模块内部
 func Module() fx.Option {
 	return fx.Module("iam",
 		// 子模块
 		cache.CacheModule,
 		persistence.RepositoryModule,
-		application.UseCaseModule,
+		app.UseCaseModule,
 		handler.HandlerModule,
 	)
 }

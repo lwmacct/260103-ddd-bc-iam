@@ -8,15 +8,14 @@ import (
 	"go.uber.org/fx"
 
 	"github.com/lwmacct/260103-ddd-bc-iam/internal/config"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/audit"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/auth"
-	iampersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/persistence"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/audit"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/auth"
+	persistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
 
+	ginmiddleware "github.com/lwmacct/260101-go-pkg-gin/pkg/middleware"
 	"github.com/lwmacct/260101-go-pkg-gin/pkg/permission"
 	"github.com/lwmacct/260101-go-pkg-gin/pkg/routes"
-
-	"github.com/lwmacct/260101-go-pkg-gin/pkg/middleware"
-	iamMiddleware "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/transport/gin/middleware"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/middleware"
 )
 
 // RouterDepsParams 聚合创建中间件所需的依赖。
@@ -35,9 +34,9 @@ type RouterDepsParams struct {
 	AuditCreateHandler *audit.CreateHandler
 
 	// Domain Repositories (for middleware)
-	MemberRepos     iampersistence.OrgMemberRepositories
-	TeamRepos       iampersistence.TeamRepositories
-	TeamMemberRepos iampersistence.TeamMemberRepositories
+	MemberRepos     persistence.OrgMemberRepositories
+	TeamRepos       persistence.TeamRepositories
+	TeamMemberRepos persistence.TeamMemberRepositories
 }
 
 // MiddlewareInjector 中间件注入器。
@@ -66,7 +65,7 @@ func NewMiddlewareInjector(p RouterDepsParams) *MiddlewareInjector {
 
 	// 认证中间件（可选 - 支持无认证的应用）
 	if p.JWTManager != nil && p.PATService != nil && p.PermissionCache != nil {
-		injector.authMiddleware = iamMiddleware.Auth(
+		injector.authMiddleware = middleware.Auth(
 			p.JWTManager,
 			p.PATService,
 			p.PermissionCache,
@@ -76,7 +75,7 @@ func NewMiddlewareInjector(p RouterDepsParams) *MiddlewareInjector {
 	// RBAC 中间件工厂
 	injector.rbacFactory = func(operation string) gin.HandlerFunc {
 		// 转换为 permission.Operation 类型
-		return iamMiddleware.RequireOperation(permission.Operation(operation))
+		return middleware.RequireOperation(permission.Operation(operation))
 	}
 
 	// Audit 中间件工厂（可选）
@@ -88,8 +87,8 @@ func NewMiddlewareInjector(p RouterDepsParams) *MiddlewareInjector {
 
 	// Org/Team 上下文中间件（可选 - 支持无多租户的应用）
 	if p.MemberRepos.Query != nil && p.TeamRepos.Query != nil {
-		injector.orgContext = iamMiddleware.OrgContext(p.MemberRepos.Query)
-		injector.teamContext = iamMiddleware.TeamContext(p.TeamRepos.Query, p.TeamMemberRepos.Query)
+		injector.orgContext = middleware.OrgContext(p.MemberRepos.Query)
+		injector.teamContext = middleware.TeamContext(p.TeamRepos.Query, p.TeamMemberRepos.Query)
 	}
 
 	return injector
@@ -109,8 +108,8 @@ func (inj *MiddlewareInjector) InjectMiddlewares(route *routes.Route) []gin.Hand
 
 	// 1. 基础中间件（所有路由）
 	m = append(m,
-		middleware.RequestID(),
-		middleware.SetOperationID(route.Operation),
+		ginmiddleware.RequestID(),
+		ginmiddleware.SetOperationID(route.Operation),
 	)
 
 	// 2. 认证中间件（非 public 路由）
@@ -150,7 +149,7 @@ func (inj *MiddlewareInjector) InjectMiddlewares(route *routes.Route) []gin.Hand
 	}
 
 	// 7. Logger 中间件（最后，记录完整请求）
-	m = append(m, middleware.LoggerSkipPaths("/health"))
+	m = append(m, ginmiddleware.LoggerSkipPaths("/health"))
 
 	return m
 }

@@ -18,6 +18,5 @@ repos:
     rev: v1.0.2
     hooks:
       - id: prettier
-      # - id: build-docs  # 禁用：项目无 VitePress 配置
       - id: golangci-lint
       - id: config-sync

@@ -15,12 +15,12 @@ import (
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/health"
 
 	// Application UseCases (only for middleware dependencies)
-	iamapplication "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/auth"
-	iampersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/persistence"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/auth"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
 
 	// Handlers (injected via fx.In from their modules)
-	iamhandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/transport/gin/handler"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
 
 	ginHttp "github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin"
 )
@@ -77,27 +77,27 @@ type routerParams struct {
 	PermissionCache *auth.PermissionCacheService
 
 	// UseCases
-	Audit *iamapplication.AuditUseCases
+	Audit *app.AuditUseCases
 
 	// Repositories (for middleware)
-	MemberRepos     iampersistence.OrgMemberRepositories
-	TeamRepos       iampersistence.TeamRepositories
-	TeamMemberRepos iampersistence.TeamMemberRepositories
+	MemberRepos     persistence.OrgMemberRepositories
+	TeamRepos       persistence.TeamRepositories
+	TeamMemberRepos persistence.TeamMemberRepositories
 
 	// Handlers
-	Auth        *iamhandler.AuthHandler
-	Captcha     *iamhandler.CaptchaHandler
-	AdminUser   *iamhandler.AdminUserHandler
-	UserProfile *iamhandler.UserProfileHandler
-	Role        *iamhandler.RoleHandler
-	PAT         *iamhandler.PATHandler
-	AuditH      *iamhandler.AuditHandler
-	TwoFA       *iamhandler.TwoFAHandler
-	Org         *iamhandler.OrgHandler
-	OrgMember   *iamhandler.OrgMemberHandler
-	Team        *iamhandler.TeamHandler
-	TeamMember  *iamhandler.TeamMemberHandler
-	UserOrg     *iamhandler.UserOrgHandler
+	Auth        *handler.AuthHandler
+	Captcha     *handler.CaptchaHandler
+	AdminUser   *handler.AdminUserHandler
+	UserProfile *handler.UserProfileHandler
+	Role        *handler.RoleHandler
+	PAT         *handler.PATHandler
+	AuditH      *handler.AuditHandler
+	TwoFA       *handler.TwoFAHandler
+	Org         *handler.OrgHandler
+	OrgMember   *handler.OrgMemberHandler
+	Team        *handler.TeamHandler
+	TeamMember  *handler.TeamMemberHandler
+	UserOrg     *handler.UserOrgHandler
 }
 
 func newRouter(p routerParams) *gin.Engine {

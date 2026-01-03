@@ -7,9 +7,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/auth"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/user"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/transport/gin/manualtest"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/manualtest"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/auth"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/user"
 )
 
 // TestGetProfile 测试获取个人资料。

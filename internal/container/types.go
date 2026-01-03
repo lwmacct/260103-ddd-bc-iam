@@ -1,7 +1,7 @@
 package container
 
 import (
-	iampersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/persistence"
+	persistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
 )
 
 // ContainerOptions 容器初始化选项。
@@ -21,17 +21,17 @@ func DefaultOptions() *ContainerOptions {
 func GetAllModels() []any {
 	return []any{
 		// 用户和角色
-		&iampersistence.UserModel{},
-		&iampersistence.RoleModel{},
+		&persistence.UserModel{},
+		&persistence.RoleModel{},
 		// 认证和授权
-		&iampersistence.PersonalAccessTokenModel{},
-		&iampersistence.TwoFAModel{},
+		&persistence.PersonalAccessTokenModel{},
+		&persistence.TwoFAModel{},
 		// 组织和团队
-		&iampersistence.OrgModel{},
-		&iampersistence.TeamModel{},
-		&iampersistence.OrgMemberModel{},
-		&iampersistence.TeamMemberModel{},
+		&persistence.OrgModel{},
+		&persistence.TeamModel{},
+		&persistence.OrgMemberModel{},
+		&persistence.TeamMemberModel{},
 		// 审计日志
-		&iampersistence.AuditModel{},
+		&persistence.AuditModel{},
 	}
 }

@@ -17,8 +17,8 @@ import (
 	"go.uber.org/fx"
 	"gorm.io/gorm"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/internal/config"
-	iamconfig "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/config"
+	internalConfig "github.com/lwmacct/260103-ddd-bc-iam/internal/config"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/config"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/cache"
 	dbpkg "github.com/lwmacct/260103-ddd-shared/pkg/platform/db"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/eventbus"
@@ -54,7 +54,7 @@ type TelemetryResult struct {
 	Shutdown telemetry.ShutdownFunc
 }
 
-func newTelemetry(lc fx.Lifecycle, cfg *config.Config) (TelemetryResult, error) {
+func newTelemetry(lc fx.Lifecycle, cfg *internalConfig.Config) (TelemetryResult, error) {
 	ctx := context.Background()
 	shutdown, err := telemetry.InitTracer(ctx, telemetry.Config{
 		ServiceName:    "go-ddd-pkg-lib",
@@ -91,7 +91,7 @@ func newTelemetry(lc fx.Lifecycle, cfg *config.Config) (TelemetryResult, error) 
 	return TelemetryResult{Shutdown: shutdown}, nil
 }
 
-func newDatabase(lc fx.Lifecycle, cfg *config.Config) (*gorm.DB, error) {
+func newDatabase(lc fx.Lifecycle, cfg *internalConfig.Config) (*gorm.DB, error) {
 	ctx := context.Background()
 	dbConfig := dbpkg.DefaultConfig(cfg.Data.PgsqlURL)
 	dbConfig.EnableTracing = cfg.Telemetry.Enabled
@@ -148,7 +148,7 @@ func runAutoMigrate(db *gorm.DB) error {
 	return nil
 }
 
-func newRedisClient(lc fx.Lifecycle, cfg *config.Config) (*redis.Client, error) {
+func newRedisClient(lc fx.Lifecycle, cfg *internalConfig.Config) (*redis.Client, error) {
 	ctx := context.Background()
 	client, err := cache.NewClient(ctx, cfg.Data.RedisURL, cfg.Telemetry.Enabled)
 	if err != nil {
@@ -182,7 +182,6 @@ func newEventBus(lc fx.Lifecycle) event.EventBus {
 }
 
 // newIAMConfig 从通用配置转换到 IAM 专属配置。
-func newIAMConfig(cfg *config.Config) *iamconfig.Config {
-	converted := ToIAMConfig(cfg)
-	return &converted
+func newIAMConfig(cfg *internalConfig.Config) config.Config {
+	return ToIAMConfig(cfg)
 }

@@ -8,9 +8,9 @@ import (
 	"go.uber.org/fx"
 	"gorm.io/gorm"
 
-	iameventhandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/eventhandler"
-	iampersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/persistence"
-	iamseeds "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/seeds"
+	eventhandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/eventhandler"
+	persistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
+	seeds "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/seeds"
 	dbpkg "github.com/lwmacct/260103-ddd-shared/pkg/platform/db"
 	"github.com/lwmacct/260103-ddd-shared/pkg/shared/event"
 )
@@ -25,7 +25,7 @@ type eventHandlersParams struct {
 	fx.In
 
 	EventBus   event.EventBus
-	AuditRepos iampersistence.AuditRepositories
+	AuditRepos persistence.AuditRepositories
 }
 
 // RegisterEventHandlers 设置审计日志的事件订阅。
@@ -34,7 +34,7 @@ type eventHandlersParams struct {
 //   - *（所有事件）→ 审计日志
 func RegisterEventHandlers(p eventHandlersParams) {
 	// 审计日志处理器
-	auditHandler := iameventhandler.NewAuditEventHandler(p.AuditRepos.Command)
+	auditHandler := eventhandler.NewAuditEventHandler(p.AuditRepos.Command)
 
 	// 订阅所有事件用于审计日志
 	p.EventBus.Subscribe("*", auditHandler)
@@ -90,7 +90,7 @@ func RunReset(lc fx.Lifecycle, db *gorm.DB, redis *redis.Client) error {
 			}
 
 			// 3. 执行种子数据
-			seeder := dbpkg.NewSeederManager(db, iamseeds.DefaultSeeders())
+			seeder := dbpkg.NewSeederManager(db, seeds.DefaultSeeders())
 			if err := seeder.Run(ctx); err != nil {
 				return err
 			}
@@ -108,7 +108,7 @@ func RunSeed(lc fx.Lifecycle, db *gorm.DB) error {
 		OnStart: func(ctx context.Context) error {
 			slog.Info("Running database seeders...")
 
-			seeder := dbpkg.NewSeederManager(db, iamseeds.DefaultSeeders())
+			seeder := dbpkg.NewSeederManager(db, seeds.DefaultSeeders())
 			if err := seeder.Run(ctx); err != nil {
 				return err
 			}
