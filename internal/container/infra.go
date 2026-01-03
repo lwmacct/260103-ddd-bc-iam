@@ -44,6 +44,7 @@ var InfraModule = fx.Module("infra",
 		newRedisClient,
 		newEventBus,
 		newIAMConfig,
+		newSettingsCacheService,
 	),
 )
 
@@ -182,6 +183,7 @@ func newEventBus(lc fx.Lifecycle) event.EventBus {
 }
 
 // newIAMConfig 从通用配置转换到 IAM 专属配置。
-func newIAMConfig(cfg *internalConfig.Config) config.Config {
-	return ToIAMConfig(cfg)
+func newIAMConfig(cfg *internalConfig.Config) *config.Config {
+	iamCfg := ToIAMConfig(cfg)
+	return &iamCfg
 }

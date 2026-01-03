@@ -4,14 +4,19 @@ import (
 	"github.com/gin-gonic/gin"
 	ginroutes "github.com/lwmacct/260101-go-pkg-gin/pkg/routes"
 
+	// IAM
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/routes"
+
+	// Settings
+	settingsHandler "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/handler"
+	settingsRoutes "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/routes"
 )
 
 // AllRoutes 聚合所有模块的路由定义。
 //
 // 职责：
-//  1. 从 IAM 模块收集路由定义
+//  1. 从 IAM 和 Settings 模块收集路由定义
 //  2. 返回统一的路由列表供注册使用
 func AllRoutes(
 	// IAM Handlers
@@ -28,9 +33,12 @@ func AllRoutes(
 	orgMemberHandler *handler.OrgMemberHandler,
 	teamHandler *handler.TeamHandler,
 	teamMemberHandler *handler.TeamMemberHandler,
+
+	// Settings Handlers
+	settingHandler *settingsHandler.SettingHandler,
 ) []ginroutes.Route {
 	// IAM 域路由
-	return routes.All(
+	iamRoutes := routes.All(
 		authHandler,
 		twoFAHandler,
 		captchaHandler,
@@ -45,6 +53,12 @@ func AllRoutes(
 		teamHandler,
 		teamMemberHandler,
 	)
+
+	// Settings 路由
+	settingsRouteList := settingsRoutes.Admin(settingHandler)
+
+	// 合并所有路由
+	return append(iamRoutes, settingsRouteList...)
 }
 
 // RegisterRoutes 注册路由到 Gin Engine。

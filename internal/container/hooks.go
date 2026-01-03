@@ -11,6 +11,7 @@ import (
 	eventhandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/eventhandler"
 	persistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
 	seeds "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/seeds"
+	settingsSeeds "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/infra/seeds"
 	dbpkg "github.com/lwmacct/260103-ddd-shared/pkg/platform/db"
 	"github.com/lwmacct/260103-ddd-shared/pkg/shared/event"
 )
@@ -108,7 +109,18 @@ func RunSeed(lc fx.Lifecycle, db *gorm.DB) error {
 		OnStart: func(ctx context.Context) error {
 			slog.Info("Running database seeders...")
 
-			seeder := dbpkg.NewSeederManager(db, seeds.DefaultSeeders())
+			// 合并 IAM 和 Settings 的种子数据
+			iamSeeders := seeds.DefaultSeeders()
+			settingsSeederList := settingsSeeds.DefaultSeeders()
+
+			// 转换 Settings Seeder 到 shared db.Seeder
+			allSeeders := make([]dbpkg.Seeder, 0, len(iamSeeders)+len(settingsSeederList))
+			allSeeders = append(allSeeders, iamSeeders...)
+			for _, s := range settingsSeederList {
+				allSeeders = append(allSeeders, settingsSeederAdapter{s})
+			}
+
+			seeder := dbpkg.NewSeederManager(db, allSeeders)
 			if err := seeder.Run(ctx); err != nil {
 				return err
 			}
@@ -118,6 +130,21 @@ func RunSeed(lc fx.Lifecycle, db *gorm.DB) error {
 		},
 	})
 	return nil
+}
+
+// settingsSeederAdapter 适配 Settings Seeder 到 shared db.Seeder。
+type settingsSeederAdapter struct {
+	seeder settingsSeeds.Seeder
+}
+
+// Seed 执行种子数据填充。
+func (a settingsSeederAdapter) Seed(ctx context.Context, db *gorm.DB) error {
+	return a.seeder.Seed(ctx, db)
+}
+
+// Name 返回 Seeder 名称。
+func (a settingsSeederAdapter) Name() string {
+	return a.seeder.Name()
 }
 
 // createAllIndexes 创建所有索引。

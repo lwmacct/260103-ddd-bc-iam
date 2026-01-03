@@ -2,6 +2,7 @@ package container
 
 import (
 	persistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
+	settingsPersistence "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/infra/persistence"
 )
 
 // ContainerOptions 容器初始化选项。
@@ -20,6 +21,7 @@ func DefaultOptions() *ContainerOptions {
 // 新增领域模型时，需在此处注册。
 func GetAllModels() []any {
 	return []any{
+		// ========== IAM Models ==========
 		// 用户和角色
 		&persistence.UserModel{},
 		&persistence.RoleModel{},
@@ -33,5 +35,9 @@ func GetAllModels() []any {
 		&persistence.TeamMemberModel{},
 		// 审计日志
 		&persistence.AuditModel{},
+
+		// ========== Settings Models ==========
+		&settingsPersistence.SettingModel{},
+		&settingsPersistence.SettingCategoryModel{},
 	}
 }

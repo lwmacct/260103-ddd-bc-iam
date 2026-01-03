@@ -225,6 +225,7 @@ func buildFxOptions(cfg *config.Config) []fx.Option {
 		container.ServiceModule,
 		// 业务模块 (Bounded Contexts) - 完全自治
 		iam.Module(),
+		container.SettingsModule(),
 		// HTTP 层 (跨模块handler + 路由)
 		container.HTTPModule,
 		container.HooksModule,

@@ -21,6 +21,7 @@ import (
 
 	// Handlers (injected via fx.In from their modules)
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
+	settingsHandler "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/handler"
 
 	ginHttp "github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin"
 )
@@ -98,6 +99,9 @@ type routerParams struct {
 	Team        *handler.TeamHandler
 	TeamMember  *handler.TeamMemberHandler
 	UserOrg     *handler.UserOrgHandler
+
+	// Settings Handlers
+	Setting *settingsHandler.SettingHandler
 }
 
 func newRouter(p routerParams) *gin.Engine {
@@ -120,6 +124,9 @@ func newRouter(p routerParams) *gin.Engine {
 		p.OrgMember,
 		p.Team,
 		p.TeamMember,
+
+		// Settings Handlers
+		p.Setting,
 	)
 
 	// Create MiddlewareInjector with all dependencies
