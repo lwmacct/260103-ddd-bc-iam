@@ -11,6 +11,7 @@ import (
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/role"
 	twofaApp "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/twofa"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/user"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/usersetting"
 	authDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/auth"
 	twofaDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/twofa"
 	authInfra "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/auth"
@@ -113,6 +114,9 @@ type OrganizationUseCases struct {
 	UserTeams *org.UserTeamsHandler
 }
 
+// UserSettingUseCases 用户设置用例处理器（从 usersetting 包导入）
+type UserSettingUseCases = usersetting.UserSettingUseCases
+
 // --- Fx 模块 ---
 
 // UseCaseModule 提供按领域组织的 IAM 模块用例处理器。
@@ -126,6 +130,7 @@ var UseCaseModule = fx.Module("iam.usecase",
 		newPATUseCases,
 		newTwoFAUseCases,
 		newOrganizationUseCases,
+		// UserSettingUseCases 由 usersetting.UseCaseModule 提供
 	),
 )
 

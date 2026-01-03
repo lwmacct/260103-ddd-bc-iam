@@ -27,6 +27,7 @@ import (
 
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/usersetting"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/cache"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
 )
@@ -50,6 +51,7 @@ func Module() fx.Option {
 		cache.CacheModule,
 		persistence.RepositoryModule,
 		app.UseCaseModule,
+		usersetting.UseCaseModule, // 用户设置用例
 		handler.HandlerModule,
 	)
 }

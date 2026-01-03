@@ -18,6 +18,7 @@ type HandlersResult struct {
 	PAT         *PATHandler
 	TwoFA       *TwoFAHandler
 	UserOrg     *UserOrgHandler
+	UserSetting *UserSettingHandler
 	Audit       *AuditHandler
 	Captcha     *CaptchaHandler
 	Org         *OrgHandler
@@ -43,6 +44,7 @@ type handlersParams struct {
 	Role         *app.RoleUseCases
 	PAT          *app.PATUseCases
 	TwoFA        *app.TwoFAUseCases
+	UserSetting  *app.UserSettingUseCases
 	Audit        *app.AuditUseCases
 	Captcha      *app.CaptchaUseCases
 	Organization *app.OrganizationUseCases
@@ -96,6 +98,12 @@ func newAllHandlers(p handlersParams) HandlersResult {
 		UserOrg: NewUserOrgHandler(
 			p.Organization.UserOrgs,
 			p.Organization.UserTeams,
+		),
+		UserSetting: NewUserSettingHandler(
+			p.UserSetting.Get,
+			p.UserSetting.List,
+			p.UserSetting.Update,
+			p.UserSetting.Delete,
 		),
 		Audit: NewAuditHandler(
 			p.Audit.List,

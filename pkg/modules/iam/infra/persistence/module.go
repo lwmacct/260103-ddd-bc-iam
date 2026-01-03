@@ -19,6 +19,7 @@ var RepositoryModule = fx.Module("iam.repository",
 		NewRoleRepositories,
 		NewPATRepositories,
 		NewTwoFARepositories,
+		NewUserSettingRepositories, // 用户设置仓储
 
 		// 组织和团队仓储（用于中间件）
 		NewOrgMemberRepositories,

@@ -28,6 +28,8 @@ func GetAllModels() []any {
 		// 认证和授权
 		&persistence.PersonalAccessTokenModel{},
 		&persistence.TwoFAModel{},
+		// 用户设置
+		&persistence.UserSettingModel{},
 		// 组织和团队
 		&persistence.OrgModel{},
 		&persistence.TeamModel{},

@@ -99,6 +99,7 @@ type routerParams struct {
 	Team        *handler.TeamHandler
 	TeamMember  *handler.TeamMemberHandler
 	UserOrg     *handler.UserOrgHandler
+	UserSetting *handler.UserSettingHandler
 
 	// Settings Handlers
 	Setting *settingsHandler.SettingHandler
@@ -115,6 +116,7 @@ func newRouter(p routerParams) *gin.Engine {
 		p.TwoFA,
 		p.UserProfile,
 		p.UserOrg,
+		p.UserSetting,
 		p.PAT,
 		p.AdminUser,
 		p.Role,
