@@ -19,10 +19,10 @@ var CacheModule = fx.Module("iam.cache",
 
 // newPermissionCacheService 创建权限缓存服务。
 func newPermissionCacheService(client *redis.Client, iamCfg *config.Config) appauth.PermissionCacheService {
-	return NewPermissionCacheService(client, iamCfg.RedisCache.KeyPrefix)
+	return NewPermissionCacheService(client, iamCfg.Redis.KeyPrefix)
 }
 
 // newUserWithRolesCacheService 创建用户实体缓存服务。
 func newUserWithRolesCacheService(client *redis.Client, iamCfg *config.Config) appuser.UserWithRolesCacheService {
-	return NewUserWithRolesCacheService(client, iamCfg.RedisCache.KeyPrefix)
+	return NewUserWithRolesCacheService(client, iamCfg.Redis.KeyPrefix)
 }

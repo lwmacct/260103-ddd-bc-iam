@@ -21,7 +21,7 @@ func ToIAMConfig(cfg *internalConfig.Config) config.Config {
 			TwoFAIssuer:     cfg.Auth.TwoFAIssuer,
 			CaptchaRequired: cfg.Auth.CaptchaRequired,
 		},
-		RedisCache: config.RedisCache{
+		Redis: config.Redis{
 			KeyPrefix: cfg.Data.RedisKeyPrefix,
 		},
 	}
