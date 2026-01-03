@@ -10,7 +10,8 @@ import (
 
 	eventhandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/eventhandler"
 	persistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
-	seeds "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/seeds"
+	iamSeeds "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/seeds"
+	localSeeds "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/infra/seeds"
 	settingsSeeds "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/infra/seeds"
 	dbpkg "github.com/lwmacct/260103-ddd-shared/pkg/platform/db"
 	"github.com/lwmacct/260103-ddd-shared/pkg/shared/event"
@@ -90,16 +91,18 @@ func RunReset(lc fx.Lifecycle, db *gorm.DB, redis *redis.Client) error {
 				return err
 			}
 
-			// 3. 合并 IAM 和 Settings 的种子数据
-			iamSeeders := seeds.DefaultSeeders()
+			// 3. 合并 IAM、外部 Settings 和本地 Settings 的种子数据
+			iamSeeders := iamSeeds.DefaultSeeders()
 			settingsSeederList := settingsSeeds.DefaultSeeders()
+			localSeeders := localSeeds.DefaultSeeders()
 
 			// 转换 Settings Seeder 到 shared db.Seeder
-			allSeeders := make([]dbpkg.Seeder, 0, len(iamSeeders)+len(settingsSeederList))
+			allSeeders := make([]dbpkg.Seeder, 0, len(iamSeeders)+len(settingsSeederList)+len(localSeeders))
 			allSeeders = append(allSeeders, iamSeeders...)
 			for _, s := range settingsSeederList {
 				allSeeders = append(allSeeders, settingsSeederAdapter{s})
 			}
+			allSeeders = append(allSeeders, localSeeders...)
 
 			// 4. 执行种子数据
 			seeder := dbpkg.NewSeederManager(db, allSeeders)
@@ -120,16 +123,18 @@ func RunSeed(lc fx.Lifecycle, db *gorm.DB) error {
 		OnStart: func(ctx context.Context) error {
 			slog.Info("Running database seeders...")
 
-			// 合并 IAM 和 Settings 的种子数据
-			iamSeeders := seeds.DefaultSeeders()
+			// 合并 IAM、外部 Settings 和本地 Settings 的种子数据
+			iamSeeders := iamSeeds.DefaultSeeders()
 			settingsSeederList := settingsSeeds.DefaultSeeders()
+			localSeeders := localSeeds.DefaultSeeders()
 
 			// 转换 Settings Seeder 到 shared db.Seeder
-			allSeeders := make([]dbpkg.Seeder, 0, len(iamSeeders)+len(settingsSeederList))
+			allSeeders := make([]dbpkg.Seeder, 0, len(iamSeeders)+len(settingsSeederList)+len(localSeeders))
 			allSeeders = append(allSeeders, iamSeeders...)
 			for _, s := range settingsSeederList {
 				allSeeders = append(allSeeders, settingsSeederAdapter{s})
 			}
+			allSeeders = append(allSeeders, localSeeders...)
 
 			seeder := dbpkg.NewSeederManager(db, allSeeders)
 			if err := seeder.Run(ctx); err != nil {

@@ -9,8 +9,8 @@ import (
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/routes"
 
 	// User Settings BC
-	userSettingsHandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/user_settings/adapters/gin/handler"
-	userSettingsRoutes "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/user_settings/adapters/gin/routes"
+	userSettingsHandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/handler"
+	userSettingsRoutes "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/routes"
 
 	// Settings
 	settingsHandler "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/handler"

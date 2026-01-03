@@ -37,7 +37,7 @@ import (
 
 	// 业务模块 (Bounded Contexts)
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam"
-	usersettings "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/user_settings"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings"
 )
 
 // Swagger 总体配置 - 使用者自定义
@@ -226,7 +226,7 @@ func buildFxOptions(cfg *config.Config) []fx.Option {
 		container.ServiceModule,
 		// 业务模块 (Bounded Contexts) - 完全自治
 		iam.Module(),
-		usersettings.Module(),
+		settings.Module(),
 		container.SettingsModule(),
 		// HTTP 层 (跨模块handler + 路由)
 		container.HTTPModule,

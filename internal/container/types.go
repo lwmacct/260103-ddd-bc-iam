@@ -2,7 +2,7 @@ package container
 
 import (
 	iamPersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
-	userSettingsPersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/user_settings/infra/persistence"
+	userSettingsPersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/infra/persistence"
 	settingsPersistence "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/infra/persistence"
 )
 

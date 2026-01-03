@@ -21,7 +21,7 @@ import (
 
 	// Handlers (injected via fx.In from their modules)
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
-	userSettingsHandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/user_settings/adapters/gin/handler"
+	userSettingsHandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/handler"
 	settingsHandler "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/handler"
 
 	ginHttp "github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin"
