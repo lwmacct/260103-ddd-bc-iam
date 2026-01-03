@@ -11,6 +11,8 @@ import (
 //
 // 装饰缓存层的仓储：
 //   - User: 缓存查询（GetByIDWithRoles）+ 缓存命令（失效缓存）
+//
+// 注意：UserSettingRepositories 已迁移到独立的 User Settings BC
 var RepositoryModule = fx.Module("iam.repository",
 	fx.Provide(
 		// 直接使用 persistence 构造函数（无需包装）
@@ -19,7 +21,6 @@ var RepositoryModule = fx.Module("iam.repository",
 		NewRoleRepositories,
 		NewPATRepositories,
 		NewTwoFARepositories,
-		NewUserSettingRepositories, // 用户设置仓储
 
 		// 组织和团队仓储（用于中间件）
 		NewOrgMemberRepositories,

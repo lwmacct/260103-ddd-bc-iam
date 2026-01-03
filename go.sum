@@ -149,6 +149,8 @@ github.com/lwmacct/260101-go-pkg-gin v0.0.12 h1:qegQoatjwH68bf8GMZheoULJwPAR7PsA
 github.com/lwmacct/260101-go-pkg-gin v0.0.12/go.mod h1:0LqoJrSEiUYm4iTGBAaOGxr7k9zdbBeKY4acmdTD8xc=
 github.com/lwmacct/260103-ddd-bc-settings v0.0.2 h1:HKI/sNGk5Z1aEda/GpgCZHOStjpj5QPCShUK4QBDOCI=
 github.com/lwmacct/260103-ddd-bc-settings v0.0.2/go.mod h1:2ouqKNAd/cKmmbQx6DMC4K9AIvrwrHgLy1iIAjr7YLE=
+github.com/lwmacct/260103-ddd-bc-settings v0.0.3 h1:gSNmdJtijQLgCQGteF4XbpMoVbBWZHPlK5dHymJMB+w=
+github.com/lwmacct/260103-ddd-bc-settings v0.0.3/go.mod h1:2ouqKNAd/cKmmbQx6DMC4K9AIvrwrHgLy1iIAjr7YLE=
 github.com/lwmacct/260103-ddd-shared v0.0.2 h1:a3saU6bAg2c/HkkU2bsr2LTCgZIoTHVe2QUSGs/wN0w=
 github.com/lwmacct/260103-ddd-shared v0.0.2/go.mod h1:JSMWhF7+tetlddOmIWk0SC03xPve+2n3LbmPSa1c67M=
 github.com/mattn/go-isatty v0.0.20 h1:xfD0iDuEKnDkl03q4limB+vH+GxLEtL/jb4xVJSWWEY=

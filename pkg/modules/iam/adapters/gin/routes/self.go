@@ -6,11 +6,11 @@ import (
 	handler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
 )
 
-// Self 用户自服务路由（资料、令牌、设置）
+// Self 用户自服务路由（资料、令牌）
+// 注意：User Settings 已迁移到独立的 User Settings BC
 func Self(
 	userProfileHandler *handler.UserProfileHandler,
 	patHandler *handler.PATHandler,
-	userSettingHandler *handler.UserSettingHandler,
 ) []routes.Route {
 	var allRoutes []routes.Route
 
@@ -118,46 +118,6 @@ func Self(
 			Tags:        "User - PAT",
 			Summary:     "启用令牌",
 			Description: "启用禁用的个人访问令牌",
-		},
-	}...)
-
-	// User Settings routes
-	allRoutes = append(allRoutes, []routes.Route{
-		{
-			Method:      routes.GET,
-			Path:        "/api/user/settings",
-			Handler:     userSettingHandler.ListSettings,
-			Operation:   "self:settings:list",
-			Tags:        "User - Settings",
-			Summary:     "设置列表",
-			Description: "获取当前用户的设置列表（系统默认值+用户自定义）",
-		},
-		{
-			Method:      routes.GET,
-			Path:        "/api/user/settings/:key",
-			Handler:     userSettingHandler.GetSetting,
-			Operation:   "self:settings:get",
-			Tags:        "User - Settings",
-			Summary:     "获取设置",
-			Description: "获取指定设置项的值",
-		},
-		{
-			Method:      routes.PUT,
-			Path:        "/api/user/settings/:key",
-			Handler:     userSettingHandler.UpdateSetting,
-			Operation:   "self:settings:update",
-			Tags:        "User - Settings",
-			Summary:     "更新设置",
-			Description: "更新指定设置项的值（用户自定义覆盖）",
-		},
-		{
-			Method:      routes.DELETE,
-			Path:        "/api/user/settings/:key",
-			Handler:     userSettingHandler.DeleteSetting,
-			Operation:   "self:settings:delete",
-			Tags:        "User - Settings",
-			Summary:     "删除设置",
-			Description: "删除指定的用户自定义设置（恢复系统默认值）",
 		},
 	}...)
 

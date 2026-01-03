@@ -1,7 +1,8 @@
 package container
 
 import (
-	persistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
+	iamPersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
+	userSettingsPersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/user_settings/infra/persistence"
 	settingsPersistence "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/infra/persistence"
 )
 
@@ -23,20 +24,21 @@ func GetAllModels() []any {
 	return []any{
 		// ========== IAM Models ==========
 		// 用户和角色
-		&persistence.UserModel{},
-		&persistence.RoleModel{},
+		&iamPersistence.UserModel{},
+		&iamPersistence.RoleModel{},
 		// 认证和授权
-		&persistence.PersonalAccessTokenModel{},
-		&persistence.TwoFAModel{},
-		// 用户设置
-		&persistence.UserSettingModel{},
+		&iamPersistence.PersonalAccessTokenModel{},
+		&iamPersistence.TwoFAModel{},
 		// 组织和团队
-		&persistence.OrgModel{},
-		&persistence.TeamModel{},
-		&persistence.OrgMemberModel{},
-		&persistence.TeamMemberModel{},
+		&iamPersistence.OrgModel{},
+		&iamPersistence.TeamModel{},
+		&iamPersistence.OrgMemberModel{},
+		&iamPersistence.TeamMemberModel{},
 		// 审计日志
-		&persistence.AuditModel{},
+		&iamPersistence.AuditModel{},
+
+		// ========== User Settings BC Models ==========
+		&userSettingsPersistence.UserSettingModel{},
 
 		// ========== Settings Models ==========
 		&settingsPersistence.SettingModel{},

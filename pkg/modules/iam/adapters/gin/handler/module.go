@@ -8,6 +8,7 @@ import (
 )
 
 // HandlersResult 使用 fx.Out 批量返回 IAM 模块的所有 HTTP 处理器。
+// 注意：UserSetting 已迁移到独立的 User Settings BC
 type HandlersResult struct {
 	fx.Out
 
@@ -18,7 +19,6 @@ type HandlersResult struct {
 	PAT         *PATHandler
 	TwoFA       *TwoFAHandler
 	UserOrg     *UserOrgHandler
-	UserSetting *UserSettingHandler
 	Audit       *AuditHandler
 	Captcha     *CaptchaHandler
 	Org         *OrgHandler
@@ -33,6 +33,7 @@ var HandlerModule = fx.Module("iam.handler",
 )
 
 // handlersParams 聚合创建 Handler 所需的依赖。
+// 注意：UserSetting 已迁移到独立的 User Settings BC
 type handlersParams struct {
 	fx.In
 
@@ -44,7 +45,6 @@ type handlersParams struct {
 	Role         *app.RoleUseCases
 	PAT          *app.PATUseCases
 	TwoFA        *app.TwoFAUseCases
-	UserSetting  *app.UserSettingUseCases
 	Audit        *app.AuditUseCases
 	Captcha      *app.CaptchaUseCases
 	Organization *app.OrganizationUseCases
@@ -98,12 +98,6 @@ func newAllHandlers(p handlersParams) HandlersResult {
 		UserOrg: NewUserOrgHandler(
 			p.Organization.UserOrgs,
 			p.Organization.UserTeams,
-		),
-		UserSetting: NewUserSettingHandler(
-			p.UserSetting.Get,
-			p.UserSetting.List,
-			p.UserSetting.Update,
-			p.UserSetting.Delete,
 		),
 		Audit: NewAuditHandler(
 			p.Audit.List,

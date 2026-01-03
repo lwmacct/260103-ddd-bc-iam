@@ -37,7 +37,6 @@ func All(
 	// User handlers
 	userProfileHandler *handler.UserProfileHandler,
 	userOrgHandler *handler.UserOrgHandler,
-	userSettingHandler *handler.UserSettingHandler,
 
 	// Admin handlers
 	adminUserHandler *handler.AdminUserHandler,
@@ -62,11 +61,10 @@ func All(
 	// Auth routes (2FA)
 	allRoutes = append(allRoutes, Auth(twoFAHandler)...)
 
-	// Self routes (user profile, PAT, UserSettings)
+	// Self routes (user profile, PAT) - User Settings moved to separate BC
 	allRoutes = append(allRoutes, Self(
 		userProfileHandler,
 		patHandler,
-		userSettingHandler,
 	)...)
 
 	// Admin routes (user/role/audit/org management)

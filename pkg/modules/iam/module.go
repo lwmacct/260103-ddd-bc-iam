@@ -12,12 +12,15 @@
 //   - app.UseCaseModule: 用例层（业务逻辑编排）
 //   - handler.HandlerModule: HTTP 处理器层
 //
+// 注意：User Settings 功能已迁移到独立的 User Settings BC。
+//
 // 使用方式：
 //
 //	fx.New(
 //	    fx.Supply(cfg),
 //	    platform.Module(),
-//	    iam.Module(),       // 本模块（完全自治）
+//	    iam.Module(),           // 本模块（完全自治）
+//	    usersettings.Module(),  // User Settings BC（独立模块）
 //	    crm.Module(),
 //	)
 package iam
@@ -27,7 +30,6 @@ import (
 
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/usersetting"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/cache"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
 )
@@ -45,13 +47,13 @@ import (
 // 注意：
 //   - 认证中间件（Auth, RBAC）在 adapters/gin/middleware 包中
 //   - 路由注册由顶层容器处理，不在模块内部
+//   - User Settings 功能已迁移到独立的 User Settings BC
 func Module() fx.Option {
 	return fx.Module("iam",
 		// 子模块
 		cache.CacheModule,
 		persistence.RepositoryModule,
 		app.UseCaseModule,
-		usersetting.UseCaseModule, // 用户设置用例
 		handler.HandlerModule,
 	)
 }

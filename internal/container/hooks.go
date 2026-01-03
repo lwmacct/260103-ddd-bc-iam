@@ -90,8 +90,19 @@ func RunReset(lc fx.Lifecycle, db *gorm.DB, redis *redis.Client) error {
 				return err
 			}
 
-			// 3. 执行种子数据
-			seeder := dbpkg.NewSeederManager(db, seeds.DefaultSeeders())
+			// 3. 合并 IAM 和 Settings 的种子数据
+			iamSeeders := seeds.DefaultSeeders()
+			settingsSeederList := settingsSeeds.DefaultSeeders()
+
+			// 转换 Settings Seeder 到 shared db.Seeder
+			allSeeders := make([]dbpkg.Seeder, 0, len(iamSeeders)+len(settingsSeederList))
+			allSeeders = append(allSeeders, iamSeeders...)
+			for _, s := range settingsSeederList {
+				allSeeders = append(allSeeders, settingsSeederAdapter{s})
+			}
+
+			// 4. 执行种子数据
+			seeder := dbpkg.NewSeederManager(db, allSeeders)
 			if err := seeder.Run(ctx); err != nil {
 				return err
 			}

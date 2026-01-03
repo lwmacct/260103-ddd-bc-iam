@@ -21,6 +21,7 @@ import (
 
 	// Handlers (injected via fx.In from their modules)
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
+	userSettingsHandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/user_settings/adapters/gin/handler"
 	settingsHandler "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/handler"
 
 	ginHttp "github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin"
@@ -99,7 +100,8 @@ type routerParams struct {
 	Team        *handler.TeamHandler
 	TeamMember  *handler.TeamMemberHandler
 	UserOrg     *handler.UserOrgHandler
-	UserSetting *handler.UserSettingHandler
+	// User Settings BC Handler
+	UserSetting *userSettingsHandler.UserSettingHandler
 
 	// Settings Handlers
 	Setting *settingsHandler.SettingHandler
@@ -116,7 +118,6 @@ func newRouter(p routerParams) *gin.Engine {
 		p.TwoFA,
 		p.UserProfile,
 		p.UserOrg,
-		p.UserSetting,
 		p.PAT,
 		p.AdminUser,
 		p.Role,
@@ -126,6 +127,9 @@ func newRouter(p routerParams) *gin.Engine {
 		p.OrgMember,
 		p.Team,
 		p.TeamMember,
+
+		// User Settings BC Handler
+		p.UserSetting,
 
 		// Settings Handlers
 		p.Setting,
