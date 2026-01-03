@@ -18,7 +18,7 @@ type MemoryRepository struct {
 }
 
 // NewMemoryRepository 创建新的内存验证码仓储。
-func NewMemoryRepository() *MemoryRepository {
+func NewMemoryRepository() captcha.CommandRepository {
 	repo := &MemoryRepository{
 		store: make(map[string]*captcha.CaptchaData),
 		done:  make(chan struct{}),

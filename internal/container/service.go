@@ -21,7 +21,7 @@ import (
 //   - Auth: 密码哈希、JWT Token 生成
 //   - PermissionCache: 用户权限缓存（Cache-Aside 模式）
 //   - TwoFA: 基于 TOTP 的双因素认证
-//   - Captcha: 图形验证码生成
+//   - Captcha: 图形验证码生成和存储
 var ServiceModule = fx.Module("service",
 	fx.Provide(
 		// 基础设施服务
@@ -31,6 +31,7 @@ var ServiceModule = fx.Module("service",
 		newAuthPermissionCacheService,
 		newPATService,
 		infracaptcha.NewService,
+		infracaptcha.NewMemoryRepository,
 		newTwoFAService,
 
 		// 领域服务
