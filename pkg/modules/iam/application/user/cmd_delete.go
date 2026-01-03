@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/shared/event"
+	"github.com/lwmacct/260103-ddd-shared/pkg/shared/event"
 )
 
 // DeleteHandler 删除用户命令处理器

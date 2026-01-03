@@ -10,7 +10,7 @@ import (
 	domain_twofa "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/twofa"
 	iampersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/persistence"
 	infra_twofa "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/twofa"
-	infracaptcha "github.com/lwmacct/260103-ddd-bc-iam/pkg/shared/captcha/infrastructure"
+	infracaptcha "github.com/lwmacct/260103-ddd-shared/pkg/shared/captcha/infrastructure"
 
 	infra_auth "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/auth"
 )

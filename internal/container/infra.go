@@ -18,11 +18,11 @@ import (
 	"gorm.io/gorm"
 
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/config"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/cache"
-	dbpkg "github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/db"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/eventbus"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/telemetry"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/shared/event"
+	"github.com/lwmacct/260103-ddd-shared/pkg/platform/cache"
+	dbpkg "github.com/lwmacct/260103-ddd-shared/pkg/platform/db"
+	"github.com/lwmacct/260103-ddd-shared/pkg/platform/eventbus"
+	"github.com/lwmacct/260103-ddd-shared/pkg/platform/telemetry"
+	"github.com/lwmacct/260103-ddd-shared/pkg/shared/event"
 )
 
 // InfraModule 提供基础设施组件。

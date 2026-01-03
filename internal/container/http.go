@@ -12,7 +12,7 @@ import (
 
 	"github.com/lwmacct/260103-ddd-bc-iam/internal/bootstrap"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/config"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/health"
+	"github.com/lwmacct/260103-ddd-shared/pkg/platform/health"
 
 	// Application UseCases (only for middleware dependencies)
 	iamapplication "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application"
@@ -22,7 +22,7 @@ import (
 	// Handlers (injected via fx.In from their modules)
 	iamhandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/transport/gin/handler"
 
-	ginHttp "github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/http/gin"
+	ginHttp "github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin"
 )
 
 // HTTPModule 提供 HTTP 路由和服务器。

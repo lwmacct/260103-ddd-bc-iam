@@ -16,8 +16,8 @@ import (
 	domain_twofa "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/twofa"
 	infra_auth "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/auth"
 	iampersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/persistence"
-	infra_captcha "github.com/lwmacct/260103-ddd-bc-iam/pkg/shared/captcha"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/shared/event"
+	infra_captcha "github.com/lwmacct/260103-ddd-shared/pkg/shared/captcha"
+	"github.com/lwmacct/260103-ddd-shared/pkg/shared/event"
 )
 
 // --- 用例模块结构体 ---

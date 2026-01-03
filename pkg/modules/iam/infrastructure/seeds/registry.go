@@ -1,6 +1,6 @@
 package seeds
 
-import "github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/db"
+import "github.com/lwmacct/260103-ddd-shared/pkg/platform/db"
 
 // DefaultSeeders 返回 IAM 模块的所有种子数据。
 //

@@ -9,7 +9,7 @@ import (
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/auth"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/twofa"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/shared/captcha"
+	"github.com/lwmacct/260103-ddd-shared/pkg/shared/captcha"
 )
 
 // LoginHandler 登录命令处理器

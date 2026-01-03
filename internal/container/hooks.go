@@ -11,8 +11,8 @@ import (
 	iameventhandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/eventhandler"
 	iampersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/persistence"
 	iamseeds "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/seeds"
-	dbpkg "github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/db"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/shared/event"
+	dbpkg "github.com/lwmacct/260103-ddd-shared/pkg/platform/db"
+	"github.com/lwmacct/260103-ddd-shared/pkg/shared/event"
 )
 
 // HooksModule 提供生命周期钩子和事件处理器注册。

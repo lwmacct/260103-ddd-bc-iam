@@ -5,7 +5,7 @@ import (
 	"log/slog"
 
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/audit"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/shared/event"
+	"github.com/lwmacct/260103-ddd-shared/pkg/shared/event"
 )
 
 // AuditEventHandler 审计日志事件处理器

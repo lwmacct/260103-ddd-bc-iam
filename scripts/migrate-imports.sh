@@ -23,13 +23,13 @@ fi
 # 定义替换规则
 declare -A replacements=(
     # Platform 层
-    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/database"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/db"
-    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/cache"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/cache"
-    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/eventbus"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/eventbus"
-    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/queue"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/queue"
-    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/telemetry"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/telemetry"
-    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/validation"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/validation"
-    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/health"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/health"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/database"]="github.com/lwmacct/260103-ddd-shared/pkg/platform/db"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/cache"]="github.com/lwmacct/260103-ddd-shared/pkg/platform/cache"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/eventbus"]="github.com/lwmacct/260103-ddd-shared/pkg/platform/eventbus"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/queue"]="github.com/lwmacct/260103-ddd-shared/pkg/platform/queue"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/telemetry"]="github.com/lwmacct/260103-ddd-shared/pkg/platform/telemetry"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/validation"]="github.com/lwmacct/260103-ddd-shared/pkg/platform/validation"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/health"]="github.com/lwmacct/260103-ddd-shared/pkg/platform/health"
 
     # Modules - Core
     ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/domain"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/app/domain"
