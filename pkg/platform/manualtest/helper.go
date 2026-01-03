@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/lwmacct/251207-go-pkg-cfgm/pkg/cfgm"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/config"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/config"
 	"github.com/stretchr/testify/require"
 )
 

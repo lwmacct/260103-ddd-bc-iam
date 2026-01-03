@@ -17,15 +17,12 @@ import (
 	"go.uber.org/fx"
 	"gorm.io/gorm"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/config"
-	corepersistence "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/app/infrastructure/persistence"
-	crmpersistence "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/crm/infrastructure/persistence"
-	taskpersistence "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/task/infrastructure/persistence"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/cache"
-	dbpkg "github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/db"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/eventbus"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/telemetry"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/shared/event"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/config"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/cache"
+	dbpkg "github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/db"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/eventbus"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/telemetry"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/shared/event"
 )
 
 // InfraModule 提供基础设施组件。
@@ -128,56 +125,9 @@ func newDatabase(lc fx.Lifecycle, cfg *config.Config) (*gorm.DB, error) {
 
 // runAutoMigrate 执行数据库自动迁移和索引创建。
 func runAutoMigrate(db *gorm.DB) error {
-	slog.Info("Auto-migration enabled, migrating dbpkg...")
+	slog.Info("Auto-migration enabled, migrating database...")
 
 	if err := db.AutoMigrate(GetAllModels()...); err != nil {
-		return err
-	}
-
-	// 为 SettingModel 创建索引
-	if err := dbpkg.CreateIndexes(db, &corepersistence.SettingModel{}, []string{
-		"idx_settings_category_sort",
-	}); err != nil {
-		return err
-	}
-
-	// 为 TaskModel 创建复合索引
-	if err := dbpkg.CreateIndexes(db, &taskpersistence.TaskModel{}, []string{
-		"idx_tasks_org_team",
-	}); err != nil {
-		return err
-	}
-
-	// 为 LeadModel 创建索引
-	if err := dbpkg.CreateIndexes(db, &crmpersistence.LeadModel{}, []string{
-		"idx_leads_owner_id",
-		"idx_leads_contact_id",
-	}); err != nil {
-		return err
-	}
-
-	// 为 OpportunityModel 创建索引
-	if err := dbpkg.CreateIndexes(db, &crmpersistence.OpportunityModel{}, []string{
-		"idx_opportunities_contact_id",
-		"idx_opportunities_company_id",
-		"idx_opportunities_lead_id",
-		"idx_opportunities_owner_id",
-	}); err != nil {
-		return err
-	}
-
-	// 为 ContactModel 创建索引
-	if err := dbpkg.CreateIndexes(db, &crmpersistence.ContactModel{}, []string{
-		"idx_contacts_owner_id",
-		"idx_contacts_company_id",
-	}); err != nil {
-		return err
-	}
-
-	// 为 CompanyModel 创建索引
-	if err := dbpkg.CreateIndexes(db, &crmpersistence.CompanyModel{}, []string{
-		"idx_companies_owner_id",
-	}); err != nil {
 		return err
 	}
 
@@ -186,6 +136,8 @@ func runAutoMigrate(db *gorm.DB) error {
 	if err := dbpkg.CreateJoinTableIndexes(db, []dbpkg.JoinTableIndex{
 		{Table: "user_roles", Name: "idx_user_roles_user_id", Columns: "user_id"},
 		{Table: "user_roles", Name: "idx_user_roles_role_id", Columns: "role_id"},
+		{Table: "role_permissions", Name: "idx_role_permissions_role_model_id", Columns: "role_model_id"},
+		{Table: "role_permissions", Name: "idx_role_permissions_permission_model_id", Columns: "permission_model_id"},
 	}); err != nil {
 		return err
 	}

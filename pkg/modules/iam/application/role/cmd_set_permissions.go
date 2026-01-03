@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/role"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/shared/event"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/role"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/shared/event"
 )
 
 // SetPermissionsHandler 设置权限命令处理器

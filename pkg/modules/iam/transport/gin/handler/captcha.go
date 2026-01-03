@@ -3,8 +3,8 @@ package handler
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/application/captcha"
 	"github.com/lwmacct/260101-go-pkg-gin/pkg/response"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/captcha"
 )
 
 // CaptchaHandler 验证码处理器

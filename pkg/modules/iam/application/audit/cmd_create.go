@@ -3,7 +3,7 @@ package audit
 import (
 	"context"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/audit"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/audit"
 )
 
 // CreateHandler 创建审计日志命令处理器

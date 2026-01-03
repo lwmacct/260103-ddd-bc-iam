@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/pat"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/pat"
 )
 
 // GetHandler 获取 Token 查询处理器

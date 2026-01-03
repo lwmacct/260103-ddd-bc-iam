@@ -4,8 +4,8 @@ import (
 	"context"
 	"log/slog"
 
-	appuser "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/application/user"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/user"
+	appuser "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/user"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
 )
 
 // cachedUserCommandRepository 带缓存失效的用户命令仓储（装饰器模式）。

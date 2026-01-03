@@ -45,26 +45,22 @@ func (o Operation) String() string {
 type Category string
 
 const (
-	CatAuth        Category = "auth"
-	CatUser        Category = "user"
-	CatRole        Category = "role"
-	CatSetting     Category = "setting"
-	CatCache       Category = "cache"
-	CatProfile     Category = "profile"
-	CatToken       Category = "token"
-	CatUserSetting Category = "user_setting"
+	CatAuth    Category = "auth"
+	CatUser    Category = "user"
+	CatRole    Category = "role"
+	CatProfile Category = "profile"
+	CatToken   Category = "token"
+	CatOrg     Category = "org"
 )
 
 //nolint:gochecknoglobals // 标签映射是只读配置
 var categoryLabels = map[Category]string{
-	CatAuth:        "认证",
-	CatUser:        "用户",
-	CatRole:        "角色",
-	CatSetting:     "配置",
-	CatCache:       "缓存",
-	CatProfile:     "个人资料",
-	CatToken:       "访问令牌",
-	CatUserSetting: "用户配置",
+	CatAuth:    "认证",
+	CatUser:    "用户",
+	CatRole:    "角色",
+	CatProfile: "个人资料",
+	CatToken:   "访问令牌",
+	CatOrg:     "组织",
 }
 
 // Label 返回审计分类的中文标签。

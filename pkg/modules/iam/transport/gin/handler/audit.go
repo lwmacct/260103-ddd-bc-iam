@@ -6,10 +6,10 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/application/audit"
-	auditDomain "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/audit"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/transport/gin/registry"
 	"github.com/lwmacct/260101-go-pkg-gin/pkg/response"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/audit"
+	auditDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/audit"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/transport/gin/registry"
 )
 
 // ListAuditQuery 审计日志列表查询参数

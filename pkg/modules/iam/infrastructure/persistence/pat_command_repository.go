@@ -5,31 +5,40 @@ import (
 	"fmt"
 	"time"
 
-	corepersistence "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/app/infrastructure/persistence"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/pat"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/pat"
 	"gorm.io/gorm"
 )
 
 // patCommandRepository PAT 命令仓储的 GORM 实现
-// 嵌入 GenericCommandRepository 以复用 Create/Update 操作
 type patCommandRepository struct {
-	*corepersistence.GenericCommandRepository[pat.PersonalAccessToken, *PersonalAccessTokenModel]
+	db *gorm.DB
 }
 
 // NewPATCommandRepository 创建 PAT 命令仓储实例
 func NewPATCommandRepository(db *gorm.DB) pat.CommandRepository {
-	return &patCommandRepository{
-		GenericCommandRepository: corepersistence.NewGenericCommandRepository(
-			db, newPATModelFromEntity,
-		),
-	}
+	return &patCommandRepository{db: db}
 }
 
-// Create、Update 方法由 GenericCommandRepository 提供
+// Create 创建 PAT 令牌
+func (r *patCommandRepository) Create(ctx context.Context, patToken *pat.PersonalAccessToken) error {
+	model := newPATModelFromEntity(patToken)
+	if err := r.db.WithContext(ctx).Create(model).Error; err != nil {
+		return fmt.Errorf("failed to create PAT: %w", err)
+	}
+	// 回写生成的 ID
+	patToken.ID = model.ID
+	return nil
+}
+
+// Update 更新 PAT 令牌
+func (r *patCommandRepository) Update(ctx context.Context, patToken *pat.PersonalAccessToken) error {
+	model := newPATModelFromEntity(patToken)
+	return r.db.WithContext(ctx).Save(model).Error
+}
 
 // Delete 硬删除令牌（覆盖泛型的软删除行为）
 func (r *patCommandRepository) Delete(ctx context.Context, id uint) error {
-	if err := r.DB().WithContext(ctx).
+	if err := r.db.WithContext(ctx).
 		Unscoped(). // Hard delete
 		Delete(&PersonalAccessTokenModel{}, id).Error; err != nil {
 		return fmt.Errorf("failed to delete PAT: %w", err)
@@ -39,7 +48,7 @@ func (r *patCommandRepository) Delete(ctx context.Context, id uint) error {
 
 // Disable 禁用令牌（设置状态为 disabled）
 func (r *patCommandRepository) Disable(ctx context.Context, id uint) error {
-	if err := r.DB().WithContext(ctx).
+	if err := r.db.WithContext(ctx).
 		Model(&PersonalAccessTokenModel{}).
 		Where("id = ?", id).
 		Update("status", "disabled").Error; err != nil {
@@ -50,7 +59,7 @@ func (r *patCommandRepository) Disable(ctx context.Context, id uint) error {
 
 // Enable 重新启用令牌
 func (r *patCommandRepository) Enable(ctx context.Context, id uint) error {
-	if err := r.DB().WithContext(ctx).
+	if err := r.db.WithContext(ctx).
 		Model(&PersonalAccessTokenModel{}).
 		Where("id = ?", id).
 		Update("status", "active").Error; err != nil {
@@ -61,7 +70,7 @@ func (r *patCommandRepository) Enable(ctx context.Context, id uint) error {
 
 // DeleteByUserID 删除指定用户的所有令牌
 func (r *patCommandRepository) DeleteByUserID(ctx context.Context, userID uint) error {
-	if err := r.DB().WithContext(ctx).
+	if err := r.db.WithContext(ctx).
 		Unscoped().
 		Where("user_id = ?", userID).
 		Delete(&PersonalAccessTokenModel{}).Error; err != nil {
@@ -74,7 +83,7 @@ func (r *patCommandRepository) DeleteByUserID(ctx context.Context, userID uint) 
 func (r *patCommandRepository) CleanupExpired(ctx context.Context) error {
 	now := time.Now()
 
-	if err := r.DB().WithContext(ctx).
+	if err := r.db.WithContext(ctx).
 		Model(&PersonalAccessTokenModel{}).
 		Where("expires_at IS NOT NULL AND expires_at < ? AND status != ?", now, "expired").
 		Update("status", "expired").Error; err != nil {

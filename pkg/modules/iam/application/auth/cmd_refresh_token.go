@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/application/audit"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/auth"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/user"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/audit"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/auth"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
 )
 
 // RefreshTokenHandler 刷新令牌命令处理器

@@ -1,7 +1,7 @@
 package audit
 
 import (
-	auditDomain "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/audit"
+	auditDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/audit"
 )
 
 // ToAuditDTO 将领域实体转换为 DTO

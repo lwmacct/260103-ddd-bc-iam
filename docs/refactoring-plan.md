@@ -7,7 +7,7 @@
 ### 1.1 当前目录结构
 
 ```
-github.com/lwmacct/260101-go-pkg-ddd/
+github.com/lwmacct/260103-ddd-bc-iam/
 ├── cmd/server/              # 应用入口
 ├── config/                  # 配置文件
 ├── ddd/                     # 水平分层的 DDD 架构
@@ -42,7 +42,7 @@ github.com/lwmacct/260101-go-pkg-ddd/
 ### 2.1 新目录结构
 
 ```
-github.com/lwmacct/260101-go-pkg-ddd/
+github.com/lwmacct/260103-ddd-bc-iam/
 ├── cmd/server/                    # 应用入口
 │   ├── main.go
 │   └── docs/                      # Swagger 生成物
@@ -268,7 +268,7 @@ mkdir -p internal/app/{bootstrap,di,module}
 
 1. **保留接口抽象**：`pkg/platform/cache/cache.go` 定义 Cache 接口
 2. **Redis 实现分离**：`pkg/platform/cache/redis_cache.go` 实现
-3. **import 路径更新**：全局替换 `github.com/lwmacct/260101-go-pkg-ddd/ddd/core/infrastructure/database` → `github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/db`
+3. **import 路径更新**：全局替换 `github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/database` → `github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/db`
 
 **验证**：
 
@@ -404,14 +404,14 @@ internal/app/di/
 package di
 
 import (
-    "github.com/lwmacct/260101-go-pkg-ddd/pkg/config"
-    "github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/cache"
-    "github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/db"
-    "github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/eventbus"
-    "github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/health"
-    "github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/queue"
-    "github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/telemetry"
-    "github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/validation"
+    "github.com/lwmacct/260103-ddd-bc-iam/pkg/config"
+    "github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/cache"
+    "github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/db"
+    "github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/eventbus"
+    "github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/health"
+    "github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/queue"
+    "github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/telemetry"
+    "github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/validation"
     "go.uber.org/fx"
 )
 
@@ -439,9 +439,9 @@ var InfraModule = fx.Module("infra",
 package di
 
 import (
-    "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/app"
-    "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam"
-    "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/crm"
+    "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/app"
+    "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam"
+    "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/crm"
     "go.uber.org/fx"
 )
 
@@ -464,7 +464,7 @@ package bootstrap
 
 import (
     "github.com/gin-gonic/gin"
-    "github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/telemetry"
+    "github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/telemetry"
 )
 
 // NewEngine 创建 Gin Engine，注册全局中间件
@@ -520,7 +520,7 @@ func (s *Server) Stop(ctx context.Context) error {
 // pkg/kit/platform/db.go
 package platform
 
-import "github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/db"
+import "github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/db"
 
 // NewDatabase 创建数据库连接的便捷函数
 func NewDatabase(dsn string) (*db.DB, error) {
@@ -530,7 +530,7 @@ func NewDatabase(dsn string) (*db.DB, error) {
 // pkg/kit/modules/app.go
 package modules
 
-import "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/app"
+import "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/app"
 
 // CoreModule 返回 Core BC 的 Fx 模块
 func CoreModule() core.Module {
@@ -546,15 +546,15 @@ func CoreModule() core.Module {
 # 使用 sed 或 ide tools 进行全局替换
 
 # Platform
-sed -i 's|github.com/lwmacct/260101-go-pkg-ddd/ddd/core/infrastructure/database|github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/db|g' $(find . -name "*.go")
+sed -i 's|github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/database|github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/db|g' $(find . -name "*.go")
 
 # Modules
-sed -i 's|github.com/lwmacct/260101-go-pkg-ddd/ddd/core|github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/app|g' $(find . -name "*.go")
-sed -i 's|github.com/lwmacct/260101-go-pkg-ddd/ddd/iam|github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam|g' $(find . -name "*.go")
-sed -i 's|github.com/lwmacct/260101-go-pkg-ddd/ddd/crm|github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/crm|g' $(find . -name "*.go")
+sed -i 's|github.com/lwmacct/260103-ddd-bc-iam/ddd/core|github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/app|g' $(find . -name "*.go")
+sed -i 's|github.com/lwmacct/260103-ddd-bc-iam/ddd/iam|github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam|g' $(find . -name "*.go")
+sed -i 's|github.com/lwmacct/260103-ddd-bc-iam/ddd/crm|github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/crm|g' $(find . -name "*.go")
 
 # Container → App
-sed -i 's|github.com/lwmacct/260101-go-pkg-ddd/internal/container|github.com/lwmacct/260101-go-pkg-ddd/internal/app/di|g' $(find . -name "*.go")
+sed -i 's|github.com/lwmacct/260103-ddd-bc-iam/internal/container|github.com/lwmacct/260103-ddd-bc-iam/internal/app/di|g' $(find . -name "*.go")
 ```
 
 ### Phase 10: 验证与修复

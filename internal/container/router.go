@@ -4,20 +4,15 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/lwmacct/260101-go-pkg-gin/pkg/routes"
 
-	apphandler "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/app/transport/gin/handler"
-	approutes "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/app/transport/gin/routes"
-	crmhandler "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/crm/transport/gin/handler"
-	iamhandler "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/transport/gin/handler"
-	iamroutes "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/transport/gin/routes"
-	taskhandler "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/task/transport/gin/handler"
+	iamhandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/transport/gin/handler"
+	iamroutes "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/transport/gin/routes"
 )
 
 // AllRoutes 聚合所有模块的路由定义。
 //
 // 职责：
-//  1. 从各 BC 模块收集路由定义
-//  2. 按业务域分组（IAM、App、CRM）
-//  3. 返回统一的路由列表供注册使用
+//  1. 从 IAM 模块收集路由定义
+//  2. 返回统一的路由列表供注册使用
 func AllRoutes(
 	// IAM Handlers
 	authHandler *iamhandler.AuthHandler,
@@ -25,7 +20,6 @@ func AllRoutes(
 	userProfileHandler *iamhandler.UserProfileHandler,
 	userOrgHandler *iamhandler.UserOrgHandler,
 	patHandler *iamhandler.PATHandler,
-	// Migrated to IAM
 	adminUserHandler *iamhandler.AdminUserHandler,
 	roleHandler *iamhandler.RoleHandler,
 	captchaHandler *iamhandler.CaptchaHandler,
@@ -34,23 +28,9 @@ func AllRoutes(
 	orgMemberHandler *iamhandler.OrgMemberHandler,
 	teamHandler *iamhandler.TeamHandler,
 	teamMemberHandler *iamhandler.TeamMemberHandler,
-	// App Handlers
-	settingHandler *apphandler.SettingHandler,
-	userSettingHandler *apphandler.UserSettingHandler,
-	taskHandler *taskhandler.TaskHandler,
-	healthHandler *apphandler.HealthHandler,
-	cacheHandler *apphandler.CacheHandler,
-	overviewHandler *apphandler.OverviewHandler,
-	// CRM Handlers
-	companyHandler *crmhandler.CompanyHandler,
-	contactHandler *crmhandler.ContactHandler,
-	leadHandler *crmhandler.LeadHandler,
-	opportunityHandler *crmhandler.OpportunityHandler,
 ) []routes.Route {
-	var allRoutes []routes.Route
-
 	// IAM 域路由
-	allRoutes = append(allRoutes, iamroutes.All(
+	return iamroutes.All(
 		authHandler,
 		twoFAHandler,
 		captchaHandler,
@@ -64,28 +44,10 @@ func AllRoutes(
 		orgMemberHandler,
 		teamHandler,
 		teamMemberHandler,
-		taskHandler, // Task routes are under Org context
-	)...)
-
-	// App 域路由
-	allRoutes = append(allRoutes, approutes.All(
-		healthHandler,
-		settingHandler,
-		userSettingHandler,
-		cacheHandler,
-		overviewHandler,
-	)...)
-
-	// CRM 域路由 - TODO: 待 CRM 模块添加 routes 包后启用
-	// allRoutes = append(allRoutes, crmroutes.All(
-	// 	companyHandler,
-	// 	contactHandler,
-	// 	leadHandler,
-	// 	opportunityHandler,
-	// )...)
-
-	return allRoutes
+	)
 }
+
+// RegisterRoutes 注册路由到 Gin Engine。
 
 // RegisterRoutes 注册路由到 Gin Engine。
 //

@@ -1,7 +1,7 @@
 package pat
 
 import (
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/pat"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/pat"
 )
 
 // ToTokenDTO 将领域模型 PersonalAccessToken 转换为应用层 TokenDTO

@@ -10,17 +10,16 @@ import "strings"
 //
 //nolint:gochecknoglobals // 只读映射表
 var typeToCategory = map[string]Category{
-	"users":               CatUser,
-	"roles":               CatRole,
-	"settings":            CatSetting,
-	"settings-categories": CatSetting,
-	"cache":               CatCache,
-	"auth":                CatAuth,
-	"2fa":                 CatAuth, // 特殊映射：2FA 归类为认证
-	"profile":             CatProfile,
-	"password":            CatProfile, // 特殊映射：密码归类为个人资料
-	"account":             CatProfile, // 特殊映射：账户归类为个人资料
-	"tokens":              CatToken,
+	"users":    CatUser,
+	"roles":    CatRole,
+	"auth":     CatAuth,
+	"2fa":      CatAuth, // 特殊映射：2FA 归类为认证
+	"profile":  CatProfile,
+	"password": CatProfile, // 特殊映射：密码归类为个人资料
+	"account":  CatProfile, // 特殊映射：账户归类为个人资料
+	"tokens":   CatToken,
+	"org":      CatOrg,
+	"teams":    CatOrg,
 }
 
 // identifierToOperation identifier 到审计操作类型的映射。

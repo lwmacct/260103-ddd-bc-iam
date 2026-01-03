@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/pat"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/pat"
 )
 
 // EnableHandler 启用 Token 命令处理器

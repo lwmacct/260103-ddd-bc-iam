@@ -143,8 +143,8 @@ gosec ./...
 
 关注以下渠道获取安全更新：
 
-- [GitHub Releases](https://github.com/lwmacct/260101-go-pkg-ddd/releases)
-- [GitHub Security Advisories](https://github.com/lwmacct/260101-go-pkg-ddd/security/advisories)
+- [GitHub Releases](https://github.com/lwmacct/260103-ddd-bc-iam/releases)
+- [GitHub Security Advisories](https://github.com/lwmacct/260103-ddd-bc-iam/security/advisories)
 
 ## 致谢
 

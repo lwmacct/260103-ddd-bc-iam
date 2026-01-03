@@ -118,7 +118,7 @@ air
 **步骤 1：复制 Container**
 
 ```bash
-cp -r 260101-go-pkg-ddd/internal/container your-project/internal/
+cp -r 260103-ddd-bc-iam/internal/container your-project/internal/
 ```
 
 Container 文件结构：

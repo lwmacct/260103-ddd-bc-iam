@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/shared/captcha"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/shared/captcha"
 )
 
 // GenerateHandler 生成验证码处理器

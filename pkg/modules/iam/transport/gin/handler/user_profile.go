@@ -4,10 +4,10 @@ import (
 	"errors"
 
 	"github.com/gin-gonic/gin"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/application/user"
-	userDomain "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/user"
 	"github.com/lwmacct/260101-go-pkg-gin/pkg/ctxutil"
 	"github.com/lwmacct/260101-go-pkg-gin/pkg/response"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/user"
+	userDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
 )
 
 // UserProfileHandler handles user profile operations

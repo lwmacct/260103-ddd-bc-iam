@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/shared/captcha"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/shared/captcha"
 )
 
 // MemoryRepository 验证码内存存储实现。

@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/org"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/org"
 )
 
 // TeamDeleteHandler 删除团队命令处理器

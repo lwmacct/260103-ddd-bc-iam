@@ -23,33 +23,33 @@ fi
 # 定义替换规则
 declare -A replacements=(
     # Platform 层
-    ["github.com/lwmacct/260101-go-pkg-ddd/ddd/core/infrastructure/database"]="github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/db"
-    ["github.com/lwmacct/260101-go-pkg-ddd/ddd/core/infrastructure/cache"]="github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/cache"
-    ["github.com/lwmacct/260101-go-pkg-ddd/ddd/core/infrastructure/eventbus"]="github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/eventbus"
-    ["github.com/lwmacct/260101-go-pkg-ddd/ddd/core/infrastructure/queue"]="github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/queue"
-    ["github.com/lwmacct/260101-go-pkg-ddd/ddd/core/infrastructure/telemetry"]="github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/telemetry"
-    ["github.com/lwmacct/260101-go-pkg-ddd/ddd/core/infrastructure/validation"]="github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/validation"
-    ["github.com/lwmacct/260101-go-pkg-ddd/ddd/core/infrastructure/health"]="github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/health"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/database"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/db"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/cache"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/cache"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/eventbus"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/eventbus"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/queue"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/queue"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/telemetry"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/telemetry"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/validation"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/validation"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/infrastructure/health"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/health"
 
     # Modules - Core
-    ["github.com/lwmacct/260101-go-pkg-ddd/ddd/core/domain"]="github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/app/domain"
-    ["github.com/lwmacct/260101-go-pkg-ddd/ddd/core/application"]="github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/app/application"
-    ["github.com/lwmacct/260101-go-pkg-ddd/ddd/core/adapters"]="github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/app/transport"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/domain"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/app/domain"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/application"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/app/application"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/core/adapters"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/app/transport"
 
     # Modules - IAM
-    ["github.com/lwmacct/260101-go-pkg-ddd/ddd/iam/domain"]="github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain"
-    ["github.com/lwmacct/260101-go-pkg-ddd/ddd/iam/application"]="github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/application"
-    ["github.com/lwmacct/260101-go-pkg-ddd/ddd/iam/adapters"]="github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/transport"
-    ["github.com/lwmacct/260101-go-pkg-ddd/ddd/iam/infrastructure/auth"]="github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/infrastructure/auth"
-    ["github.com/lwmacct/260101-go-pkg-ddd/ddd/iam/infrastructure/twofa"]="github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/infrastructure/twofa"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/iam/domain"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/iam/application"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/iam/adapters"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/transport"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/iam/infrastructure/auth"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/auth"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/iam/infrastructure/twofa"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/twofa"
 
     # Modules - CRM
-    ["github.com/lwmacct/260101-go-pkg-ddd/ddd/crm/domain"]="github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/crm/domain"
-    ["github.com/lwmacct/260101-go-pkg-ddd/ddd/crm/application"]="github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/crm/application"
-    ["github.com/lwmacct/260101-go-pkg-ddd/ddd/crm/adapters"]="github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/crm/transport"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/crm/domain"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/crm/domain"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/crm/application"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/crm/application"
+    ["github.com/lwmacct/260103-ddd-bc-iam/ddd/crm/adapters"]="github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/crm/transport"
 
     # Container → DI
-    ["github.com/lwmacct/260101-go-pkg-ddd/internal/container"]="github.com/lwmacct/260101-go-pkg-ddd/internal/app/di"
+    ["github.com/lwmacct/260103-ddd-bc-iam/internal/container"]="github.com/lwmacct/260103-ddd-bc-iam/internal/app/di"
 )
 
 # 执行替换

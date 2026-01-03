@@ -4,7 +4,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/role"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/role"
 )
 
 // Scope 定义 PAT 权限范围标识符。

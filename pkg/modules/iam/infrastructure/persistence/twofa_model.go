@@ -3,7 +3,7 @@ package persistence
 import (
 	"time"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/twofa"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/twofa"
 	"gorm.io/gorm"
 )
 

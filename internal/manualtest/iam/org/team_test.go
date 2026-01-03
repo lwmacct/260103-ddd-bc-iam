@@ -8,8 +8,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/application/org"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/manualtest"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/org"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/manualtest"
 )
 
 // 种子数据: acme org (ID=1), admin 是 owner

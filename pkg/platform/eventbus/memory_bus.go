@@ -6,7 +6,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/shared/event"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/shared/event"
 )
 
 // InMemoryEventBus 内存事件总线实现

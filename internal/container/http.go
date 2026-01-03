@@ -10,22 +10,19 @@ import (
 	"github.com/redis/go-redis/v9"
 	"go.uber.org/fx"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/internal/bootstrap"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/config"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/health"
+	"github.com/lwmacct/260103-ddd-bc-iam/internal/bootstrap"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/config"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/health"
 
 	// Application UseCases (only for middleware dependencies)
-	iamapplication "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/application"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/infrastructure/auth"
-	iampersistence "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/infrastructure/persistence"
+	iamapplication "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/auth"
+	iampersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/persistence"
 
 	// Handlers (injected via fx.In from their modules)
-	corehandler "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/app/transport/gin/handler"
-	crmhandler "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/crm/transport/gin/handler"
-	iamhandler "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/transport/gin/handler"
-	taskhandler "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/task/transport/gin/handler"
+	iamhandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/transport/gin/handler"
 
-	ginHttp "github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/http/gin"
+	ginHttp "github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/http/gin"
 )
 
 // HTTPModule 提供 HTTP 路由和服务器。
@@ -88,30 +85,19 @@ type routerParams struct {
 	TeamMemberRepos iampersistence.TeamMemberRepositories
 
 	// Handlers
-	Health      *corehandler.HealthHandler
 	Auth        *iamhandler.AuthHandler
 	Captcha     *iamhandler.CaptchaHandler
 	AdminUser   *iamhandler.AdminUserHandler
 	UserProfile *iamhandler.UserProfileHandler
 	Role        *iamhandler.RoleHandler
-	Setting     *corehandler.SettingHandler
-	UserSetting *corehandler.UserSettingHandler
 	PAT         *iamhandler.PATHandler
 	AuditH      *iamhandler.AuditHandler
-	Overview    *corehandler.OverviewHandler
 	TwoFA       *iamhandler.TwoFAHandler
-	Cache       *corehandler.CacheHandler
-	Operation   *corehandler.OperationHandler
 	Org         *iamhandler.OrgHandler
 	OrgMember   *iamhandler.OrgMemberHandler
 	Team        *iamhandler.TeamHandler
 	TeamMember  *iamhandler.TeamMemberHandler
 	UserOrg     *iamhandler.UserOrgHandler
-	TaskHandler *taskhandler.TaskHandler
-	Contact     *crmhandler.ContactHandler
-	Company     *crmhandler.CompanyHandler
-	Lead        *crmhandler.LeadHandler
-	Opportunity *crmhandler.OpportunityHandler
 }
 
 func newRouter(p routerParams) *gin.Engine {
@@ -126,7 +112,6 @@ func newRouter(p routerParams) *gin.Engine {
 		p.UserProfile,
 		p.UserOrg,
 		p.PAT,
-		// Migrated to IAM
 		p.AdminUser,
 		p.Role,
 		p.Captcha,
@@ -135,18 +120,6 @@ func newRouter(p routerParams) *gin.Engine {
 		p.OrgMember,
 		p.Team,
 		p.TeamMember,
-		// App Handlers
-		p.Setting,
-		p.UserSetting,
-		p.TaskHandler,
-		p.Health,
-		p.Cache,
-		p.Overview,
-		// CRM Handlers
-		p.Company,
-		p.Contact,
-		p.Lead,
-		p.Opportunity,
 	)
 
 	// Create MiddlewareInjector with all dependencies

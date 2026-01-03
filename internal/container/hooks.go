@@ -8,12 +8,11 @@ import (
 	"go.uber.org/fx"
 	"gorm.io/gorm"
 
-	apppersistence "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/app/infrastructure/persistence"
-	iameventhandler "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/infrastructure/eventhandler"
-	iampersistence "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/infrastructure/persistence"
-	dbpkg "github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/db"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/db/seeds"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/shared/event"
+	iameventhandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/eventhandler"
+	iampersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/persistence"
+	dbpkg "github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/db"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/db/seeds"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/shared/event"
 )
 
 // HooksModule 提供生命周期钩子和事件处理器注册。
@@ -141,10 +140,7 @@ func createAllIndexes(db *gorm.DB) error {
 // getIndexMigrations 返回所有 Model 索引配置。
 func getIndexMigrations() []dbpkg.IndexMigration {
 	return []dbpkg.IndexMigration{
-		{
-			Model:   &apppersistence.SettingModel{},
-			Indexes: []string{"idx_settings_category_sort"},
-		},
+		// IAM module has no custom indexes
 	}
 }
 

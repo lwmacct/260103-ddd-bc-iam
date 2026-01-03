@@ -1,7 +1,7 @@
 package persistence
 
 import (
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/audit"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/audit"
 	"gorm.io/gorm"
 )
 

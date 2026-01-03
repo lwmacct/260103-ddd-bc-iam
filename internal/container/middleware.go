@@ -7,16 +7,16 @@ import (
 	"github.com/redis/go-redis/v9"
 	"go.uber.org/fx"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/config"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/application/audit"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/infrastructure/auth"
-	iampersistence "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/infrastructure/persistence"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/config"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/audit"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/auth"
+	iampersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/persistence"
 
 	"github.com/lwmacct/260101-go-pkg-gin/pkg/permission"
 	"github.com/lwmacct/260101-go-pkg-gin/pkg/routes"
 
-	iamMiddleware "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/transport/gin/middleware"
 	"github.com/lwmacct/260101-go-pkg-gin/pkg/middleware"
+	iamMiddleware "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/transport/gin/middleware"
 )
 
 // RouterDepsParams 聚合创建中间件所需的依赖。

@@ -6,10 +6,10 @@ import (
 	"log/slog"
 	"slices"
 
-	appauth "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/application/auth"
-	appuser "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/application/user"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/role"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/user"
+	appauth "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/auth"
+	appuser "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/user"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/role"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
 )
 
 // mergePermissions 合并权限列表（去重）。

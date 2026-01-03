@@ -3,7 +3,7 @@ package twofa
 import (
 	"context"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/twofa"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/twofa"
 )
 
 // SetupHandler 设置 2FA 命令处理器

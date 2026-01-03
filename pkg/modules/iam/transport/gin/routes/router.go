@@ -22,8 +22,7 @@ package routes
 import (
 	"github.com/lwmacct/260101-go-pkg-gin/pkg/routes"
 
-	iamhandler "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/transport/gin/handler"
-	taskhandler "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/task/transport/gin/handler"
+	iamhandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/transport/gin/handler"
 )
 
 // All 返回 IAM 域的所有路由
@@ -50,9 +49,6 @@ func All(
 	orgMemberHandler *iamhandler.OrgMemberHandler,
 	teamHandler *iamhandler.TeamHandler,
 	teamMemberHandler *iamhandler.TeamMemberHandler,
-
-	// Task handler (App module, but under Org context)
-	taskHandler *taskhandler.TaskHandler,
 ) []routes.Route {
 	var allRoutes []routes.Route
 
@@ -79,12 +75,11 @@ func All(
 		orgHandler,
 	)...)
 
-	// Org routes (organization/team management + tasks)
+	// Org routes (organization/team management)
 	allRoutes = append(allRoutes, Org(
 		orgMemberHandler,
 		teamHandler,
 		teamMemberHandler,
-		taskHandler,
 	)...)
 
 	// Org routes (user's org view)

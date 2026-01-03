@@ -3,8 +3,8 @@ package handler
 import (
 	"go.uber.org/fx"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/config"
-	iamapplication "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/application"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/config"
+	iamapplication "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application"
 )
 
 // HandlersResult 使用 fx.Out 批量返回 IAM 模块的所有 HTTP 处理器。

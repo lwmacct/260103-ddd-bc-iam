@@ -9,8 +9,8 @@ import (
 
 	"github.com/redis/go-redis/v9"
 
-	appauth "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/application/auth"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/role"
+	appauth "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/auth"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/role"
 )
 
 const permissionCacheTTL = 5 * time.Minute

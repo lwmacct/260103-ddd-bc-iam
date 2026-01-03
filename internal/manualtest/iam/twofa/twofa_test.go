@@ -9,11 +9,11 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/application/auth"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/application/twofa"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/application/user"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/manualtest"
 	"github.com/lwmacct/260101-go-pkg-gin/pkg/response"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/auth"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/twofa"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/user"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/manualtest"
 )
 
 // TestGetTwoFAStatus 测试获取 2FA 状态。

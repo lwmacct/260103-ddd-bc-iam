@@ -3,16 +3,16 @@ package container
 import (
 	"go.uber.org/fx"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/config"
-	appauth "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/application/auth"
-	appuser "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/application/user"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/auth"
-	domain_twofa "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/twofa"
-	iampersistence "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/infrastructure/persistence"
-	infra_twofa "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/infrastructure/twofa"
-	infracaptcha "github.com/lwmacct/260101-go-pkg-ddd/pkg/shared/captcha/infrastructure"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/config"
+	appauth "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/auth"
+	appuser "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/user"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/auth"
+	domain_twofa "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/twofa"
+	iampersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/persistence"
+	infra_twofa "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/twofa"
+	infracaptcha "github.com/lwmacct/260103-ddd-bc-iam/pkg/shared/captcha/infrastructure"
 
-	infra_auth "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/infrastructure/auth"
+	infra_auth "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/auth"
 )
 
 // ServiceModule 提供所有领域服务和基础设施服务。

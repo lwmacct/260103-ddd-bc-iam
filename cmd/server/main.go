@@ -17,7 +17,7 @@ import (
 	"github.com/gin-gonic/gin"
 
 	// Swagger docs - 空白导入触发 docs.go 的 init() 函数
-	_ "github.com/lwmacct/260101-go-pkg-ddd/cmd/server/docs"
+	_ "github.com/lwmacct/260103-ddd-bc-iam/cmd/server/docs"
 
 	// Swagger - 使用者完全控制文档生成
 	swaggerFiles "github.com/swaggo/files"
@@ -27,19 +27,16 @@ import (
 	"github.com/lwmacct/251219-go-pkg-logm/pkg/logm"
 	"github.com/lwmacct/251219-go-pkg-logm/pkg/logm/formatter"
 	"github.com/lwmacct/251219-go-pkg-logm/pkg/logm/writer"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/config"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/config"
 	"github.com/urfave/cli/v3"
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxevent"
 
 	// 启动器组装代码
-	"github.com/lwmacct/260101-go-pkg-ddd/internal/container"
+	"github.com/lwmacct/260103-ddd-bc-iam/internal/container"
 
 	// 业务模块 (Bounded Contexts)
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/app"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/crm"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/task"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam"
 )
 
 // Swagger 总体配置 - 使用者自定义
@@ -51,7 +48,7 @@ import (
 //	@BasePath        /
 //
 //	@contact.name    API Support
-//	@contact.url     https://github.com/lwmacct/260101-go-pkg-ddd
+//	@contact.url     https://github.com/lwmacct/260103-ddd-bc-iam
 //
 //	@license.name    MIT
 //	@license.url     https://opensource.org/licenses/MIT
@@ -228,10 +225,7 @@ func buildFxOptions(cfg *config.Config) []fx.Option {
 		container.CacheModule,
 		container.ServiceModule,
 		// 业务模块 (Bounded Contexts)
-		app.Module(),
 		iam.Module(),
-		task.Module(),
-		crm.Module(),
 		// HTTP 层 (跨模块handler + 路由)
 		container.HTTPModule,
 		container.HooksModule,

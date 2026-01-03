@@ -4,9 +4,9 @@ import (
 	"errors"
 
 	"github.com/gin-gonic/gin"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/application/auth"
-	authDomain "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/auth"
 	"github.com/lwmacct/260101-go-pkg-gin/pkg/response"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/auth"
+	authDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/auth"
 )
 
 // AuthHandler 认证处理器（新架构）

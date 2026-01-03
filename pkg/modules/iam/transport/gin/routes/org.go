@@ -1,18 +1,16 @@
 package routes
 
 import (
-	iamhandler "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/transport/gin/handler"
-	taskhandler "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/task/transport/gin/handler"
 	"github.com/lwmacct/260101-go-pkg-gin/pkg/routes"
+	iamhandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/transport/gin/handler"
 )
 
 // Org 返回 Org 域路由
-// 包含：Org 域成员管理、Org 域团队管理、Org 域团队成员管理、Org 域任务管理
+// 包含：Org 域成员管理、Org 域团队管理、Org 域团队成员管理
 func Org(
 	orgMemberHandler *iamhandler.OrgMemberHandler,
 	teamHandler *iamhandler.TeamHandler,
 	teamMemberHandler *iamhandler.TeamMemberHandler,
-	taskHandler *taskhandler.TaskHandler,
 ) []routes.Route {
 	return []routes.Route{
 		// ==================== Org 域 - 成员管理 ====================
@@ -127,48 +125,6 @@ func Org(
 			Tags:        "Org - Teams",
 			Summary:     "移除团队成员",
 			Description: "移除团队成员",
-		},
-
-		// ==================== Org 域 - 任务管理 ====================
-		{
-			Method:    routes.POST,
-			Path:      "/api/org/:org_id/teams/:team_id/tasks",
-			Handler:   taskHandler.Create,
-			Operation: "org:tasks:create",
-			Tags:      "Org - Tasks",
-			Summary:   "创建任务",
-		},
-		{
-			Method:    routes.GET,
-			Path:      "/api/org/:org_id/teams/:team_id/tasks",
-			Handler:   taskHandler.List,
-			Operation: "org:tasks:list",
-			Tags:      "Org - Tasks",
-			Summary:   "任务列表",
-		},
-		{
-			Method:    routes.GET,
-			Path:      "/api/org/:org_id/teams/:team_id/tasks/:id",
-			Handler:   taskHandler.Get,
-			Operation: "org:tasks:get",
-			Tags:      "Org - Tasks",
-			Summary:   "任务详情",
-		},
-		{
-			Method:    routes.PUT,
-			Path:      "/api/org/:org_id/teams/:team_id/tasks/:id",
-			Handler:   taskHandler.Update,
-			Operation: "org:tasks:update",
-			Tags:      "Org - Tasks",
-			Summary:   "更新任务",
-		},
-		{
-			Method:    routes.DELETE,
-			Path:      "/api/org/:org_id/teams/:team_id/tasks/:id",
-			Handler:   taskHandler.Delete,
-			Operation: "org:tasks:delete",
-			Tags:      "Org - Tasks",
-			Summary:   "删除任务",
 		},
 	}
 }

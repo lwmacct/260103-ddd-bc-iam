@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/shared/event"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/shared/event"
 )
 
 // mockEvent 测试用事件

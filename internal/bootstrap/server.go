@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/config"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/config"
 )
 
 // Server 管理 HTTP Server 生命周期

@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/role"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/role"
 )
 
 // newTestPAT 创建测试用 PAT。

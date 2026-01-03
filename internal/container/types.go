@@ -1,10 +1,7 @@
 package container
 
 import (
-	corepersistence "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/app/infrastructure/persistence"
-	crmpersistence "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/crm/infrastructure/persistence"
-	iampersistence "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/infrastructure/persistence"
-	taskpersistence "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/task/infrastructure/persistence"
+	iampersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/persistence"
 )
 
 // ContainerOptions 容器初始化选项。
@@ -23,25 +20,18 @@ func DefaultOptions() *ContainerOptions {
 // 新增领域模型时，需在此处注册。
 func GetAllModels() []any {
 	return []any{
+		// 用户和角色
 		&iampersistence.UserModel{},
 		&iampersistence.RoleModel{},
+		// 认证和授权
 		&iampersistence.PersonalAccessTokenModel{},
-		&iampersistence.AuditModel{},
 		&iampersistence.TwoFAModel{},
-		&corepersistence.SettingModel{},
-		&corepersistence.SettingCategoryModel{},
-		&iampersistence.UserSettingModel{},
 		// 组织和团队
 		&iampersistence.OrgModel{},
 		&iampersistence.TeamModel{},
 		&iampersistence.OrgMemberModel{},
 		&iampersistence.TeamMemberModel{},
-		// 任务
-		&taskpersistence.TaskModel{},
-		// CRM
-		&crmpersistence.ContactModel{},
-		&crmpersistence.CompanyModel{},
-		&crmpersistence.LeadModel{},
-		&crmpersistence.OpportunityModel{},
+		// 审计日志
+		&iampersistence.AuditModel{},
 	}
 }

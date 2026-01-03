@@ -5,10 +5,10 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/application/org"
-	orgDomain "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/org"
-	userDomain "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/user"
 	"github.com/lwmacct/260101-go-pkg-gin/pkg/response"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/org"
+	orgDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/org"
+	userDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
 )
 
 // ListMembersQuery 成员列表查询参数

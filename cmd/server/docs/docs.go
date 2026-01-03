@@ -11,7 +11,7 @@ const docTemplate = `{
         "title": "{{.Title}}",
         "contact": {
             "name": "API Support",
-            "url": "https://github.com/lwmacct/260101-go-pkg-ddd"
+            "url": "https://github.com/lwmacct/260103-ddd-bc-iam"
         },
         "license": {
             "name": "MIT",
@@ -103,7 +103,7 @@ const docTemplate = `{
                     "200": {
                         "description": "审计日志列表",
                         "schema": {
-                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_audit_AuditDTO"
+                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_audit_AuditDTO"
                         }
                     },
                     "400": {
@@ -155,7 +155,7 @@ const docTemplate = `{
                     "200": {
                         "description": "审计操作定义",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_audit_AuditActionsResponseDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_audit_AuditActionsResponseDTO"
                         }
                     },
                     "401": {
@@ -205,7 +205,7 @@ const docTemplate = `{
                     "200": {
                         "description": "日志详情",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_audit_AuditDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_audit_AuditDTO"
                         }
                     },
                     "400": {
@@ -257,7 +257,7 @@ const docTemplate = `{
                     "200": {
                         "description": "成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_cache_CacheInfoDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_cache_CacheInfoDTO"
                         }
                     },
                     "500": {
@@ -300,7 +300,7 @@ const docTemplate = `{
                     "200": {
                         "description": "成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_cache_CacheValueDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_cache_CacheValueDTO"
                         }
                     },
                     "400": {
@@ -353,7 +353,7 @@ const docTemplate = `{
                     "200": {
                         "description": "成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_cache_DeleteResultDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_cache_DeleteResultDTO"
                         }
                     },
                     "400": {
@@ -415,7 +415,7 @@ const docTemplate = `{
                     "200": {
                         "description": "成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_cache_ScanKeysResultDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_cache_ScanKeysResultDTO"
                         }
                     },
                     "400": {
@@ -462,7 +462,7 @@ const docTemplate = `{
                     "200": {
                         "description": "成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_cache_DeleteResultDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_cache_DeleteResultDTO"
                         }
                     },
                     "400": {
@@ -502,7 +502,7 @@ const docTemplate = `{
                     "200": {
                         "description": "操作列表",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260101-go-pkg-ddd_pkg_adapters_http_routes_OperationDefinition"
+                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_adapters_http_routes_OperationDefinition"
                         }
                     },
                     "401": {
@@ -570,7 +570,7 @@ const docTemplate = `{
                     "200": {
                         "description": "组织列表",
                         "schema": {
-                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_OrgDTO"
+                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_OrgDTO"
                         }
                     },
                     "401": {
@@ -617,7 +617,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.CreateOrgDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.CreateOrgDTO"
                         }
                     }
                 ],
@@ -625,7 +625,7 @@ const docTemplate = `{
                     "201": {
                         "description": "组织创建成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_OrgDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_OrgDTO"
                         }
                     },
                     "400": {
@@ -687,7 +687,7 @@ const docTemplate = `{
                     "200": {
                         "description": "组织详情",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_OrgDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_OrgDTO"
                         }
                     },
                     "400": {
@@ -748,7 +748,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.UpdateOrgDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.UpdateOrgDTO"
                         }
                     }
                 ],
@@ -756,7 +756,7 @@ const docTemplate = `{
                     "200": {
                         "description": "组织更新成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_OrgDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_OrgDTO"
                         }
                     },
                     "400": {
@@ -880,7 +880,7 @@ const docTemplate = `{
                     "200": {
                         "description": "统计信息",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_stats_StatsDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_stats_StatsDTO"
                         }
                     },
                     "401": {
@@ -945,7 +945,7 @@ const docTemplate = `{
                     "200": {
                         "description": "产品列表",
                         "schema": {
-                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_product_ProductDTO"
+                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_product_ProductDTO"
                         }
                     },
                     "401": {
@@ -992,7 +992,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_product.CreateProductDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_product.CreateProductDTO"
                         }
                     }
                 ],
@@ -1000,7 +1000,7 @@ const docTemplate = `{
                     "201": {
                         "description": "产品创建成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_product_ProductDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_product_ProductDTO"
                         }
                     },
                     "400": {
@@ -1061,7 +1061,7 @@ const docTemplate = `{
                     "200": {
                         "description": "产品详情",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_product_ProductDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_product_ProductDTO"
                         }
                     },
                     "401": {
@@ -1121,7 +1121,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_product.UpdateProductDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_product.UpdateProductDTO"
                         }
                     }
                 ],
@@ -1129,7 +1129,7 @@ const docTemplate = `{
                     "200": {
                         "description": "更新成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_product_ProductDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_product_ProductDTO"
                         }
                     },
                     "400": {
@@ -1271,7 +1271,7 @@ const docTemplate = `{
                     "200": {
                         "description": "角色列表",
                         "schema": {
-                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role_RoleDTO"
+                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role_RoleDTO"
                         }
                     },
                     "401": {
@@ -1318,7 +1318,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role.CreateDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role.CreateDTO"
                         }
                     }
                 ],
@@ -1326,7 +1326,7 @@ const docTemplate = `{
                     "201": {
                         "description": "角色创建成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role_CreateResultDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role_CreateResultDTO"
                         }
                     },
                     "400": {
@@ -1388,7 +1388,7 @@ const docTemplate = `{
                     "200": {
                         "description": "角色详情",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role_RoleDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role_RoleDTO"
                         }
                     },
                     "400": {
@@ -1449,7 +1449,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role.UpdateDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role.UpdateDTO"
                         }
                     }
                 ],
@@ -1457,7 +1457,7 @@ const docTemplate = `{
                     "200": {
                         "description": "角色更新成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role_RoleDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role_RoleDTO"
                         }
                     },
                     "400": {
@@ -1592,7 +1592,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role.SetPermissionsDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role.SetPermissionsDTO"
                         }
                     }
                 ],
@@ -1666,7 +1666,7 @@ const docTemplate = `{
                     "200": {
                         "description": "配置列表（层级结构）",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting_SettingsCategoryDTO"
+                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting_SettingsCategoryDTO"
                         }
                     },
                     "401": {
@@ -1727,7 +1727,7 @@ const docTemplate = `{
                     "201": {
                         "description": "配置创建成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting_SettingDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting_SettingDTO"
                         }
                     },
                     "400": {
@@ -1842,7 +1842,7 @@ const docTemplate = `{
                     "200": {
                         "description": "分类列表",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting_CategoryDTO"
+                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting_CategoryDTO"
                         }
                     },
                     "401": {
@@ -1897,7 +1897,7 @@ const docTemplate = `{
                     "201": {
                         "description": "分类创建成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting_CategoryDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting_CategoryDTO"
                         }
                     },
                     "400": {
@@ -1958,7 +1958,7 @@ const docTemplate = `{
                     "200": {
                         "description": "分类详情",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting_CategoryDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting_CategoryDTO"
                         }
                     },
                     "401": {
@@ -2020,7 +2020,7 @@ const docTemplate = `{
                     "200": {
                         "description": "分类更新成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting_CategoryDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting_CategoryDTO"
                         }
                     },
                     "400": {
@@ -2149,7 +2149,7 @@ const docTemplate = `{
                     "200": {
                         "description": "配置详情",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting_SettingDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting_SettingDTO"
                         }
                     },
                     "401": {
@@ -2211,7 +2211,7 @@ const docTemplate = `{
                     "200": {
                         "description": "配置更新成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting_SettingDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting_SettingDTO"
                         }
                     },
                     "400": {
@@ -2350,7 +2350,7 @@ const docTemplate = `{
                     "200": {
                         "description": "用户列表",
                         "schema": {
-                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user_UserWithRolesDTO"
+                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user_UserWithRolesDTO"
                         }
                     },
                     "401": {
@@ -2397,7 +2397,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.CreateDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.CreateDTO"
                         }
                     }
                 ],
@@ -2405,7 +2405,7 @@ const docTemplate = `{
                     "201": {
                         "description": "用户创建成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user_UserWithRolesDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user_UserWithRolesDTO"
                         }
                     },
                     "400": {
@@ -2460,7 +2460,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.BatchCreateDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.BatchCreateDTO"
                         }
                     }
                 ],
@@ -2468,7 +2468,7 @@ const docTemplate = `{
                     "200": {
                         "description": "批量创建结果",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user_BatchCreateResultDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user_BatchCreateResultDTO"
                         }
                     },
                     "400": {
@@ -2530,7 +2530,7 @@ const docTemplate = `{
                     "200": {
                         "description": "用户详情",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user_UserWithRolesDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user_UserWithRolesDTO"
                         }
                     },
                     "400": {
@@ -2591,7 +2591,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.UpdateDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.UpdateDTO"
                         }
                     }
                 ],
@@ -2599,7 +2599,7 @@ const docTemplate = `{
                     "200": {
                         "description": "用户更新成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user_UserWithRolesDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user_UserWithRolesDTO"
                         }
                     },
                     "400": {
@@ -2734,7 +2734,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.AssignRolesDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.AssignRolesDTO"
                         }
                     }
                 ],
@@ -2742,7 +2742,7 @@ const docTemplate = `{
                     "200": {
                         "description": "角色分配成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user_UserWithRolesDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user_UserWithRolesDTO"
                         }
                     },
                     "400": {
@@ -2840,7 +2840,7 @@ const docTemplate = `{
                     "200": {
                         "description": "2FA初始化成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_twofa_SetupDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_twofa_SetupDTO"
                         }
                     },
                     "400": {
@@ -2880,7 +2880,7 @@ const docTemplate = `{
                     "200": {
                         "description": "2FA状态",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_twofa_StatusDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_twofa_StatusDTO"
                         }
                     },
                     "400": {
@@ -2923,7 +2923,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_twofa.VerifyDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_twofa.VerifyDTO"
                         }
                     }
                 ],
@@ -2931,7 +2931,7 @@ const docTemplate = `{
                     "200": {
                         "description": "2FA启用成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_twofa_EnableDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_twofa_EnableDTO"
                         }
                     },
                     "400": {
@@ -2980,7 +2980,7 @@ const docTemplate = `{
                     "200": {
                         "description": "验证码生成成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_captcha_GenerateResultDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_captcha_GenerateResultDTO"
                         }
                     },
                     "500": {
@@ -3012,7 +3012,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth.LoginDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth.LoginDTO"
                         }
                     }
                 ],
@@ -3020,7 +3020,7 @@ const docTemplate = `{
                     "200": {
                         "description": "登录成功或需要2FA验证",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth_LoginResponseDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth_LoginResponseDTO"
                         }
                     },
                     "401": {
@@ -3052,7 +3052,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth.Login2FADTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth.Login2FADTO"
                         }
                     }
                 ],
@@ -3060,7 +3060,7 @@ const docTemplate = `{
                     "200": {
                         "description": "登录成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth_TokenDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth_TokenDTO"
                         }
                     },
                     "401": {
@@ -3097,7 +3097,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth.RefreshTokenDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth.RefreshTokenDTO"
                         }
                     }
                 ],
@@ -3105,7 +3105,7 @@ const docTemplate = `{
                     "200": {
                         "description": "令牌刷新成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth_LoginResponseDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth_LoginResponseDTO"
                         }
                     },
                     "401": {
@@ -3137,7 +3137,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth.RegisterDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth.RegisterDTO"
                         }
                     }
                 ],
@@ -3145,7 +3145,7 @@ const docTemplate = `{
                     "201": {
                         "description": "注册成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth_RegisterResultDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth_RegisterResultDTO"
                         }
                     },
                     "400": {
@@ -3206,7 +3206,7 @@ const docTemplate = `{
                     "200": {
                         "description": "成员列表",
                         "schema": {
-                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_MemberDTO"
+                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_MemberDTO"
                         }
                     },
                     "401": {
@@ -3261,7 +3261,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.AddMemberDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.AddMemberDTO"
                         }
                     }
                 ],
@@ -3269,7 +3269,7 @@ const docTemplate = `{
                     "201": {
                         "description": "成员添加成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_MemberDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_MemberDTO"
                         }
                     },
                     "400": {
@@ -3416,7 +3416,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.UpdateMemberRoleDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.UpdateMemberRoleDTO"
                         }
                     }
                 ],
@@ -3424,7 +3424,7 @@ const docTemplate = `{
                     "200": {
                         "description": "角色更新成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_MemberDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_MemberDTO"
                         }
                     },
                     "400": {
@@ -3509,7 +3509,7 @@ const docTemplate = `{
                     "200": {
                         "description": "团队列表",
                         "schema": {
-                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_TeamDTO"
+                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_TeamDTO"
                         }
                     },
                     "401": {
@@ -3564,7 +3564,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.CreateTeamDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.CreateTeamDTO"
                         }
                     }
                 ],
@@ -3572,7 +3572,7 @@ const docTemplate = `{
                     "201": {
                         "description": "团队创建成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_TeamDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_TeamDTO"
                         }
                     },
                     "400": {
@@ -3642,7 +3642,7 @@ const docTemplate = `{
                     "200": {
                         "description": "团队详情",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_TeamDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_TeamDTO"
                         }
                     },
                     "400": {
@@ -3803,7 +3803,7 @@ const docTemplate = `{
                     "200": {
                         "description": "成员列表",
                         "schema": {
-                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_TeamMemberDTO"
+                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_TeamMemberDTO"
                         }
                     },
                     "400": {
@@ -3972,7 +3972,7 @@ const docTemplate = `{
                     "200": {
                         "description": "任务列表",
                         "schema": {
-                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_task_TaskDTO"
+                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_task_TaskDTO"
                         }
                     },
                     "401": {
@@ -4033,7 +4033,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_task.CreateTaskDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_task.CreateTaskDTO"
                         }
                     }
                 ],
@@ -4041,7 +4041,7 @@ const docTemplate = `{
                     "201": {
                         "description": "任务创建成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_task_TaskDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_task_TaskDTO"
                         }
                     },
                     "400": {
@@ -4116,7 +4116,7 @@ const docTemplate = `{
                     "200": {
                         "description": "任务详情",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_task_TaskDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_task_TaskDTO"
                         }
                     },
                     "401": {
@@ -4190,7 +4190,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_task.UpdateTaskDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_task.UpdateTaskDTO"
                         }
                     }
                 ],
@@ -4198,7 +4198,7 @@ const docTemplate = `{
                     "200": {
                         "description": "更新成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_task_TaskDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_task_TaskDTO"
                         }
                     },
                     "400": {
@@ -4369,7 +4369,7 @@ const docTemplate = `{
                     "200": {
                         "description": "组织列表",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_UserOrgDTO"
+                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_UserOrgDTO"
                         }
                     },
                     "401": {
@@ -4412,7 +4412,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.ChangePasswordDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.ChangePasswordDTO"
                         }
                     }
                 ],
@@ -4460,7 +4460,7 @@ const docTemplate = `{
                     "200": {
                         "description": "个人资料",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user_UserWithRolesDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user_UserWithRolesDTO"
                         }
                     },
                     "401": {
@@ -4509,7 +4509,7 @@ const docTemplate = `{
                     "200": {
                         "description": "资料更新成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user_UserWithRolesDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user_UserWithRolesDTO"
                         }
                     },
                     "400": {
@@ -4563,7 +4563,7 @@ const docTemplate = `{
                     "200": {
                         "description": "配置列表（层级结构）",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting_SettingsCategoryDTO"
+                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting_SettingsCategoryDTO"
                         }
                     },
                     "401": {
@@ -4666,7 +4666,7 @@ const docTemplate = `{
                     "200": {
                         "description": "分类列表",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting_CategoryMetaDTO"
+                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting_CategoryMetaDTO"
                         }
                     },
                     "401": {
@@ -4715,7 +4715,7 @@ const docTemplate = `{
                     "200": {
                         "description": "配置详情",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting_UserSettingDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting_UserSettingDTO"
                         }
                     },
                     "401": {
@@ -4771,7 +4771,7 @@ const docTemplate = `{
                     "200": {
                         "description": "设置成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting_UserSettingDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting_UserSettingDTO"
                         }
                     },
                     "400": {
@@ -4875,7 +4875,7 @@ const docTemplate = `{
                     "200": {
                         "description": "团队列表",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_UserTeamDTO"
+                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_UserTeamDTO"
                         }
                     },
                     "401": {
@@ -4915,7 +4915,7 @@ const docTemplate = `{
                     "200": {
                         "description": "令牌列表",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260101-go-pkg-ddd_pkg_application_pat_TokenDTO"
+                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_application_pat_TokenDTO"
                         }
                     },
                     "401": {
@@ -4956,7 +4956,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_pat.CreateDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_pat.CreateDTO"
                         }
                     }
                 ],
@@ -4964,7 +4964,7 @@ const docTemplate = `{
                     "201": {
                         "description": "令牌创建成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_pat_CreateResultDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_pat_CreateResultDTO"
                         }
                     },
                     "400": {
@@ -5004,7 +5004,7 @@ const docTemplate = `{
                     "200": {
                         "description": "Scope 列表",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260101-go-pkg-ddd_pkg_application_pat_ScopeInfoDTO"
+                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_application_pat_ScopeInfoDTO"
                         }
                     },
                     "401": {
@@ -5048,7 +5048,7 @@ const docTemplate = `{
                     "200": {
                         "description": "令牌详情",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_pat_TokenDTO"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_pat_TokenDTO"
                         }
                     },
                     "400": {
@@ -5243,13 +5243,13 @@ const docTemplate = `{
                     "200": {
                         "description": "服务健康",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_health_HealthReport"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_health_HealthReport"
                         }
                     },
                     "503": {
                         "description": "服务降级",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_health_HealthReport"
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_health_HealthReport"
                         }
                     }
                 }
@@ -5303,7 +5303,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_adapters_http_routes.OperationDefinition": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_adapters_http_routes.OperationDefinition": {
             "type": "object",
             "properties": {
                 "code": {
@@ -5336,7 +5336,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_audit.AuditActionDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_audit.AuditActionDTO": {
             "type": "object",
             "properties": {
                 "action": {
@@ -5361,33 +5361,33 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_audit.AuditActionsResponseDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_audit.AuditActionsResponseDTO": {
             "type": "object",
             "properties": {
                 "actions": {
                     "description": "操作定义列表",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_audit.AuditActionDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_audit.AuditActionDTO"
                     }
                 },
                 "categories": {
                     "description": "分类选项",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_audit.CategoryOptionDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_audit.CategoryOptionDTO"
                     }
                 },
                 "operations": {
                     "description": "操作类型选项",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_audit.OperationTypeDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_audit.OperationTypeDTO"
                     }
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_audit.AuditDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_audit.AuditDTO": {
             "type": "object",
             "properties": {
                 "action": {
@@ -5419,7 +5419,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_audit.CategoryOptionDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_audit.CategoryOptionDTO": {
             "type": "object",
             "properties": {
                 "label": {
@@ -5432,7 +5432,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_audit.OperationTypeDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_audit.OperationTypeDTO": {
             "type": "object",
             "properties": {
                 "label": {
@@ -5445,7 +5445,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth.Login2FADTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth.Login2FADTO": {
             "type": "object",
             "required": [
                 "session_token",
@@ -5464,7 +5464,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth.LoginDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth.LoginDTO": {
             "type": "object",
             "required": [
                 "account",
@@ -5495,7 +5495,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth.LoginResponseDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth.LoginResponseDTO": {
             "type": "object",
             "properties": {
                 "access_token": {
@@ -5518,11 +5518,11 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "user": {
-                    "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth.UserBriefDTO"
+                    "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth.UserBriefDTO"
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth.LoginRoleDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth.LoginRoleDTO": {
             "type": "object",
             "properties": {
                 "id": {
@@ -5533,7 +5533,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth.RefreshTokenDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth.RefreshTokenDTO": {
             "type": "object",
             "required": [
                 "refresh_token"
@@ -5545,7 +5545,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth.RegisterDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth.RegisterDTO": {
             "type": "object",
             "required": [
                 "email",
@@ -5589,7 +5589,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth.RegisterResultDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth.RegisterResultDTO": {
             "type": "object",
             "properties": {
                 "access_token": {
@@ -5615,7 +5615,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth.TokenDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth.TokenDTO": {
             "type": "object",
             "properties": {
                 "access_token": {
@@ -5632,13 +5632,13 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth.UserBriefDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth.UserBriefDTO": {
             "type": "object",
             "properties": {
                 "roles": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth.LoginRoleDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth.LoginRoleDTO"
                     }
                 },
                 "user_id": {
@@ -5649,7 +5649,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_cache.CacheInfoDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_cache.CacheInfoDTO": {
             "type": "object",
             "properties": {
                 "db_size": {
@@ -5670,7 +5670,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_cache.CacheKeyDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_cache.CacheKeyDTO": {
             "type": "object",
             "properties": {
                 "key": {
@@ -5687,7 +5687,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_cache.CacheValueDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_cache.CacheValueDTO": {
             "type": "object",
             "properties": {
                 "key": {
@@ -5711,7 +5711,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_cache.DeleteResultDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_cache.DeleteResultDTO": {
             "type": "object",
             "properties": {
                 "deleted_count": {
@@ -5720,7 +5720,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_cache.ScanKeysResultDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_cache.ScanKeysResultDTO": {
             "type": "object",
             "properties": {
                 "cursor": {
@@ -5731,7 +5731,7 @@ const docTemplate = `{
                     "description": "Keys key 列表",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_cache.CacheKeyDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_cache.CacheKeyDTO"
                     }
                 },
                 "total_scanned": {
@@ -5740,7 +5740,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_captcha.GenerateResultDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_captcha.GenerateResultDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -5761,21 +5761,21 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_health.HealthReport": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_health.HealthReport": {
             "type": "object",
             "properties": {
                 "checks": {
                     "type": "object",
                     "additionalProperties": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_domain_health.CheckResult"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_domain_health.CheckResult"
                     }
                 },
                 "status": {
-                    "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_domain_health.Status"
+                    "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_domain_health.Status"
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.AddMemberDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.AddMemberDTO": {
             "type": "object",
             "required": [
                 "role",
@@ -5795,7 +5795,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.CreateOrgDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.CreateOrgDTO": {
             "type": "object",
             "required": [
                 "display_name",
@@ -5822,7 +5822,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.CreateTeamDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.CreateTeamDTO": {
             "type": "object",
             "required": [
                 "display_name",
@@ -5849,7 +5849,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.MemberDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.MemberDTO": {
             "type": "object",
             "properties": {
                 "avatar": {
@@ -5882,7 +5882,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.OrgDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.OrgDTO": {
             "type": "object",
             "properties": {
                 "avatar": {
@@ -5911,7 +5911,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.TeamDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.TeamDTO": {
             "type": "object",
             "properties": {
                 "avatar": {
@@ -5940,7 +5940,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.TeamMemberDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.TeamMemberDTO": {
             "type": "object",
             "properties": {
                 "avatar": {
@@ -5973,7 +5973,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.UpdateMemberRoleDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.UpdateMemberRoleDTO": {
             "type": "object",
             "required": [
                 "role"
@@ -5989,7 +5989,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.UpdateOrgDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.UpdateOrgDTO": {
             "type": "object",
             "properties": {
                 "avatar": {
@@ -6014,7 +6014,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.UserOrgDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.UserOrgDTO": {
             "type": "object",
             "properties": {
                 "avatar": {
@@ -6051,7 +6051,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.UserTeamDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.UserTeamDTO": {
             "type": "object",
             "properties": {
                 "avatar": {
@@ -6092,7 +6092,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_pat.CreateDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_pat.CreateDTO": {
             "type": "object",
             "required": [
                 "name"
@@ -6131,18 +6131,18 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_pat.CreateResultDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_pat.CreateResultDTO": {
             "type": "object",
             "properties": {
                 "plain_token": {
                     "type": "string"
                 },
                 "token": {
-                    "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_pat.TokenDTO"
+                    "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_pat.TokenDTO"
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_pat.ScopeInfoDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_pat.ScopeInfoDTO": {
             "type": "object",
             "properties": {
                 "description": {
@@ -6156,7 +6156,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_pat.TokenDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_pat.TokenDTO": {
             "type": "object",
             "properties": {
                 "created_at": {
@@ -6200,7 +6200,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_product.CreateProductDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_product.CreateProductDTO": {
             "type": "object",
             "required": [
                 "code",
@@ -6254,7 +6254,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_product.ProductDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_product.ProductDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -6295,7 +6295,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_product.UpdateProductDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_product.UpdateProductDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -6344,7 +6344,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role.CreateDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role.CreateDTO": {
             "type": "object",
             "required": [
                 "display_name",
@@ -6369,7 +6369,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role.CreateResultDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role.CreateResultDTO": {
             "type": "object",
             "properties": {
                 "display_name": {
@@ -6383,7 +6383,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role.PermissionDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role.PermissionDTO": {
             "type": "object",
             "properties": {
                 "operation_pattern": {
@@ -6396,7 +6396,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role.PermissionInputDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role.PermissionInputDTO": {
             "type": "object",
             "required": [
                 "operation_pattern"
@@ -6412,7 +6412,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role.RoleDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role.RoleDTO": {
             "type": "object",
             "properties": {
                 "created_at": {
@@ -6436,7 +6436,7 @@ const docTemplate = `{
                 "permissions": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role.PermissionDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role.PermissionDTO"
                     }
                 },
                 "updated_at": {
@@ -6444,7 +6444,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role.SetPermissionsDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role.SetPermissionsDTO": {
             "type": "object",
             "required": [
                 "permissions"
@@ -6453,12 +6453,12 @@ const docTemplate = `{
                 "permissions": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role.PermissionInputDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role.PermissionInputDTO"
                     }
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role.UpdateDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role.UpdateDTO": {
             "type": "object",
             "properties": {
                 "description": {
@@ -6471,7 +6471,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.CategoryDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.CategoryDTO": {
             "type": "object",
             "properties": {
                 "created_at": {
@@ -6497,7 +6497,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.CategoryMetaDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.CategoryMetaDTO": {
             "type": "object",
             "properties": {
                 "category": {
@@ -6515,7 +6515,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.DependsOnConfigDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.DependsOnConfigDTO": {
             "type": "object",
             "properties": {
                 "key": {
@@ -6528,7 +6528,7 @@ const docTemplate = `{
                 "value": {}
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.SelectOptionDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.SelectOptionDTO": {
             "type": "object",
             "properties": {
                 "label": {
@@ -6539,7 +6539,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.SettingDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.SettingDTO": {
             "type": "object",
             "properties": {
                 "category_id": {
@@ -6578,7 +6578,7 @@ const docTemplate = `{
                     "description": "hint/options/depends_on",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.UIConfigDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.UIConfigDTO"
                         }
                     ]
                 },
@@ -6593,7 +6593,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.SettingsCategoryDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.SettingsCategoryDTO": {
             "type": "object",
             "properties": {
                 "category": {
@@ -6602,7 +6602,7 @@ const docTemplate = `{
                 "groups": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.SettingsGroupDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.SettingsGroupDTO"
                     }
                 },
                 "icon": {
@@ -6613,7 +6613,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.SettingsGroupDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.SettingsGroupDTO": {
             "type": "object",
             "properties": {
                 "name": {
@@ -6623,12 +6623,12 @@ const docTemplate = `{
                 "settings": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.SettingsItemDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.SettingsItemDTO"
                     }
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.SettingsItemDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.SettingsItemDTO": {
             "type": "object",
             "properties": {
                 "default_value": {
@@ -6663,7 +6663,7 @@ const docTemplate = `{
                     "description": "hint/options/depends_on",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.UIConfigDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.UIConfigDTO"
                         }
                     ]
                 },
@@ -6678,14 +6678,14 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.UIConfigDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.UIConfigDTO": {
             "type": "object",
             "properties": {
                 "depends_on": {
                     "description": "依赖关系",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.DependsOnConfigDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.DependsOnConfigDTO"
                         }
                     ]
                 },
@@ -6697,12 +6697,12 @@ const docTemplate = `{
                     "description": "下拉选项",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.SelectOptionDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.SelectOptionDTO"
                     }
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.UserSettingDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.UserSettingDTO": {
             "type": "object",
             "properties": {
                 "category_id": {
@@ -6735,7 +6735,7 @@ const docTemplate = `{
                     "description": "hint/options/depends_on",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.UIConfigDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.UIConfigDTO"
                         }
                     ]
                 },
@@ -6750,7 +6750,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_stats.AuditLogSummaryDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_stats.AuditLogSummaryDTO": {
             "type": "object",
             "properties": {
                 "action": {
@@ -6776,7 +6776,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_stats.StatsDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_stats.StatsDTO": {
             "type": "object",
             "properties": {
                 "active_users": {
@@ -6791,7 +6791,7 @@ const docTemplate = `{
                 "recent_audit_logs": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_stats.AuditLogSummaryDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_stats.AuditLogSummaryDTO"
                     }
                 },
                 "total_permissions": {
@@ -6805,7 +6805,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_task.CreateTaskDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_task.CreateTaskDTO": {
             "type": "object",
             "required": [
                 "title"
@@ -6825,7 +6825,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_task.TaskDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_task.TaskDTO": {
             "type": "object",
             "properties": {
                 "assignee_id": {
@@ -6860,7 +6860,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_task.UpdateTaskDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_task.UpdateTaskDTO": {
             "type": "object",
             "properties": {
                 "assignee_id": {
@@ -6885,7 +6885,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_twofa.EnableDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_twofa.EnableDTO": {
             "type": "object",
             "properties": {
                 "message": {
@@ -6901,7 +6901,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_twofa.SetupDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_twofa.SetupDTO": {
             "type": "object",
             "properties": {
                 "qrcode_img": {
@@ -6918,7 +6918,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_twofa.StatusDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_twofa.StatusDTO": {
             "type": "object",
             "properties": {
                 "enabled": {
@@ -6931,7 +6931,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_twofa.VerifyDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_twofa.VerifyDTO": {
             "type": "object",
             "required": [
                 "code"
@@ -6944,7 +6944,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.AssignRolesDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.AssignRolesDTO": {
             "type": "object",
             "required": [
                 "role_ids"
@@ -6958,7 +6958,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.BatchCreateDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.BatchCreateDTO": {
             "type": "object",
             "required": [
                 "users"
@@ -6969,12 +6969,12 @@ const docTemplate = `{
                     "maxItems": 100,
                     "minItems": 1,
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.BatchItemDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.BatchItemDTO"
                     }
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.BatchCreateErrorDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.BatchCreateErrorDTO": {
             "type": "object",
             "properties": {
                 "email": {
@@ -6991,13 +6991,13 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.BatchCreateResultDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.BatchCreateResultDTO": {
             "type": "object",
             "properties": {
                 "errors": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.BatchCreateErrorDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.BatchCreateErrorDTO"
                     }
                 },
                 "failed": {
@@ -7011,7 +7011,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.BatchItemDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.BatchItemDTO": {
             "type": "object",
             "required": [
                 "email",
@@ -7061,7 +7061,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.ChangePasswordDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.ChangePasswordDTO": {
             "type": "object",
             "required": [
                 "new_password",
@@ -7077,7 +7077,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.CreateDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.CreateDTO": {
             "type": "object",
             "required": [
                 "email",
@@ -7127,7 +7127,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.RoleDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.RoleDTO": {
             "type": "object",
             "properties": {
                 "description": {
@@ -7144,7 +7144,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.UpdateDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.UpdateDTO": {
             "type": "object",
             "properties": {
                 "avatar": {
@@ -7187,7 +7187,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.UserWithRolesDTO": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.UserWithRolesDTO": {
             "type": "object",
             "properties": {
                 "avatar": {
@@ -7217,7 +7217,7 @@ const docTemplate = `{
                 "roles": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.RoleDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.RoleDTO"
                     }
                 },
                 "signature": {
@@ -7238,7 +7238,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_domain_health.CheckResult": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_domain_health.CheckResult": {
             "type": "object",
             "properties": {
                 "error": {
@@ -7249,11 +7249,11 @@ const docTemplate = `{
                     "additionalProperties": {}
                 },
                 "status": {
-                    "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_domain_health.Status"
+                    "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_domain_health.Status"
                 }
             }
         },
-        "github_com_lwmacct_260101-go-pkg-ddd_pkg_domain_health.Status": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_domain_health.Status": {
             "type": "string",
             "enum": [
                 "healthy",
@@ -7476,7 +7476,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-array_github_com_lwmacct_260101-go-pkg-ddd_pkg_adapters_http_routes_OperationDefinition": {
+        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_adapters_http_routes_OperationDefinition": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7487,7 +7487,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_adapters_http_routes.OperationDefinition"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_adapters_http_routes.OperationDefinition"
                     }
                 },
                 "error": {
@@ -7499,7 +7499,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-array_github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_UserOrgDTO": {
+        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_UserOrgDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7510,7 +7510,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.UserOrgDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.UserOrgDTO"
                     }
                 },
                 "error": {
@@ -7522,7 +7522,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-array_github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_UserTeamDTO": {
+        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_UserTeamDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7533,7 +7533,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.UserTeamDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.UserTeamDTO"
                     }
                 },
                 "error": {
@@ -7545,7 +7545,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-array_github_com_lwmacct_260101-go-pkg-ddd_pkg_application_pat_ScopeInfoDTO": {
+        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_application_pat_ScopeInfoDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7556,7 +7556,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_pat.ScopeInfoDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_pat.ScopeInfoDTO"
                     }
                 },
                 "error": {
@@ -7568,7 +7568,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-array_github_com_lwmacct_260101-go-pkg-ddd_pkg_application_pat_TokenDTO": {
+        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_application_pat_TokenDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7579,7 +7579,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_pat.TokenDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_pat.TokenDTO"
                     }
                 },
                 "error": {
@@ -7591,7 +7591,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-array_github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting_CategoryDTO": {
+        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting_CategoryDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7602,7 +7602,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.CategoryDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.CategoryDTO"
                     }
                 },
                 "error": {
@@ -7614,7 +7614,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-array_github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting_CategoryMetaDTO": {
+        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting_CategoryMetaDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7625,7 +7625,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.CategoryMetaDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.CategoryMetaDTO"
                     }
                 },
                 "error": {
@@ -7637,7 +7637,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-array_github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting_SettingsCategoryDTO": {
+        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting_SettingsCategoryDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7648,7 +7648,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.SettingsCategoryDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.SettingsCategoryDTO"
                     }
                 },
                 "error": {
@@ -7660,7 +7660,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_audit_AuditActionsResponseDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_audit_AuditActionsResponseDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7671,7 +7671,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_audit.AuditActionsResponseDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_audit.AuditActionsResponseDTO"
                         }
                     ]
                 },
@@ -7684,7 +7684,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_audit_AuditDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_audit_AuditDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7695,7 +7695,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_audit.AuditDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_audit.AuditDTO"
                         }
                     ]
                 },
@@ -7708,7 +7708,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth_LoginResponseDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth_LoginResponseDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7719,7 +7719,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth.LoginResponseDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth.LoginResponseDTO"
                         }
                     ]
                 },
@@ -7732,7 +7732,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth_RegisterResultDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth_RegisterResultDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7743,7 +7743,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth.RegisterResultDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth.RegisterResultDTO"
                         }
                     ]
                 },
@@ -7756,7 +7756,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth_TokenDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth_TokenDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7767,7 +7767,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_auth.TokenDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_auth.TokenDTO"
                         }
                     ]
                 },
@@ -7780,7 +7780,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_cache_CacheInfoDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_cache_CacheInfoDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7791,7 +7791,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_cache.CacheInfoDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_cache.CacheInfoDTO"
                         }
                     ]
                 },
@@ -7804,7 +7804,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_cache_CacheValueDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_cache_CacheValueDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7815,7 +7815,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_cache.CacheValueDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_cache.CacheValueDTO"
                         }
                     ]
                 },
@@ -7828,7 +7828,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_cache_DeleteResultDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_cache_DeleteResultDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7839,7 +7839,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_cache.DeleteResultDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_cache.DeleteResultDTO"
                         }
                     ]
                 },
@@ -7852,7 +7852,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_cache_ScanKeysResultDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_cache_ScanKeysResultDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7863,7 +7863,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_cache.ScanKeysResultDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_cache.ScanKeysResultDTO"
                         }
                     ]
                 },
@@ -7876,7 +7876,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_captcha_GenerateResultDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_captcha_GenerateResultDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7887,7 +7887,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_captcha.GenerateResultDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_captcha.GenerateResultDTO"
                         }
                     ]
                 },
@@ -7900,7 +7900,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_health_HealthReport": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_health_HealthReport": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7911,7 +7911,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_health.HealthReport"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_health.HealthReport"
                         }
                     ]
                 },
@@ -7924,7 +7924,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_MemberDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_MemberDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7935,7 +7935,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.MemberDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.MemberDTO"
                         }
                     ]
                 },
@@ -7948,7 +7948,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_OrgDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_OrgDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7959,7 +7959,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.OrgDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.OrgDTO"
                         }
                     ]
                 },
@@ -7972,7 +7972,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_TeamDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_TeamDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -7983,7 +7983,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.TeamDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.TeamDTO"
                         }
                     ]
                 },
@@ -7996,7 +7996,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_pat_CreateResultDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_pat_CreateResultDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8007,7 +8007,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_pat.CreateResultDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_pat.CreateResultDTO"
                         }
                     ]
                 },
@@ -8020,7 +8020,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_pat_TokenDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_pat_TokenDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8031,7 +8031,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_pat.TokenDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_pat.TokenDTO"
                         }
                     ]
                 },
@@ -8044,7 +8044,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_product_ProductDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_product_ProductDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8055,7 +8055,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_product.ProductDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_product.ProductDTO"
                         }
                     ]
                 },
@@ -8068,7 +8068,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role_CreateResultDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role_CreateResultDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8079,7 +8079,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role.CreateResultDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role.CreateResultDTO"
                         }
                     ]
                 },
@@ -8092,7 +8092,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role_RoleDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role_RoleDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8103,7 +8103,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role.RoleDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role.RoleDTO"
                         }
                     ]
                 },
@@ -8116,7 +8116,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting_CategoryDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting_CategoryDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8127,7 +8127,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.CategoryDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.CategoryDTO"
                         }
                     ]
                 },
@@ -8140,7 +8140,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting_SettingDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting_SettingDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8151,7 +8151,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.SettingDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.SettingDTO"
                         }
                     ]
                 },
@@ -8164,7 +8164,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting_UserSettingDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting_UserSettingDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8175,7 +8175,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_setting.UserSettingDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_setting.UserSettingDTO"
                         }
                     ]
                 },
@@ -8188,7 +8188,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_stats_StatsDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_stats_StatsDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8199,7 +8199,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_stats.StatsDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_stats.StatsDTO"
                         }
                     ]
                 },
@@ -8212,7 +8212,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_task_TaskDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_task_TaskDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8223,7 +8223,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_task.TaskDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_task.TaskDTO"
                         }
                     ]
                 },
@@ -8236,7 +8236,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_twofa_EnableDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_twofa_EnableDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8247,7 +8247,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_twofa.EnableDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_twofa.EnableDTO"
                         }
                     ]
                 },
@@ -8260,7 +8260,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_twofa_SetupDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_twofa_SetupDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8271,7 +8271,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_twofa.SetupDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_twofa.SetupDTO"
                         }
                     ]
                 },
@@ -8284,7 +8284,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_twofa_StatusDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_twofa_StatusDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8295,7 +8295,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_twofa.StatusDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_twofa.StatusDTO"
                         }
                     ]
                 },
@@ -8308,7 +8308,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user_BatchCreateResultDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user_BatchCreateResultDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8319,7 +8319,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.BatchCreateResultDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.BatchCreateResultDTO"
                         }
                     ]
                 },
@@ -8332,7 +8332,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.DataResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user_UserWithRolesDTO": {
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user_UserWithRolesDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8343,7 +8343,7 @@ const docTemplate = `{
                     "description": "响应数据",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.UserWithRolesDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.UserWithRolesDTO"
                         }
                     ]
                 },
@@ -8394,7 +8394,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.PagedResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_audit_AuditDTO": {
+        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_audit_AuditDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8405,7 +8405,7 @@ const docTemplate = `{
                     "description": "数据列表",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_audit.AuditDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_audit.AuditDTO"
                     }
                 },
                 "message": {
@@ -8422,7 +8422,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.PagedResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_MemberDTO": {
+        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_MemberDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8433,7 +8433,7 @@ const docTemplate = `{
                     "description": "数据列表",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.MemberDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.MemberDTO"
                     }
                 },
                 "message": {
@@ -8450,7 +8450,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.PagedResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_OrgDTO": {
+        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_OrgDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8461,7 +8461,7 @@ const docTemplate = `{
                     "description": "数据列表",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.OrgDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.OrgDTO"
                     }
                 },
                 "message": {
@@ -8478,7 +8478,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.PagedResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_TeamDTO": {
+        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_TeamDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8489,7 +8489,7 @@ const docTemplate = `{
                     "description": "数据列表",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.TeamDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.TeamDTO"
                     }
                 },
                 "message": {
@@ -8506,7 +8506,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.PagedResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org_TeamMemberDTO": {
+        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org_TeamMemberDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8517,7 +8517,7 @@ const docTemplate = `{
                     "description": "数据列表",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_org.TeamMemberDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_org.TeamMemberDTO"
                     }
                 },
                 "message": {
@@ -8534,7 +8534,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.PagedResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_product_ProductDTO": {
+        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_product_ProductDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8545,7 +8545,7 @@ const docTemplate = `{
                     "description": "数据列表",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_product.ProductDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_product.ProductDTO"
                     }
                 },
                 "message": {
@@ -8562,7 +8562,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.PagedResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role_RoleDTO": {
+        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role_RoleDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8573,7 +8573,7 @@ const docTemplate = `{
                     "description": "数据列表",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_role.RoleDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_role.RoleDTO"
                     }
                 },
                 "message": {
@@ -8590,7 +8590,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.PagedResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_task_TaskDTO": {
+        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_task_TaskDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8601,7 +8601,7 @@ const docTemplate = `{
                     "description": "数据列表",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_task.TaskDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_task.TaskDTO"
                     }
                 },
                 "message": {
@@ -8618,7 +8618,7 @@ const docTemplate = `{
                 }
             }
         },
-        "response.PagedResponse-github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user_UserWithRolesDTO": {
+        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user_UserWithRolesDTO": {
             "type": "object",
             "properties": {
                 "code": {
@@ -8629,7 +8629,7 @@ const docTemplate = `{
                     "description": "数据列表",
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260101-go-pkg-ddd_pkg_application_user.UserWithRolesDTO"
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_application_user.UserWithRolesDTO"
                     }
                 },
                 "message": {

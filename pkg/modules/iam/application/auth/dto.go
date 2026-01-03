@@ -1,6 +1,6 @@
 package auth
 
-import "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/auth"
+import "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/auth"
 
 // 重新导出领域错误供 Adapters 层使用（遵循 DDD 依赖方向）
 var (

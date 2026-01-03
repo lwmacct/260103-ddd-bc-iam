@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/domain/audit"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/audit"
 )
 
 // GetHandler 获取审计日志查询处理器
