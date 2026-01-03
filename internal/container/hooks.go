@@ -1,0 +1,159 @@
+package container
+
+import (
+	"context"
+	"log/slog"
+
+	"github.com/redis/go-redis/v9"
+	"go.uber.org/fx"
+	"gorm.io/gorm"
+
+	apppersistence "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/app/infrastructure/persistence"
+	iameventhandler "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/infrastructure/eventhandler"
+	iampersistence "github.com/lwmacct/260101-go-pkg-ddd/pkg/modules/iam/infrastructure/persistence"
+	dbpkg "github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/db"
+	"github.com/lwmacct/260101-go-pkg-ddd/pkg/platform/db/seeds"
+	"github.com/lwmacct/260101-go-pkg-ddd/pkg/shared/event"
+)
+
+// HooksModule 提供生命周期钩子和事件处理器注册。
+var HooksModule = fx.Module("hooks",
+	fx.Invoke(RegisterEventHandlers),
+)
+
+// eventHandlersParams 聚合事件处理器所需的依赖。
+type eventHandlersParams struct {
+	fx.In
+
+	EventBus   event.EventBus
+	AuditRepos iampersistence.AuditRepositories
+}
+
+// RegisterEventHandlers 设置审计日志的事件订阅。
+//
+// 订阅事件：
+//   - *（所有事件）→ 审计日志
+func RegisterEventHandlers(p eventHandlersParams) {
+	// 审计日志处理器
+	auditHandler := iameventhandler.NewAuditEventHandler(p.AuditRepos.Command)
+
+	// 订阅所有事件用于审计日志
+	p.EventBus.Subscribe("*", auditHandler)
+
+	slog.Info("Event handlers initialized",
+		"handlers", []string{"AuditEventHandler"},
+		"audit_subscriptions", []string{"*"},
+	)
+}
+
+// --- CLI 命令函数 ---
+
+// RunMigration 执行数据库迁移。
+func RunMigration(lc fx.Lifecycle, db *gorm.DB) error {
+	lc.Append(fx.Hook{
+		OnStart: func(context.Context) error {
+			slog.Info("Running database migration...")
+
+			models := GetAllModels()
+			if err := db.AutoMigrate(models...); err != nil {
+				return err
+			}
+
+			// 创建索引
+			if err := createAllIndexes(db); err != nil {
+				return err
+			}
+
+			slog.Info("Database migration completed successfully")
+			return nil
+		},
+	})
+	return nil
+}
+
+// RunReset 重置数据库（删表+迁移+种子数据）。
+func RunReset(lc fx.Lifecycle, db *gorm.DB, redis *redis.Client) error {
+	lc.Append(fx.Hook{
+		OnStart: func(ctx context.Context) error {
+			slog.Info("Resetting db...")
+
+			// 1. 清空 Redis 缓存
+			if err := redis.FlushAll(ctx).Err(); err != nil {
+				slog.Warn("Failed to flush Redis", "error", err)
+			} else {
+				slog.Info("Redis cache flushed")
+			}
+
+			// 2. 重置数据库
+			migrator := dbpkg.NewMigrationManager(db, GetAllModels())
+			if err := migrator.ResetWithIndexes(getIndexMigrations()); err != nil {
+				return err
+			}
+
+			// 3. 执行种子数据
+			seeder := dbpkg.NewSeederManager(db, seeds.DefaultSeeders())
+			if err := seeder.Run(ctx); err != nil {
+				return err
+			}
+
+			slog.Info("Database reset completed successfully")
+			return nil
+		},
+	})
+	return nil
+}
+
+// RunSeed 执行种子数据。
+func RunSeed(lc fx.Lifecycle, db *gorm.DB) error {
+	lc.Append(fx.Hook{
+		OnStart: func(ctx context.Context) error {
+			slog.Info("Running database seeders...")
+
+			seeder := dbpkg.NewSeederManager(db, seeds.DefaultSeeders())
+			if err := seeder.Run(ctx); err != nil {
+				return err
+			}
+
+			slog.Info("Database seeding completed successfully")
+			return nil
+		},
+	})
+	return nil
+}
+
+// createAllIndexes 创建所有索引。
+func createAllIndexes(db *gorm.DB) error {
+	// Model 索引
+	for _, im := range getIndexMigrations() {
+		if err := dbpkg.CreateIndexes(db, im.Model, im.Indexes); err != nil {
+			return err
+		}
+	}
+
+	// 关联表索引
+	if err := dbpkg.CreateJoinTableIndexes(db, getJoinTableIndexes()); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// getIndexMigrations 返回所有 Model 索引配置。
+func getIndexMigrations() []dbpkg.IndexMigration {
+	return []dbpkg.IndexMigration{
+		{
+			Model:   &apppersistence.SettingModel{},
+			Indexes: []string{"idx_settings_category_sort"},
+		},
+	}
+}
+
+// getJoinTableIndexes 返回所有关联表索引配置。
+func getJoinTableIndexes() []dbpkg.JoinTableIndex {
+	return []dbpkg.JoinTableIndex{
+		{Table: "user_roles", Name: "idx_user_roles_user_id", Columns: "user_id"},
+		{Table: "user_roles", Name: "idx_user_roles_role_id", Columns: "role_id"},
+		{Table: "role_permissions", Name: "idx_role_permissions_role_model_id", Columns: "role_model_id"},
+		{Table: "role_permissions", Name: "idx_role_permissions_permission_model_id", Columns: "permission_model_id"},
+	}
+}
