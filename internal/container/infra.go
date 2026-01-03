@@ -17,7 +17,8 @@ import (
 	"go.uber.org/fx"
 	"gorm.io/gorm"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/config"
+	"github.com/lwmacct/260103-ddd-bc-iam/internal/config"
+	iamconfig "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/config"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/cache"
 	dbpkg "github.com/lwmacct/260103-ddd-shared/pkg/platform/db"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/eventbus"
@@ -42,6 +43,7 @@ var InfraModule = fx.Module("infra",
 		newDatabase,
 		newRedisClient,
 		newEventBus,
+		newIAMConfig,
 	),
 )
 
@@ -177,4 +179,10 @@ func newEventBus(lc fx.Lifecycle) event.EventBus {
 	})
 
 	return bus
+}
+
+// newIAMConfig 从通用配置转换到 IAM 专属配置。
+func newIAMConfig(cfg *config.Config) *iamconfig.Config {
+	converted := ToIAMConfig(cfg)
+	return &converted
 }

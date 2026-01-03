@@ -3,9 +3,9 @@ package container
 import (
 	"go.uber.org/fx"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/config"
 	appauth "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/auth"
 	appuser "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/user"
+	iamconfig "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/config"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/auth"
 	domain_twofa "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/twofa"
 	iampersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/persistence"
@@ -39,8 +39,8 @@ var ServiceModule = fx.Module("service",
 	),
 )
 
-func newJWTManager(cfg *config.Config) *infra_auth.JWTManager {
-	return infra_auth.NewJWTManager(cfg.JWT.Secret, cfg.JWT.AccessTokenExpiry, cfg.JWT.RefreshTokenExpiry)
+func newJWTManager(iamCfg *iamconfig.Config) *infra_auth.JWTManager {
+	return infra_auth.NewJWTManager(iamCfg.JWT.Secret, iamCfg.JWT.AccessTokenExpiry, iamCfg.JWT.RefreshTokenExpiry)
 }
 
 func newAuthPermissionCacheService(
@@ -73,11 +73,11 @@ func newPATService(
 type twofaServiceParams struct {
 	fx.In
 
-	Config    *config.Config
+	IAMConfig *iamconfig.Config
 	TwoFA     iampersistence.TwoFARepositories
 	UserRepos iampersistence.UserRepositories
 }
 
 func newTwoFAService(p twofaServiceParams) domain_twofa.Service {
-	return infra_twofa.NewService(p.TwoFA.Command, p.TwoFA.Query, p.UserRepos.Query, p.Config.Auth.TwoFAIssuer)
+	return infra_twofa.NewService(p.TwoFA.Command, p.TwoFA.Query, p.UserRepos.Query, p.IAMConfig.Auth.TwoFAIssuer)
 }

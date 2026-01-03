@@ -3,8 +3,8 @@ package handler
 import (
 	"go.uber.org/fx"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/config"
 	iamapplication "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application"
+	iamconfig "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/config"
 )
 
 // HandlersResult 使用 fx.Out 批量返回 IAM 模块的所有 HTTP 处理器。
@@ -35,7 +35,7 @@ var HandlerModule = fx.Module("iam.handler",
 type handlersParams struct {
 	fx.In
 
-	Config *config.Config
+	IAMConfig *iamconfig.Config
 
 	// IAM 模块用例
 	Auth         *iamapplication.AuthUseCases
@@ -103,7 +103,7 @@ func newAllHandlers(p handlersParams) HandlersResult {
 		),
 		Captcha: NewCaptchaHandler(
 			p.Captcha.Generate,
-			p.Config.Auth.DevSecret,
+			p.IAMConfig.Auth.DevSecret,
 		),
 		Org: NewOrgHandler(
 			p.Organization.Create,

@@ -11,7 +11,7 @@ import (
 	"go.uber.org/fx"
 
 	"github.com/lwmacct/260103-ddd-bc-iam/internal/bootstrap"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/config"
+	"github.com/lwmacct/260103-ddd-bc-iam/internal/config"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/health"
 
 	// Application UseCases (only for middleware dependencies)

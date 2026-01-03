@@ -7,7 +7,8 @@ import (
 	"time"
 
 	"github.com/lwmacct/251207-go-pkg-cfgm/pkg/cfgm"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/config"
+	"github.com/lwmacct/260103-ddd-bc-iam/internal/config"
+	iamconfig "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/config"
 	"github.com/stretchr/testify/require"
 )
 
@@ -39,8 +40,20 @@ func NewClient() *Client {
 		panic("加载配置失败: " + err.Error())
 	}
 
+	// 转换为 IAM 配置
+	iamCfg := toIAMConfig(cfg)
+
 	baseURL := cfg.GetBaseUrl(false)
-	return newClient(baseURL, cfg.Auth.DevSecret)
+	return newClient(baseURL, iamCfg.Auth.DevSecret)
+}
+
+// toIAMConfig 从通用配置中提取 IAM 模块配置（测试用）。
+func toIAMConfig(cfg *config.Config) iamconfig.Config {
+	return iamconfig.Config{
+		Auth: iamconfig.Auth{
+			DevSecret: cfg.Auth.DevSecret,
+		},
+	}
 }
 
 // LoginAsAdmin 登录管理员账户，返回已认证的客户端。

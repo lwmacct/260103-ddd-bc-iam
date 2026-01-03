@@ -7,7 +7,7 @@ import (
 	"github.com/redis/go-redis/v9"
 	"go.uber.org/fx"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/config"
+	"github.com/lwmacct/260103-ddd-bc-iam/internal/config"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/audit"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/auth"
 	iampersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/persistence"

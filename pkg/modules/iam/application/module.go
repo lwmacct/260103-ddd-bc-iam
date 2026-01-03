@@ -3,7 +3,6 @@ package application
 import (
 	"go.uber.org/fx"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/config"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/audit"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/auth"
 	iamcaptcha "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/captcha"
@@ -143,7 +142,6 @@ func newAuditUseCases(repos iampersistence.AuditRepositories) *AuditUseCases {
 type captchaUseCasesParams struct {
 	fx.In
 
-	Config         *config.Config
 	CaptchaCommand infra_captcha.CommandRepository
 	CaptchaSvc     infra_captcha.Service
 }
