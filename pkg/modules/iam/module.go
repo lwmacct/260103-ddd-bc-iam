@@ -3,11 +3,12 @@
 // 本模块包含：
 //   - Domain: 用户、角色、权限、认证、双因素认证、PAT
 //   - Application: 用例处理器
-//   - Infrastructure: JWT、TOTP、仓储实现
-//   - Transport: HTTP 适配器、中间件
+//   - Infrastructure: JWT、TOTP、仓储实现、缓存服务、种子数据
+//   - Transport: HTTP 适配器、中间件、测试工具
 //
 // 模块化设计：
 //   - persistence.RepositoryModule: 仓储层（包括缓存装饰器）
+//   - cache.CacheModule: IAM 专属缓存服务
 //   - application.UseCaseModule: 用例层（业务逻辑编排）
 //   - handler.HandlerModule: HTTP 处理器层
 //
@@ -16,8 +17,7 @@
 //	fx.New(
 //	    fx.Supply(cfg),
 //	    platform.Module(),
-//	    app.Module(),
-//	    iam.Module(),       // 本模块
+//	    iam.Module(),       // 本模块（完全自治）
 //	    crm.Module(),
 //	)
 package iam
@@ -26,6 +26,7 @@ import (
 	"go.uber.org/fx"
 
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/cache"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/persistence"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/transport/gin/handler"
 )
@@ -35,7 +36,7 @@ import (
 // 依赖注入顺序：
 //  1. Platform 层 (DB, Redis, Config, EventBus) - 由外部提供
 //  2. App 模块 (AuditUseCases, OrganizationUseCases) - 跨模块依赖
-//  3. CacheModule (Platform 层) - 由外部提供
+//  3. CacheModule (本模块) - IAM 专属缓存服务
 //  4. RepositoryModule (本模块) - 仓储层
 //  5. UseCaseModule (本模块) - 用例层
 //  6. HandlerModule (本模块) - HTTP 处理器层
@@ -46,6 +47,7 @@ import (
 func Module() fx.Option {
 	return fx.Module("iam",
 		// 子模块
+		cache.CacheModule,
 		persistence.RepositoryModule,
 		application.UseCaseModule,
 		handler.HandlerModule,

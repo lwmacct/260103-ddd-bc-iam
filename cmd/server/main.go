@@ -222,9 +222,8 @@ func buildFxOptions(cfg *config.Config) []fx.Option {
 		fx.StopTimeout(10 * time.Second),
 		// Platform 层 (基础设施)
 		container.InfraModule,
-		container.CacheModule,
 		container.ServiceModule,
-		// 业务模块 (Bounded Contexts)
+		// 业务模块 (Bounded Contexts) - 完全自治
 		iam.Module(),
 		// HTTP 层 (跨模块handler + 路由)
 		container.HTTPModule,

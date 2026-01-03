@@ -9,7 +9,7 @@ import (
 
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/auth"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/user"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/manualtest"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/transport/gin/manualtest"
 )
 
 // TestLoginScenarios 测试各种登录场景（Table-Driven）。

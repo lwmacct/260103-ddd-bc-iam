@@ -10,8 +10,8 @@ import (
 
 	iameventhandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/eventhandler"
 	iampersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/persistence"
+	iamseeds "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infrastructure/seeds"
 	dbpkg "github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/db"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/db/seeds"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/shared/event"
 )
 
@@ -90,7 +90,7 @@ func RunReset(lc fx.Lifecycle, db *gorm.DB, redis *redis.Client) error {
 			}
 
 			// 3. 执行种子数据
-			seeder := dbpkg.NewSeederManager(db, seeds.DefaultSeeders())
+			seeder := dbpkg.NewSeederManager(db, iamseeds.DefaultSeeders())
 			if err := seeder.Run(ctx); err != nil {
 				return err
 			}
@@ -108,7 +108,7 @@ func RunSeed(lc fx.Lifecycle, db *gorm.DB) error {
 		OnStart: func(ctx context.Context) error {
 			slog.Info("Running database seeders...")
 
-			seeder := dbpkg.NewSeederManager(db, seeds.DefaultSeeders())
+			seeder := dbpkg.NewSeederManager(db, iamseeds.DefaultSeeders())
 			if err := seeder.Run(ctx); err != nil {
 				return err
 			}

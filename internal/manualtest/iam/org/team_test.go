@@ -9,7 +9,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/org"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/manualtest"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/transport/gin/manualtest"
 )
 
 // 种子数据: acme org (ID=1), admin 是 owner

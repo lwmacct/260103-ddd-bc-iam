@@ -13,7 +13,7 @@ import (
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/pat"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/role"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/application/user"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/platform/manualtest"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/transport/gin/manualtest"
 )
 
 // TestMain 在所有测试完成后清理测试数据。
