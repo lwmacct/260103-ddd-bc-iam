@@ -134,6 +134,11 @@ func runAutoMigrate(db *gorm.DB) error {
 		return err
 	}
 
+	// Settings 表结构迁移（激进重构：从 Scope + Public 改为 VisibleAt + ConfigurableAt）
+	if err := migrateSettingsTable(db); err != nil {
+		return err
+	}
+
 	// 为多对多关联表创建索引
 	// role_permissions 使用复合主键，PostgreSQL 自动利用前缀索引
 	if err := dbpkg.CreateJoinTableIndexes(db, []dbpkg.JoinTableIndex{
@@ -146,6 +151,70 @@ func runAutoMigrate(db *gorm.DB) error {
 	}
 
 	slog.Info("Database migration completed")
+	return nil
+}
+
+// migrateSettingsTable 执行 Settings 表的结构迁移
+func migrateSettingsTable(db *gorm.DB) error {
+	// 检查表是否存在
+	if !db.Migrator().HasTable("settings") {
+		// 表不存在，跳过迁移（AutoMigrate 会创建）
+		return nil
+	}
+
+	// 检查是否已经迁移过（通过检查 visible_at 列是否存在）
+	if db.Migrator().HasColumn("settings", "visible_at") {
+		slog.Info("Settings table already migrated, skipping")
+		return nil
+	}
+
+	slog.Info("Migrating settings table structure...")
+
+	// 1. 添加新列
+	if err := db.Exec(`
+		ALTER TABLE settings
+		ADD COLUMN IF NOT EXISTS visible_at VARCHAR(20) NOT NULL DEFAULT 'user',
+		ADD COLUMN IF NOT EXISTS configurable_at VARCHAR(20) NOT NULL DEFAULT 'user';
+	`).Error; err != nil {
+		return err
+	}
+
+	// 2. 根据现有的 Scope 和 Public 设置新列的默认值
+	// 迁移规则：
+	//   - scope=system → visible_at=system, configurable_at=system
+	//   - scope=org → visible_at=org, configurable_at=org
+	//   - scope=team → visible_at=team, configurable_at=team
+	//   - scope=user → visible_at=user, configurable_at=user
+	if err := db.Exec(`
+		UPDATE settings
+		SET visible_at = scope,
+		    configurable_at = scope;
+	`).Error; err != nil {
+		return err
+	}
+
+	// 3. 创建新索引
+	if err := db.Exec(`
+		CREATE INDEX IF NOT EXISTS idx_settings_visible_at ON settings(visible_at);
+		CREATE INDEX IF NOT EXISTS idx_settings_configurable_at ON settings(configurable_at);
+		CREATE INDEX IF NOT EXISTS idx_settings_visible_configurable ON settings(visible_at, configurable_at);
+	`).Error; err != nil {
+		return err
+	}
+
+	// 4. 删除旧列和旧索引（可选，激进重构）
+	// 注意：如果需要保留旧数据用于回滚，可以先不删除
+	if err := db.Exec(`
+		ALTER TABLE settings DROP COLUMN IF EXISTS scope;
+		ALTER TABLE settings DROP COLUMN IF EXISTS public;
+		DROP INDEX IF EXISTS idx_settings_scope;
+		DROP INDEX IF EXISTS idx_settings_visible_to_user;
+	`).Error; err != nil {
+		// 删除失败不是致命错误，记录日志但继续
+		slog.Warn("Failed to drop old columns/indexes (non-critical)", "error", err)
+	}
+
+	slog.Info("Settings table migration completed")
 	return nil
 }
 

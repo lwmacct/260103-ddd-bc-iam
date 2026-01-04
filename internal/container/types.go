@@ -37,8 +37,10 @@ func GetAllModels() []any {
 		// 审计日志
 		&iamPersistence.AuditModel{},
 
-		// ========== User Settings BC Models ==========
+		// ========== Settings BC Models ==========
 		&userSettingsPersistence.UserSettingModel{},
+		&userSettingsPersistence.OrgSettingModel{},
+		&userSettingsPersistence.TeamSettingModel{},
 
 		// ========== Settings Models ==========
 		&settingsPersistence.SettingModel{},

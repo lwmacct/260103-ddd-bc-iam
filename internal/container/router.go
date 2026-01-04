@@ -8,19 +8,19 @@ import (
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/routes"
 
-	// User Settings BC
+	// Settings BC
 	userSettingsHandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/handler"
-	userSettingsRoutes "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/routes"
+	settingsRoutes "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/routes"
 
 	// Settings
 	settingsHandler "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/handler"
-	settingsRoutes "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/routes"
+	settingsBCRoutes "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/routes"
 )
 
 // AllRoutes 聚合所有模块的路由定义。
 //
 // 职责：
-//  1. 从 IAM、User Settings 和 Settings 模块收集路由定义
+//  1. 从 IAM、Settings BC 模块收集路由定义
 //  2. 返回统一的路由列表供注册使用
 func AllRoutes(
 	// IAM Handlers
@@ -38,8 +38,10 @@ func AllRoutes(
 	teamHandler *handler.TeamHandler,
 	teamMemberHandler *handler.TeamMemberHandler,
 
-	// User Settings BC Handler
+	// Settings BC Handlers
 	userSettingHandler *userSettingsHandler.UserSettingHandler,
+	orgSettingHandler *userSettingsHandler.OrgSettingHandler,
+	teamSettingHandler *userSettingsHandler.TeamSettingHandler,
 
 	// Settings Handlers
 	settingHandler *settingsHandler.SettingHandler,
@@ -61,16 +63,16 @@ func AllRoutes(
 		teamMemberHandler,
 	)
 
-	// User Settings BC 路由
-	userSettingsRouteList := userSettingsRoutes.All(userSettingHandler)
+	// Settings BC 路由（User + Org + Team）
+	settingsRouteList := settingsRoutes.All(userSettingHandler, orgSettingHandler, teamSettingHandler)
 
 	// Settings 路由
-	settingsRouteList := settingsRoutes.Admin(settingHandler)
+	settingsBCRouteList := settingsBCRoutes.Admin(settingHandler)
 
 	// 合并所有路由
 	allRoutes := iamRoutes
-	allRoutes = append(allRoutes, userSettingsRouteList...)
-	return append(allRoutes, settingsRouteList...)
+	allRoutes = append(allRoutes, settingsRouteList...)
+	return append(allRoutes, settingsBCRouteList...)
 }
 
 // RegisterRoutes 注册路由到 Gin Engine。

@@ -1,4 +1,4 @@
-// Package routes 定义 User Settings 模块的 HTTP 路由。
+// Package routes 定义 Settings 模块的 HTTP 路由。
 package routes
 
 import (
@@ -7,8 +7,17 @@ import (
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/handler"
 )
 
-// All 返回 User Settings 模块的所有路由
-func All(h *handler.UserSettingHandler) []routes.Route {
+// All 返回 Settings 模块的所有路由
+func All(h *handler.UserSettingHandler, orgH *handler.OrgSettingHandler, teamH *handler.TeamSettingHandler) []routes.Route {
+	userRoutes := AllUser(h)
+	orgRoutes := OrgSettings(orgH)
+	teamRoutes := TeamSettings(teamH)
+
+	return append(userRoutes, append(orgRoutes, teamRoutes...)...)
+}
+
+// AllUser 返回用户配置的所有路由
+func AllUser(h *handler.UserSettingHandler) []routes.Route {
 	return []routes.Route{
 		{
 			Method:      routes.GET,

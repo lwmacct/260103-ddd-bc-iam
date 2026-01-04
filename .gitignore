@@ -61,3 +61,6 @@ __snapshots__/
 # Swagger docs（由 swag 生成，但 docs.go 需要提交）
 **/docs/swagger.json
 **/docs/swagger.yaml
+
+# Go vendor
+vendor/
