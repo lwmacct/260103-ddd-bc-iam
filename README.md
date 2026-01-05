@@ -53,8 +53,6 @@ fx.New(
 ).Run()
 ```
 
-> 📖 详细架构说明见 [`.claude/CLAUDE.md`](.claude/CLAUDE.md)
-
 ## 特性
 
 - **垂直切分架构**：按业务域组织模块，边界清晰，可独立演化
