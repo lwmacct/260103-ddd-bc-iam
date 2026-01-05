@@ -20,18 +20,19 @@ type HandlerParams struct {
 	UseCases *app.UseCases
 }
 
-// HandlerResult Handler 导出结果
-type HandlerResult struct {
-	fx.Out
-
+// Handlers 聚合 Settings BC 模块的所有 HTTP 处理器。
+//
+// 设计说明：使用聚合结构体而非 fx.Out 导出单独 Handler，
+// 与 IAM 模块保持风格一致，维护成本更低。
+type Handlers struct {
 	UserSetting *UserSettingHandler
 	OrgSetting  *OrgSettingHandler
 	TeamSetting *TeamSettingHandler
 }
 
 // NewAllHandlers 创建所有 Handler
-func NewAllHandlers(p HandlerParams) HandlerResult {
-	return HandlerResult{
+func NewAllHandlers(p HandlerParams) *Handlers {
+	return &Handlers{
 		UserSetting: NewUserSettingHandler(p.UseCases),
 		OrgSetting:  NewOrgSettingHandler(p.UseCases.OrgSet, p.UseCases.OrgReset, p.UseCases.OrgGet, p.UseCases.OrgList),
 		TeamSetting: NewTeamSettingHandler(p.UseCases.TeamSet, p.UseCases.TeamReset, p.UseCases.TeamGet, p.UseCases.TeamList),

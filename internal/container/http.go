@@ -93,10 +93,8 @@ type routerParams struct {
 	// IAM Handlers（聚合注入）
 	IAM *handler.Handlers
 
-	// Settings BC Handlers
-	UserSetting *userSettingsHandler.UserSettingHandler
-	OrgSetting  *userSettingsHandler.OrgSettingHandler
-	TeamSetting *userSettingsHandler.TeamSettingHandler
+	// Settings BC Handlers（聚合注入）
+	SettingsBC *userSettingsHandler.Handlers
 
 	// Settings Handlers
 	Setting     *settingsHandler.SettingHandler
@@ -112,10 +110,8 @@ func newRouter(p routerParams) *gin.Engine {
 		// IAM Handlers（聚合）
 		p.IAM,
 
-		// Settings BC Handlers
-		p.UserSetting,
-		p.OrgSetting,
-		p.TeamSetting,
+		// Settings BC Handlers（聚合）
+		p.SettingsBC,
 
 		// Settings Handlers
 		p.Setting,

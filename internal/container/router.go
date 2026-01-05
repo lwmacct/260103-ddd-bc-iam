@@ -27,10 +27,8 @@ func AllRoutes(
 	// IAM Handlers（聚合）
 	iam *handler.Handlers,
 
-	// Settings BC Handlers
-	userSettingHandler *userSettingsHandler.UserSettingHandler,
-	orgSettingHandler *userSettingsHandler.OrgSettingHandler,
-	teamSettingHandler *userSettingsHandler.TeamSettingHandler,
+	// Settings BC Handlers（聚合）
+	settingsBC *userSettingsHandler.Handlers,
 
 	// Settings Handlers (external dependency)
 	settingHandler *settingsHandler.SettingHandler,
@@ -54,7 +52,11 @@ func AllRoutes(
 	)
 
 	// Settings BC 路由（User + Org + Team）
-	settingsRouteList := settingsRoutes.All(userSettingHandler, orgSettingHandler, teamSettingHandler)
+	settingsRouteList := settingsRoutes.All(
+		settingsBC.UserSetting,
+		settingsBC.OrgSetting,
+		settingsBC.TeamSetting,
+	)
 
 	// Settings 路由 (external dependency)
 	settingsBCRouteList := settingsBCRoutes.Admin(settingHandler, &settingsCfg)
