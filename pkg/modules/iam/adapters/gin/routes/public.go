@@ -1,7 +1,8 @@
 package routes
 
 import (
-	"github.com/lwmacct/260101-go-pkg-gin/pkg/routes"
+	"github.com/gin-gonic/gin"
+	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/routes"
 
 	handler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
 )
@@ -17,45 +18,45 @@ func Public(
 		{
 			Method:      routes.GET,
 			Path:        "/api/auth/captcha",
-			Handler:     captchaHandler.GetCaptcha,
-			Operation:   "public:auth:captcha",
-			Tags:        "Authentication",
+			Handlers:    []gin.HandlerFunc{captchaHandler.GetCaptcha},
+			OperationID: "public:auth:captcha",
+			Tags:        []string{"auth"},
 			Summary:     "获取验证码",
 			Description: "生成图形验证码用于登录",
 		},
 		{
 			Method:      routes.POST,
 			Path:        "/api/auth/register",
-			Handler:     authHandler.Register,
-			Operation:   "public:auth:register",
-			Tags:        "Authentication",
+			Handlers:    []gin.HandlerFunc{authHandler.Register},
+			OperationID: "public:auth:register",
+			Tags:        []string{"auth"},
 			Summary:     "注册",
 			Description: "用户注册",
 		},
 		{
 			Method:      routes.POST,
 			Path:        "/api/auth/login",
-			Handler:     authHandler.Login,
-			Operation:   "public:auth:login",
-			Tags:        "Authentication",
+			Handlers:    []gin.HandlerFunc{authHandler.Login},
+			OperationID: "public:auth:login",
+			Tags:        []string{"auth"},
 			Summary:     "登录",
 			Description: "用户登录",
 		},
 		{
 			Method:      routes.POST,
 			Path:        "/api/auth/login/2fa",
-			Handler:     authHandler.Login2FA,
-			Operation:   "public:auth:login2fa",
-			Tags:        "Authentication",
+			Handlers:    []gin.HandlerFunc{authHandler.Login2FA},
+			OperationID: "public:auth:login2fa",
+			Tags:        []string{"auth"},
 			Summary:     "2FA 登录",
 			Description: "两步验证登录",
 		},
 		{
 			Method:      routes.POST,
 			Path:        "/api/auth/refresh",
-			Handler:     authHandler.RefreshToken,
-			Operation:   "public:auth:refresh",
-			Tags:        "Authentication",
+			Handlers:    []gin.HandlerFunc{authHandler.RefreshToken},
+			OperationID: "public:auth:refresh",
+			Tags:        []string{"auth"},
 			Summary:     "刷新令牌",
 			Description: "使用 refresh token 获取新的 access token",
 		},

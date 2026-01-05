@@ -149,8 +149,12 @@ github.com/lwmacct/260101-go-pkg-gin v0.0.12 h1:qegQoatjwH68bf8GMZheoULJwPAR7PsA
 github.com/lwmacct/260101-go-pkg-gin v0.0.12/go.mod h1:0LqoJrSEiUYm4iTGBAaOGxr7k9zdbBeKY4acmdTD8xc=
 github.com/lwmacct/260103-ddd-bc-settings v0.0.5 h1:RW6WswuFo9G1syqSQU2btW8y13bZmRsiP2r8eqg/Y0c=
 github.com/lwmacct/260103-ddd-bc-settings v0.0.5/go.mod h1:2ouqKNAd/cKmmbQx6DMC4K9AIvrwrHgLy1iIAjr7YLE=
-github.com/lwmacct/260103-ddd-shared v0.0.2 h1:a3saU6bAg2c/HkkU2bsr2LTCgZIoTHVe2QUSGs/wN0w=
-github.com/lwmacct/260103-ddd-shared v0.0.2/go.mod h1:JSMWhF7+tetlddOmIWk0SC03xPve+2n3LbmPSa1c67M=
+github.com/lwmacct/260103-ddd-shared v0.0.3 h1:0PZceAmoFdsx9x48FoTh4vs6fYUPzUJvjbpOR0TSjbM=
+github.com/lwmacct/260103-ddd-shared v0.0.3/go.mod h1:xZJ8dEh6y+20899+uYDMz/BGB6wQHFn6LHRNdcAB9k4=
+github.com/lwmacct/260103-ddd-shared v0.0.6 h1:+2OAwMQn8oy0moJPnUra1Po06NGBWQNld1BantUPPZE=
+github.com/lwmacct/260103-ddd-shared v0.0.6/go.mod h1:JSMWhF7+tetlddOmIWk0SC03xPve+2n3LbmPSa1c67M=
+github.com/lwmacct/260103-ddd-shared v0.0.7 h1:SRBWddF+pEcC1iVYMwgLO+1MKiDAnt3W8xTl2ecEyDk=
+github.com/lwmacct/260103-ddd-shared v0.0.7/go.mod h1:JSMWhF7+tetlddOmIWk0SC03xPve+2n3LbmPSa1c67M=
 github.com/mattn/go-isatty v0.0.20 h1:xfD0iDuEKnDkl03q4limB+vH+GxLEtL/jb4xVJSWWEY=
 github.com/mattn/go-isatty v0.0.20/go.mod h1:W+V8PltTTMOvKvAeJH7IuucS94S2C6jfK/D7dTCTo3Y=
 github.com/mattn/go-sqlite3 v1.14.22 h1:2gZY6PC6kBnID23Tichd1K+Z0oS6nE/XwU+Vz/5o4kU=

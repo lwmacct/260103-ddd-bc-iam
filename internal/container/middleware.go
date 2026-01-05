@@ -12,9 +12,9 @@ import (
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/auth"
 	persistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
 
-	ginmiddleware "github.com/lwmacct/260101-go-pkg-gin/pkg/middleware"
-	"github.com/lwmacct/260101-go-pkg-gin/pkg/permission"
-	"github.com/lwmacct/260101-go-pkg-gin/pkg/routes"
+	ginmiddleware "github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/middleware"
+	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/permission"
+	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/routes"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/middleware"
 )
 
@@ -109,11 +109,11 @@ func (inj *MiddlewareInjector) InjectMiddlewares(route *routes.Route) []gin.Hand
 	// 1. 基础中间件（所有路由）
 	m = append(m,
 		ginmiddleware.RequestID(),
-		ginmiddleware.SetOperationID(route.Operation),
+		ginmiddleware.SetOperationID(route.OperationID),
 	)
 
 	// 2. 认证中间件（非 public 路由）
-	if !strings.HasPrefix(route.Operation, "public:") {
+	if !strings.HasPrefix(route.OperationID, "public:") {
 		if inj.authMiddleware != nil {
 			m = append(m, inj.authMiddleware)
 		}
@@ -135,17 +135,17 @@ func (inj *MiddlewareInjector) InjectMiddlewares(route *routes.Route) []gin.Hand
 	}
 
 	// 5. RBAC 权限检查（非 public 路由）
-	if !strings.HasPrefix(route.Operation, "public:") {
+	if !strings.HasPrefix(route.OperationID, "public:") {
 		if inj.rbacFactory != nil {
-			m = append(m, inj.rbacFactory(route.Operation))
+			m = append(m, inj.rbacFactory(route.OperationID))
 		}
 	}
 
 	// 6. 审计中间件（写操作 + 非 public）
 	if route.Method != routes.GET &&
-		!strings.HasPrefix(route.Operation, "public:") &&
+		!strings.HasPrefix(route.OperationID, "public:") &&
 		inj.auditFactory != nil {
-		m = append(m, inj.auditFactory(route.Operation))
+		m = append(m, inj.auditFactory(route.OperationID))
 	}
 
 	// 7. Logger 中间件（最后，记录完整请求）

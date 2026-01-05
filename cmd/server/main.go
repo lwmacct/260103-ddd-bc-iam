@@ -28,6 +28,7 @@ import (
 	"github.com/lwmacct/251219-go-pkg-logm/pkg/logm/formatter"
 	"github.com/lwmacct/251219-go-pkg-logm/pkg/logm/writer"
 	"github.com/lwmacct/260103-ddd-bc-iam/internal/config"
+	_ "github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/response"
 	"github.com/urfave/cli/v3"
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxevent"

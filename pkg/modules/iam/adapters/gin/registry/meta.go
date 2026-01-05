@@ -2,7 +2,7 @@ package registry
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/lwmacct/260101-go-pkg-gin/pkg/permission"
+	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/permission"
 )
 
 // Registry 路由注册表（用于查询函数）。

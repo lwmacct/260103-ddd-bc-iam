@@ -6,9 +6,9 @@ import (
 
 	"github.com/go-resty/resty/v2"
 
-	"github.com/lwmacct/260101-go-pkg-gin/pkg/response"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/auth"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/captcha"
+	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/response"
 )
 
 // Client HTTP 测试客户端。

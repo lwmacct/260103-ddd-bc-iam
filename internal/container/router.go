@@ -2,7 +2,8 @@ package container
 
 import (
 	"github.com/gin-gonic/gin"
-	ginroutes "github.com/lwmacct/260101-go-pkg-gin/pkg/routes"
+	oldroutes "github.com/lwmacct/260101-go-pkg-gin/pkg/routes"
+	ginroutes "github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/routes"
 
 	// IAM
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
@@ -12,10 +13,33 @@ import (
 	userSettingsHandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/handler"
 	settingsRoutes "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/routes"
 
-	// Settings
+	// Settings (external dependency)
 	settingsHandler "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/handler"
 	settingsBCRoutes "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/routes"
 )
+
+// convertRoutes converts old Route type to new Route type.
+// This adapter is needed until 260103-ddd-bc-settings migrates to 260103-ddd-shared v0.0.7.
+func convertRoutes(oldRoutes []oldroutes.Route) []ginroutes.Route {
+	newRoutes := make([]ginroutes.Route, len(oldRoutes))
+	for i, r := range oldRoutes {
+		// 构建处理链：Handler + Middlewares
+		handlers := make([]gin.HandlerFunc, 0, 1+len(r.Middlewares))
+		handlers = append(handlers, r.Handler)
+		handlers = append(handlers, r.Middlewares...)
+
+		newRoutes[i] = ginroutes.Route{
+			Method:      ginroutes.Method(r.Method),
+			Path:        r.Path,
+			OperationID: r.Operation,
+			Handlers:    handlers,
+			Tags:        []string{r.Tags},
+			Summary:     r.Summary,
+			Description: r.Description,
+		}
+	}
+	return newRoutes
+}
 
 // AllRoutes 聚合所有模块的路由定义。
 //
@@ -43,7 +67,7 @@ func AllRoutes(
 	orgSettingHandler *userSettingsHandler.OrgSettingHandler,
 	teamSettingHandler *userSettingsHandler.TeamSettingHandler,
 
-	// Settings Handlers
+	// Settings Handlers (external dependency, needs adapter)
 	settingHandler *settingsHandler.SettingHandler,
 ) []ginroutes.Route {
 	// IAM 域路由
@@ -66,8 +90,9 @@ func AllRoutes(
 	// Settings BC 路由（User + Org + Team）
 	settingsRouteList := settingsRoutes.All(userSettingHandler, orgSettingHandler, teamSettingHandler)
 
-	// Settings 路由
-	settingsBCRouteList := settingsBCRoutes.Admin(settingHandler)
+	// Settings 路由 (external dependency - convert old Route type to new)
+	oldSettingsBCRoutes := settingsBCRoutes.Admin(settingHandler)
+	settingsBCRouteList := convertRoutes(oldSettingsBCRoutes)
 
 	// 合并所有路由
 	allRoutes := iamRoutes
@@ -76,11 +101,9 @@ func AllRoutes(
 }
 
 // RegisterRoutes 注册路由到 Gin Engine。
-
-// RegisterRoutes 注册路由到 Gin Engine。
 //
 // 架构特点：
-//  1. BC 层定义路由元数据（Operation、Path、Method、Handler）
+//  1. BC 层定义路由元数据（OperationID、Path、Method、Handlers）
 //  2. 应用层注入中间件（认证、鉴权、审计、日志等）
 //  3. 完美解耦 - BC 不依赖具体中间件实现
 func RegisterRoutes(engine *gin.Engine, allRoutes []ginroutes.Route, injector *MiddlewareInjector) {
@@ -88,25 +111,26 @@ func RegisterRoutes(engine *gin.Engine, allRoutes []ginroutes.Route, injector *M
 		// 应用层注入中间件
 		middlewares := injector.InjectMiddlewares(&route)
 
-		// 添加 Handler 作为最后一个处理函数
-		middlewares = append(middlewares, route.Handler)
+		// 追加路由定义的 Handlers（BC 层定义的处理函数）
+		handlers := middlewares
+		handlers = append(handlers, route.Handlers...)
 
 		// 注册到 Gin Engine
 		switch route.Method {
 		case ginroutes.GET:
-			engine.GET(route.Path, middlewares...)
+			engine.GET(route.Path, handlers...)
 		case ginroutes.POST:
-			engine.POST(route.Path, middlewares...)
+			engine.POST(route.Path, handlers...)
 		case ginroutes.PUT:
-			engine.PUT(route.Path, middlewares...)
+			engine.PUT(route.Path, handlers...)
 		case ginroutes.DELETE:
-			engine.DELETE(route.Path, middlewares...)
+			engine.DELETE(route.Path, handlers...)
 		case ginroutes.PATCH:
-			engine.PATCH(route.Path, middlewares...)
+			engine.PATCH(route.Path, handlers...)
 		case ginroutes.HEAD:
-			engine.HEAD(route.Path, middlewares...)
+			engine.HEAD(route.Path, handlers...)
 		case ginroutes.OPTIONS:
-			engine.OPTIONS(route.Path, middlewares...)
+			engine.OPTIONS(route.Path, handlers...)
 		}
 	}
 }

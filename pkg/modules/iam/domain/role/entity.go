@@ -3,7 +3,7 @@ package role
 import (
 	"time"
 
-	"github.com/lwmacct/260101-go-pkg-gin/pkg/permission"
+	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/permission"
 )
 
 // ============================================================================

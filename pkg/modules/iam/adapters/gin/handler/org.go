@@ -5,10 +5,10 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/lwmacct/260101-go-pkg-gin/pkg/ctxutil"
-	"github.com/lwmacct/260101-go-pkg-gin/pkg/response"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/org"
 	orgDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/org"
+	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/ctxutil"
+	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/response"
 )
 
 // ListOrgsQuery 组织列表查询参数

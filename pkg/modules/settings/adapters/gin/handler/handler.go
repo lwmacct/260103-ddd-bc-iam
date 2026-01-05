@@ -4,11 +4,11 @@ import (
 	"errors"
 
 	"github.com/gin-gonic/gin"
-	"github.com/lwmacct/260101-go-pkg-gin/pkg/ctxutil"
-	"github.com/lwmacct/260101-go-pkg-gin/pkg/response"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/app"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/app/user"
 	userDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/domain/user"
+	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/ctxutil"
+	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/response"
 )
 
 // UserSettingHandler 用户配置 HTTP Handler

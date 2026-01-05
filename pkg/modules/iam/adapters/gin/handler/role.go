@@ -5,9 +5,9 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/lwmacct/260101-go-pkg-gin/pkg/response"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/role"
 	roleDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/role"
+	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/response"
 )
 
 // ListRolesQuery 角色列表查询参数

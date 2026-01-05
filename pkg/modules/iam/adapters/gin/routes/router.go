@@ -20,7 +20,7 @@
 package routes
 
 import (
-	"github.com/lwmacct/260101-go-pkg-gin/pkg/routes"
+	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/routes"
 
 	handler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
 )

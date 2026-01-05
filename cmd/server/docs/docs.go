@@ -103,31 +103,31 @@ const docTemplate = `{
                     "200": {
                         "description": "审计日志列表",
                         "schema": {
-                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit_AuditDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit_AuditDTO"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -155,19 +155,19 @@ const docTemplate = `{
                     "200": {
                         "description": "审计操作定义",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit_AuditActionsResponseDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit_AuditActionsResponseDTO"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -205,31 +205,31 @@ const docTemplate = `{
                     "200": {
                         "description": "日志详情",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit_AuditDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit_AuditDTO"
                         }
                     },
                     "400": {
                         "description": "无效的日志ID",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "日志不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -285,25 +285,25 @@ const docTemplate = `{
                     "200": {
                         "description": "组织列表",
                         "schema": {
-                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_OrgDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_OrgDTO"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -340,31 +340,31 @@ const docTemplate = `{
                     "201": {
                         "description": "组织创建成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_OrgDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_OrgDTO"
                         }
                     },
                     "400": {
                         "description": "参数错误或组织名已存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -402,31 +402,31 @@ const docTemplate = `{
                     "200": {
                         "description": "组织详情",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_OrgDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_OrgDTO"
                         }
                     },
                     "400": {
                         "description": "无效的组织ID",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "组织不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -471,37 +471,37 @@ const docTemplate = `{
                     "200": {
                         "description": "组织更新成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_OrgDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_OrgDTO"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "组织不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -537,37 +537,37 @@ const docTemplate = `{
                     "200": {
                         "description": "组织删除成功",
                         "schema": {
-                            "$ref": "#/definitions/response.MessageResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.MessageResponse"
                         }
                     },
                     "400": {
                         "description": "无效的组织ID",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "组织不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -614,25 +614,25 @@ const docTemplate = `{
                     "200": {
                         "description": "角色列表",
                         "schema": {
-                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_RoleDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_RoleDTO"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -669,31 +669,31 @@ const docTemplate = `{
                     "201": {
                         "description": "角色创建成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_CreateResultDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_CreateResultDTO"
                         }
                     },
                     "400": {
                         "description": "参数错误或角色名已存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -731,31 +731,31 @@ const docTemplate = `{
                     "200": {
                         "description": "角色详情",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_RoleDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_RoleDTO"
                         }
                     },
                     "400": {
                         "description": "无效的角色ID",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "角色不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -800,37 +800,37 @@ const docTemplate = `{
                     "200": {
                         "description": "角色更新成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_RoleDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_RoleDTO"
                         }
                     },
                     "400": {
                         "description": "无效的角色ID或参数错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "角色不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -866,37 +866,37 @@ const docTemplate = `{
                     "200": {
                         "description": "角色删除成功",
                         "schema": {
-                            "$ref": "#/definitions/response.MessageResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.MessageResponse"
                         }
                     },
                     "400": {
                         "description": "无效的角色ID",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "角色不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误或角色被使用中",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -943,37 +943,37 @@ const docTemplate = `{
                     "200": {
                         "description": "权限设置成功",
                         "schema": {
-                            "$ref": "#/definitions/response.MessageResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.MessageResponse"
                         }
                     },
                     "400": {
                         "description": "无效的角色ID或参数错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "角色不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -1026,25 +1026,25 @@ const docTemplate = `{
                     "200": {
                         "description": "用户列表",
                         "schema": {
-                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -1081,31 +1081,31 @@ const docTemplate = `{
                     "201": {
                         "description": "用户创建成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
                         }
                     },
                     "400": {
                         "description": "参数错误或用户名/邮箱已存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -1144,31 +1144,31 @@ const docTemplate = `{
                     "200": {
                         "description": "批量创建结果",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_BatchCreateResultDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_BatchCreateResultDTO"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -1206,31 +1206,31 @@ const docTemplate = `{
                     "200": {
                         "description": "用户详情",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
                         }
                     },
                     "400": {
                         "description": "无效的用户ID",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "用户不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -1275,37 +1275,37 @@ const docTemplate = `{
                     "200": {
                         "description": "用户更新成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
                         }
                     },
                     "400": {
                         "description": "无效的用户ID或参数错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "用户不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -1341,37 +1341,37 @@ const docTemplate = `{
                     "200": {
                         "description": "用户删除成功",
                         "schema": {
-                            "$ref": "#/definitions/response.MessageResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.MessageResponse"
                         }
                     },
                     "400": {
                         "description": "无效的用户ID",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "用户不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -1418,37 +1418,37 @@ const docTemplate = `{
                     "200": {
                         "description": "角色分配成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
                         }
                     },
                     "400": {
                         "description": "无效的用户ID或参数错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "用户不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -1476,19 +1476,19 @@ const docTemplate = `{
                     "200": {
                         "description": "2FA禁用成功",
                         "schema": {
-                            "$ref": "#/definitions/response.MessageResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.MessageResponse"
                         }
                     },
                     "400": {
                         "description": "禁用失败",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -1516,19 +1516,19 @@ const docTemplate = `{
                     "200": {
                         "description": "2FA初始化成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa_SetupDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa_SetupDTO"
                         }
                     },
                     "400": {
                         "description": "设置失败",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -1556,19 +1556,19 @@ const docTemplate = `{
                     "200": {
                         "description": "2FA状态",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa_StatusDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa_StatusDTO"
                         }
                     },
                     "400": {
                         "description": "获取失败",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -1607,19 +1607,19 @@ const docTemplate = `{
                     "200": {
                         "description": "2FA启用成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa_EnableDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa_EnableDTO"
                         }
                     },
                     "400": {
                         "description": "验证码错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -1656,13 +1656,13 @@ const docTemplate = `{
                     "200": {
                         "description": "验证码生成成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_captcha_GenerateResultDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_captcha_GenerateResultDTO"
                         }
                     },
                     "500": {
                         "description": "生成失败",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -1696,13 +1696,13 @@ const docTemplate = `{
                     "200": {
                         "description": "登录成功或需要2FA验证",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_LoginResponseDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_LoginResponseDTO"
                         }
                     },
                     "401": {
                         "description": "登录失败：凭证无效、验证码错误或账户被禁用",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -1736,13 +1736,13 @@ const docTemplate = `{
                     "200": {
                         "description": "登录成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_TokenDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_TokenDTO"
                         }
                     },
                     "401": {
                         "description": "验证失败：session_token无效或2FA验证码错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -1781,13 +1781,13 @@ const docTemplate = `{
                     "200": {
                         "description": "令牌刷新成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_LoginResponseDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_LoginResponseDTO"
                         }
                     },
                     "401": {
                         "description": "刷新令牌无效或已过期",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -1821,13 +1821,13 @@ const docTemplate = `{
                     "201": {
                         "description": "注册成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_RegisterResultDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_RegisterResultDTO"
                         }
                     },
                     "400": {
                         "description": "参数错误或用户名/邮箱已存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -1882,25 +1882,25 @@ const docTemplate = `{
                     "200": {
                         "description": "成员列表",
                         "schema": {
-                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_MemberDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_MemberDTO"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -1945,31 +1945,31 @@ const docTemplate = `{
                     "201": {
                         "description": "成员添加成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_MemberDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_MemberDTO"
                         }
                     },
                     "400": {
                         "description": "参数错误或成员已存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -2015,37 +2015,37 @@ const docTemplate = `{
                     "200": {
                         "description": "成员移除成功",
                         "schema": {
-                            "$ref": "#/definitions/response.MessageResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.MessageResponse"
                         }
                     },
                     "400": {
                         "description": "无效的ID或无法移除最后的所有者",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "成员不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -2100,37 +2100,37 @@ const docTemplate = `{
                     "200": {
                         "description": "角色更新成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_MemberDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_MemberDTO"
                         }
                     },
                     "400": {
                         "description": "参数错误或无法降级最后的所有者",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "成员不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -2179,25 +2179,25 @@ const docTemplate = `{
                     "200": {
                         "description": "配置列表",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org_OrgSettingDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org_OrgSettingDTO"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -2241,31 +2241,31 @@ const docTemplate = `{
                     "200": {
                         "description": "配置信息",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org_OrgSettingDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org_OrgSettingDTO"
                         }
                     },
                     "400": {
                         "description": "无效的键名",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "配置不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -2316,31 +2316,31 @@ const docTemplate = `{
                     "200": {
                         "description": "设置成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org_OrgSettingDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org_OrgSettingDTO"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -2382,25 +2382,25 @@ const docTemplate = `{
                     "200": {
                         "description": "重置成功",
                         "schema": {
-                            "$ref": "#/definitions/response.MessageResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.MessageResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -2455,25 +2455,25 @@ const docTemplate = `{
                     "200": {
                         "description": "团队列表",
                         "schema": {
-                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamDTO"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -2518,31 +2518,31 @@ const docTemplate = `{
                     "201": {
                         "description": "团队创建成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamDTO"
                         }
                     },
                     "400": {
                         "description": "参数错误或团队名已存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -2588,31 +2588,31 @@ const docTemplate = `{
                     "200": {
                         "description": "团队详情",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamDTO"
                         }
                     },
                     "400": {
                         "description": "无效的ID",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "团队不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -2656,37 +2656,37 @@ const docTemplate = `{
                     "200": {
                         "description": "团队删除成功",
                         "schema": {
-                            "$ref": "#/definitions/response.MessageResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.MessageResponse"
                         }
                     },
                     "400": {
                         "description": "无效的ID",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "团队不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -2749,31 +2749,31 @@ const docTemplate = `{
                     "200": {
                         "description": "成员列表",
                         "schema": {
-                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamMemberDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamMemberDTO"
                         }
                     },
                     "400": {
                         "description": "无效的ID",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -2827,37 +2827,37 @@ const docTemplate = `{
                     "200": {
                         "description": "成员移除成功",
                         "schema": {
-                            "$ref": "#/definitions/response.MessageResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.MessageResponse"
                         }
                     },
                     "400": {
                         "description": "无效的ID",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "成员不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -2913,25 +2913,25 @@ const docTemplate = `{
                     "200": {
                         "description": "配置列表",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team_TeamSettingDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team_TeamSettingDTO"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -2982,31 +2982,31 @@ const docTemplate = `{
                     "200": {
                         "description": "配置信息",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team_TeamSettingDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team_TeamSettingDTO"
                         }
                     },
                     "400": {
                         "description": "无效的键名",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "配置不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -3064,31 +3064,31 @@ const docTemplate = `{
                     "200": {
                         "description": "设置成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team_TeamSettingDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team_TeamSettingDTO"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -3137,25 +3137,25 @@ const docTemplate = `{
                     "200": {
                         "description": "重置成功",
                         "schema": {
-                            "$ref": "#/definitions/response.MessageResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.MessageResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "403": {
                         "description": "权限不足",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -3183,19 +3183,19 @@ const docTemplate = `{
                     "200": {
                         "description": "账号删除成功",
                         "schema": {
-                            "$ref": "#/definitions/response.MessageResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.MessageResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -3223,19 +3223,19 @@ const docTemplate = `{
                     "200": {
                         "description": "组织列表",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_UserOrgDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_UserOrgDTO"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -3274,19 +3274,19 @@ const docTemplate = `{
                     "200": {
                         "description": "密码修改成功",
                         "schema": {
-                            "$ref": "#/definitions/response.MessageResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.MessageResponse"
                         }
                     },
                     "400": {
                         "description": "参数错误或旧密码不正确",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -3314,19 +3314,19 @@ const docTemplate = `{
                     "200": {
                         "description": "个人资料",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "用户不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -3363,25 +3363,25 @@ const docTemplate = `{
                     "200": {
                         "description": "资料更新成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -3423,19 +3423,19 @@ const docTemplate = `{
                     "200": {
                         "description": "配置列表",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_UserSettingDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_UserSettingDTO"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -3474,25 +3474,25 @@ const docTemplate = `{
                     "200": {
                         "description": "设置成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_UserSettingDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_UserSettingDTO"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -3520,19 +3520,19 @@ const docTemplate = `{
                     "200": {
                         "description": "分类列表",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_CategoryDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_CategoryDTO"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -3560,19 +3560,19 @@ const docTemplate = `{
                     "200": {
                         "description": "重置成功",
                         "schema": {
-                            "$ref": "#/definitions/response.MessageResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.MessageResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -3609,25 +3609,25 @@ const docTemplate = `{
                     "200": {
                         "description": "配置信息",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_UserSettingDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_UserSettingDTO"
                         }
                     },
                     "400": {
                         "description": "无效的键名",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "配置不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -3671,25 +3671,25 @@ const docTemplate = `{
                     "200": {
                         "description": "设置成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_UserSettingDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_UserSettingDTO"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -3724,19 +3724,19 @@ const docTemplate = `{
                     "200": {
                         "description": "重置成功",
                         "schema": {
-                            "$ref": "#/definitions/response.MessageResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.MessageResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -3772,19 +3772,19 @@ const docTemplate = `{
                     "200": {
                         "description": "团队列表",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_UserTeamDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_UserTeamDTO"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -3812,19 +3812,19 @@ const docTemplate = `{
                     "200": {
                         "description": "令牌列表",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_TokenDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_TokenDTO"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "500": {
                         "description": "服务器内部错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -3861,19 +3861,19 @@ const docTemplate = `{
                     "201": {
                         "description": "令牌创建成功",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_CreateResultDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_CreateResultDTO"
                         }
                     },
                     "400": {
                         "description": "参数错误",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -3901,13 +3901,13 @@ const docTemplate = `{
                     "200": {
                         "description": "Scope 列表",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_ScopeInfoDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_ScopeInfoDTO"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -3945,25 +3945,25 @@ const docTemplate = `{
                     "200": {
                         "description": "令牌详情",
                         "schema": {
-                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_TokenDTO"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_TokenDTO"
                         }
                     },
                     "400": {
                         "description": "无效的令牌ID",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "令牌不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -3999,25 +3999,25 @@ const docTemplate = `{
                     "200": {
                         "description": "令牌删除成功",
                         "schema": {
-                            "$ref": "#/definitions/response.MessageResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.MessageResponse"
                         }
                     },
                     "400": {
                         "description": "无效的令牌ID",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "404": {
                         "description": "令牌不存在",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -4055,19 +4055,19 @@ const docTemplate = `{
                     "200": {
                         "description": "令牌已禁用",
                         "schema": {
-                            "$ref": "#/definitions/response.MessageResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.MessageResponse"
                         }
                     },
                     "400": {
                         "description": "无效的令牌ID",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -4105,19 +4105,19 @@ const docTemplate = `{
                     "200": {
                         "description": "令牌已启用",
                         "schema": {
-                            "$ref": "#/definitions/response.MessageResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.MessageResponse"
                         }
                     },
                     "400": {
                         "description": "无效的令牌ID",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     },
                     "401": {
                         "description": "未授权",
                         "schema": {
-                            "$ref": "#/definitions/response.ErrorResponse"
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse"
                         }
                     }
                 }
@@ -5634,6 +5634,957 @@ const docTemplate = `{
                 }
             }
         },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_UserOrgDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.UserOrgDTO"
+                    }
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_UserTeamDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.UserTeamDTO"
+                    }
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_ScopeInfoDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat.ScopeInfoDTO"
+                    }
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_TokenDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat.TokenDTO"
+                    }
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org_OrgSettingDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org.OrgSettingDTO"
+                    }
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team_TeamSettingDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team.TeamSettingDTO"
+                    }
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_CategoryDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user.CategoryDTO"
+                    }
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_UserSettingDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user.UserSettingDTO"
+                    }
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit_AuditActionsResponseDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit.AuditActionsResponseDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit_AuditDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit.AuditDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_LoginResponseDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.LoginResponseDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_RegisterResultDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.RegisterResultDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_TokenDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.TokenDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_captcha_GenerateResultDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_captcha.GenerateResultDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_MemberDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.MemberDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_OrgDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.OrgDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.TeamDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_CreateResultDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat.CreateResultDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_TokenDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat.TokenDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_CreateResultDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.CreateResultDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_RoleDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.RoleDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa_EnableDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa.EnableDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa_SetupDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa.SetupDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa_StatusDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa.StatusDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_BatchCreateResultDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.BatchCreateResultDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.UserWithRolesDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org_OrgSettingDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org.OrgSettingDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team_TeamSettingDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team.TeamSettingDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_UserSettingDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user.UserSettingDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorDetail": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "业务错误码（小写下划线）",
+                    "type": "string"
+                },
+                "details": {
+                    "description": "额外详情（如验证错误列表）"
+                },
+                "message": {
+                    "description": "错误消息",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.ErrorDetail"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.MessageResponse": {
+            "description": "纯消息响应格式",
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit_AuditDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "数据列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit.AuditDTO"
+                    }
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                },
+                "meta": {
+                    "description": "分页信息",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PaginationMeta"
+                        }
+                    ]
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_MemberDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "数据列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.MemberDTO"
+                    }
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                },
+                "meta": {
+                    "description": "分页信息",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PaginationMeta"
+                        }
+                    ]
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_OrgDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "数据列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.OrgDTO"
+                    }
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                },
+                "meta": {
+                    "description": "分页信息",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PaginationMeta"
+                        }
+                    ]
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "数据列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.TeamDTO"
+                    }
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                },
+                "meta": {
+                    "description": "分页信息",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PaginationMeta"
+                        }
+                    ]
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamMemberDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "数据列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.TeamMemberDTO"
+                    }
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                },
+                "meta": {
+                    "description": "分页信息",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PaginationMeta"
+                        }
+                    ]
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_RoleDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "数据列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.RoleDTO"
+                    }
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                },
+                "meta": {
+                    "description": "分页信息",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PaginationMeta"
+                        }
+                    ]
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "数据列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.UserWithRolesDTO"
+                    }
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                },
+                "meta": {
+                    "description": "分页信息",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PaginationMeta"
+                        }
+                    ]
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-shared_pkg_platform_http_gin_response.PaginationMeta": {
+            "type": "object",
+            "properties": {
+                "has_more": {
+                    "description": "是否有下一页",
+                    "type": "boolean"
+                },
+                "page": {
+                    "description": "当前页码",
+                    "type": "integer"
+                },
+                "per_page": {
+                    "description": "每页数量",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "总记录数",
+                    "type": "integer"
+                },
+                "total_pages": {
+                    "description": "总页数",
+                    "type": "integer"
+                },
+                "warning": {
+                    "description": "页码越界警告",
+                    "type": "string"
+                }
+            }
+        },
         "pkg_modules_iam_adapters_gin_handler.UpdateProfileRequest": {
             "type": "object",
             "properties": {
@@ -5702,957 +6653,6 @@ const docTemplate = `{
             ],
             "properties": {
                 "value": {}
-            }
-        },
-        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_UserOrgDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.UserOrgDTO"
-                    }
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_UserTeamDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.UserTeamDTO"
-                    }
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_ScopeInfoDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat.ScopeInfoDTO"
-                    }
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_TokenDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat.TokenDTO"
-                    }
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org_OrgSettingDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org.OrgSettingDTO"
-                    }
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team_TeamSettingDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team.TeamSettingDTO"
-                    }
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_CategoryDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user.CategoryDTO"
-                    }
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_UserSettingDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user.UserSettingDTO"
-                    }
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit_AuditActionsResponseDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit.AuditActionsResponseDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit_AuditDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit.AuditDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_LoginResponseDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.LoginResponseDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_RegisterResultDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.RegisterResultDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_TokenDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.TokenDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_captcha_GenerateResultDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_captcha.GenerateResultDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_MemberDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.MemberDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_OrgDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.OrgDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.TeamDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_CreateResultDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat.CreateResultDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_TokenDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat.TokenDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_CreateResultDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.CreateResultDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_RoleDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.RoleDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa_EnableDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa.EnableDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa_SetupDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa.SetupDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa_StatusDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa.StatusDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_BatchCreateResultDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.BatchCreateResultDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.UserWithRolesDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org_OrgSettingDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org.OrgSettingDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team_TeamSettingDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team.TeamSettingDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_UserSettingDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "响应数据",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user.UserSettingDTO"
-                        }
-                    ]
-                },
-                "error": {
-                    "description": "错误详情（仅失败时）"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.ErrorDetail": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "业务错误码（小写下划线）",
-                    "type": "string"
-                },
-                "details": {
-                    "description": "额外详情（如验证错误列表）"
-                },
-                "message": {
-                    "description": "错误消息",
-                    "type": "string"
-                }
-            }
-        },
-        "response.ErrorResponse": {
-            "type": "object",
-            "properties": {
-                "error": {
-                    "$ref": "#/definitions/response.ErrorDetail"
-                }
-            }
-        },
-        "response.MessageResponse": {
-            "description": "纯消息响应格式",
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                }
-            }
-        },
-        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit_AuditDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "数据列表",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit.AuditDTO"
-                    }
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                },
-                "meta": {
-                    "description": "分页信息",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/response.PaginationMeta"
-                        }
-                    ]
-                }
-            }
-        },
-        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_MemberDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "数据列表",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.MemberDTO"
-                    }
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                },
-                "meta": {
-                    "description": "分页信息",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/response.PaginationMeta"
-                        }
-                    ]
-                }
-            }
-        },
-        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_OrgDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "数据列表",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.OrgDTO"
-                    }
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                },
-                "meta": {
-                    "description": "分页信息",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/response.PaginationMeta"
-                        }
-                    ]
-                }
-            }
-        },
-        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "数据列表",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.TeamDTO"
-                    }
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                },
-                "meta": {
-                    "description": "分页信息",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/response.PaginationMeta"
-                        }
-                    ]
-                }
-            }
-        },
-        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamMemberDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "数据列表",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.TeamMemberDTO"
-                    }
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                },
-                "meta": {
-                    "description": "分页信息",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/response.PaginationMeta"
-                        }
-                    ]
-                }
-            }
-        },
-        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_RoleDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "数据列表",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.RoleDTO"
-                    }
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                },
-                "meta": {
-                    "description": "分页信息",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/response.PaginationMeta"
-                        }
-                    ]
-                }
-            }
-        },
-        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "description": "HTTP 状态码",
-                    "type": "integer"
-                },
-                "data": {
-                    "description": "数据列表",
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.UserWithRolesDTO"
-                    }
-                },
-                "message": {
-                    "description": "消息描述",
-                    "type": "string"
-                },
-                "meta": {
-                    "description": "分页信息",
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/response.PaginationMeta"
-                        }
-                    ]
-                }
-            }
-        },
-        "response.PaginationMeta": {
-            "type": "object",
-            "properties": {
-                "has_more": {
-                    "description": "是否有下一页",
-                    "type": "boolean"
-                },
-                "page": {
-                    "description": "当前页码",
-                    "type": "integer"
-                },
-                "per_page": {
-                    "description": "每页数量",
-                    "type": "integer"
-                },
-                "total": {
-                    "description": "总记录数",
-                    "type": "integer"
-                },
-                "total_pages": {
-                    "description": "总页数",
-                    "type": "integer"
-                },
-                "warning": {
-                    "description": "页码越界警告",
-                    "type": "string"
-                }
             }
         }
     },
