@@ -155,9 +155,8 @@ func getApplicationFiles(t *testing.T) []string {
 
 	// 搜索所有 BC 模块的 application 目录
 	appDirs := []string{
-		"../../pkg/modules/app/application",
-		"../../pkg/modules/iam/application",
-		"../../pkg/modules/crm/application",
+		"../../pkg/modules/iam/app",
+		"../../pkg/modules/settings/app",
 	}
 	var files []string
 
@@ -200,9 +199,8 @@ func parseHandlerAnnotations(t *testing.T) []handlerAnnotation {
 
 	// 搜索所有 BC 模块的 handler 目录
 	handlerDirs := []string{
-		"../../pkg/modules/app/transport/gin/handler",
-		"../../pkg/modules/iam/transport/gin/handler",
-		"../../pkg/modules/crm/transport/gin/handler",
+		"../../pkg/modules/iam/adapters/gin/handler",
+		"../../pkg/modules/settings/adapters/gin/handler",
 	}
 	var annotations []handlerAnnotation
 
@@ -318,9 +316,8 @@ func loadDTOTypes(t *testing.T) map[string]bool {
 
 	// 搜索所有 BC 模块的 application 目录
 	appDirs := []string{
-		"../../pkg/modules/app/application",
-		"../../pkg/modules/iam/application",
-		"../../pkg/modules/crm/application",
+		"../../pkg/modules/iam/app",
+		"../../pkg/modules/settings/app",
 	}
 
 	for _, appDir := range appDirs {
@@ -387,9 +384,8 @@ func loadHandlerQueryTypes(t *testing.T) map[string]bool {
 
 	// 搜索所有 BC 模块的 handler 目录
 	handlerDirs := []string{
-		"../../pkg/modules/app/transport/gin/handler",
-		"../../pkg/modules/iam/transport/gin/handler",
-		"../../pkg/modules/crm/transport/gin/handler",
+		"../../pkg/modules/iam/adapters/gin/handler",
+		"../../pkg/modules/settings/adapters/gin/handler",
 	}
 	queryTypes := make(map[string]bool)
 

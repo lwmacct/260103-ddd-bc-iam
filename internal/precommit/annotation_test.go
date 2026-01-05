@@ -61,11 +61,11 @@ func TestAnnotation_SecurityRequired(t *testing.T) {
 }
 
 // TestAnnotation_TagsFormat 检查 @Tags 格式规范。
-// 规则：格式为英文分组名（如「Admin - User Management」「Authentication」）。
+// 规则：格式为 kebab-case（小写字母+短横线），如「user-profile」「admin-role」「auth-2fa」。
 func TestAnnotation_TagsFormat(t *testing.T) {
 	annotations := parseHandlerAnnotations(t)
-	// 匹配英文 Tags 格式：字母开头，可包含空格和连字符
-	tagsRe := regexp.MustCompile(`^[A-Za-z][A-Za-z0-9\s\-]*$`)
+	// 匹配 kebab-case Tags 格式：小写字母开头，可包含小写字母、数字和短横线
+	tagsRe := regexp.MustCompile(`^[a-z][a-z0-9\-]*$`)
 
 	for _, ann := range annotations {
 		if !strings.HasPrefix(ann.Path, "/api") || ann.Tags == "" {
@@ -74,7 +74,7 @@ func TestAnnotation_TagsFormat(t *testing.T) {
 
 		t.Run(ann.File+"/"+ann.Method+ann.Path, func(t *testing.T) {
 			assert.True(t, tagsRe.MatchString(ann.Tags),
-				"@Tags should be English format (e.g. 'Admin - User Management'): got %q", ann.Tags)
+				"@Tags should be kebab-case (e.g. 'user-profile', 'admin-role'): got %q", ann.Tags)
 		})
 	}
 }

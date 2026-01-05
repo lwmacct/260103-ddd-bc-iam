@@ -36,7 +36,7 @@ func NewAuthHandler(
 //
 //	@Summary		注册
 //	@Description	创建新用户账号，注册成功后自动登录并返回访问令牌
-//	@Tags			Authentication
+//	@Tags			auth
 //	@Accept			json
 //	@Produce		json
 //	@Param			request	body		auth.RegisterDTO								true	"注册信息"
@@ -65,7 +65,7 @@ func (h *AuthHandler) Register(c *gin.Context) {
 //
 //	@Summary		登录
 //	@Description	使用手机号/用户名/邮箱和密码登录系统，需要提供图形验证码。如果启用了2FA，返回session_token用于后续2FA验证
-//	@Tags			Authentication
+//	@Tags			auth
 //	@Accept			json
 //	@Produce		json
 //	@Param			request	body		auth.LoginDTO									true	"登录凭证"
@@ -111,7 +111,7 @@ func (h *AuthHandler) Login(c *gin.Context) {
 //
 //	@Summary		2FA 登录
 //	@Description	使用session_token和2FA验证码完成登录（适用于启用了2FA的账户）
-//	@Tags			Authentication
+//	@Tags			auth
 //	@Accept			json
 //	@Produce		json
 //	@Param			request	body		auth.Login2FADTO						true	"二次认证凭证"
@@ -145,7 +145,7 @@ func (h *AuthHandler) Login2FA(c *gin.Context) {
 //
 //	@Summary		刷新令牌
 //	@Description	使用refresh_token获取新的access_token和refresh_token，延长会话有效期
-//	@Tags			Authentication
+//	@Tags			auth
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth

@@ -55,7 +55,7 @@ func NewOrgMemberHandler(
 //
 //	@Summary		成员列表
 //	@Description	分页获取组织成员列表
-//	@Tags			Organization - Member Management
+//	@Tags			org-member
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -93,7 +93,7 @@ func (h *OrgMemberHandler) List(c *gin.Context) {
 //
 //	@Summary		添加成员
 //	@Description	添加用户到组织
-//	@Tags			Organization - Member Management
+//	@Tags			org-member
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -152,7 +152,7 @@ func (h *OrgMemberHandler) Add(c *gin.Context) {
 //
 //	@Summary		移除成员
 //	@Description	从组织中移除成员
-//	@Tags			Organization - Member Management
+//	@Tags			org-member
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -201,7 +201,7 @@ func (h *OrgMemberHandler) Remove(c *gin.Context) {
 //
 //	@Summary		更新成员角色
 //	@Description	更新组织成员的角色
-//	@Tags			Organization - Member Management
+//	@Tags			org-member
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth

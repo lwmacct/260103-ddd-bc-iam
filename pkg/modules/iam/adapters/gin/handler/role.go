@@ -59,7 +59,7 @@ func NewRoleHandler(
 //
 //	@Summary		创建角色
 //	@Description	管理员创建新的系统角色
-//	@Tags			Admin - Role Management
+//	@Tags			admin-role
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -107,7 +107,7 @@ func (h *RoleHandler) CreateRole(c *gin.Context) {
 //
 //	@Summary		角色列表
 //	@Description	分页获取所有系统角色
-//	@Tags			Admin - Role Management
+//	@Tags			admin-role
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -138,7 +138,7 @@ func (h *RoleHandler) ListRoles(c *gin.Context) {
 //
 //	@Summary		角色详情
 //	@Description	根据角色ID获取角色详细信息（包含权限列表）
-//	@Tags			Admin - Role Management
+//	@Tags			admin-role
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -177,7 +177,7 @@ func (h *RoleHandler) GetRole(c *gin.Context) {
 //
 //	@Summary		更新角色
 //	@Description	管理员更新角色的显示名称和描述
-//	@Tags			Admin - Role Management
+//	@Tags			admin-role
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -231,7 +231,7 @@ func (h *RoleHandler) UpdateRole(c *gin.Context) {
 //
 //	@Summary		删除角色
 //	@Description	管理员删除指定角色（如果角色被用户使用，可能会失败）
-//	@Tags			Admin - Role Management
+//	@Tags			admin-role
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -279,7 +279,7 @@ func (h *RoleHandler) DeleteRole(c *gin.Context) {
 //
 //	@Summary		设置权限
 //	@Description	管理员为指定角色设置权限（会覆盖现有权限）。新 RBAC 模型使用 Operation + Resource Pattern。
-//	@Tags			Admin - Role Management
+//	@Tags			admin-role
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth

@@ -53,7 +53,7 @@ func NewTeamMemberHandler(
 //
 //	@Summary		团队成员列表
 //	@Description	分页获取团队成员列表
-//	@Tags			Organization - Team Member Management
+//	@Tags			org-team-member
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -99,7 +99,7 @@ func (h *TeamMemberHandler) List(c *gin.Context) {
 //
 //	@Summary		添加团队成员
 //	@Description	添加用户到团队（用户必须先是组织成员）
-//	@Tags			Organization - Team Member Management
+//	@Tags			org-team-member
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -167,7 +167,7 @@ func (h *TeamMemberHandler) Add(c *gin.Context) {
 //
 //	@Summary		移除团队成员
 //	@Description	从团队中移除成员
-//	@Tags			Organization - Team Member Management
+//	@Tags			org-team-member
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth

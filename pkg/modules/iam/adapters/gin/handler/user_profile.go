@@ -37,7 +37,7 @@ func NewUserProfileHandler(
 //
 //	@Summary		获取资料
 //	@Description	获取当前登录用户的个人资料和角色信息
-//	@Tags			User - Profile
+//	@Tags			user-profile
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -82,7 +82,7 @@ type UpdateProfileRequest struct {
 //
 //	@Summary		更新资料
 //	@Description	用户更新自己的姓名、头像和个人简介
-//	@Tags			User - Profile
+//	@Tags			user-profile
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -135,7 +135,7 @@ func (h *UserProfileHandler) UpdateProfile(c *gin.Context) {
 //
 //	@Summary		修改密码
 //	@Description	用户修改自己的登录密码
-//	@Tags			User - Profile
+//	@Tags			user-profile
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -173,7 +173,7 @@ func (h *UserProfileHandler) ChangePassword(c *gin.Context) {
 //
 //	@Summary		注销账户
 //	@Description	用户删除自己的账号（不可恢复）
-//	@Tags			User - Profile
+//	@Tags			user-profile
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth

@@ -63,7 +63,7 @@ func NewAdminUserHandler(
 //
 //	@Summary		创建用户
 //	@Description	管理员创建新用户账号，可同时分配角色
-//	@Tags			Admin - User Management
+//	@Tags			admin-user
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -103,7 +103,7 @@ func (h *AdminUserHandler) CreateUser(c *gin.Context) {
 //
 //	@Summary		用户列表
 //	@Description	分页获取所有用户列表（包含角色信息）
-//	@Tags			Admin - User Management
+//	@Tags			admin-user
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -134,7 +134,7 @@ func (h *AdminUserHandler) ListUsers(c *gin.Context) {
 //
 //	@Summary		用户详情
 //	@Description	根据用户ID获取用户详细信息（包含角色信息）
-//	@Tags			Admin - User Management
+//	@Tags			admin-user
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -172,7 +172,7 @@ func (h *AdminUserHandler) GetUser(c *gin.Context) {
 //
 //	@Summary		更新用户
 //	@Description	管理员更新用户的基本信息和状态
-//	@Tags			Admin - User Management
+//	@Tags			admin-user
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -231,7 +231,7 @@ func (h *AdminUserHandler) UpdateUser(c *gin.Context) {
 //
 //	@Summary		删除用户
 //	@Description	管理员删除指定用户（物理删除或软删除）
-//	@Tags			Admin - User Management
+//	@Tags			admin-user
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -264,7 +264,7 @@ func (h *AdminUserHandler) DeleteUser(c *gin.Context) {
 //
 //	@Summary		分配角色
 //	@Description	管理员为指定用户分配角色（会覆盖现有角色）
-//	@Tags			Admin - User Management
+//	@Tags			admin-user
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -315,7 +315,7 @@ func (h *AdminUserHandler) AssignRoles(c *gin.Context) {
 //
 //	@Summary		批量创建用户
 //	@Description	管理员从 CSV 等来源批量创建用户，支持部分失败（单个失败不影响其他用户）
-//	@Tags			Admin - User Management
+//	@Tags			admin-user
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth

@@ -58,7 +58,7 @@ func NewTeamHandler(
 //
 //	@Summary		创建团队
 //	@Description	在组织内创建新团队
-//	@Tags			Organization - Team Management
+//	@Tags			org-team
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -118,7 +118,7 @@ func (h *TeamHandler) Create(c *gin.Context) {
 //
 //	@Summary		团队列表
 //	@Description	分页获取组织内的团队列表
-//	@Tags			Organization - Team Management
+//	@Tags			org-team
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -156,7 +156,7 @@ func (h *TeamHandler) List(c *gin.Context) {
 //
 //	@Summary		团队详情
 //	@Description	获取团队详情
-//	@Tags			Organization - Team Management
+//	@Tags			org-team
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -201,7 +201,7 @@ func (h *TeamHandler) Get(c *gin.Context) {
 //
 //	@Summary		更新团队
 //	@Description	更新团队信息
-//	@Tags			Organization - Team Management
+//	@Tags			org-team
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -259,7 +259,7 @@ func (h *TeamHandler) Update(c *gin.Context) {
 //
 //	@Summary		删除团队
 //	@Description	软删除团队
-//	@Tags			Organization - Team Management
+//	@Tags			org-team
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth

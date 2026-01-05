@@ -35,7 +35,7 @@ func NewTwoFAHandler(
 //
 //	@Summary		设置 2FA
 //	@Description	为当前用户生成2FA密钥和二维码，用于配置身份验证器应用
-//	@Tags			Authentication - 2FA
+//	@Tags				auth-2fa
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -73,7 +73,7 @@ func (h *TwoFAHandler) Setup(c *gin.Context) {
 //
 //	@Summary		启用 2FA
 //	@Description	验证身份验证器应用生成的TOTP代码，成功后启用2FA并返回恢复代码
-//	@Tags			Authentication - 2FA
+//	@Tags				auth-2fa
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -117,7 +117,7 @@ func (h *TwoFAHandler) VerifyAndEnable(c *gin.Context) {
 //
 //	@Summary		禁用 2FA
 //	@Description	禁用当前用户的两步验证功能
-//	@Tags			Authentication - 2FA
+//	@Tags				auth-2fa
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -148,7 +148,7 @@ func (h *TwoFAHandler) Disable(c *gin.Context) {
 //
 //	@Summary		2FA 状态
 //	@Description	获取当前用户的2FA启用状态和剩余恢复代码数量
-//	@Tags			Authentication - 2FA
+//	@Tags				auth-2fa
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth

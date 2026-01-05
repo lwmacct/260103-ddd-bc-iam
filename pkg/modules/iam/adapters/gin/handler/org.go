@@ -59,7 +59,7 @@ func NewOrgHandler(
 //
 //	@Summary		创建组织
 //	@Description	系统管理员创建新组织
-//	@Tags			Admin - Organization Management
+//	@Tags			admin-org
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -108,7 +108,7 @@ func (h *OrgHandler) Create(c *gin.Context) {
 //
 //	@Summary		组织列表
 //	@Description	分页获取所有组织
-//	@Tags			Admin - Organization Management
+//	@Tags			admin-org
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -139,7 +139,7 @@ func (h *OrgHandler) List(c *gin.Context) {
 //
 //	@Summary		组织详情
 //	@Description	根据 ID 获取组织详情
-//	@Tags			Admin - Organization Management
+//	@Tags			admin-org
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -176,7 +176,7 @@ func (h *OrgHandler) Get(c *gin.Context) {
 //
 //	@Summary		更新组织
 //	@Description	更新组织信息
-//	@Tags			Admin - Organization Management
+//	@Tags			admin-org
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -230,7 +230,7 @@ func (h *OrgHandler) Update(c *gin.Context) {
 //
 //	@Summary		删除组织
 //	@Description	软删除组织
-//	@Tags			Admin - Organization Management
+//	@Tags			admin-org
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth

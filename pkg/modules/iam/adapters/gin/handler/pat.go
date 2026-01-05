@@ -49,7 +49,7 @@ func NewPATHandler(
 //
 //	@Summary		创建令牌
 //	@Description	用户创建新的个人访问令牌(PAT)，用于API访问。令牌仅在创建时显示一次
-//	@Tags			User - Personal Access Token
+//	@Tags			user-pat
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -101,7 +101,7 @@ func (h *PATHandler) CreateToken(c *gin.Context) {
 //
 //	@Summary		令牌列表
 //	@Description	获取当前用户的所有个人访问令牌（不包含令牌值）
-//	@Tags			User - Personal Access Token
+//	@Tags			user-pat
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -133,7 +133,7 @@ func (h *PATHandler) ListTokens(c *gin.Context) {
 //
 //	@Summary		删除令牌
 //	@Description	用户删除指定的个人访问令牌（不可恢复）
-//	@Tags			User - Personal Access Token
+//	@Tags			user-pat
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -173,7 +173,7 @@ func (h *PATHandler) DeleteToken(c *gin.Context) {
 //
 //	@Summary		令牌详情
 //	@Description	获取指定个人访问令牌的详细信息（不包含令牌值）
-//	@Tags			User - Personal Access Token
+//	@Tags			user-pat
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -219,7 +219,7 @@ func (h *PATHandler) GetToken(c *gin.Context) {
 //
 //	@Summary		禁用令牌
 //	@Description	暂停指定令牌的使用（可再次启用）
-//	@Tags			User - Personal Access Token
+//	@Tags			user-pat
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -256,7 +256,7 @@ func (h *PATHandler) DisableToken(c *gin.Context) {
 //
 //	@Summary		启用令牌
 //	@Description	重新启用已禁用的令牌
-//	@Tags			User - Personal Access Token
+//	@Tags			user-pat
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -293,7 +293,7 @@ func (h *PATHandler) EnableToken(c *gin.Context) {
 //
 //	@Summary		Scope 列表
 //	@Description	获取创建 PAT 时可选的权限范围列表
-//	@Tags			User - Personal Access Token
+//	@Tags			user-pat
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth

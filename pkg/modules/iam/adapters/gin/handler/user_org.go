@@ -32,7 +32,7 @@ func NewUserOrgHandler(
 //
 //	@Summary		我的组织
 //	@Description	获取当前用户加入的所有组织
-//	@Tags			User - Organization
+//	@Tags			user-org
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -67,7 +67,7 @@ type ListUserTeamsQuery struct {
 //
 //	@Summary		我的团队
 //	@Description	获取当前用户加入的所有团队（可按组织筛选）
-//	@Tags			User - Organization
+//	@Tags			user-org
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth

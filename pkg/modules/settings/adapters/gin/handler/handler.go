@@ -39,7 +39,7 @@ func NewUserSettingHandler(useCases *app.UseCases) *UserSettingHandler {
 //
 //	@Summary		配置列表
 //	@Description	获取当前用户的配置列表（系统默认值+用户自定义值合并视图）
-//	@Tags			User - Settings
+//	@Tags			settings-user
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -75,7 +75,7 @@ func (h *UserSettingHandler) List(c *gin.Context) {
 //
 //	@Summary		分类列表
 //	@Description	获取配置分类列表
-//	@Tags			User - Settings
+//	@Tags			settings-user
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -107,7 +107,7 @@ func (h *UserSettingHandler) ListCategories(c *gin.Context) {
 //
 //	@Summary		获取配置
 //	@Description	获取指定配置项的值（系统默认值或用户自定义值）
-//	@Tags			User - Settings
+//	@Tags			settings-user
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -147,7 +147,7 @@ func (h *UserSettingHandler) Get(c *gin.Context) {
 //
 //	@Summary		设置配置
 //	@Description	设置指定配置项的值（用户自定义覆盖）
-//	@Tags			User - Settings
+//	@Tags			settings-user
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -203,7 +203,7 @@ func (h *UserSettingHandler) Set(c *gin.Context) {
 //
 //	@Summary		批量设置
 //	@Description	批量设置多个配置项的值
-//	@Tags			User - Settings
+//	@Tags			settings-user
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -265,7 +265,7 @@ func (h *UserSettingHandler) BatchSet(c *gin.Context) {
 //
 //	@Summary		重置配置
 //	@Description	重置指定配置项（删除用户自定义值，恢复系统默认值）
-//	@Tags			User - Settings
+//	@Tags			settings-user
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -299,7 +299,7 @@ func (h *UserSettingHandler) Reset(c *gin.Context) {
 //
 //	@Summary		重置所有配置
 //	@Description	重置所有用户自定义配置（恢复系统默认值）
-//	@Tags			User - Settings
+//	@Tags			settings-user
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth

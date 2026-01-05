@@ -78,7 +78,7 @@ func NewAuditHandler(
 //
 //	@Summary		审计日志列表
 //	@Description	分页获取审计日志，支持按用户、操作、资源、状态、时间范围筛选
-//	@Tags			Admin - Audit Log
+//	@Tags			admin-audit
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -110,7 +110,7 @@ func (h *AuditHandler) ListLogs(c *gin.Context) {
 //
 //	@Summary		审计日志详情
 //	@Description	根据日志ID获取审计日志详细信息
-//	@Tags			Admin - Audit Log
+//	@Tags			admin-audit
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -148,7 +148,7 @@ func (h *AuditHandler) GetLog(c *gin.Context) {
 //
 //	@Summary		审计操作定义
 //	@Description	获取所有审计操作的定义、分类和操作类型，供前端筛选器使用
-//	@Tags			Admin - Audit Log
+//	@Tags			admin-audit
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
