@@ -108,8 +108,8 @@ pkg/modules/
 # - github.com/lwmacct/260103-ddd-bc-settings
 #   └── 提供 Setting Schema 定义和校验逻辑
 # - github.com/lwmacct/260103-ddd-shared
-#   ├── platform/              # 纯技术基础设施（DB、Redis、EventBus、Queue、Telemetry）
-#   └── shared/                # 接口定义层（Cache、Captcha、Event、Health）
+#   ├── pkg/platform/              # 纯技术基础设施（DB、Redis、EventBus、Queue、Telemetry）
+#   └── pkg/shared/                # 接口定义层（Cache、Captcha、Event、Health）
 
 internal/
 └── container/                  # Fx 依赖注入组装点
