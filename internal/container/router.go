@@ -12,9 +12,10 @@ import (
 	userSettingsHandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/handler"
 	settingsRoutes "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/routes"
 
-	// Settings (external dependency, migrated to 260103-ddd-shared)
+	// Settings (external dependency)
 	settingsHandler "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/handler"
 	settingsBCRoutes "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/routes"
+	settingsconfig "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/config"
 )
 
 // AllRoutes 聚合所有模块的路由定义。
@@ -43,8 +44,9 @@ func AllRoutes(
 	orgSettingHandler *userSettingsHandler.OrgSettingHandler,
 	teamSettingHandler *userSettingsHandler.TeamSettingHandler,
 
-	// Settings Handlers (external dependency, needs adapter)
+	// Settings Handlers (external dependency)
 	settingHandler *settingsHandler.SettingHandler,
+	settingsCfg settingsconfig.Config,
 ) []ginroutes.Route {
 	// IAM 域路由
 	iamRoutes := routes.All(
@@ -67,7 +69,7 @@ func AllRoutes(
 	settingsRouteList := settingsRoutes.All(userSettingHandler, orgSettingHandler, teamSettingHandler)
 
 	// Settings 路由 (external dependency)
-	settingsBCRouteList := settingsBCRoutes.Admin(settingHandler)
+	settingsBCRouteList := settingsBCRoutes.Admin(settingHandler, &settingsCfg)
 
 	// 合并所有路由
 	allRoutes := iamRoutes
