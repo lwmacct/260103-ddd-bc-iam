@@ -57,3 +57,9 @@ type SettingsGroupDTO struct {
 	Name     string           `json:"name"`
 	Settings []UserSettingDTO `json:"settings"`
 }
+
+// SettingItemDTO 配置项（用于批量设置）
+type SettingItemDTO struct {
+	Key   string `json:"key"`
+	Value any    `json:"value"`
+}

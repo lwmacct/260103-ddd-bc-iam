@@ -227,9 +227,9 @@ func (h *UserSettingHandler) BatchSet(c *gin.Context) {
 	}
 
 	// 转换请求
-	items := make([]user.SettingItem, len(req.Settings))
+	items := make([]user.SettingItemDTO, len(req.Settings))
 	for i, s := range req.Settings {
-		items[i] = user.SettingItem{
+		items[i] = user.SettingItemDTO{
 			Key:   s.Key,
 			Value: s.Value,
 		}

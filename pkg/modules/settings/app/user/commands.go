@@ -10,13 +10,7 @@ type SetCommand struct {
 // BatchSetCommand 批量设置用户配置命令
 type BatchSetCommand struct {
 	UserID   uint
-	Settings []SettingItem
-}
-
-// SettingItem 配置项
-type SettingItem struct {
-	Key   string `json:"key"`
-	Value any    `json:"value"`
+	Settings []SettingItemDTO
 }
 
 // ResetCommand 重置单个配置命令

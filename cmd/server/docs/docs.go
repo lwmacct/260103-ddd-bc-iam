@@ -21,7 +21,6641 @@ const docTemplate = `{
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
-    "paths": {},
+    "paths": {
+        "/api/admin/audit": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "分页获取审计日志，支持按用户、操作、资源、状态、时间范围筛选",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-audit"
+                ],
+                "summary": "审计日志列表",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Action 操作类型过滤（语义化标识，如 setting.update）",
+                        "name": "action",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "EndDate 结束时间（RFC3339 格式）",
+                        "name": "end_date",
+                        "in": "query"
+                    },
+                    {
+                        "maximum": 1000,
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 20,
+                        "description": "Limit 每页数量，默认 20，最大 1000",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page 页码，从 1 开始",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Resource 资源分类过滤（如 setting, user）",
+                        "name": "resource",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "StartDate 开始时间（RFC3339 格式）",
+                        "name": "start_date",
+                        "in": "query"
+                    },
+                    {
+                        "enum": [
+                            "success",
+                            "failure"
+                        ],
+                        "type": "string",
+                        "description": "Status 状态过滤",
+                        "name": "status",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "UserID 按用户 ID 过滤",
+                        "name": "user_id",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "审计日志列表",
+                        "schema": {
+                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit_AuditDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/audit/actions": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "获取所有审计操作的定义、分类和操作类型，供前端筛选器使用",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-audit"
+                ],
+                "summary": "审计操作定义",
+                "responses": {
+                    "200": {
+                        "description": "审计操作定义",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit_AuditActionsResponseDTO"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/audit/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "根据日志ID获取审计日志详细信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-audit"
+                ],
+                "summary": "审计日志详情",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "日志ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "日志详情",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit_AuditDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的日志ID",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "日志不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/orgs": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "分页获取所有组织",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-org"
+                ],
+                "summary": "组织列表",
+                "parameters": [
+                    {
+                        "maximum": 1000,
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 20,
+                        "description": "Limit 每页数量，默认 20，最大 1000",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page 页码，从 1 开始",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "enum": [
+                            "active",
+                            "inactive"
+                        ],
+                        "type": "string",
+                        "name": "status",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "组织列表",
+                        "schema": {
+                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_OrgDTO"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "系统管理员创建新组织",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-org"
+                ],
+                "summary": "创建组织",
+                "parameters": [
+                    {
+                        "description": "组织信息",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.CreateOrgDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "组织创建成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_OrgDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误或组织名已存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/orgs/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "根据 ID 获取组织详情",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-org"
+                ],
+                "summary": "组织详情",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "组织详情",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_OrgDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的组织ID",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "组织不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "更新组织信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-org"
+                ],
+                "summary": "更新组织",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "更新信息",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.UpdateOrgDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "组织更新成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_OrgDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "组织不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "软删除组织",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-org"
+                ],
+                "summary": "删除组织",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "组织删除成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的组织ID",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "组织不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/roles": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "分页获取所有系统角色",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-role"
+                ],
+                "summary": "角色列表",
+                "parameters": [
+                    {
+                        "maximum": 1000,
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 20,
+                        "description": "Limit 每页数量，默认 20，最大 1000",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page 页码，从 1 开始",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "角色列表",
+                        "schema": {
+                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_RoleDTO"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "管理员创建新的系统角色",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-role"
+                ],
+                "summary": "创建角色",
+                "parameters": [
+                    {
+                        "description": "角色信息",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.CreateDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "角色创建成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_CreateResultDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误或角色名已存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/roles/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "根据角色ID获取角色详细信息（包含权限列表）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-role"
+                ],
+                "summary": "角色详情",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "角色ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "角色详情",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_RoleDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的角色ID",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "角色不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "管理员更新角色的显示名称和描述",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-role"
+                ],
+                "summary": "更新角色",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "角色ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "更新信息",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.UpdateDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "角色更新成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_RoleDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的角色ID或参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "角色不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "管理员删除指定角色（如果角色被用户使用，可能会失败）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-role"
+                ],
+                "summary": "删除角色",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "角色ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "角色删除成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的角色ID",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "角色不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误或角色被使用中",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/roles/{id}/permissions": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "管理员为指定角色设置权限（会覆盖现有权限）。新 RBAC 模型使用 Operation + Resource Pattern。",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-role"
+                ],
+                "summary": "设置权限",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "角色ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "权限模式列表",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.SetPermissionsDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "权限设置成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的角色ID或参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "角色不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/users": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "分页获取所有用户列表（包含角色信息）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-user"
+                ],
+                "summary": "用户列表",
+                "parameters": [
+                    {
+                        "maximum": 1000,
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 20,
+                        "description": "Limit 每页数量，默认 20，最大 1000",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page 页码，从 1 开始",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Search 搜索关键词（用户名或邮箱）",
+                        "name": "search",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "用户列表",
+                        "schema": {
+                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "管理员创建新用户账号，可同时分配角色",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-user"
+                ],
+                "summary": "创建用户",
+                "parameters": [
+                    {
+                        "description": "用户信息",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.CreateDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "用户创建成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误或用户名/邮箱已存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/users/batch": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "管理员从 CSV 等来源批量创建用户，支持部分失败（单个失败不影响其他用户）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-user"
+                ],
+                "summary": "批量创建用户",
+                "parameters": [
+                    {
+                        "description": "用户列表（最多 100 个）",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.BatchCreateDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "批量创建结果",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_BatchCreateResultDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/users/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "根据用户ID获取用户详细信息（包含角色信息）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-user"
+                ],
+                "summary": "用户详情",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "用户ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "用户详情",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的用户ID",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "用户不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "管理员更新用户的基本信息和状态",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-user"
+                ],
+                "summary": "更新用户",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "用户ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "更新信息",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.UpdateDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "用户更新成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的用户ID或参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "用户不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "管理员删除指定用户（物理删除或软删除）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-user"
+                ],
+                "summary": "删除用户",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "用户ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "用户删除成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的用户ID",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "用户不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/users/{id}/roles": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "管理员为指定用户分配角色（会覆盖现有角色）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "admin-user"
+                ],
+                "summary": "分配角色",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "用户ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "角色ID列表",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.AssignRolesDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "角色分配成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的用户ID或参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "用户不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/2fa/disable": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "禁用当前用户的两步验证功能",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth-2fa"
+                ],
+                "summary": "禁用 2FA",
+                "responses": {
+                    "200": {
+                        "description": "2FA禁用成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "禁用失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/2fa/setup": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "为当前用户生成2FA密钥和二维码，用于配置身份验证器应用",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth-2fa"
+                ],
+                "summary": "设置 2FA",
+                "responses": {
+                    "200": {
+                        "description": "2FA初始化成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa_SetupDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "设置失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/2fa/status": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "获取当前用户的2FA启用状态和剩余恢复代码数量",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth-2fa"
+                ],
+                "summary": "2FA 状态",
+                "responses": {
+                    "200": {
+                        "description": "2FA状态",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa_StatusDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "获取失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/2fa/verify": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "验证身份验证器应用生成的TOTP代码，成功后启用2FA并返回恢复代码",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth-2fa"
+                ],
+                "summary": "启用 2FA",
+                "parameters": [
+                    {
+                        "description": "TOTP验证码",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa.VerifyDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "2FA启用成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa_EnableDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "验证码错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/captcha": {
+            "get": {
+                "description": "生成图形验证码用于登录。支持开发模式（通过code和secret参数指定验证码值）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "获取验证码",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "开发模式：指定验证码值",
+                        "name": "code",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "开发模式：密钥",
+                        "name": "secret",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "验证码生成成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_captcha_GenerateResultDTO"
+                        }
+                    },
+                    "500": {
+                        "description": "生成失败",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/login": {
+            "post": {
+                "description": "使用手机号/用户名/邮箱和密码登录系统，需要提供图形验证码。如果启用了2FA，返回session_token用于后续2FA验证",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "登录",
+                "parameters": [
+                    {
+                        "description": "登录凭证",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.LoginDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "登录成功或需要2FA验证",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_LoginResponseDTO"
+                        }
+                    },
+                    "401": {
+                        "description": "登录失败：凭证无效、验证码错误或账户被禁用",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/login/2fa": {
+            "post": {
+                "description": "使用session_token和2FA验证码完成登录（适用于启用了2FA的账户）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "2FA 登录",
+                "parameters": [
+                    {
+                        "description": "二次认证凭证",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.Login2FADTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "登录成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_TokenDTO"
+                        }
+                    },
+                    "401": {
+                        "description": "验证失败：session_token无效或2FA验证码错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/refresh": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "使用refresh_token获取新的access_token和refresh_token，延长会话有效期",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "刷新令牌",
+                "parameters": [
+                    {
+                        "description": "刷新令牌",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.RefreshTokenDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "令牌刷新成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_LoginResponseDTO"
+                        }
+                    },
+                    "401": {
+                        "description": "刷新令牌无效或已过期",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/register": {
+            "post": {
+                "description": "创建新用户账号，注册成功后自动登录并返回访问令牌",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "注册",
+                "parameters": [
+                    {
+                        "description": "注册信息",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.RegisterDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "注册成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_RegisterResultDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误或用户名/邮箱已存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/org/{org_id}/members": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "分页获取组织成员列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "org-member"
+                ],
+                "summary": "成员列表",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "maximum": 1000,
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 20,
+                        "description": "Limit 每页数量，默认 20，最大 1000",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page 页码，从 1 开始",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成员列表",
+                        "schema": {
+                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_MemberDTO"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "添加用户到组织",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "org-member"
+                ],
+                "summary": "添加成员",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "成员信息",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.AddMemberDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "成员添加成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_MemberDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误或成员已存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/org/{org_id}/members/{user_id}": {
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "从组织中移除成员",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "org-member"
+                ],
+                "summary": "移除成员",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "用户ID",
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成员移除成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的ID或无法移除最后的所有者",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "成员不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/org/{org_id}/members/{user_id}/role": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "更新组织成员的角色",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "org-member"
+                ],
+                "summary": "更新成员角色",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "用户ID",
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "角色信息",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.UpdateMemberRoleDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "角色更新成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_MemberDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误或无法降级最后的所有者",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "成员不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/org/{org_id}/settings": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "获取当前组织的配置列表（系统默认值+组织自定义值合并视图）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings-org"
+                ],
+                "summary": "组织配置列表",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "从上下文获取，不绑定",
+                        "name": "-",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "可选：按分类 ID 过滤",
+                        "name": "category_id",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "配置列表",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org_OrgSettingDTO"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/org/{org_id}/settings/{key}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "获取指定配置项的值（系统默认值或组织自定义值）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings-org"
+                ],
+                "summary": "获取组织配置",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "配置键名",
+                        "name": "key",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "配置信息",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org_OrgSettingDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的键名",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "配置不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "设置指定配置项的值（组织自定义覆盖）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings-org"
+                ],
+                "summary": "设置组织配置",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "配置键名",
+                        "name": "key",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "设置请求",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/pkg_modules_settings_adapters_gin_handler.SetRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "设置成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org_OrgSettingDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "重置指定配置项（删除组织自定义值，恢复系统默认值）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings-org"
+                ],
+                "summary": "重置组织配置",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "配置键名",
+                        "name": "key",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "重置成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.MessageResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/org/{org_id}/teams": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "分页获取组织内的团队列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "org-team"
+                ],
+                "summary": "团队列表",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "maximum": 1000,
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 20,
+                        "description": "Limit 每页数量，默认 20，最大 1000",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page 页码，从 1 开始",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "团队列表",
+                        "schema": {
+                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamDTO"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "在组织内创建新团队",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "org-team"
+                ],
+                "summary": "创建团队",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "团队信息",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.CreateTeamDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "团队创建成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误或团队名已存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/org/{org_id}/teams/{team_id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "获取团队详情",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "org-team"
+                ],
+                "summary": "团队详情",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "团队ID",
+                        "name": "team_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "团队详情",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的ID",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "团队不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "软删除团队",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "org-team"
+                ],
+                "summary": "删除团队",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "团队ID",
+                        "name": "team_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "团队删除成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的ID",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "团队不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/org/{org_id}/teams/{team_id}/members": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "分页获取团队成员列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "org-team-member"
+                ],
+                "summary": "团队成员列表",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "团队ID",
+                        "name": "team_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "maximum": 1000,
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 20,
+                        "description": "Limit 每页数量，默认 20，最大 1000",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "default": 1,
+                        "description": "Page 页码，从 1 开始",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成员列表",
+                        "schema": {
+                            "$ref": "#/definitions/response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamMemberDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的ID",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/org/{org_id}/teams/{team_id}/members/{user_id}": {
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "从团队中移除成员",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "org-team-member"
+                ],
+                "summary": "移除团队成员",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "团队ID",
+                        "name": "team_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "用户ID",
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成员移除成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的ID",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "成员不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/org/{org_id}/teams/{team_id}/settings": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "获取当前团队的配置列表（支持三级继承：团队\u003e组织\u003e系统默认值）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings-team"
+                ],
+                "summary": "团队配置列表",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "团队ID",
+                        "name": "team_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "从上下文获取，不绑定",
+                        "name": "-",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "可选：按分类 ID 过滤",
+                        "name": "category_id",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "配置列表",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team_TeamSettingDTO"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/org/{org_id}/teams/{team_id}/settings/{key}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "获取指定配置项的值（支持三级继承：团队\u003e组织\u003e系统默认值）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings-team"
+                ],
+                "summary": "获取团队配置",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "团队ID",
+                        "name": "team_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "配置键名",
+                        "name": "key",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "配置信息",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team_TeamSettingDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的键名",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "配置不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "设置指定配置项的值（团队自定义覆盖）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings-team"
+                ],
+                "summary": "设置团队配置",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "团队ID",
+                        "name": "team_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "配置键名",
+                        "name": "key",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "设置请求",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/pkg_modules_settings_adapters_gin_handler.SetRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "设置成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team_TeamSettingDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "重置指定配置项（删除团队自定义值，恢复组织配置或系统默认值）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings-team"
+                ],
+                "summary": "重置团队配置",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "组织ID",
+                        "name": "org_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "团队ID",
+                        "name": "team_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "配置键名",
+                        "name": "key",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "重置成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.MessageResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "权限不足",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/account": {
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "用户删除自己的账号（不可恢复）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user-profile"
+                ],
+                "summary": "注销账户",
+                "responses": {
+                    "200": {
+                        "description": "账号删除成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.MessageResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/orgs": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "获取当前用户加入的所有组织",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user-org"
+                ],
+                "summary": "我的组织",
+                "responses": {
+                    "200": {
+                        "description": "组织列表",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_UserOrgDTO"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/password": {
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "用户修改自己的登录密码",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user-profile"
+                ],
+                "summary": "修改密码",
+                "parameters": [
+                    {
+                        "description": "密码信息",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.ChangePasswordDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "密码修改成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误或旧密码不正确",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/profile": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "获取当前登录用户的个人资料和角色信息",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user-profile"
+                ],
+                "summary": "获取资料",
+                "responses": {
+                    "200": {
+                        "description": "个人资料",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "用户不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "用户更新自己的姓名、头像和个人简介",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user-profile"
+                ],
+                "summary": "更新资料",
+                "parameters": [
+                    {
+                        "description": "更新信息",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/pkg_modules_iam_adapters_gin_handler.UpdateProfileRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "资料更新成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/settings": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "获取当前用户的配置列表（系统默认值+用户自定义值合并视图）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings-user"
+                ],
+                "summary": "配置列表",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "从上下文获取，不绑定",
+                        "name": "-",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "可选：按分类 ID 过滤",
+                        "name": "category_id",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "配置列表",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_UserSettingDTO"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/settings/batch": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "批量设置多个配置项的值",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings-user"
+                ],
+                "summary": "批量设置",
+                "parameters": [
+                    {
+                        "description": "批量设置请求",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/pkg_modules_settings_adapters_gin_handler.BatchSetRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "设置成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_UserSettingDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/settings/categories": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "获取配置分类列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings-user"
+                ],
+                "summary": "分类列表",
+                "responses": {
+                    "200": {
+                        "description": "分类列表",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_CategoryDTO"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/settings/reset-all": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "重置所有用户自定义配置（恢复系统默认值）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings-user"
+                ],
+                "summary": "重置所有配置",
+                "responses": {
+                    "200": {
+                        "description": "重置成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.MessageResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/settings/{key}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "获取指定配置项的值（系统默认值或用户自定义值）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings-user"
+                ],
+                "summary": "获取配置",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "配置键名",
+                        "name": "key",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "配置信息",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_UserSettingDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的键名",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "配置不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "设置指定配置项的值（用户自定义覆盖）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings-user"
+                ],
+                "summary": "设置配置",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "配置键名",
+                        "name": "key",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "设置请求",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/pkg_modules_settings_adapters_gin_handler.SetRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "设置成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_UserSettingDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "重置指定配置项（删除用户自定义值，恢复系统默认值）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "settings-user"
+                ],
+                "summary": "重置配置",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "配置键名",
+                        "name": "key",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "重置成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.MessageResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/teams": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "获取当前用户加入的所有团队（可按组织筛选）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user-org"
+                ],
+                "summary": "我的团队",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "name": "org_id",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "团队列表",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_UserTeamDTO"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/tokens": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "获取当前用户的所有个人访问令牌（不包含令牌值）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user-pat"
+                ],
+                "summary": "令牌列表",
+                "responses": {
+                    "200": {
+                        "description": "令牌列表",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_TokenDTO"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "用户创建新的个人访问令牌(PAT)，用于API访问。令牌仅在创建时显示一次",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user-pat"
+                ],
+                "summary": "创建令牌",
+                "parameters": [
+                    {
+                        "description": "令牌信息",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat.CreateDTO"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "令牌创建成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_CreateResultDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "参数错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/tokens/scopes": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "获取创建 PAT 时可选的权限范围列表",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user-pat"
+                ],
+                "summary": "Scope 列表",
+                "responses": {
+                    "200": {
+                        "description": "Scope 列表",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_ScopeInfoDTO"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/tokens/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "获取指定个人访问令牌的详细信息（不包含令牌值）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user-pat"
+                ],
+                "summary": "令牌详情",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "令牌ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "令牌详情",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_TokenDTO"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的令牌ID",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "令牌不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "用户删除指定的个人访问令牌（不可恢复）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user-pat"
+                ],
+                "summary": "删除令牌",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "令牌ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "令牌删除成功",
+                        "schema": {
+                            "$ref": "#/definitions/response.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的令牌ID",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "令牌不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/tokens/{id}/disable": {
+            "patch": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "暂停指定令牌的使用（可再次启用）",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user-pat"
+                ],
+                "summary": "禁用令牌",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "令牌ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "令牌已禁用",
+                        "schema": {
+                            "$ref": "#/definitions/response.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的令牌ID",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/user/tokens/{id}/enable": {
+            "patch": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "description": "重新启用已禁用的令牌",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "user-pat"
+                ],
+                "summary": "启用令牌",
+                "parameters": [
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "description": "令牌ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "令牌已启用",
+                        "schema": {
+                            "$ref": "#/definitions/response.MessageResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "无效的令牌ID",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "未授权",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit.AuditActionDTO": {
+            "type": "object",
+            "properties": {
+                "action": {
+                    "description": "\"user.create\"",
+                    "type": "string"
+                },
+                "category": {
+                    "description": "\"user\"",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "\"Create new user\"",
+                    "type": "string"
+                },
+                "label": {
+                    "description": "\"创建用户\"",
+                    "type": "string"
+                },
+                "operation": {
+                    "description": "\"create\"",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit.AuditActionsResponseDTO": {
+            "type": "object",
+            "properties": {
+                "actions": {
+                    "description": "操作定义列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit.AuditActionDTO"
+                    }
+                },
+                "categories": {
+                    "description": "分类选项",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit.CategoryOptionDTO"
+                    }
+                },
+                "operations": {
+                    "description": "操作类型选项",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit.OperationTypeDTO"
+                    }
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit.AuditDTO": {
+            "type": "object",
+            "properties": {
+                "action": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "details": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "ip_address": {
+                    "type": "string"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "user_agent": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit.CategoryOptionDTO": {
+            "type": "object",
+            "properties": {
+                "label": {
+                    "description": "\"用户管理\"",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "\"user\"",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit.OperationTypeDTO": {
+            "type": "object",
+            "properties": {
+                "label": {
+                    "description": "\"创建\"",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "\"create\"",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.Login2FADTO": {
+            "type": "object",
+            "required": [
+                "session_token",
+                "two_factor_code"
+            ],
+            "properties": {
+                "session_token": {
+                    "description": "登录时返回的临时会话令牌",
+                    "type": "string",
+                    "example": "eyJhbGciOiJIUzI1NiIs..."
+                },
+                "two_factor_code": {
+                    "description": "6位TOTP验证码",
+                    "type": "string",
+                    "example": "123456"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.LoginDTO": {
+            "type": "object",
+            "required": [
+                "account",
+                "captcha",
+                "captcha_id",
+                "password"
+            ],
+            "properties": {
+                "account": {
+                    "description": "手机号/用户名/邮箱",
+                    "type": "string",
+                    "example": "admin"
+                },
+                "captcha": {
+                    "description": "验证码",
+                    "type": "string",
+                    "example": "9999"
+                },
+                "captcha_id": {
+                    "description": "验证码ID",
+                    "type": "string",
+                    "example": "dev-123456"
+                },
+                "password": {
+                    "description": "密码",
+                    "type": "string",
+                    "example": "admin123"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.LoginResponseDTO": {
+            "type": "object",
+            "properties": {
+                "access_token": {
+                    "type": "string"
+                },
+                "expires_in": {
+                    "type": "integer"
+                },
+                "refresh_token": {
+                    "type": "string"
+                },
+                "requires_2fa": {
+                    "description": "2FA 相关（当需要 2FA 时返回）",
+                    "type": "boolean"
+                },
+                "session_token": {
+                    "type": "string"
+                },
+                "token_type": {
+                    "type": "string"
+                },
+                "user": {
+                    "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.UserBriefDTO"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.LoginRoleDTO": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.RefreshTokenDTO": {
+            "type": "object",
+            "required": [
+                "refresh_token"
+            ],
+            "properties": {
+                "refresh_token": {
+                    "type": "string",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.RegisterDTO": {
+            "type": "object",
+            "required": [
+                "email",
+                "password",
+                "username"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "john@example.com"
+                },
+                "nickname": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "example": "Johnny"
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 6,
+                    "example": "password123"
+                },
+                "phone": {
+                    "type": "string",
+                    "example": "13800138000"
+                },
+                "real_name": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "example": "John Doe"
+                },
+                "signature": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "Hello World"
+                },
+                "username": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "minLength": 3,
+                    "example": "john_doe"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.RegisterResultDTO": {
+            "type": "object",
+            "properties": {
+                "access_token": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "expires_in": {
+                    "type": "integer"
+                },
+                "refresh_token": {
+                    "type": "string"
+                },
+                "token_type": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.TokenDTO": {
+            "type": "object",
+            "properties": {
+                "access_token": {
+                    "type": "string"
+                },
+                "expires_in": {
+                    "type": "integer"
+                },
+                "refresh_token": {
+                    "type": "string"
+                },
+                "token_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.UserBriefDTO": {
+            "type": "object",
+            "properties": {
+                "roles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.LoginRoleDTO"
+                    }
+                },
+                "user_id": {
+                    "type": "integer"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_captcha.GenerateResultDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "Code 验证码值（仅开发模式返回）",
+                    "type": "string"
+                },
+                "expire_at": {
+                    "description": "ExpireAt 过期时间戳（秒）",
+                    "type": "integer"
+                },
+                "id": {
+                    "description": "ID 验证码ID",
+                    "type": "string"
+                },
+                "image": {
+                    "description": "Image Base64编码的图片",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.AddMemberDTO": {
+            "type": "object",
+            "required": [
+                "role",
+                "user_id"
+            ],
+            "properties": {
+                "role": {
+                    "type": "string",
+                    "enum": [
+                        "owner",
+                        "admin",
+                        "member"
+                    ]
+                },
+                "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.CreateOrgDTO": {
+            "type": "object",
+            "required": [
+                "display_name",
+                "name"
+            ],
+            "properties": {
+                "avatar": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "description": {
+                    "type": "string",
+                    "maxLength": 500
+                },
+                "display_name": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 2
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "minLength": 2
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.CreateTeamDTO": {
+            "type": "object",
+            "required": [
+                "display_name",
+                "name"
+            ],
+            "properties": {
+                "avatar": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "description": {
+                    "type": "string",
+                    "maxLength": 500
+                },
+                "display_name": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 2
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "minLength": 2
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.MemberDTO": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "full_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "joined_at": {
+                    "type": "string"
+                },
+                "org_id": {
+                    "type": "integer"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                },
+                "username": {
+                    "description": "关联的用户信息（可选加载）",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.OrgDTO": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.TeamDTO": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "org_id": {
+                    "type": "integer"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.TeamMemberDTO": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "full_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "joined_at": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "team_id": {
+                    "type": "integer"
+                },
+                "user_id": {
+                    "type": "integer"
+                },
+                "username": {
+                    "description": "关联的用户信息（可选加载）",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.UpdateMemberRoleDTO": {
+            "type": "object",
+            "required": [
+                "role"
+            ],
+            "properties": {
+                "role": {
+                    "type": "string",
+                    "enum": [
+                        "owner",
+                        "admin",
+                        "member"
+                    ]
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.UpdateOrgDTO": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "description": {
+                    "type": "string",
+                    "maxLength": 500
+                },
+                "display_name": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 2
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "active",
+                        "suspended"
+                    ]
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.UserOrgDTO": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "joined_at": {
+                    "description": "加入时间",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "role": {
+                    "description": "用户在该组织中的角色",
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.UserTeamDTO": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "joined_at": {
+                    "description": "加入时间",
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "org_id": {
+                    "type": "integer"
+                },
+                "org_name": {
+                    "description": "所属组织名称",
+                    "type": "string"
+                },
+                "role": {
+                    "description": "用户在该团队中的角色",
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat.CreateDTO": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "description": {
+                    "description": "可选，备注",
+                    "type": "string"
+                },
+                "expires_at": {
+                    "description": "可选，过期时间（RFC3339 或 yyyy-MM-ddTHH:mm）",
+                    "type": "string"
+                },
+                "expires_in": {
+                    "description": "可选，以天为单位的有效期（兜底，前端未使用时可忽略）",
+                    "type": "integer"
+                },
+                "ip_whitelist": {
+                    "description": "可选，IP 白名单",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "minLength": 3
+                },
+                "scopes": {
+                    "description": "权限范围（full, self, sys），默认 [\"full\"]",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat.CreateResultDTO": {
+            "type": "object",
+            "properties": {
+                "plain_token": {
+                    "type": "string"
+                },
+                "token": {
+                    "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat.TokenDTO"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat.ScopeInfoDTO": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat.TokenDTO": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "expires_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "ip_whitelist": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "last_used_at": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "scopes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "status": {
+                    "type": "string"
+                },
+                "token_prefix": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.CreateDTO": {
+            "type": "object",
+            "required": [
+                "display_name",
+                "name"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "系统开发人员角色"
+                },
+                "display_name": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "example": "开发者"
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "minLength": 2,
+                    "example": "developer"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.CreateResultDTO": {
+            "type": "object",
+            "properties": {
+                "display_name": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "role_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.PermissionDTO": {
+            "type": "object",
+            "properties": {
+                "operation_pattern": {
+                    "type": "string",
+                    "example": "sys:users.*"
+                },
+                "resource_pattern": {
+                    "type": "string",
+                    "example": "user/*"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.PermissionInputDTO": {
+            "type": "object",
+            "required": [
+                "operation_pattern"
+            ],
+            "properties": {
+                "operation_pattern": {
+                    "type": "string",
+                    "example": "sys:users.*"
+                },
+                "resource_pattern": {
+                    "type": "string",
+                    "example": "user/*"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.RoleDTO": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "is_system": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "permissions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.PermissionDTO"
+                    }
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.SetPermissionsDTO": {
+            "type": "object",
+            "required": [
+                "permissions"
+            ],
+            "properties": {
+                "permissions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.PermissionInputDTO"
+                    }
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.UpdateDTO": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "display_name": {
+                    "type": "string",
+                    "maxLength": 100
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa.EnableDTO": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "description": "提示消息",
+                    "type": "string"
+                },
+                "recovery_codes": {
+                    "description": "恢复码列表",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa.SetupDTO": {
+            "type": "object",
+            "properties": {
+                "qrcode_img": {
+                    "description": "Base64 编码的二维码图片",
+                    "type": "string"
+                },
+                "qrcode_url": {
+                    "description": "二维码 URL",
+                    "type": "string"
+                },
+                "secret": {
+                    "description": "TOTP 密钥（用户可手动输入）",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa.StatusDTO": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "description": "是否启用",
+                    "type": "boolean"
+                },
+                "recovery_codes_count": {
+                    "description": "剩余恢复码数量",
+                    "type": "integer"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa.VerifyDTO": {
+            "type": "object",
+            "required": [
+                "code"
+            ],
+            "properties": {
+                "code": {
+                    "description": "TOTP 验证码",
+                    "type": "string",
+                    "example": "123456"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.AssignRolesDTO": {
+            "type": "object",
+            "required": [
+                "role_ids"
+            ],
+            "properties": {
+                "role_ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.BatchCreateDTO": {
+            "type": "object",
+            "required": [
+                "users"
+            ],
+            "properties": {
+                "users": {
+                    "type": "array",
+                    "maxItems": 100,
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.BatchItemDTO"
+                    }
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.BatchCreateErrorDTO": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "error": {
+                    "type": "string"
+                },
+                "index": {
+                    "type": "integer"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.BatchCreateResultDTO": {
+            "type": "object",
+            "properties": {
+                "errors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.BatchCreateErrorDTO"
+                    }
+                },
+                "failed": {
+                    "type": "integer"
+                },
+                "success": {
+                    "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.BatchItemDTO": {
+            "type": "object",
+            "required": [
+                "email",
+                "password",
+                "username"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "nickname": {
+                    "type": "string",
+                    "maxLength": 50
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 6
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "real_name": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "role_ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "signature": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "active",
+                        "inactive"
+                    ]
+                },
+                "username": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "minLength": 3
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.ChangePasswordDTO": {
+            "type": "object",
+            "required": [
+                "new_password",
+                "old_password"
+            ],
+            "properties": {
+                "new_password": {
+                    "type": "string",
+                    "minLength": 6
+                },
+                "old_password": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.CreateDTO": {
+            "type": "object",
+            "required": [
+                "email",
+                "password",
+                "username"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "nickname": {
+                    "type": "string",
+                    "maxLength": 50
+                },
+                "password": {
+                    "type": "string",
+                    "minLength": 6
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "real_name": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "role_ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "integer"
+                    }
+                },
+                "signature": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "active",
+                        "inactive"
+                    ]
+                },
+                "username": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "minLength": 3
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.RoleDTO": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.UpdateDTO": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "bio": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "nickname": {
+                    "type": "string",
+                    "maxLength": 50
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "real_name": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "signature": {
+                    "type": "string",
+                    "maxLength": 255
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "active",
+                        "inactive",
+                        "banned"
+                    ]
+                },
+                "username": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "minLength": 3
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.UserWithRolesDTO": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "bio": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "nickname": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "real_name": {
+                    "type": "string"
+                },
+                "roles": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.RoleDTO"
+                    }
+                },
+                "signature": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "type": {
+                    "description": "\"human\" | \"service\" | \"system\"",
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org.DependsOnDTO": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "value": {}
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org.OrgSettingDTO": {
+            "type": "object",
+            "properties": {
+                "category_id": {
+                    "type": "integer"
+                },
+                "default_value": {
+                    "description": "系统默认值"
+                },
+                "group": {
+                    "type": "string"
+                },
+                "input_type": {
+                    "type": "string"
+                },
+                "is_customized": {
+                    "description": "是否组织自定义",
+                    "type": "boolean"
+                },
+                "key": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "order": {
+                    "type": "integer"
+                },
+                "ui_config": {
+                    "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org.UIConfigDTO"
+                },
+                "validation": {
+                    "type": "string"
+                },
+                "value": {
+                    "description": "实际生效值（组织值 \u003e 默认值）"
+                },
+                "value_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org.SelectOptionDTO": {
+            "type": "object",
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "value": {}
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org.UIConfigDTO": {
+            "type": "object",
+            "properties": {
+                "depends_on": {
+                    "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org.DependsOnDTO"
+                },
+                "hint": {
+                    "type": "string"
+                },
+                "options": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org.SelectOptionDTO"
+                    }
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team.DependsOnDTO": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "value": {}
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team.SelectOptionDTO": {
+            "type": "object",
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "value": {}
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team.TeamSettingDTO": {
+            "type": "object",
+            "properties": {
+                "category_id": {
+                    "type": "integer"
+                },
+                "configurable_at": {
+                    "description": "最大可配置级别",
+                    "type": "string"
+                },
+                "default_value": {
+                    "description": "系统默认值"
+                },
+                "group": {
+                    "type": "string"
+                },
+                "inherited_from": {
+                    "description": "继承来源: \"team\" | \"org\" | \"system\"",
+                    "type": "string"
+                },
+                "input_type": {
+                    "type": "string"
+                },
+                "is_customized": {
+                    "description": "是否团队自定义",
+                    "type": "boolean"
+                },
+                "is_team_default": {
+                    "description": "是否为团队可配置的默认值（User 可覆盖）",
+                    "type": "boolean"
+                },
+                "key": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "order": {
+                    "type": "integer"
+                },
+                "org_value": {
+                    "description": "组织配置值"
+                },
+                "ui_config": {
+                    "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team.UIConfigDTO"
+                },
+                "validation": {
+                    "type": "string"
+                },
+                "value": {
+                    "description": "实际生效值（团队 \u003e 组织 \u003e 默认值）"
+                },
+                "value_type": {
+                    "type": "string"
+                },
+                "visible_at": {
+                    "description": "最小可见级别",
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team.UIConfigDTO": {
+            "type": "object",
+            "properties": {
+                "depends_on": {
+                    "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team.DependsOnDTO"
+                },
+                "hint": {
+                    "type": "string"
+                },
+                "options": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team.SelectOptionDTO"
+                    }
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user.CategoryDTO": {
+            "type": "object",
+            "properties": {
+                "icon": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "key": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "order": {
+                    "type": "integer"
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user.DependsOnDTO": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "value": {}
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user.SelectOptionDTO": {
+            "type": "object",
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "value": {}
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user.UIConfigDTO": {
+            "type": "object",
+            "properties": {
+                "depends_on": {
+                    "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user.DependsOnDTO"
+                },
+                "hint": {
+                    "type": "string"
+                },
+                "options": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user.SelectOptionDTO"
+                    }
+                }
+            }
+        },
+        "github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user.UserSettingDTO": {
+            "type": "object",
+            "properties": {
+                "category_id": {
+                    "type": "integer"
+                },
+                "default_value": {
+                    "description": "系统默认值"
+                },
+                "group": {
+                    "type": "string"
+                },
+                "input_type": {
+                    "type": "string"
+                },
+                "is_customized": {
+                    "description": "是否用户自定义",
+                    "type": "boolean"
+                },
+                "key": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "order": {
+                    "type": "integer"
+                },
+                "ui_config": {
+                    "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user.UIConfigDTO"
+                },
+                "validation": {
+                    "type": "string"
+                },
+                "value": {
+                    "description": "实际生效值（用户值 \u003e 默认值）"
+                },
+                "value_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "pkg_modules_iam_adapters_gin_handler.UpdateProfileRequest": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "https://example.com/avatar.jpg"
+                },
+                "bio": {
+                    "type": "string",
+                    "example": "这是我的个人简介"
+                },
+                "nickname": {
+                    "type": "string",
+                    "maxLength": 50,
+                    "example": "小三"
+                },
+                "phone": {
+                    "type": "string",
+                    "example": "13800138000"
+                },
+                "real_name": {
+                    "type": "string",
+                    "maxLength": 100,
+                    "example": "张三"
+                },
+                "signature": {
+                    "type": "string",
+                    "maxLength": 255,
+                    "example": "Hello World"
+                }
+            }
+        },
+        "pkg_modules_settings_adapters_gin_handler.BatchSetItem": {
+            "type": "object",
+            "required": [
+                "key",
+                "value"
+            ],
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "value": {}
+            }
+        },
+        "pkg_modules_settings_adapters_gin_handler.BatchSetRequest": {
+            "type": "object",
+            "required": [
+                "settings"
+            ],
+            "properties": {
+                "settings": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#/definitions/pkg_modules_settings_adapters_gin_handler.BatchSetItem"
+                    }
+                }
+            }
+        },
+        "pkg_modules_settings_adapters_gin_handler.SetRequest": {
+            "type": "object",
+            "required": [
+                "value"
+            ],
+            "properties": {
+                "value": {}
+            }
+        },
+        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_UserOrgDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.UserOrgDTO"
+                    }
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_UserTeamDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.UserTeamDTO"
+                    }
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_ScopeInfoDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat.ScopeInfoDTO"
+                    }
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_TokenDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat.TokenDTO"
+                    }
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org_OrgSettingDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org.OrgSettingDTO"
+                    }
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team_TeamSettingDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team.TeamSettingDTO"
+                    }
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_CategoryDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user.CategoryDTO"
+                    }
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-array_github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_UserSettingDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user.UserSettingDTO"
+                    }
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit_AuditActionsResponseDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit.AuditActionsResponseDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit_AuditDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit.AuditDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_LoginResponseDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.LoginResponseDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_RegisterResultDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.RegisterResultDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth_TokenDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_auth.TokenDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_captcha_GenerateResultDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_captcha.GenerateResultDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_MemberDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.MemberDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_OrgDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.OrgDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.TeamDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_CreateResultDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat.CreateResultDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat_TokenDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_pat.TokenDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_CreateResultDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.CreateResultDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_RoleDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.RoleDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa_EnableDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa.EnableDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa_SetupDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa.SetupDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa_StatusDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_twofa.StatusDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_BatchCreateResultDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.BatchCreateResultDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.UserWithRolesDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org_OrgSettingDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_org.OrgSettingDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team_TeamSettingDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_team.TeamSettingDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user_UserSettingDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_settings_app_user.UserSettingDTO"
+                        }
+                    ]
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.ErrorDetail": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "业务错误码（小写下划线）",
+                    "type": "string"
+                },
+                "details": {
+                    "description": "额外详情（如验证错误列表）"
+                },
+                "message": {
+                    "description": "错误消息",
+                    "type": "string"
+                }
+            }
+        },
+        "response.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/response.ErrorDetail"
+                }
+            }
+        },
+        "response.MessageResponse": {
+            "description": "纯消息响应格式",
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit_AuditDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "数据列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_audit.AuditDTO"
+                    }
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                },
+                "meta": {
+                    "description": "分页信息",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/response.PaginationMeta"
+                        }
+                    ]
+                }
+            }
+        },
+        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_MemberDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "数据列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.MemberDTO"
+                    }
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                },
+                "meta": {
+                    "description": "分页信息",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/response.PaginationMeta"
+                        }
+                    ]
+                }
+            }
+        },
+        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_OrgDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "数据列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.OrgDTO"
+                    }
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                },
+                "meta": {
+                    "description": "分页信息",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/response.PaginationMeta"
+                        }
+                    ]
+                }
+            }
+        },
+        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "数据列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.TeamDTO"
+                    }
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                },
+                "meta": {
+                    "description": "分页信息",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/response.PaginationMeta"
+                        }
+                    ]
+                }
+            }
+        },
+        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org_TeamMemberDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "数据列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_org.TeamMemberDTO"
+                    }
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                },
+                "meta": {
+                    "description": "分页信息",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/response.PaginationMeta"
+                        }
+                    ]
+                }
+            }
+        },
+        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role_RoleDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "数据列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_role.RoleDTO"
+                    }
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                },
+                "meta": {
+                    "description": "分页信息",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/response.PaginationMeta"
+                        }
+                    ]
+                }
+            }
+        },
+        "response.PagedResponse-github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user_UserWithRolesDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "数据列表",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/github_com_lwmacct_260103-ddd-bc-iam_pkg_modules_iam_app_user.UserWithRolesDTO"
+                    }
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                },
+                "meta": {
+                    "description": "分页信息",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/response.PaginationMeta"
+                        }
+                    ]
+                }
+            }
+        },
+        "response.PaginationMeta": {
+            "type": "object",
+            "properties": {
+                "has_more": {
+                    "description": "是否有下一页",
+                    "type": "boolean"
+                },
+                "page": {
+                    "description": "当前页码",
+                    "type": "integer"
+                },
+                "per_page": {
+                    "description": "每页数量",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "总记录数",
+                    "type": "integer"
+                },
+                "total_pages": {
+                    "description": "总页数",
+                    "type": "integer"
+                },
+                "warning": {
+                    "description": "页码越界警告",
+                    "type": "string"
+                }
+            }
+        }
+    },
     "securityDefinitions": {
         "BearerAuth": {
             "description": "Bearer token authentication",
