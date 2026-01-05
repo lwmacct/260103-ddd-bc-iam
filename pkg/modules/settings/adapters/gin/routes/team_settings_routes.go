@@ -13,7 +13,7 @@ func TeamSettings(h *handler.TeamSettingHandler) []routes.Route {
 	return []routes.Route{
 		{
 			Method:      routes.GET,
-			Path:        "/api/org/:org_id/teams/:team_id/settings",
+			Path:        "/api/org/{org_id}/teams/{team_id}/settings",
 			Handlers:    []gin.HandlerFunc{h.List},
 			OperationID: "org:team:settings:list",
 			Tags:        []string{"team-setting"},
@@ -22,7 +22,7 @@ func TeamSettings(h *handler.TeamSettingHandler) []routes.Route {
 		},
 		{
 			Method:      routes.GET,
-			Path:        "/api/org/:org_id/teams/:team_id/settings/:key",
+			Path:        "/api/org/{org_id}/teams/{team_id}/settings/{key}",
 			Handlers:    []gin.HandlerFunc{h.Get},
 			OperationID: "org:team:settings:get",
 			Tags:        []string{"team-setting"},
@@ -31,7 +31,7 @@ func TeamSettings(h *handler.TeamSettingHandler) []routes.Route {
 		},
 		{
 			Method:      routes.PUT,
-			Path:        "/api/org/:org_id/teams/:team_id/settings/:key",
+			Path:        "/api/org/{org_id}/teams/{team_id}/settings/{key}",
 			Handlers:    []gin.HandlerFunc{h.Set},
 			OperationID: "org:team:settings:update",
 			Tags:        []string{"team-setting"},
@@ -40,7 +40,7 @@ func TeamSettings(h *handler.TeamSettingHandler) []routes.Route {
 		},
 		{
 			Method:      routes.DELETE,
-			Path:        "/api/org/:org_id/teams/:team_id/settings/:key",
+			Path:        "/api/org/{org_id}/teams/{team_id}/settings/{key}",
 			Handlers:    []gin.HandlerFunc{h.Reset},
 			OperationID: "org:team:settings:reset",
 			Tags:        []string{"team-setting"},

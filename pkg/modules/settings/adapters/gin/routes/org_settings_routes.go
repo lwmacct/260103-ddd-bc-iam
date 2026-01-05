@@ -13,7 +13,7 @@ func OrgSettings(h *handler.OrgSettingHandler) []routes.Route {
 	return []routes.Route{
 		{
 			Method:      routes.GET,
-			Path:        "/api/org/:org_id/settings",
+			Path:        "/api/org/{org_id}/settings",
 			Handlers:    []gin.HandlerFunc{h.List},
 			OperationID: "org:settings:list",
 			Tags:        []string{"org-setting"},
@@ -22,7 +22,7 @@ func OrgSettings(h *handler.OrgSettingHandler) []routes.Route {
 		},
 		{
 			Method:      routes.GET,
-			Path:        "/api/org/:org_id/settings/:key",
+			Path:        "/api/org/{org_id}/settings/{key}",
 			Handlers:    []gin.HandlerFunc{h.Get},
 			OperationID: "org:settings:get",
 			Tags:        []string{"org-setting"},
@@ -31,7 +31,7 @@ func OrgSettings(h *handler.OrgSettingHandler) []routes.Route {
 		},
 		{
 			Method:      routes.PUT,
-			Path:        "/api/org/:org_id/settings/:key",
+			Path:        "/api/org/{org_id}/settings/{key}",
 			Handlers:    []gin.HandlerFunc{h.Set},
 			OperationID: "org:settings:update",
 			Tags:        []string{"org-setting"},
@@ -40,7 +40,7 @@ func OrgSettings(h *handler.OrgSettingHandler) []routes.Route {
 		},
 		{
 			Method:      routes.DELETE,
-			Path:        "/api/org/:org_id/settings/:key",
+			Path:        "/api/org/{org_id}/settings/{key}",
 			Handlers:    []gin.HandlerFunc{h.Reset},
 			OperationID: "org:settings:reset",
 			Tags:        []string{"org-setting"},

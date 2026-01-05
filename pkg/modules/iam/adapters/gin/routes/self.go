@@ -77,7 +77,7 @@ func Self(
 		},
 		{
 			Method:      routes.GET,
-			Path:        "/api/user/tokens/:id",
+			Path:        "/api/user/tokens/{id}",
 			Handlers:    []gin.HandlerFunc{patHandler.GetToken},
 			OperationID: "self:tokens:get",
 			Tags:        []string{"user-pat"},
@@ -95,7 +95,7 @@ func Self(
 		},
 		{
 			Method:      routes.DELETE,
-			Path:        "/api/user/tokens/:id",
+			Path:        "/api/user/tokens/{id}",
 			Handlers:    []gin.HandlerFunc{patHandler.DeleteToken},
 			OperationID: "self:tokens:delete",
 			Tags:        []string{"user-pat"},
@@ -104,7 +104,7 @@ func Self(
 		},
 		{
 			Method:      routes.PATCH,
-			Path:        "/api/user/tokens/:id/disable",
+			Path:        "/api/user/tokens/{id}/disable",
 			Handlers:    []gin.HandlerFunc{patHandler.DisableToken},
 			OperationID: "self:tokens:disable",
 			Tags:        []string{"user-pat"},
@@ -113,7 +113,7 @@ func Self(
 		},
 		{
 			Method:      routes.PATCH,
-			Path:        "/api/user/tokens/:id/enable",
+			Path:        "/api/user/tokens/{id}/enable",
 			Handlers:    []gin.HandlerFunc{patHandler.EnableToken},
 			OperationID: "self:tokens:enable",
 			Tags:        []string{"user-pat"},

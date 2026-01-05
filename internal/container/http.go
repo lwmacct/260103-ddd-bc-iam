@@ -19,10 +19,13 @@ import (
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/auth"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
 
+	// Settings 模块相关
+	settingsHandler "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/handler"
+	"github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/app/setting"
+
 	// Handlers (injected via fx.In from their modules)
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
 	userSettingsHandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/handler"
-	settingsHandler "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/handler"
 
 	ginHttp "github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin"
 )
@@ -31,14 +34,64 @@ import (
 //
 // 注意：所有 HTTP 处理器由各自的业务模块 (app/iam/crm) 提供，
 // 本模块只负责路由注册和服务器生命周期管理。
+//
+// Settings 模块适配：上游 settings 模块的 UseCaseModule 返回聚合结构体，
+// 但 HandlerModule 期望单独的 handler 实例。因此在这里添加适配逻辑。
 var HTTPModule = fx.Module("http",
 	fx.Provide(
 		health.NewSystemChecker,
+		// Settings 模块适配：将 SettingUseCases 转换为单独的 handler 实例
+		exportSettingHandlers,
+		// Settings Handler（会自动使用上面导出的单独 handler）
+		settingsHandler.NewSettingHandler,
 		newRouter,
 		newHTTPServer,
 	),
 	fx.Invoke(startHTTPServer),
 )
+
+// settingHandlers 导出 Setting 模块的单独 handler 供 NewSettingHandler 使用。
+type settingHandlers struct {
+	fx.Out
+
+	// Setting Command Handlers
+	Create      *setting.CreateHandler
+	Update      *setting.UpdateHandler
+	Delete      *setting.DeleteHandler
+	BatchUpdate *setting.BatchUpdateHandler
+
+	// Setting Query Handlers
+	Get          *setting.GetHandler
+	List         *setting.ListHandler
+	ListSettings *setting.ListSettingsHandler
+
+	// Category Command Handlers
+	CreateCategory *setting.CreateCategoryHandler
+	UpdateCategory *setting.UpdateCategoryHandler
+	DeleteCategory *setting.DeleteCategoryHandler
+
+	// Category Query Handlers
+	GetCategory    *setting.GetCategoryHandler
+	ListCategories *setting.ListCategoriesHandler
+}
+
+// exportSettingHandlers 从 SettingUseCases 聚合结构体中提取单独的 handler 实例。
+func exportSettingHandlers(useCases *setting.SettingUseCases) settingHandlers {
+	return settingHandlers{
+		Create:         useCases.Create,
+		Update:         useCases.Update,
+		Delete:         useCases.Delete,
+		BatchUpdate:    useCases.BatchUpdate,
+		Get:            useCases.Get,
+		List:           useCases.List,
+		ListSettings:   useCases.ListSettings,
+		CreateCategory: useCases.CreateCategory,
+		UpdateCategory: useCases.UpdateCategory,
+		DeleteCategory: useCases.DeleteCategory,
+		GetCategory:    useCases.GetCategory,
+		ListCategories: useCases.ListCategories,
+	}
+}
 
 // newHTTPServer 创建 HTTP 服务器实例。
 func newHTTPServer(router *gin.Engine, cfg *config.Config) *ginHttp.Server {

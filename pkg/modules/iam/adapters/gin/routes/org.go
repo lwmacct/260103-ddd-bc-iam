@@ -17,7 +17,7 @@ func Org(
 		// ==================== Org 域 - 成员管理 ====================
 		{
 			Method:      routes.GET,
-			Path:        "/api/org/:org_id/members",
+			Path:        "/api/org/{org_id}/members",
 			Handlers:    []gin.HandlerFunc{orgMemberHandler.List},
 			OperationID: "org:members:list",
 			Tags:        []string{"org-member"},
@@ -26,7 +26,7 @@ func Org(
 		},
 		{
 			Method:      routes.POST,
-			Path:        "/api/org/:org_id/members",
+			Path:        "/api/org/{org_id}/members",
 			Handlers:    []gin.HandlerFunc{orgMemberHandler.Add},
 			OperationID: "org:members:add",
 			Tags:        []string{"org-member"},
@@ -35,7 +35,7 @@ func Org(
 		},
 		{
 			Method:      routes.DELETE,
-			Path:        "/api/org/:org_id/members/:user_id",
+			Path:        "/api/org/{org_id}/members/{user_id}",
 			Handlers:    []gin.HandlerFunc{orgMemberHandler.Remove},
 			OperationID: "org:members:remove",
 			Tags:        []string{"org-member"},
@@ -44,7 +44,7 @@ func Org(
 		},
 		{
 			Method:      routes.PUT,
-			Path:        "/api/org/:org_id/members/:user_id/role",
+			Path:        "/api/org/{org_id}/members/{user_id}/role",
 			Handlers:    []gin.HandlerFunc{orgMemberHandler.UpdateRole},
 			OperationID: "org:members:update:role",
 			Tags:        []string{"org-member"},
@@ -55,7 +55,7 @@ func Org(
 		// ==================== Org 域 - 团队管理 ====================
 		{
 			Method:      routes.POST,
-			Path:        "/api/org/:org_id/teams",
+			Path:        "/api/org/{org_id}/teams",
 			Handlers:    []gin.HandlerFunc{teamHandler.Create},
 			OperationID: "org:teams:create",
 			Tags:        []string{"org-team"},
@@ -64,7 +64,7 @@ func Org(
 		},
 		{
 			Method:      routes.GET,
-			Path:        "/api/org/:org_id/teams",
+			Path:        "/api/org/{org_id}/teams",
 			Handlers:    []gin.HandlerFunc{teamHandler.List},
 			OperationID: "org:teams:list",
 			Tags:        []string{"org-team"},
@@ -73,7 +73,7 @@ func Org(
 		},
 		{
 			Method:      routes.GET,
-			Path:        "/api/org/:org_id/teams/:team_id",
+			Path:        "/api/org/{org_id}/teams/{team_id}",
 			Handlers:    []gin.HandlerFunc{teamHandler.Get},
 			OperationID: "org:teams:get",
 			Tags:        []string{"org-team"},
@@ -82,7 +82,7 @@ func Org(
 		},
 		{
 			Method:      routes.PUT,
-			Path:        "/api/org/:org_id/teams/:team_id",
+			Path:        "/api/org/{org_id}/teams/{team_id}",
 			Handlers:    []gin.HandlerFunc{teamHandler.Update},
 			OperationID: "org:teams:update",
 			Tags:        []string{"org-team"},
@@ -91,7 +91,7 @@ func Org(
 		},
 		{
 			Method:      routes.DELETE,
-			Path:        "/api/org/:org_id/teams/:team_id",
+			Path:        "/api/org/{org_id}/teams/{team_id}",
 			Handlers:    []gin.HandlerFunc{teamHandler.Delete},
 			OperationID: "org:teams:delete",
 			Tags:        []string{"org-team"},
@@ -102,7 +102,7 @@ func Org(
 		// ==================== Org 域 - 团队成员管理 ====================
 		{
 			Method:      routes.GET,
-			Path:        "/api/org/:org_id/teams/:team_id/members",
+			Path:        "/api/org/{org_id}/teams/{team_id}/members",
 			Handlers:    []gin.HandlerFunc{teamMemberHandler.List},
 			OperationID: "org:team:members:list",
 			Tags:        []string{"org-team"},
@@ -111,7 +111,7 @@ func Org(
 		},
 		{
 			Method:      routes.POST,
-			Path:        "/api/org/:org_id/teams/:team_id/members",
+			Path:        "/api/org/{org_id}/teams/{team_id}/members",
 			Handlers:    []gin.HandlerFunc{teamMemberHandler.Add},
 			OperationID: "org:team:members:add",
 			Tags:        []string{"org-team"},
@@ -120,7 +120,7 @@ func Org(
 		},
 		{
 			Method:      routes.DELETE,
-			Path:        "/api/org/:org_id/teams/:team_id/members/:user_id",
+			Path:        "/api/org/{org_id}/teams/{team_id}/members/{user_id}",
 			Handlers:    []gin.HandlerFunc{teamMemberHandler.Remove},
 			OperationID: "org:team:members:remove",
 			Tags:        []string{"org-team"},

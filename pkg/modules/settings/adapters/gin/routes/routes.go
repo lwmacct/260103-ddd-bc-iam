@@ -40,7 +40,7 @@ func AllUser(h *handler.UserSettingHandler) []routes.Route {
 		},
 		{
 			Method:      routes.GET,
-			Path:        "/api/user/settings/:key",
+			Path:        "/api/user/settings/{key}",
 			Handlers:    []gin.HandlerFunc{h.Get},
 			OperationID: "self:settings:get",
 			Tags:        []string{"user-setting"},
@@ -49,7 +49,7 @@ func AllUser(h *handler.UserSettingHandler) []routes.Route {
 		},
 		{
 			Method:      routes.PUT,
-			Path:        "/api/user/settings/:key",
+			Path:        "/api/user/settings/{key}",
 			Handlers:    []gin.HandlerFunc{h.Set},
 			OperationID: "self:settings:update",
 			Tags:        []string{"user-setting"},
@@ -58,7 +58,7 @@ func AllUser(h *handler.UserSettingHandler) []routes.Route {
 		},
 		{
 			Method:      routes.DELETE,
-			Path:        "/api/user/settings/:key",
+			Path:        "/api/user/settings/{key}",
 			Handlers:    []gin.HandlerFunc{h.Reset},
 			OperationID: "self:settings:delete",
 			Tags:        []string{"user-setting"},

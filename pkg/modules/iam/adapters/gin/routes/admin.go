@@ -29,7 +29,7 @@ func Admin(
 		},
 		{
 			Method:      routes.GET,
-			Path:        "/api/admin/users/:id",
+			Path:        "/api/admin/users/{id}",
 			Handlers:    []gin.HandlerFunc{adminUserHandler.GetUser},
 			OperationID: "admin:users:get",
 			Tags:        []string{"admin-user"},
@@ -47,7 +47,7 @@ func Admin(
 		},
 		{
 			Method:      routes.PUT,
-			Path:        "/api/admin/users/:id",
+			Path:        "/api/admin/users/{id}",
 			Handlers:    []gin.HandlerFunc{adminUserHandler.UpdateUser},
 			OperationID: "admin:users:update",
 			Tags:        []string{"admin-user"},
@@ -56,7 +56,7 @@ func Admin(
 		},
 		{
 			Method:      routes.DELETE,
-			Path:        "/api/admin/users/:id",
+			Path:        "/api/admin/users/{id}",
 			Handlers:    []gin.HandlerFunc{adminUserHandler.DeleteUser},
 			OperationID: "admin:users:delete",
 			Tags:        []string{"admin-user"},
@@ -74,7 +74,7 @@ func Admin(
 		},
 		{
 			Method:      routes.PUT,
-			Path:        "/api/admin/users/:id/roles",
+			Path:        "/api/admin/users/{id}/roles",
 			Handlers:    []gin.HandlerFunc{adminUserHandler.AssignRoles},
 			OperationID: "admin:users:assign_roles",
 			Tags:        []string{"admin-user"},
@@ -96,7 +96,7 @@ func Admin(
 		},
 		{
 			Method:      routes.GET,
-			Path:        "/api/admin/roles/:id",
+			Path:        "/api/admin/roles/{id}",
 			Handlers:    []gin.HandlerFunc{roleHandler.GetRole},
 			OperationID: "admin:roles:get",
 			Tags:        []string{"admin-role"},
@@ -114,7 +114,7 @@ func Admin(
 		},
 		{
 			Method:      routes.PUT,
-			Path:        "/api/admin/roles/:id",
+			Path:        "/api/admin/roles/{id}",
 			Handlers:    []gin.HandlerFunc{roleHandler.UpdateRole},
 			OperationID: "admin:roles:update",
 			Tags:        []string{"admin-role"},
@@ -123,7 +123,7 @@ func Admin(
 		},
 		{
 			Method:      routes.DELETE,
-			Path:        "/api/admin/roles/:id",
+			Path:        "/api/admin/roles/{id}",
 			Handlers:    []gin.HandlerFunc{roleHandler.DeleteRole},
 			OperationID: "admin:roles:delete",
 			Tags:        []string{"admin-role"},
@@ -132,7 +132,7 @@ func Admin(
 		},
 		{
 			Method:      routes.PUT,
-			Path:        "/api/admin/roles/:id/permissions",
+			Path:        "/api/admin/roles/{id}/permissions",
 			Handlers:    []gin.HandlerFunc{roleHandler.SetPermissions},
 			OperationID: "admin:roles:set_permissions",
 			Tags:        []string{"admin-role"},
@@ -154,7 +154,7 @@ func Admin(
 		},
 		{
 			Method:      routes.GET,
-			Path:        "/api/admin/audit/:id",
+			Path:        "/api/admin/audit/{id}",
 			Handlers:    []gin.HandlerFunc{auditHandler.GetLog},
 			OperationID: "admin:audit:get",
 			Tags:        []string{"admin-audit"},
@@ -185,7 +185,7 @@ func Admin(
 		},
 		{
 			Method:      routes.GET,
-			Path:        "/api/admin/orgs/:id",
+			Path:        "/api/admin/orgs/{id}",
 			Handlers:    []gin.HandlerFunc{orgHandler.Get},
 			OperationID: "admin:orgs:get",
 			Tags:        []string{"admin-org"},
@@ -194,7 +194,7 @@ func Admin(
 		},
 		{
 			Method:      routes.PUT,
-			Path:        "/api/admin/orgs/:id",
+			Path:        "/api/admin/orgs/{id}",
 			Handlers:    []gin.HandlerFunc{orgHandler.Update},
 			OperationID: "admin:orgs:update",
 			Tags:        []string{"admin-org"},
@@ -203,7 +203,7 @@ func Admin(
 		},
 		{
 			Method:      routes.DELETE,
-			Path:        "/api/admin/orgs/:id",
+			Path:        "/api/admin/orgs/{id}",
 			Handlers:    []gin.HandlerFunc{orgHandler.Delete},
 			OperationID: "admin:orgs:delete",
 			Tags:        []string{"admin-org"},
