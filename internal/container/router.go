@@ -2,7 +2,6 @@ package container
 
 import (
 	"github.com/gin-gonic/gin"
-	oldroutes "github.com/lwmacct/260101-go-pkg-gin/pkg/routes"
 	ginroutes "github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/routes"
 
 	// IAM
@@ -13,33 +12,10 @@ import (
 	userSettingsHandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/handler"
 	settingsRoutes "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/routes"
 
-	// Settings (external dependency)
+	// Settings (external dependency, migrated to 260103-ddd-shared)
 	settingsHandler "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/handler"
 	settingsBCRoutes "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/routes"
 )
-
-// convertRoutes converts old Route type to new Route type.
-// This adapter is needed until 260103-ddd-bc-settings migrates to 260103-ddd-shared v0.0.7.
-func convertRoutes(oldRoutes []oldroutes.Route) []ginroutes.Route {
-	newRoutes := make([]ginroutes.Route, len(oldRoutes))
-	for i, r := range oldRoutes {
-		// 构建处理链：Handler + Middlewares
-		handlers := make([]gin.HandlerFunc, 0, 1+len(r.Middlewares))
-		handlers = append(handlers, r.Handler)
-		handlers = append(handlers, r.Middlewares...)
-
-		newRoutes[i] = ginroutes.Route{
-			Method:      ginroutes.Method(r.Method),
-			Path:        r.Path,
-			OperationID: r.Operation,
-			Handlers:    handlers,
-			Tags:        []string{r.Tags},
-			Summary:     r.Summary,
-			Description: r.Description,
-		}
-	}
-	return newRoutes
-}
 
 // AllRoutes 聚合所有模块的路由定义。
 //
@@ -90,9 +66,8 @@ func AllRoutes(
 	// Settings BC 路由（User + Org + Team）
 	settingsRouteList := settingsRoutes.All(userSettingHandler, orgSettingHandler, teamSettingHandler)
 
-	// Settings 路由 (external dependency - convert old Route type to new)
-	oldSettingsBCRoutes := settingsBCRoutes.Admin(settingHandler)
-	settingsBCRouteList := convertRoutes(oldSettingsBCRoutes)
+	// Settings 路由 (external dependency)
+	settingsBCRouteList := settingsBCRoutes.Admin(settingHandler)
 
 	// 合并所有路由
 	allRoutes := iamRoutes
