@@ -9,7 +9,7 @@
 //
 // # 架构
 //
-//	pkg/modules/user_settings/
+//	pkg/modules/settings/
 //	├── domain/       # 领域层：实体、仓储接口
 //	├── app/          # 应用层：用例处理器、DTO
 //	├── infra/        # 基础设施层：持久化、缓存
