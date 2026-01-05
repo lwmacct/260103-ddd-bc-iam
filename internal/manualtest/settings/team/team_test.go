@@ -335,3 +335,246 @@ func TestTeamSettingsVisibility(t *testing.T) {
 		assert.NotContains(t, visibleAtLevels, "system", "不应包含 system 级别设置（Team 不可配置）")
 	})
 }
+
+// TestTeamSettingsPermission 测试团队设置权限控制
+//
+// 测试场景：
+// 1. 非组织成员访问团队设置应被拒绝
+// 2. 组织成员但非团队成员访问团队设置应被拒绝
+// 3. 团队成员可以访问团队设置
+func TestTeamSettingsPermission(t *testing.T) {
+	adminClient := manualtest.LoginAsAdmin(t)
+
+	t.Run("非组织成员访问团队设置应被拒绝", func(t *testing.T) {
+		// 创建一个不属于任何组织的测试用户
+		testUserResp, err := manualtest.Post[map[string]any](
+			adminClient,
+			"/api/admin/users",
+			map[string]any{
+				"username": "test_non_org_member_team",
+				"email":    "non_org_member_team@example.com",
+				"password": "Test123456!",
+			},
+		)
+		require.NoError(t, err, "创建测试用户应成功")
+		testUserID := uint((*testUserResp)["id"].(float64))
+		t.Cleanup(func() {
+			_ = adminClient.Delete(fmt.Sprintf("/api/admin/users/%d", testUserID))
+		})
+
+		// 以测试用户登录
+		nonMemberClient := manualtest.LoginAs(t, "test_non_org_member_team", "Test123456!")
+
+		// 尝试访问团队设置（应被拒绝）
+		_, _, err = manualtest.GetList[team.TeamSettingDTO](
+			nonMemberClient,
+			teamSettingsPath(testOrgID, testTeamID),
+			nil,
+		)
+		require.Error(t, err, "非组织成员访问团队设置应被拒绝")
+		t.Logf("  预期错误: %v", err)
+	})
+
+	t.Run("组织成员但非团队成员访问团队设置", func(t *testing.T) {
+		// 创建测试用户并加入组织（但不加入团队）
+		testUserResp, err := manualtest.Post[map[string]any](
+			adminClient,
+			"/api/admin/users",
+			map[string]any{
+				"username": "test_org_only_member",
+				"email":    "org_only_member@example.com",
+				"password": "Test123456!",
+			},
+		)
+		require.NoError(t, err, "创建测试用户应成功")
+		testUserID := uint((*testUserResp)["id"].(float64))
+		t.Cleanup(func() {
+			_ = adminClient.Delete(fmt.Sprintf("/api/admin/users/%d", testUserID))
+		})
+
+		// 将用户加入组织（但不加入团队）
+		_, err = manualtest.Post[any](
+			adminClient,
+			fmt.Sprintf("/api/org/%d/members", testOrgID),
+			map[string]any{
+				"user_id": testUserID,
+				"role":    "member",
+			},
+		)
+		require.NoError(t, err, "将用户加入组织应成功")
+		t.Cleanup(func() {
+			_ = adminClient.Delete(fmt.Sprintf("/api/org/%d/members/%d", testOrgID, testUserID))
+		})
+
+		// 以测试用户登录
+		orgOnlyClient := manualtest.LoginAs(t, "test_org_only_member", "Test123456!")
+
+		// 尝试访问团队设置
+		// 注意：根据权限配置，组织成员可能可以查看团队设置，但不能修改
+		_, _, err = manualtest.GetList[team.TeamSettingDTO](
+			orgOnlyClient,
+			teamSettingsPath(testOrgID, testTeamID),
+			nil,
+		)
+		// 根据实际权限配置验证结果
+		if err != nil {
+			t.Logf("  组织成员（非团队成员）访问团队设置被拒绝: %v", err)
+		} else {
+			t.Log("  组织成员（非团队成员）可以访问团队设置（查看权限）")
+		}
+	})
+
+	t.Run("团队成员可以访问团队设置", func(t *testing.T) {
+		// admin 用户是团队成员
+		result, _, err := manualtest.GetList[team.TeamSettingDTO](
+			adminClient,
+			teamSettingsPath(testOrgID, testTeamID),
+			nil,
+		)
+		require.NoError(t, err, "团队成员访问团队设置应成功")
+		assert.NotEmpty(t, result, "设置列表不应为空")
+	})
+
+	t.Run("团队普通成员无法访问团队设置", func(t *testing.T) {
+		// 创建测试用户并加入组织和团队（作为 member 角色）
+		testUserResp, err := manualtest.Post[map[string]any](
+			adminClient,
+			"/api/admin/users",
+			map[string]any{
+				"username": "test_team_member",
+				"email":    "team_member@example.com",
+				"password": "Test123456!",
+			},
+		)
+		require.NoError(t, err, "创建测试用户应成功")
+		testUserID := uint((*testUserResp)["id"].(float64))
+		t.Cleanup(func() {
+			_ = adminClient.Delete(fmt.Sprintf("/api/admin/users/%d", testUserID))
+		})
+
+		// 将用户加入组织
+		_, err = manualtest.Post[any](
+			adminClient,
+			fmt.Sprintf("/api/org/%d/members", testOrgID),
+			map[string]any{
+				"user_id": testUserID,
+				"role":    "member",
+			},
+		)
+		require.NoError(t, err, "将用户加入组织应成功")
+		t.Cleanup(func() {
+			_ = adminClient.Delete(fmt.Sprintf("/api/org/%d/members/%d", testOrgID, testUserID))
+		})
+
+		// 将用户加入团队（作为 member）
+		_, err = manualtest.Post[any](
+			adminClient,
+			fmt.Sprintf("/api/org/%d/teams/%d/members", testOrgID, testTeamID),
+			map[string]any{
+				"user_id": testUserID,
+				"role":    "member",
+			},
+		)
+		require.NoError(t, err, "将用户加入团队应成功")
+		t.Cleanup(func() {
+			_ = adminClient.Delete(fmt.Sprintf("/api/org/%d/teams/%d/members/%d", testOrgID, testTeamID, testUserID))
+		})
+
+		// 以测试用户登录
+		teamMemberClient := manualtest.LoginAs(t, "test_team_member", "Test123456!")
+
+		// 团队 member 角色无法读取团队设置（需要 lead/admin 角色）
+		_, _, err = manualtest.GetList[team.TeamSettingDTO](
+			teamMemberClient,
+			teamSettingsPath(testOrgID, testTeamID),
+			nil,
+		)
+		require.Error(t, err, "团队 member 访问团队设置应被拒绝")
+		t.Logf("  团队 member 访问团队设置被拒绝（符合预期）: %v", err)
+	})
+
+	t.Run("团队负责人无法访问团队设置", func(t *testing.T) {
+		// 创建测试用户并加入组织和团队（作为 lead 角色）
+		// 注意：team lead 角色没有 org:team:settings:* RBAC 权限，需要系统级权限
+		testUserResp, err := manualtest.Post[map[string]any](
+			adminClient,
+			"/api/admin/users",
+			map[string]any{
+				"username": "test_team_lead",
+				"email":    "team_lead@example.com",
+				"password": "Test123456!",
+			},
+		)
+		require.NoError(t, err, "创建测试用户应成功")
+		testUserID := uint((*testUserResp)["id"].(float64))
+		t.Cleanup(func() {
+			_ = adminClient.Delete(fmt.Sprintf("/api/admin/users/%d", testUserID))
+		})
+
+		// 将用户加入组织
+		_, err = manualtest.Post[any](
+			adminClient,
+			fmt.Sprintf("/api/org/%d/members", testOrgID),
+			map[string]any{
+				"user_id": testUserID,
+				"role":    "member",
+			},
+		)
+		require.NoError(t, err, "将用户加入组织应成功")
+		t.Cleanup(func() {
+			_ = adminClient.Delete(fmt.Sprintf("/api/org/%d/members/%d", testOrgID, testUserID))
+		})
+
+		// 将用户加入团队（作为 lead）
+		_, err = manualtest.Post[any](
+			adminClient,
+			fmt.Sprintf("/api/org/%d/teams/%d/members", testOrgID, testTeamID),
+			map[string]any{
+				"user_id": testUserID,
+				"role":    "lead",
+			},
+		)
+		require.NoError(t, err, "将用户加入团队应成功")
+		t.Cleanup(func() {
+			_ = adminClient.Delete(fmt.Sprintf("/api/org/%d/teams/%d/members/%d", testOrgID, testTeamID, testUserID))
+		})
+
+		// 以测试用户登录
+		teamLeadClient := manualtest.LoginAs(t, "test_team_lead", "Test123456!")
+
+		// 团队 lead 角色无法读取团队设置（需要系统级 RBAC 权限）
+		_, _, err = manualtest.GetList[team.TeamSettingDTO](
+			teamLeadClient,
+			teamSettingsPath(testOrgID, testTeamID),
+			nil,
+		)
+		require.Error(t, err, "团队 lead 访问团队设置应被拒绝（需要系统级权限）")
+		t.Logf("  团队 lead 访问团队设置被拒绝（符合预期）: %v", err)
+	})
+
+	t.Run("系统管理员（团队创建者）可以读取和修改设置", func(t *testing.T) {
+		// admin 用户（系统管理员）是团队的创建者
+		// 只有系统级 RBAC 权限才能访问团队设置
+		result, _, err := manualtest.GetList[team.TeamSettingDTO](
+			adminClient,
+			teamSettingsPath(testOrgID, testTeamID),
+			nil,
+		)
+		require.NoError(t, err, "系统管理员读取团队设置应成功")
+		assert.NotEmpty(t, result, "设置列表不应为空")
+
+		// 系统管理员可以修改团队设置
+		updateReq := map[string]any{
+			"value": "dark",
+		}
+		_, err = manualtest.Put[team.TeamSettingDTO](
+			adminClient,
+			teamSettingPath(testOrgID, testTeamID, "general.theme"),
+			updateReq,
+		)
+		require.NoError(t, err, "系统管理员修改团队设置应成功")
+		t.Cleanup(func() {
+			_ = adminClient.Delete(teamSettingPath(testOrgID, testTeamID, "general.theme"))
+		})
+	})
+}

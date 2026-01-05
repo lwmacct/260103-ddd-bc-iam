@@ -279,6 +279,155 @@ func TestSettingsValueTypes(t *testing.T) {
 	})
 }
 
+// TestListCategories 测试获取设置分类列表
+//
+// 测试场景：
+// 1. 获取分类列表应成功
+// 2. 分类应包含必要字段
+func TestListCategories(t *testing.T) {
+	c := manualtest.LoginAsAdmin(t)
+
+	t.Run("获取分类列表应成功", func(t *testing.T) {
+		result, _, err := manualtest.GetList[user.CategoryDTO](
+			c,
+			"/api/user/settings/categories",
+			nil,
+		)
+		require.NoError(t, err, "获取分类列表应成功")
+		require.NotNil(t, result, "响应不应为空")
+		assert.NotEmpty(t, result, "分类列表不应为空")
+
+		t.Logf("分类数量: %d", len(result))
+		for _, cat := range result {
+			t.Logf("  - [%d] %s (%s)", cat.ID, cat.Label, cat.Key)
+		}
+	})
+
+	t.Run("分类应包含必要字段", func(t *testing.T) {
+		result, _, err := manualtest.GetList[user.CategoryDTO](
+			c,
+			"/api/user/settings/categories",
+			nil,
+		)
+		require.NoError(t, err, "获取分类列表应成功")
+
+		for _, cat := range result {
+			assert.NotZero(t, cat.ID, "分类 ID 不应为 0")
+			assert.NotEmpty(t, cat.Key, "分类键不应为空")
+			assert.NotEmpty(t, cat.Label, "分类标签不应为空")
+		}
+	})
+}
+
+// TestBatchSet 测试批量设置配置
+//
+// 测试场景：
+// 1. 批量设置多个配置项应成功
+// 2. 验证批量设置后各配置值正确
+func TestBatchSet(t *testing.T) {
+	c := manualtest.LoginAsAdmin(t)
+	t.Cleanup(func() {
+		// Cleanup: 删除测试创建的自定义值
+		_ = c.Delete("/api/user/settings/general.theme")
+		_ = c.Delete("/api/user/settings/general.language")
+	})
+
+	t.Run("批量设置多个配置项", func(t *testing.T) {
+		batchReq := map[string]any{
+			"settings": []map[string]any{
+				{"key": "general.theme", "value": "dark"},
+				{"key": "general.language", "value": "en-US"},
+			},
+		}
+
+		_, err := manualtest.Post[any](
+			c,
+			"/api/user/settings/batch",
+			batchReq,
+		)
+		require.NoError(t, err, "批量设置应成功")
+
+		// 验证 theme 设置
+		themeResult, err := manualtest.Get[user.UserSettingDTO](
+			c,
+			"/api/user/settings/general.theme",
+			nil,
+		)
+		require.NoError(t, err, "获取 theme 设置应成功")
+		assert.Equal(t, "dark", themeResult.Value, "theme 值应为 dark")
+		assert.True(t, themeResult.IsCustomized, "theme 应为自定义值")
+
+		// 验证 language 设置
+		langResult, err := manualtest.Get[user.UserSettingDTO](
+			c,
+			"/api/user/settings/general.language",
+			nil,
+		)
+		require.NoError(t, err, "获取 language 设置应成功")
+		assert.Equal(t, "en-US", langResult.Value, "language 值应为 en-US")
+		assert.True(t, langResult.IsCustomized, "language 应为自定义值")
+	})
+}
+
+// TestResetAll 测试重置所有用户配置
+//
+// 测试场景：
+// 1. 重置所有配置应成功
+// 2. 重置后所有配置应恢复系统默认值
+func TestResetAll(t *testing.T) {
+	c := manualtest.LoginAsAdmin(t)
+
+	t.Run("重置所有配置", func(t *testing.T) {
+		// 先创建一些自定义值
+		batchReq := map[string]any{
+			"settings": []map[string]any{
+				{"key": "general.theme", "value": "dark"},
+				{"key": "general.language", "value": "en-US"},
+			},
+		}
+		_, err := manualtest.Post[any](
+			c,
+			"/api/user/settings/batch",
+			batchReq,
+		)
+		require.NoError(t, err, "创建自定义值应成功")
+
+		// 验证自定义值存在
+		themeBeforeReset, err := manualtest.Get[user.UserSettingDTO](
+			c,
+			"/api/user/settings/general.theme",
+			nil,
+		)
+		require.NoError(t, err, "获取设置应成功")
+		assert.True(t, themeBeforeReset.IsCustomized, "重置前应为自定义值")
+
+		// 执行重置所有
+		_, err = manualtest.Post[any](
+			c,
+			"/api/user/settings/reset-all",
+			nil,
+		)
+		require.NoError(t, err, "重置所有配置应成功")
+
+		// 验证所有配置已恢复默认值
+		themeAfterReset, err := manualtest.Get[user.UserSettingDTO](
+			c,
+			"/api/user/settings/general.theme",
+			nil,
+		)
+		require.NoError(t, err, "获取设置应成功")
+		assert.False(t, themeAfterReset.IsCustomized, "重置后 theme 应为系统默认值")
+
+		langAfterReset, err := manualtest.Get[user.UserSettingDTO](
+			c,
+			"/api/user/settings/general.language",
+			nil,
+		)
+		require.NoError(t, err, "获取设置应成功")
+		assert.False(t, langAfterReset.IsCustomized, "重置后 language 应为系统默认值")
+	})
+}
+
 // TestSettingsIsolation 测试用户设置隔离
 //
 // 测试场景：
