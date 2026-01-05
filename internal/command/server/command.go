@@ -22,7 +22,7 @@ package server
 
 import (
 	// Swagger docs - 空白导入触发 docs.go 的 init() 函数
-	_ "github.com/lwmacct/260103-ddd-bc-iam/internal/command/server/docs"
+	_ "github.com/lwmacct/260103-ddd-bc-iam/docs/swagger"
 
 	"github.com/urfave/cli/v3"
 )
