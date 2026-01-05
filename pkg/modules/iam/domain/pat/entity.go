@@ -7,19 +7,19 @@ import (
 
 // PersonalAccessToken 个人访问令牌实体，用于 API 认证
 type PersonalAccessToken struct {
-	ID        uint      `json:"id"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	ID        uint       `json:"id"`
+	CreatedAt time.Time  `json:"created_at"`
+	UpdatedAt time.Time  `json:"updated_at"`
 	DeletedAt *time.Time `json:"deleted_at,omitempty"`
 
-	UserID      uint   `json:"user_id"`         // 所属用户
-	Name        string `json:"name"`            // Token 名称
-	Token       string `json:"-"`               // Token 哈希值，不序列化
-	TokenPrefix string `json:"token_prefix"`    // Token 前缀（明文）
+	UserID      uint   `json:"user_id"`      // 所属用户
+	Name        string `json:"name"`         // Token 名称
+	Token       string `json:"-"`            // Token 哈希值，不序列化
+	TokenPrefix string `json:"token_prefix"` // Token 前缀（明文）
 
 	Scopes StringList `json:"scopes"` // 权限范围（full, self, sys）
 
-	ExpiresAt  *time.Time `json:"expires_at,omitempty"`  // 过期时间（nil=永久）
+	ExpiresAt  *time.Time `json:"expires_at,omitempty"`   // 过期时间（nil=永久）
 	LastUsedAt *time.Time `json:"last_used_at,omitempty"` // 最后使用时间
 	Status     string     `json:"status"`                 // active, disabled, expired
 

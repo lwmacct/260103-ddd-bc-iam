@@ -80,7 +80,7 @@ func (h *OrgSettingHandler) List(c *gin.Context) {
 //	@Produce		json
 //	@Security		BearerAuth
 //	@Param			org_id	path		int		true	"组织ID"
-//	@Param			key		path		string	true	"配置键名"	example(theme.dark_mode)
+//	@Param			key		path		string	true	"配置键名"
 //	@Success		200		{object}	response.DataResponse[org.OrgSettingDTO]	"配置信息"
 //	@Failure		400		{object}	response.ErrorResponse	"无效的键名"
 //	@Failure		401		{object}	response.ErrorResponse	"未授权"
@@ -122,7 +122,7 @@ func (h *OrgSettingHandler) Get(c *gin.Context) {
 //	@Produce		json
 //	@Security		BearerAuth
 //	@Param			org_id	path		int			true	"组织ID"
-//	@Param			key		path		string		true	"配置键名"	example(theme.dark_mode)
+//	@Param			key		path		string		true	"配置键名"
 //	@Param			request	body		SetRequest	true	"设置请求"
 //	@Success		200		{object}	response.DataResponse[org.OrgSettingDTO]	"设置成功"
 //	@Failure		400		{object}	response.ErrorResponse	"参数错误"
@@ -180,7 +180,7 @@ func (h *OrgSettingHandler) Set(c *gin.Context) {
 //	@Produce		json
 //	@Security		BearerAuth
 //	@Param			org_id	path		int		true	"组织ID"
-//	@Param			key		path		string	true	"配置键名"	example(theme.dark_mode)
+//	@Param			key		path		string	true	"配置键名"
 //	@Success		200		{object}	response.MessageResponse	"重置成功"
 //	@Failure		401		{object}	response.ErrorResponse	"未授权"
 //	@Failure		403		{object}	response.ErrorResponse	"权限不足"

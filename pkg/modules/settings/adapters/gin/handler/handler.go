@@ -111,7 +111,7 @@ func (h *UserSettingHandler) ListCategories(c *gin.Context) {
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
-//	@Param			key		path		string	true	"配置键名"	example(theme.dark_mode)
+//	@Param			key		path		string	true	"配置键名"
 //	@Success		200		{object}	response.DataResponse[user.UserSettingDTO]	"配置信息"
 //	@Failure		400		{object}	response.ErrorResponse	"无效的键名"
 //	@Failure		401		{object}	response.ErrorResponse	"未授权"
@@ -151,7 +151,7 @@ func (h *UserSettingHandler) Get(c *gin.Context) {
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
-//	@Param			key		path		string		true	"配置键名"	example(theme.dark_mode)
+//	@Param			key		path		string		true	"配置键名"
 //	@Param			request	body		SetRequest	true	"设置请求"
 //	@Success		200		{object}	response.DataResponse[user.UserSettingDTO]	"设置成功"
 //	@Failure		400		{object}	response.ErrorResponse	"参数错误"
@@ -269,7 +269,7 @@ func (h *UserSettingHandler) BatchSet(c *gin.Context) {
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
-//	@Param			key		path		string	true	"配置键名"	example(theme.dark_mode)
+//	@Param			key		path		string	true	"配置键名"
 //	@Success		200		{object}	response.MessageResponse	"重置成功"
 //	@Failure		401		{object}	response.ErrorResponse	"未授权"
 //	@Failure		500		{object}	response.ErrorResponse	"服务器内部错误"

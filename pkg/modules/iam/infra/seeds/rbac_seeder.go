@@ -129,7 +129,7 @@ func (s *RBACSeeder) seedAdminUser(ctx context.Context, db *gorm.DB) error {
 		email    string
 		realName string
 		avatar   string
-		userType string                    // "human" | "service" | "system"
+		userType string                 // "human" | "service" | "system"
 		role     *persistence.RoleModel // nil 表示不分配角色（root 用户硬编码权限）
 	}
 

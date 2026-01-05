@@ -89,7 +89,7 @@ func (h *TeamSettingHandler) List(c *gin.Context) {
 //	@Security		BearerAuth
 //	@Param			org_id	path		int		true	"组织ID"
 //	@Param			team_id	path		int		true	"团队ID"
-//	@Param			key		path		string	true	"配置键名"	example(theme.dark_mode)
+//	@Param			key		path		string	true	"配置键名"
 //	@Success		200		{object}	response.DataResponse[team.TeamSettingDTO]	"配置信息"
 //	@Failure		400		{object}	response.ErrorResponse	"无效的键名"
 //	@Failure		401		{object}	response.ErrorResponse	"未授权"
@@ -139,7 +139,7 @@ func (h *TeamSettingHandler) Get(c *gin.Context) {
 //	@Security		BearerAuth
 //	@Param			org_id	path		int			true	"组织ID"
 //	@Param			team_id	path		int			true	"团队ID"
-//	@Param			key		path		string		true	"配置键名"	example(theme.dark_mode)
+//	@Param			key		path		string		true	"配置键名"
 //	@Param			request	body		SetRequest	true	"设置请求"
 //	@Success		200		{object}	response.DataResponse[team.TeamSettingDTO]	"设置成功"
 //	@Failure		400		{object}	response.ErrorResponse	"参数错误"
@@ -198,7 +198,7 @@ func (h *TeamSettingHandler) Set(c *gin.Context) {
 //	@Security		BearerAuth
 //	@Param			org_id	path		int		true	"组织ID"
 //	@Param			team_id	path		int		true	"团队ID"
-//	@Param			key		path		string	true	"配置键名"	example(theme.dark_mode)
+//	@Param			key		path		string	true	"配置键名"
 //	@Success		200		{object}	response.MessageResponse	"重置成功"
 //	@Failure		401		{object}	response.ErrorResponse	"未授权"
 //	@Failure		403		{object}	response.ErrorResponse	"权限不足"
