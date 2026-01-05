@@ -5,6 +5,7 @@ import (
 
 	"github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/app/setting"
 	settingsconfig "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/config"
+	settingsPersistence "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/infra/persistence"
 )
 
 // SettingsModule 提供 Settings Bounded Context 的 Fx 模块。
@@ -13,6 +14,7 @@ import (
 func SettingsModule() fx.Option {
 	return fx.Module("settings",
 		fx.Supply(settingsconfig.DefaultConfig()),
+		settingsPersistence.RepositoryModule,
 		setting.UseCaseModule,
 	)
 }

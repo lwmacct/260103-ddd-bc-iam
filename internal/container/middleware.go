@@ -119,13 +119,13 @@ func (inj *MiddlewareInjector) InjectMiddlewares(route *routes.Route) []gin.Hand
 		}
 	}
 
-	// 3. Org 上下文（路径包含 :org_id）
-	if strings.Contains(route.Path, ":org_id") && inj.orgContext != nil {
+	// 3. Org 上下文（路径包含 {org_id}）
+	if strings.Contains(route.Path, "{org_id}") && inj.orgContext != nil {
 		m = append(m, inj.orgContext)
 	}
 
-	// 4. Team 上下文（路径包含 :team_id）
-	if strings.Contains(route.Path, ":team_id") {
+	// 4. Team 上下文（路径包含 {team_id}）
+	if strings.Contains(route.Path, "{team_id}") {
 		if inj.teamContextOpt != nil && route.Method == routes.GET {
 			// GET 操作使用可选的 Team 上下文
 			m = append(m, inj.teamContextOpt)

@@ -82,22 +82,25 @@ func RegisterRoutes(engine *gin.Engine, allRoutes []ginroutes.Route, injector *M
 		handlers := middlewares
 		handlers = append(handlers, route.Handlers...)
 
+		// 转换 OpenAPI 风格路径参数 {param} 为 Gin 风格 :param
+		ginPath := ginroutes.ToGinPath(route.Path)
+
 		// 注册到 Gin Engine
 		switch route.Method {
 		case ginroutes.GET:
-			engine.GET(route.Path, handlers...)
+			engine.GET(ginPath, handlers...)
 		case ginroutes.POST:
-			engine.POST(route.Path, handlers...)
+			engine.POST(ginPath, handlers...)
 		case ginroutes.PUT:
-			engine.PUT(route.Path, handlers...)
+			engine.PUT(ginPath, handlers...)
 		case ginroutes.DELETE:
-			engine.DELETE(route.Path, handlers...)
+			engine.DELETE(ginPath, handlers...)
 		case ginroutes.PATCH:
-			engine.PATCH(route.Path, handlers...)
+			engine.PATCH(ginPath, handlers...)
 		case ginroutes.HEAD:
-			engine.HEAD(route.Path, handlers...)
+			engine.HEAD(ginPath, handlers...)
 		case ginroutes.OPTIONS:
-			engine.OPTIONS(route.Path, handlers...)
+			engine.OPTIONS(ginPath, handlers...)
 		}
 	}
 }
