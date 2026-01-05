@@ -2,7 +2,6 @@ package handler
 
 import (
 	"errors"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/lwmacct/260101-go-pkg-gin/pkg/ctxutil"
@@ -44,7 +43,7 @@ func NewTeamSettingHandler(
 //	@Security		BearerAuth
 //	@Param			org_id		path		int		true	"组织ID"
 //	@Param			team_id	path		int		true	"团队ID"
-//	@Param			category_id	query		int		false	"分类ID过滤"
+//	@Param			params	query		team.ListQuery	false	"查询参数"
 //	@Success		200		{object}	response.DataResponse[[]team.TeamSettingDTO]	"配置列表"
 //	@Failure		401		{object}	response.ErrorResponse	"未授权"
 //	@Failure		403		{object}	response.ErrorResponse	"权限不足"
@@ -63,18 +62,13 @@ func (h *TeamSettingHandler) List(c *gin.Context) {
 		return
 	}
 
-	var categoryID uint
-	if id := c.Query("category_id"); id != "" {
-		if parsed, err := strconv.ParseUint(id, 10, 32); err == nil {
-			categoryID = uint(parsed)
-		}
+	var query team.ListQuery
+	if err := c.ShouldBindQuery(&query); err != nil {
+		response.ValidationError(c, err.Error())
+		return
 	}
-
-	query := team.ListQuery{
-		OrgID:      orgID,
-		TeamID:     teamID,
-		CategoryID: categoryID,
-	}
+	query.OrgID = orgID
+	query.TeamID = teamID
 
 	result, err := h.listHandler.Handle(c.Request.Context(), query)
 	if err != nil {

@@ -43,7 +43,7 @@ func NewUserSettingHandler(useCases *app.UseCases) *UserSettingHandler {
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
-//	@Param			category_id	query		int	false	"分类ID过滤"
+//	@Param			params	query		user.ListQuery	false	"查询参数"
 //	@Success		200		{object}	response.DataResponse[[]user.UserSettingDTO]	"配置列表"
 //	@Failure		401		{object}	response.ErrorResponse	"未授权"
 //	@Failure		500		{object}	response.ErrorResponse	"服务器内部错误"
@@ -55,19 +55,12 @@ func (h *UserSettingHandler) List(c *gin.Context) {
 		return
 	}
 
-	var categoryID uint
-	if id := c.Query("category_id"); id != "" {
-		// 简单解析，实际可用 strconv
-		var parsed uint
-		if _, err := parseUint(id, &parsed); err == nil {
-			categoryID = parsed
-		}
+	var query user.ListQuery
+	if err := c.ShouldBindQuery(&query); err != nil {
+		response.ValidationError(c, err.Error())
+		return
 	}
-
-	query := user.ListQuery{
-		UserID:     uid,
-		CategoryID: categoryID,
-	}
+	query.UserID = uid
 
 	result, err := h.listHandler.Handle(c.Request.Context(), query)
 	if err != nil {
@@ -331,17 +324,4 @@ func (h *UserSettingHandler) ResetAll(c *gin.Context) {
 	}
 
 	response.OK(c, gin.H{"message": "all settings reset to default"})
-}
-
-// parseUint 解析 uint
-func parseUint(s string, v *uint) (uint64, error) {
-	var n uint64
-	for _, c := range s {
-		if c < '0' || c > '9' {
-			return 0, errors.New("invalid number")
-		}
-		n = n*10 + uint64(c-'0')
-	}
-	*v = uint(n)
-	return n, nil
 }

@@ -7,24 +7,24 @@ import (
 
 // PersonalAccessToken 个人访问令牌实体，用于 API 认证
 type PersonalAccessToken struct {
-	ID        uint
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt *time.Time
+	ID        uint      `json:"id"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+	DeletedAt *time.Time `json:"deleted_at,omitempty"`
 
-	UserID      uint   // 所属用户
-	Name        string // Token 名称
-	Token       string // Token 哈希值（不返回）
-	TokenPrefix string // Token 前缀（明文）
+	UserID      uint   `json:"user_id"`         // 所属用户
+	Name        string `json:"name"`            // Token 名称
+	Token       string `json:"-"`               // Token 哈希值，不序列化
+	TokenPrefix string `json:"token_prefix"`    // Token 前缀（明文）
 
-	Scopes StringList // 权限范围（full, self, sys）
+	Scopes StringList `json:"scopes"` // 权限范围（full, self, sys）
 
-	ExpiresAt  *time.Time // 过期时间（nil=永久）
-	LastUsedAt *time.Time // 最后使用时间
-	Status     string     // active, disabled, expired
+	ExpiresAt  *time.Time `json:"expires_at,omitempty"`  // 过期时间（nil=永久）
+	LastUsedAt *time.Time `json:"last_used_at,omitempty"` // 最后使用时间
+	Status     string     `json:"status"`                 // active, disabled, expired
 
-	IPWhitelist StringList // IP 白名单（可选）
-	Description string     // 描述
+	IPWhitelist StringList `json:"ip_whitelist,omitempty"` // IP 白名单（可选）
+	Description string     `json:"description,omitempty"`  // 描述
 }
 
 // IsExpired 检查 Token 是否已过期
@@ -107,12 +107,12 @@ func (p *PersonalAccessToken) ToListItem() *TokenListItem {
 
 // TokenListItem PAT 列表项（不含完整 Token）
 type TokenListItem struct {
-	ID          uint
-	Name        string
-	TokenPrefix string // 用于识别
-	Scopes      []string
-	ExpiresAt   *time.Time
-	LastUsedAt  *time.Time
-	Status      string
-	CreatedAt   time.Time
+	ID          uint       `json:"id"`
+	Name        string     `json:"name"`
+	TokenPrefix string     `json:"token_prefix"` // 用于识别
+	Scopes      []string   `json:"scopes"`
+	ExpiresAt   *time.Time `json:"expires_at,omitempty"`
+	LastUsedAt  *time.Time `json:"last_used_at,omitempty"`
+	Status      string     `json:"status"`
+	CreatedAt   time.Time  `json:"created_at"`
 }
