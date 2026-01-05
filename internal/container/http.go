@@ -90,20 +90,8 @@ type routerParams struct {
 	TeamRepos       persistence.TeamRepositories
 	TeamMemberRepos persistence.TeamMemberRepositories
 
-	// Handlers
-	Auth        *handler.AuthHandler
-	Captcha     *handler.CaptchaHandler
-	AdminUser   *handler.AdminUserHandler
-	UserProfile *handler.UserProfileHandler
-	Role        *handler.RoleHandler
-	PAT         *handler.PATHandler
-	AuditH      *handler.AuditHandler
-	TwoFA       *handler.TwoFAHandler
-	Org         *handler.OrgHandler
-	OrgMember   *handler.OrgMemberHandler
-	Team        *handler.TeamHandler
-	TeamMember  *handler.TeamMemberHandler
-	UserOrg     *handler.UserOrgHandler
+	// IAM Handlers（聚合注入）
+	IAM *handler.Handlers
 
 	// Settings BC Handlers
 	UserSetting *userSettingsHandler.UserSettingHandler
@@ -121,20 +109,8 @@ func newRouter(p routerParams) *gin.Engine {
 
 	// Get all routes from modules using the new routes function
 	allRoutes := AllRoutes(
-		// IAM Handlers
-		p.Auth,
-		p.TwoFA,
-		p.UserProfile,
-		p.UserOrg,
-		p.PAT,
-		p.AdminUser,
-		p.Role,
-		p.Captcha,
-		p.AuditH,
-		p.Org,
-		p.OrgMember,
-		p.Team,
-		p.TeamMember,
+		// IAM Handlers（聚合）
+		p.IAM,
 
 		// Settings BC Handlers
 		p.UserSetting,

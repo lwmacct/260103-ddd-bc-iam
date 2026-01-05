@@ -7,11 +7,11 @@ import (
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/config"
 )
 
-// HandlersResult 使用 fx.Out 批量返回 IAM 模块的所有 HTTP 处理器。
-// 注意：UserSetting 已迁移到独立的 User Settings BC
-type HandlersResult struct {
-	fx.Out
-
+// Handlers 聚合 IAM 模块的所有 HTTP 处理器。
+//
+// 设计说明：使用聚合结构体而非 fx.Out 导出单独 Handler，
+// 符合 Fx 规范（禁止 fx.Out 导出 12+ 字段），维护成本更低。
+type Handlers struct {
 	Auth        *AuthHandler
 	UserProfile *UserProfileHandler
 	AdminUser   *AdminUserHandler
@@ -33,7 +33,6 @@ var HandlerModule = fx.Module("iam.handler",
 )
 
 // handlersParams 聚合创建 Handler 所需的依赖。
-// 注意：UserSetting 已迁移到独立的 User Settings BC
 type handlersParams struct {
 	fx.In
 
@@ -50,8 +49,8 @@ type handlersParams struct {
 	Organization *app.OrganizationUseCases
 }
 
-func newAllHandlers(p handlersParams) HandlersResult {
-	return HandlersResult{
+func newAllHandlers(p handlersParams) *Handlers {
+	return &Handlers{
 		Auth: NewAuthHandler(
 			p.Auth.Login,
 			p.Auth.Login2FA,

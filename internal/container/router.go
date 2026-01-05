@@ -24,20 +24,8 @@ import (
 //  1. 从 IAM、Settings BC 模块收集路由定义
 //  2. 返回统一的路由列表供注册使用
 func AllRoutes(
-	// IAM Handlers
-	authHandler *handler.AuthHandler,
-	twoFAHandler *handler.TwoFAHandler,
-	userProfileHandler *handler.UserProfileHandler,
-	userOrgHandler *handler.UserOrgHandler,
-	patHandler *handler.PATHandler,
-	adminUserHandler *handler.AdminUserHandler,
-	roleHandler *handler.RoleHandler,
-	captchaHandler *handler.CaptchaHandler,
-	auditHandler *handler.AuditHandler,
-	orgHandler *handler.OrgHandler,
-	orgMemberHandler *handler.OrgMemberHandler,
-	teamHandler *handler.TeamHandler,
-	teamMemberHandler *handler.TeamMemberHandler,
+	// IAM Handlers（聚合）
+	iam *handler.Handlers,
 
 	// Settings BC Handlers
 	userSettingHandler *userSettingsHandler.UserSettingHandler,
@@ -50,19 +38,19 @@ func AllRoutes(
 ) []ginroutes.Route {
 	// IAM 域路由
 	iamRoutes := routes.All(
-		authHandler,
-		twoFAHandler,
-		captchaHandler,
-		userProfileHandler,
-		userOrgHandler,
-		adminUserHandler,
-		roleHandler,
-		patHandler,
-		auditHandler,
-		orgHandler,
-		orgMemberHandler,
-		teamHandler,
-		teamMemberHandler,
+		iam.Auth,
+		iam.TwoFA,
+		iam.Captcha,
+		iam.UserProfile,
+		iam.UserOrg,
+		iam.AdminUser,
+		iam.Role,
+		iam.PAT,
+		iam.Audit,
+		iam.Org,
+		iam.OrgMember,
+		iam.Team,
+		iam.TeamMember,
 	)
 
 	// Settings BC 路由（User + Org + Team）
