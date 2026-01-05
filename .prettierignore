@@ -17,6 +17,7 @@ build/
 coverage/
 .nyc_output/
 internal/adapters/http/docs/
+docs/swagger/
 src/generated/
 
 # Logs
