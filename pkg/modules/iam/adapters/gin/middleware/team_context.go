@@ -1,10 +1,13 @@
 package middleware
 
 import (
+	"fmt"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/org"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/role"
+	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/ctxutil"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/response"
 )
 
@@ -15,6 +18,9 @@ import (
 // 验证通过后注入以下值到 Gin Context:
 //   - team_id: uint - 团队 ID
 //   - team_role: string - 用户在团队中的角色 (仅当是团队成员时)
+//
+// 权限注入：根据 team_role 动态添加团队级权限到 permissions 列表：
+//   - lead: org:team:* 对 org.{oid}.team.{tid}:*:*（团队操作权限）
 func TeamContext(
 	teamQuery org.TeamQueryRepository,
 	teamMemberQuery org.TeamMemberQueryRepository,
@@ -77,6 +83,19 @@ func TeamContext(
 		// 5. 注入团队上下文
 		c.Set("team_id", uint(teamID))
 		c.Set("team_role", string(teamMember.Role))
+
+		// 6. 动态注入基于 team_role 的权限
+		// 团队负责人获得团队配置管理权限
+		// 注意：URN 解析器只支持 3 段，org:team:settings:list 解析为 Identifier="settings:list"
+		// 因此通配符必须用 org:team:* 而非 org:team:settings:*
+		if teamMember.Role == "lead" {
+			permissions, _ := ctxutil.Get[[]role.Permission](c, ctxutil.Permissions)
+			permissions = append(permissions, role.Permission{
+				OperationPattern: "org:team:*",
+				ResourcePattern:  fmt.Sprintf("org.%d.team.%d:*:*", orgID.(uint), uint(teamID)),
+			})
+			c.Set(ctxutil.Permissions, permissions)
+		}
 
 		c.Next()
 	}

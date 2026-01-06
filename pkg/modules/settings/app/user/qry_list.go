@@ -43,25 +43,31 @@ func (h *ListHandler) Handle(ctx context.Context, query ListQuery) ([]SettingsIt
 		return []SettingsItemDTO{}, nil
 	}
 
-	// 2. 获取用户自定义值
+	// 2. 过滤出对普通用户可见的设置
+	defs = FilterByVisibleToUser(defs)
+	if len(defs) == 0 {
+		return []SettingsItemDTO{}, nil
+	}
+
+	// 3. 获取用户自定义值
 	userSettings, err := h.queryRepo.FindByUser(ctx, query.UserID)
 	if err != nil {
 		return nil, fmt.Errorf("failed to find user settings: %w", err)
 	}
 
-	// 3. 构建用户配置映射
+	// 4. 构建用户配置映射
 	userMap := make(map[string]*user.UserSetting)
 	for _, us := range userSettings {
 		userMap[us.SettingKey] = us
 	}
 
-	// 4. 获取所有分类元数据（用于填充 category key）
+	// 5. 获取所有分类元数据（用于填充 category key）
 	categories, err := h.categoryQueryRepo.FindAll(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("failed to fetch categories: %w", err)
 	}
 
-	// 5. 构建 CategoryID -> Key 映射
+	// 6. 构建 CategoryID -> Key 映射
 	categoryKeyByID := make(map[uint]string, len(categories))
 	categoryOrderByKey := make(map[string]int, len(categories))
 	for _, cat := range categories {
@@ -69,7 +75,7 @@ func (h *ListHandler) Handle(ctx context.Context, query ListQuery) ([]SettingsIt
 		categoryOrderByKey[cat.Key] = cat.Order
 	}
 
-	// 6. 转换为扁平 DTO 列表
+	// 7. 转换为扁平 DTO 列表
 	result := make([]SettingsItemDTO, 0, len(defs))
 	for _, def := range defs {
 		categoryKey := categoryKeyByID[def.CategoryID]
@@ -80,7 +86,7 @@ func (h *ListHandler) Handle(ctx context.Context, query ListQuery) ([]SettingsIt
 		}
 	}
 
-	// 7. 按 Category Order + Group + Setting Order 排序
+	// 8. 按 Category Order + Group + Setting Order 排序
 	sort.Slice(result, func(i, j int) bool {
 		catOrderI := categoryOrderByKey[result[i].Category]
 		catOrderJ := categoryOrderByKey[result[j].Category]

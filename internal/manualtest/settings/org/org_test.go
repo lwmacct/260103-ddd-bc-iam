@@ -271,7 +271,10 @@ func TestOrgSettingsIsolation(t *testing.T) {
 //
 // 测试场景：
 // 1. 非组织成员访问组织设置应被拒绝
-// 2. 组织成员可以访问组织设置
+// 2. 系统管理员（org owner）可以访问组织设置
+// 3. 组织普通成员（member）无法访问组织设置
+// 4. 组织管理员（admin）可以访问组织设置
+// 5. 组织 Owner 可以读取和修改设置
 func TestOrgSettingsPermission(t *testing.T) {
 	adminClient := manualtest.LoginAsAdmin(t)
 
@@ -360,9 +363,9 @@ func TestOrgSettingsPermission(t *testing.T) {
 		t.Logf("  member 访问组织设置被拒绝（符合预期）: %v", err)
 	})
 
-	t.Run("组织管理员无法访问组织设置", func(t *testing.T) {
+	t.Run("组织管理员可以访问组织设置", func(t *testing.T) {
 		// 创建测试用户并加入组织（作为 admin 角色）
-		// 注意：org admin 角色没有 org:settings:* RBAC 权限，需要 owner 角色
+		// 修复后：org admin 角色通过 OrgContext 动态注入 org:settings:* 权限
 		testUserResp, err := manualtest.Post[map[string]any](
 			adminClient,
 			"/api/admin/users",
@@ -395,14 +398,30 @@ func TestOrgSettingsPermission(t *testing.T) {
 		// 以测试用户登录
 		orgAdminClient := manualtest.LoginAs(t, "test_org_admin", "Test123456!")
 
-		// org admin 角色无法读取组织设置（需要 owner 角色 + RBAC 权限）
-		_, _, err = manualtest.GetList[org.SettingsItemDTO](
+		// org admin 角色可以读取组织设置（通过 OrgContext 动态权限注入）
+		result, _, err := manualtest.GetList[org.SettingsItemDTO](
 			orgAdminClient,
 			orgSettingsPath(testOrgID),
 			nil,
 		)
-		require.Error(t, err, "组织 admin 访问组织设置应被拒绝（需要 owner 角色）")
-		t.Logf("  org admin 访问组织设置被拒绝（符合预期）: %v", err)
+		require.NoError(t, err, "组织 admin 访问组织设置应成功")
+		assert.NotEmpty(t, result, "设置列表不应为空")
+		t.Logf("  org admin 访问组织设置成功，获取 %d 个设置", len(result))
+
+		// org admin 角色也可以修改组织设置
+		updateReq := map[string]any{
+			"value": "light",
+		}
+		_, err = manualtest.Put[org.SettingsItemDTO](
+			orgAdminClient,
+			orgSettingPath(testOrgID, "general.theme"),
+			updateReq,
+		)
+		require.NoError(t, err, "组织 admin 修改组织设置应成功")
+		t.Cleanup(func() {
+			_ = adminClient.Delete(orgSettingPath(testOrgID, "general.theme"))
+		})
+		t.Log("  org admin 修改组织设置成功")
 	})
 
 	t.Run("组织 Owner 可以读取和修改设置", func(t *testing.T) {
