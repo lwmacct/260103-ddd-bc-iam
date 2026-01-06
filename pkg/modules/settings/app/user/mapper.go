@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/domain/user"
+	setting "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/app/setting"
 	settingdomain "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/domain/setting"
 )
 
@@ -50,11 +51,13 @@ func ToCategoryDTO(c *settingdomain.SettingCategory) *CategoryDTO {
 		return nil
 	}
 	return &CategoryDTO{
-		ID:    c.ID,
-		Key:   c.Key,
-		Label: c.Label,
-		Icon:  c.Icon,
-		Order: c.Order,
+		ID:        c.ID,
+		Key:       c.Key,
+		Label:     c.Label,
+		Icon:      c.Icon,
+		Order:     c.Order,
+		CreatedAt: c.CreatedAt,
+		UpdatedAt: c.UpdatedAt,
 	}
 }
 
@@ -70,36 +73,37 @@ func ToCategoryDTOs(categories []*settingdomain.SettingCategory) []*CategoryDTO 
 }
 
 // parseUIConfig 解析 UIConfig JSON 字符串
-func parseUIConfig(raw string) UIConfigDTO {
+func parseUIConfig(raw string) setting.UIConfigDTO {
 	if raw == "" {
-		return UIConfigDTO{}
+		return setting.UIConfigDTO{}
 	}
 
 	var config struct {
 		Hint    string `json:"hint"`
 		Options []struct {
 			Label string `json:"label"`
-			Value any    `json:"value"`
+			Value string `json:"value"`
 		} `json:"options"`
 		DependsOn *struct {
-			Key   string `json:"key"`
-			Value any    `json:"value"`
+			Key      string `json:"key"`
+			Value    any    `json:"value"`
+			Operator string `json:"operator"`
 		} `json:"depends_on"`
 	}
 
 	if err := json.Unmarshal([]byte(raw), &config); err != nil {
-		return UIConfigDTO{}
+		return setting.UIConfigDTO{}
 	}
 
-	dto := UIConfigDTO{
+	dto := setting.UIConfigDTO{
 		Hint: config.Hint,
 	}
 
 	// 转换 options
 	if len(config.Options) > 0 {
-		dto.Options = make([]SelectOptionDTO, len(config.Options))
+		dto.Options = make([]setting.SelectOptionDTO, len(config.Options))
 		for i, opt := range config.Options {
-			dto.Options[i] = SelectOptionDTO{
+			dto.Options[i] = setting.SelectOptionDTO{
 				Label: opt.Label,
 				Value: opt.Value,
 			}
@@ -108,9 +112,10 @@ func parseUIConfig(raw string) UIConfigDTO {
 
 	// 转换 depends_on
 	if config.DependsOn != nil {
-		dto.DependsOn = &DependsOnDTO{
-			Key:   config.DependsOn.Key,
-			Value: config.DependsOn.Value,
+		dto.DependsOn = &setting.DependsOnConfigDTO{
+			Key:      config.DependsOn.Key,
+			Value:    config.DependsOn.Value,
+			Operator: config.DependsOn.Operator,
 		}
 	}
 

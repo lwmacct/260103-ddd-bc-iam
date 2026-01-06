@@ -3827,6 +3827,48 @@ const docTemplate = `{
                 }
             }
         },
+        "/api/public/settings": {
+            "get": {
+                "description": "获取公开可见的配置数据（VisibleAt=\"public\"），用于前端展示站点信息等。无需认证。",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "public"
+                ],
+                "summary": "公开配置列表",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "category",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "公开配置列表",
+                        "schema": {
+                            "$ref": "#/definitions/response.DataResponse-array_setting_PublicSettingsCategoryDTO"
+                        }
+                    },
+                    "404": {
+                        "description": "分类不存在",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "服务器内部错误",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/api/user/account": {
             "delete": {
                 "security": [
@@ -5393,15 +5435,6 @@ const docTemplate = `{
                 }
             }
         },
-        "org.DependsOnDTO": {
-            "type": "object",
-            "properties": {
-                "key": {
-                    "type": "string"
-                },
-                "value": {}
-            }
-        },
         "org.MemberDTO": {
             "type": "object",
             "properties": {
@@ -5470,6 +5503,10 @@ const docTemplate = `{
                 "category_id": {
                     "type": "integer"
                 },
+                "configurable_at": {
+                    "description": "最大可配置级别",
+                    "type": "string"
+                },
                 "default_value": {
                     "description": "系统默认值"
                 },
@@ -5493,26 +5530,19 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "ui_config": {
-                    "$ref": "#/definitions/org.UIConfigDTO"
+                    "$ref": "#/definitions/setting.UIConfigDTO"
                 },
-                "validation": {
-                    "type": "string"
-                },
+                "validation": {},
                 "value": {
                     "description": "实际生效值（组织值 \u003e 默认值）"
                 },
                 "value_type": {
                     "type": "string"
-                }
-            }
-        },
-        "org.SelectOptionDTO": {
-            "type": "object",
-            "properties": {
-                "label": {
-                    "type": "string"
                 },
-                "value": {}
+                "visible_at": {
+                    "description": "最小可见级别",
+                    "type": "string"
+                }
             }
         },
         "org.TeamDTO": {
@@ -5574,23 +5604,6 @@ const docTemplate = `{
                 "username": {
                     "description": "关联的用户信息（可选加载）",
                     "type": "string"
-                }
-            }
-        },
-        "org.UIConfigDTO": {
-            "type": "object",
-            "properties": {
-                "depends_on": {
-                    "$ref": "#/definitions/org.DependsOnDTO"
-                },
-                "hint": {
-                    "type": "string"
-                },
-                "options": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/org.SelectOptionDTO"
-                    }
                 }
             }
         },
@@ -5948,6 +5961,29 @@ const docTemplate = `{
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/setting.CategoryDTO"
+                    }
+                },
+                "error": {
+                    "description": "错误详情（仅失败时）"
+                },
+                "message": {
+                    "description": "消息描述",
+                    "type": "string"
+                }
+            }
+        },
+        "response.DataResponse-array_setting_PublicSettingsCategoryDTO": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "HTTP 状态码",
+                    "type": "integer"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/setting.PublicSettingsCategoryDTO"
                     }
                 },
                 "error": {
@@ -7036,6 +7072,49 @@ const docTemplate = `{
                 "value": {}
             }
         },
+        "setting.PublicSettingItemDTO": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "label": {
+                    "type": "string"
+                },
+                "value": {}
+            }
+        },
+        "setting.PublicSettingsCategoryDTO": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "groups": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/setting.PublicSettingsGroupDTO"
+                    }
+                },
+                "label": {
+                    "type": "string"
+                }
+            }
+        },
+        "setting.PublicSettingsGroupDTO": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "settings": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/setting.PublicSettingItemDTO"
+                    }
+                }
+            }
+        },
         "setting.SelectOptionDTO": {
             "type": "object",
             "properties": {
@@ -7214,24 +7293,6 @@ const docTemplate = `{
                 }
             }
         },
-        "team.DependsOnDTO": {
-            "type": "object",
-            "properties": {
-                "key": {
-                    "type": "string"
-                },
-                "value": {}
-            }
-        },
-        "team.SelectOptionDTO": {
-            "type": "object",
-            "properties": {
-                "label": {
-                    "type": "string"
-                },
-                "value": {}
-            }
-        },
         "team.TeamSettingDTO": {
             "type": "object",
             "properties": {
@@ -7276,11 +7337,9 @@ const docTemplate = `{
                     "description": "组织配置值"
                 },
                 "ui_config": {
-                    "$ref": "#/definitions/team.UIConfigDTO"
+                    "$ref": "#/definitions/setting.UIConfigDTO"
                 },
-                "validation": {
-                    "type": "string"
-                },
+                "validation": {},
                 "value": {
                     "description": "实际生效值（团队 \u003e 组织 \u003e 默认值）"
                 },
@@ -7290,23 +7349,6 @@ const docTemplate = `{
                 "visible_at": {
                     "description": "最小可见级别",
                     "type": "string"
-                }
-            }
-        },
-        "team.UIConfigDTO": {
-            "type": "object",
-            "properties": {
-                "depends_on": {
-                    "$ref": "#/definitions/team.DependsOnDTO"
-                },
-                "hint": {
-                    "type": "string"
-                },
-                "options": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/team.SelectOptionDTO"
-                    }
                 }
             }
         },
@@ -7489,6 +7531,9 @@ const docTemplate = `{
         "user.CategoryDTO": {
             "type": "object",
             "properties": {
+                "created_at": {
+                    "type": "string"
+                },
                 "icon": {
                     "type": "string"
                 },
@@ -7503,6 +7548,9 @@ const docTemplate = `{
                 },
                 "order": {
                     "type": "integer"
+                },
+                "updated_at": {
+                    "type": "string"
                 }
             }
         },
@@ -7572,15 +7620,6 @@ const docTemplate = `{
                 }
             }
         },
-        "user.DependsOnDTO": {
-            "type": "object",
-            "properties": {
-                "key": {
-                    "type": "string"
-                },
-                "value": {}
-            }
-        },
         "user.RoleDTO": {
             "type": "object",
             "properties": {
@@ -7595,32 +7634,6 @@ const docTemplate = `{
                 },
                 "name": {
                     "type": "string"
-                }
-            }
-        },
-        "user.SelectOptionDTO": {
-            "type": "object",
-            "properties": {
-                "label": {
-                    "type": "string"
-                },
-                "value": {}
-            }
-        },
-        "user.UIConfigDTO": {
-            "type": "object",
-            "properties": {
-                "depends_on": {
-                    "$ref": "#/definitions/user.DependsOnDTO"
-                },
-                "hint": {
-                    "type": "string"
-                },
-                "options": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/user.SelectOptionDTO"
-                    }
                 }
             }
         },
@@ -7696,11 +7709,9 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "ui_config": {
-                    "$ref": "#/definitions/user.UIConfigDTO"
+                    "$ref": "#/definitions/setting.UIConfigDTO"
                 },
-                "validation": {
-                    "type": "string"
-                },
+                "validation": {},
                 "value": {
                     "description": "实际生效值（用户值 \u003e 默认值）"
                 },

@@ -10,15 +10,17 @@ import (
 // ToOrgSettingDTO 将配置定义和组织配置合并为 DTO
 func ToOrgSettingDTO(def *settingdomain.Setting, os *org.OrgSetting) *OrgSettingDTO {
 	dto := &OrgSettingDTO{
-		Key:          def.Key,
-		DefaultValue: def.DefaultValue,
-		CategoryID:   def.CategoryID,
-		Group:        def.Group,
-		ValueType:    def.ValueType,
-		Label:        def.Label,
-		Order:        def.Order,
-		InputType:    def.InputType,
-		Validation:   def.Validation,
+		Key:            def.Key,
+		DefaultValue:   def.DefaultValue,
+		VisibleAt:      def.VisibleAt,
+		ConfigurableAt: def.ConfigurableAt,
+		CategoryID:     def.CategoryID,
+		Group:          def.Group,
+		ValueType:      def.ValueType,
+		Label:          def.Label,
+		Order:          def.Order,
+		InputType:      def.InputType,
+		Validation:     def.Validation,
 	}
 
 	// 解析 UIConfig

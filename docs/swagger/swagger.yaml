@@ -426,12 +426,6 @@ definitions:
     - display_name
     - name
     type: object
-  org.DependsOnDTO:
-    properties:
-      key:
-        type: string
-      value: {}
-    type: object
   org.MemberDTO:
     properties:
       avatar:
@@ -477,6 +471,9 @@ definitions:
     properties:
       category_id:
         type: integer
+      configurable_at:
+        description: 最大可配置级别
+        type: string
       default_value:
         description: 系统默认值
       group:
@@ -493,19 +490,15 @@ definitions:
       order:
         type: integer
       ui_config:
-        $ref: '#/definitions/org.UIConfigDTO'
-      validation:
-        type: string
+        $ref: '#/definitions/setting.UIConfigDTO'
+      validation: {}
       value:
         description: 实际生效值（组织值 > 默认值）
       value_type:
         type: string
-    type: object
-  org.SelectOptionDTO:
-    properties:
-      label:
+      visible_at:
+        description: 最小可见级别
         type: string
-      value: {}
     type: object
   org.TeamDTO:
     properties:
@@ -547,17 +540,6 @@ definitions:
       username:
         description: 关联的用户信息（可选加载）
         type: string
-    type: object
-  org.UIConfigDTO:
-    properties:
-      depends_on:
-        $ref: '#/definitions/org.DependsOnDTO'
-      hint:
-        type: string
-      options:
-        items:
-          $ref: '#/definitions/org.SelectOptionDTO'
-        type: array
     type: object
   org.UpdateMemberRoleDTO:
     properties:
@@ -803,6 +785,22 @@ definitions:
         description: 响应数据
         items:
           $ref: '#/definitions/setting.CategoryDTO'
+        type: array
+      error:
+        description: 错误详情（仅失败时）
+      message:
+        description: 消息描述
+        type: string
+    type: object
+  response.DataResponse-array_setting_PublicSettingsCategoryDTO:
+    properties:
+      code:
+        description: HTTP 状态码
+        type: integer
+      data:
+        description: 响应数据
+        items:
+          $ref: '#/definitions/setting.PublicSettingsCategoryDTO'
         type: array
       error:
         description: 错误详情（仅失败时）
@@ -1508,6 +1506,34 @@ definitions:
         type: string
       value: {}
     type: object
+  setting.PublicSettingItemDTO:
+    properties:
+      key:
+        type: string
+      label:
+        type: string
+      value: {}
+    type: object
+  setting.PublicSettingsCategoryDTO:
+    properties:
+      category:
+        type: string
+      groups:
+        items:
+          $ref: '#/definitions/setting.PublicSettingsGroupDTO'
+        type: array
+      label:
+        type: string
+    type: object
+  setting.PublicSettingsGroupDTO:
+    properties:
+      name:
+        type: string
+      settings:
+        items:
+          $ref: '#/definitions/setting.PublicSettingItemDTO'
+        type: array
+    type: object
   setting.SelectOptionDTO:
     properties:
       label:
@@ -1624,18 +1650,6 @@ definitions:
           $ref: '#/definitions/setting.SelectOptionDTO'
         type: array
     type: object
-  team.DependsOnDTO:
-    properties:
-      key:
-        type: string
-      value: {}
-    type: object
-  team.SelectOptionDTO:
-    properties:
-      label:
-        type: string
-      value: {}
-    type: object
   team.TeamSettingDTO:
     properties:
       category_id:
@@ -1667,9 +1681,8 @@ definitions:
       org_value:
         description: 组织配置值
       ui_config:
-        $ref: '#/definitions/team.UIConfigDTO'
-      validation:
-        type: string
+        $ref: '#/definitions/setting.UIConfigDTO'
+      validation: {}
       value:
         description: 实际生效值（团队 > 组织 > 默认值）
       value_type:
@@ -1677,17 +1690,6 @@ definitions:
       visible_at:
         description: 最小可见级别
         type: string
-    type: object
-  team.UIConfigDTO:
-    properties:
-      depends_on:
-        $ref: '#/definitions/team.DependsOnDTO'
-      hint:
-        type: string
-      options:
-        items:
-          $ref: '#/definitions/team.SelectOptionDTO'
-        type: array
     type: object
   twofa.EnableDTO:
     properties:
@@ -1812,6 +1814,8 @@ definitions:
     type: object
   user.CategoryDTO:
     properties:
+      created_at:
+        type: string
       icon:
         type: string
       id:
@@ -1822,6 +1826,8 @@ definitions:
         type: string
       order:
         type: integer
+      updated_at:
+        type: string
     type: object
   user.ChangePasswordDTO:
     properties:
@@ -1870,12 +1876,6 @@ definitions:
     - password
     - username
     type: object
-  user.DependsOnDTO:
-    properties:
-      key:
-        type: string
-      value: {}
-    type: object
   user.RoleDTO:
     properties:
       description:
@@ -1886,23 +1886,6 @@ definitions:
         type: integer
       name:
         type: string
-    type: object
-  user.SelectOptionDTO:
-    properties:
-      label:
-        type: string
-      value: {}
-    type: object
-  user.UIConfigDTO:
-    properties:
-      depends_on:
-        $ref: '#/definitions/user.DependsOnDTO'
-      hint:
-        type: string
-      options:
-        items:
-          $ref: '#/definitions/user.SelectOptionDTO'
-        type: array
     type: object
   user.UpdateDTO:
     properties:
@@ -1955,9 +1938,8 @@ definitions:
       order:
         type: integer
       ui_config:
-        $ref: '#/definitions/user.UIConfigDTO'
-      validation:
-        type: string
+        $ref: '#/definitions/setting.UIConfigDTO'
+      validation: {}
       value:
         description: 实际生效值（用户值 > 默认值）
       value_type:
@@ -4481,6 +4463,33 @@ paths:
       summary: 设置团队配置
       tags:
       - settings-team
+  /api/public/settings:
+    get:
+      consumes:
+      - application/json
+      description: 获取公开可见的配置数据（VisibleAt="public"），用于前端展示站点信息等。无需认证。
+      parameters:
+      - in: query
+        name: category
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 公开配置列表
+          schema:
+            $ref: '#/definitions/response.DataResponse-array_setting_PublicSettingsCategoryDTO'
+        "404":
+          description: 分类不存在
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+        "500":
+          description: 服务器内部错误
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      summary: 公开配置列表
+      tags:
+      - public
   /api/user/account:
     delete:
       consumes:
