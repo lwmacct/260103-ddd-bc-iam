@@ -63,6 +63,7 @@ func ToCategoryDTO(c *settingdomain.SettingCategory) *CategoryDTO {
 		Label:     c.Label,
 		Icon:      c.Icon,
 		Order:     c.Order,
+		Scope:     string(c.Scope),
 		CreatedAt: c.CreatedAt,
 		UpdatedAt: c.UpdatedAt,
 	}

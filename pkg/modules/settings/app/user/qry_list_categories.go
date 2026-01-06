@@ -22,10 +22,13 @@ func NewListCategoriesHandler(
 }
 
 // Handle 处理获取分类列表查询
+//
+// 只返回用户可见的分类（Scope 为 user 或 public）。
 func (h *ListCategoriesHandler) Handle(ctx context.Context, _ ListCategoriesQuery) ([]*CategoryDTO, error) {
-	categories, err := h.categoryQueryRepo.FindAll(ctx)
+	// 只返回用户可见的分类
+	categories, err := h.categoryQueryRepo.FindByVisibleScope(ctx, settingdomain.ScopeLevelUser)
 	if err != nil {
-		return nil, fmt.Errorf("failed to find categories: %w", err)
+		return nil, fmt.Errorf("failed to find visible categories: %w", err)
 	}
 
 	return ToCategoryDTOs(categories), nil

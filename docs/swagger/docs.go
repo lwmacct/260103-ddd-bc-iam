@@ -7482,6 +7482,10 @@ const docTemplate = `{
                 "order": {
                     "type": "integer"
                 },
+                "scope": {
+                    "description": "可见性级别：system | org | team | user | public",
+                    "type": "string"
+                },
                 "updated_at": {
                     "type": "string"
                 }
