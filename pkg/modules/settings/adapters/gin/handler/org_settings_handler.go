@@ -43,7 +43,7 @@ func NewOrgSettingHandler(
 //	@Security		BearerAuth
 //	@Param			org_id		path		int		true	"组织ID"
 //	@Param			params	query		org.ListQuery	false	"查询参数"
-//	@Success		200		{object}	response.DataResponse[[]org.OrgSettingDTO]	"配置列表"
+//	@Success		200		{object}	response.DataResponse[[]org.SettingsItemDTO]	"配置列表"
 //	@Failure		401		{object}	response.ErrorResponse	"未授权"
 //	@Failure		403		{object}	response.ErrorResponse	"权限不足"
 //	@Failure		500		{object}	response.ErrorResponse	"服务器内部错误"
@@ -81,7 +81,7 @@ func (h *OrgSettingHandler) List(c *gin.Context) {
 //	@Security		BearerAuth
 //	@Param			org_id	path		int		true	"组织ID"
 //	@Param			key		path		string	true	"配置键名"
-//	@Success		200		{object}	response.DataResponse[org.OrgSettingDTO]	"配置信息"
+//	@Success		200		{object}	response.DataResponse[org.SettingsItemDTO]	"配置信息"
 //	@Failure		400		{object}	response.ErrorResponse	"无效的键名"
 //	@Failure		401		{object}	response.ErrorResponse	"未授权"
 //	@Failure		403		{object}	response.ErrorResponse	"权限不足"
@@ -124,7 +124,7 @@ func (h *OrgSettingHandler) Get(c *gin.Context) {
 //	@Param			org_id	path		int			true	"组织ID"
 //	@Param			key		path		string		true	"配置键名"
 //	@Param			request	body		SetRequest	true	"设置请求"
-//	@Success		200		{object}	response.DataResponse[org.OrgSettingDTO]	"设置成功"
+//	@Success		200		{object}	response.DataResponse[org.SettingsItemDTO]	"设置成功"
 //	@Failure		400		{object}	response.ErrorResponse	"参数错误"
 //	@Failure		401		{object}	response.ErrorResponse	"未授权"
 //	@Failure		403		{object}	response.ErrorResponse	"权限不足"

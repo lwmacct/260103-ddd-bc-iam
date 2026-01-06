@@ -10,18 +10,21 @@ import (
 
 // BatchSetHandler 批量设置用户配置命令处理器
 type BatchSetHandler struct {
-	settingQueryRepo settingdomain.QueryRepository
-	cmdRepo          user.CommandRepository
+	settingQueryRepo  settingdomain.QueryRepository
+	categoryQueryRepo settingdomain.SettingCategoryQueryRepository
+	cmdRepo           user.CommandRepository
 }
 
 // NewBatchSetHandler 创建批量设置命令处理器
 func NewBatchSetHandler(
 	settingQueryRepo settingdomain.QueryRepository,
+	categoryQueryRepo settingdomain.SettingCategoryQueryRepository,
 	cmdRepo user.CommandRepository,
 ) *BatchSetHandler {
 	return &BatchSetHandler{
-		settingQueryRepo: settingQueryRepo,
-		cmdRepo:          cmdRepo,
+		settingQueryRepo:  settingQueryRepo,
+		categoryQueryRepo: categoryQueryRepo,
+		cmdRepo:           cmdRepo,
 	}
 }
 
@@ -31,9 +34,9 @@ func NewBatchSetHandler(
 //  1. 批量获取配置定义
 //  2. 逐个校验值类型和格式
 //  3. 批量 Upsert
-func (h *BatchSetHandler) Handle(ctx context.Context, cmd BatchSetCommand) ([]*UserSettingDTO, error) {
+func (h *BatchSetHandler) Handle(ctx context.Context, cmd BatchSetCommand) ([]SettingsItemDTO, error) {
 	if len(cmd.Settings) == 0 {
-		return []*UserSettingDTO{}, nil
+		return []SettingsItemDTO{}, nil
 	}
 
 	// 1. 提取所有 keys
@@ -85,11 +88,23 @@ func (h *BatchSetHandler) Handle(ctx context.Context, cmd BatchSetCommand) ([]*U
 		return nil, fmt.Errorf("failed to batch save user settings: %w", err)
 	}
 
-	// 5. 构建返回 DTO
-	result := make([]*UserSettingDTO, len(userSettings))
+	// 5. 获取所有分类元数据（用于填充 category key）
+	categories, err := h.categoryQueryRepo.FindAll(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("failed to fetch categories: %w", err)
+	}
+
+	categoryKeyByID := make(map[uint]string, len(categories))
+	for _, cat := range categories {
+		categoryKeyByID[cat.ID] = cat.Key
+	}
+
+	// 6. 构建返回 DTO
+	result := make([]SettingsItemDTO, len(userSettings))
 	for i, us := range userSettings {
 		def := defMap[us.SettingKey]
-		result[i] = ToUserSettingDTO(def, us)
+		categoryKey := categoryKeyByID[def.CategoryID]
+		result[i] = *ToSettingsItemDTO(def, us, categoryKey)
 	}
 
 	return result, nil

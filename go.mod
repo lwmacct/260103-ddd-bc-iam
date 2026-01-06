@@ -2,6 +2,9 @@ module github.com/lwmacct/260103-ddd-bc-iam
 
 go 1.25.5
 
+// 开发期间使用本地上游项目
+// replace github.com/lwmacct/260103-ddd-bc-settings => /data/project/260103-ddd-bc-settings/workspace
+
 require (
 	github.com/gin-gonic/gin v1.11.0
 	github.com/go-playground/validator/v10 v10.30.1
@@ -10,7 +13,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/lwmacct/251207-go-pkg-cfgm v0.2.4
 	github.com/lwmacct/251219-go-pkg-logm v0.1.8
-	github.com/lwmacct/260103-ddd-bc-settings v0.10.260106
+	github.com/lwmacct/260103-ddd-bc-settings v0.11.260106
 	github.com/lwmacct/260103-ddd-shared v0.6.260106
 	github.com/pquerna/otp v1.5.0
 	github.com/redis/go-redis/v9 v9.17.2

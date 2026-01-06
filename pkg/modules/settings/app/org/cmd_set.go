@@ -10,18 +10,21 @@ import (
 
 // SetHandler 设置组织配置命令处理器
 type SetHandler struct {
-	settingQueryRepo settingdomain.QueryRepository
-	cmdRepo          org.CommandRepository
+	settingQueryRepo  settingdomain.QueryRepository
+	categoryQueryRepo settingdomain.SettingCategoryQueryRepository
+	cmdRepo           org.CommandRepository
 }
 
 // NewSetHandler 创建设置命令处理器
 func NewSetHandler(
 	settingQueryRepo settingdomain.QueryRepository,
+	categoryQueryRepo settingdomain.SettingCategoryQueryRepository,
 	cmdRepo org.CommandRepository,
 ) *SetHandler {
 	return &SetHandler{
-		settingQueryRepo: settingQueryRepo,
-		cmdRepo:          cmdRepo,
+		settingQueryRepo:  settingQueryRepo,
+		categoryQueryRepo: categoryQueryRepo,
+		cmdRepo:           cmdRepo,
 	}
 }
 
@@ -32,7 +35,7 @@ func NewSetHandler(
 //  2. ValueType 类型校验
 //  3. InputType 格式校验（email/url/password 等）
 //  4. Upsert 组织配置
-func (h *SetHandler) Handle(ctx context.Context, cmd SetCommand) (*OrgSettingDTO, error) {
+func (h *SetHandler) Handle(ctx context.Context, cmd SetCommand) (*SettingsItemDTO, error) {
 	// 1. 校验配置定义存在
 	def, err := h.settingQueryRepo.FindByKey(ctx, cmd.Key)
 	if err != nil {
@@ -58,5 +61,15 @@ func (h *SetHandler) Handle(ctx context.Context, cmd SetCommand) (*OrgSettingDTO
 		return nil, fmt.Errorf("failed to save org setting: %w", err)
 	}
 
-	return ToOrgSettingDTO(def, os), nil
+	// 5. 获取 category key
+	category, err := h.categoryQueryRepo.FindByID(ctx, def.CategoryID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to find category: %w", err)
+	}
+	categoryKey := ""
+	if category != nil {
+		categoryKey = category.Key
+	}
+
+	return ToSettingsItemDTO(def, os, categoryKey), nil
 }

@@ -60,24 +60,24 @@ func newUseCases(p useCasesParams) *UseCases {
 
 	return &UseCases{
 		// User Settings
-		Set:            user.NewSetHandler(settingQueryRepo, p.Repos.Command),
-		BatchSet:       user.NewBatchSetHandler(settingQueryRepo, p.Repos.Command),
+		Set:            user.NewSetHandler(settingQueryRepo, categoryQueryRepo, p.Repos.Command),
+		BatchSet:       user.NewBatchSetHandler(settingQueryRepo, categoryQueryRepo, p.Repos.Command),
 		Reset:          user.NewResetHandler(p.Repos.Command),
 		ResetAll:       user.NewResetAllHandler(p.Repos.Command),
-		Get:            user.NewGetHandler(settingQueryRepo, p.Repos.Query),
+		Get:            user.NewGetHandler(settingQueryRepo, categoryQueryRepo, p.Repos.Query),
 		List:           user.NewListHandler(settingQueryRepo, categoryQueryRepo, p.Repos.Query),
 		ListCategories: user.NewListCategoriesHandler(categoryQueryRepo),
 
 		// Org Settings
-		OrgSet:   org.NewSetHandler(settingQueryRepo, p.OrgRepos.Command),
+		OrgSet:   org.NewSetHandler(settingQueryRepo, categoryQueryRepo, p.OrgRepos.Command),
 		OrgReset: org.NewResetHandler(p.OrgRepos.Command),
-		OrgGet:   org.NewGetHandler(settingQueryRepo, p.OrgRepos.Query),
+		OrgGet:   org.NewGetHandler(settingQueryRepo, categoryQueryRepo, p.OrgRepos.Query),
 		OrgList:  org.NewListHandler(settingQueryRepo, categoryQueryRepo, p.OrgRepos.Query),
 
 		// Team Settings
-		TeamSet:   team.NewSetHandler(settingQueryRepo, p.TeamRepos.Command),
+		TeamSet:   team.NewSetHandler(settingQueryRepo, categoryQueryRepo, p.TeamRepos.Command),
 		TeamReset: team.NewResetHandler(p.TeamRepos.Command),
-		TeamGet:   team.NewGetHandler(settingQueryRepo, p.TeamRepos.Query, p.OrgRepos.Query),
+		TeamGet:   team.NewGetHandler(settingQueryRepo, categoryQueryRepo, p.TeamRepos.Query, p.OrgRepos.Query),
 		TeamList:  team.NewListHandler(settingQueryRepo, categoryQueryRepo, p.TeamRepos.Query, p.OrgRepos.Query),
 	}
 }

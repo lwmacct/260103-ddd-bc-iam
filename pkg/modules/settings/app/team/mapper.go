@@ -5,25 +5,32 @@ import (
 
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/domain/org"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/domain/team"
+	setting "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/app/setting"
 	settingdomain "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/domain/setting"
 )
 
-// ToTeamSettingDTO 将配置定义、团队配置和组织配置合并为 DTO
-// 优先级：团队 > 组织 > 系统默认
-func ToTeamSettingDTO(def *settingdomain.Setting, ts *team.TeamSetting, os *org.OrgSetting) *TeamSettingDTO {
-	dto := &TeamSettingDTO{
+// ToSettingsItemDTO 将配置定义、团队配置和组织配置合并为扁平结构 DTO
+//
+// 三级继承优先级：团队 > 组织 > 系统默认值
+// InheritedFrom 字段指示当前生效值的来源
+func ToSettingsItemDTO(def *settingdomain.Setting, ts *team.TeamSetting, os *org.OrgSetting, categoryKey string) *setting.SettingsItemDTO {
+	group := def.Group
+	if group == "" {
+		group = "default"
+	}
+
+	dto := &setting.SettingsItemDTO{
 		Key:            def.Key,
+		Category:       categoryKey,
+		Group:          group,
 		DefaultValue:   def.DefaultValue,
-		CategoryID:     def.CategoryID,
-		Group:          def.Group,
+		VisibleAt:      def.VisibleAt,
+		ConfigurableAt: def.ConfigurableAt,
 		ValueType:      def.ValueType,
 		Label:          def.Label,
 		Order:          def.Order,
 		InputType:      def.InputType,
 		Validation:     def.Validation,
-		VisibleAt:      def.VisibleAt,
-		ConfigurableAt: def.ConfigurableAt,
-		IsTeamDefault:  def.IsTeamDefaultForUser(), // 是否为团队可为用户设置的默认值
 	}
 
 	// 解析 UIConfig
@@ -32,7 +39,6 @@ func ToTeamSettingDTO(def *settingdomain.Setting, ts *team.TeamSetting, os *org.
 	}
 
 	// 三级继承：团队 > 组织 > 系统
-	// 优先级判断：使用嵌套的三元表达式风格实现 switch
 	var hasTeam, hasOrg bool
 	if ts != nil {
 		hasTeam = !ts.IsEmpty()
@@ -41,24 +47,19 @@ func ToTeamSettingDTO(def *settingdomain.Setting, ts *team.TeamSetting, os *org.
 		hasOrg = !os.IsEmpty()
 	}
 
-	// 根据优先级选择源
 	switch {
 	case hasTeam:
 		// 团队有自定义值
 		dto.Value = ts.Value
 		dto.IsCustomized = true
-		dto.InheritedFrom = "team"
 	case hasOrg:
 		// 组织有配置值
 		dto.Value = os.Value
-		dto.OrgValue = os.Value
 		dto.IsCustomized = false
-		dto.InheritedFrom = "org"
 	default:
 		// 使用系统默认值
 		dto.Value = def.DefaultValue
 		dto.IsCustomized = false
-		dto.InheritedFrom = "system"
 	}
 
 	return dto

@@ -4,18 +4,24 @@ import (
 	"encoding/json"
 
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/domain/org"
+	setting "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/app/setting"
 	settingdomain "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/domain/setting"
 )
 
-// ToOrgSettingDTO 将配置定义和组织配置合并为 DTO
-func ToOrgSettingDTO(def *settingdomain.Setting, os *org.OrgSetting) *OrgSettingDTO {
-	dto := &OrgSettingDTO{
+// ToSettingsItemDTO 将配置定义和组织配置合并为扁平结构 DTO
+func ToSettingsItemDTO(def *settingdomain.Setting, os *org.OrgSetting, categoryKey string) *setting.SettingsItemDTO {
+	group := def.Group
+	if group == "" {
+		group = "default"
+	}
+
+	dto := &setting.SettingsItemDTO{
 		Key:            def.Key,
+		Category:       categoryKey,
+		Group:          group,
 		DefaultValue:   def.DefaultValue,
 		VisibleAt:      def.VisibleAt,
 		ConfigurableAt: def.ConfigurableAt,
-		CategoryID:     def.CategoryID,
-		Group:          def.Group,
 		ValueType:      def.ValueType,
 		Label:          def.Label,
 		Order:          def.Order,

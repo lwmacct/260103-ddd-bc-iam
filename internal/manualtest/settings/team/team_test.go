@@ -38,7 +38,7 @@ func TestListTeamSettings(t *testing.T) {
 	c := manualtest.LoginAsAdmin(t)
 
 	t.Run("获取团队设置列表应成功", func(t *testing.T) {
-		result, _, err := manualtest.GetList[team.TeamSettingDTO](
+		result, _, err := manualtest.GetList[team.SettingsItemDTO](
 			c,
 			teamSettingsPath(testOrgID, testTeamID),
 			nil,
@@ -51,7 +51,7 @@ func TestListTeamSettings(t *testing.T) {
 	})
 
 	t.Run("验证 VisibleAt 和 ConfigurableAt 字段", func(t *testing.T) {
-		result, _, err := manualtest.GetList[team.TeamSettingDTO](
+		result, _, err := manualtest.GetList[team.SettingsItemDTO](
 			c,
 			teamSettingsPath(testOrgID, testTeamID),
 			nil,
@@ -68,7 +68,7 @@ func TestListTeamSettings(t *testing.T) {
 	})
 
 	t.Run("验证 Team 默认值设置（VisibleAt=user, ConfigurableAt=team）", func(t *testing.T) {
-		result, _, err := manualtest.GetList[team.TeamSettingDTO](
+		result, _, err := manualtest.GetList[team.SettingsItemDTO](
 			c,
 			teamSettingsPath(testOrgID, testTeamID),
 			nil,
@@ -77,7 +77,7 @@ func TestListTeamSettings(t *testing.T) {
 
 		// 查找 Team 可为用户设置默认值的配置
 		// 例如: general.timezone (visible_at=user, configurable_at=team)
-		var teamDefaultSetting *team.TeamSettingDTO
+		var teamDefaultSetting *team.SettingsItemDTO
 		for _, s := range result {
 			if s.Key == "general.timezone" || s.Key == "general.theme" {
 				teamDefaultSetting = &s
@@ -88,10 +88,9 @@ func TestListTeamSettings(t *testing.T) {
 		require.NotNil(t, teamDefaultSetting, "应找到 Team 默认值设置")
 		assert.Equal(t, "user", teamDefaultSetting.VisibleAt, "general.timezone 的 VisibleAt 应为 user")
 		assert.Equal(t, "team", teamDefaultSetting.ConfigurableAt, "general.timezone 的 ConfigurableAt 应为 team")
-		assert.True(t, teamDefaultSetting.IsTeamDefault, "IsTeamDefault 应为 true")
 
-		t.Logf("  Team 默认值设置: %s, visible_at=%s, configurable_at=%s, is_team_default=%v",
-			teamDefaultSetting.Key, teamDefaultSetting.VisibleAt, teamDefaultSetting.ConfigurableAt, teamDefaultSetting.IsTeamDefault)
+		t.Logf("  Team 默认值设置: %s, visible_at=%s, configurable_at=%s",
+			teamDefaultSetting.Key, teamDefaultSetting.VisibleAt, teamDefaultSetting.ConfigurableAt)
 	})
 }
 
@@ -105,7 +104,7 @@ func TestGetTeamSetting(t *testing.T) {
 
 	t.Run("获取 Team 可配置的设置", func(t *testing.T) {
 		// general.timezone: visible_at=user, configurable_at=team
-		result, err := manualtest.Get[team.TeamSettingDTO](
+		result, err := manualtest.Get[team.SettingsItemDTO](
 			c,
 			teamSettingPath(testOrgID, testTeamID, "general.timezone"),
 			nil,
@@ -116,9 +115,8 @@ func TestGetTeamSetting(t *testing.T) {
 		assert.Equal(t, "general.timezone", result.Key, "设置键应匹配")
 		assert.Equal(t, "user", result.VisibleAt, "VisibleAt 应为 user")
 		assert.Equal(t, "team", result.ConfigurableAt, "ConfigurableAt 应为 team")
-		assert.True(t, result.IsTeamDefault, "IsTeamDefault 应为 true")
 
-		t.Logf("  继承来源: %s, 值: %v", result.InheritedFrom, result.Value)
+		t.Logf("  值: %v, is_customized: %v", result.Value, result.IsCustomized)
 	})
 }
 
@@ -139,7 +137,7 @@ func TestSetTeamSetting(t *testing.T) {
 			"value": "America/New_York",
 		}
 
-		result, err := manualtest.Put[team.TeamSettingDTO](
+		result, err := manualtest.Put[team.SettingsItemDTO](
 			c,
 			teamSettingPath(testOrgID, testTeamID, testKey),
 			updateReq,
@@ -159,7 +157,7 @@ func TestSetTeamSetting(t *testing.T) {
 
 	t.Run("验证自定义值覆盖系统默认值", func(t *testing.T) {
 		// 先获取当前值
-		original, err := manualtest.Get[team.TeamSettingDTO](
+		original, err := manualtest.Get[team.SettingsItemDTO](
 			c,
 			teamSettingPath(testOrgID, testTeamID, "general.theme"),
 			nil,
@@ -171,7 +169,7 @@ func TestSetTeamSetting(t *testing.T) {
 		updateReq := map[string]any{
 			"value": "light",
 		}
-		_, err = manualtest.Put[team.TeamSettingDTO](
+		_, err = manualtest.Put[team.SettingsItemDTO](
 			c,
 			teamSettingPath(testOrgID, testTeamID, "general.theme"),
 			updateReq,
@@ -179,7 +177,7 @@ func TestSetTeamSetting(t *testing.T) {
 		require.NoError(t, err, "更新应成功")
 
 		// 验证团队自定义值
-		updated, err := manualtest.Get[team.TeamSettingDTO](
+		updated, err := manualtest.Get[team.SettingsItemDTO](
 			c,
 			teamSettingPath(testOrgID, testTeamID, "general.theme"),
 			nil,
@@ -187,7 +185,6 @@ func TestSetTeamSetting(t *testing.T) {
 		require.NoError(t, err, "获取更新后的值应成功")
 		assert.Equal(t, "light", updated.Value, "应返回团队自定义值")
 		assert.True(t, updated.IsCustomized, "is_customized 应为 true")
-		assert.Equal(t, "team", updated.InheritedFrom, "inherited_from 应为 team")
 
 		// Cleanup: 恢复原始值
 		t.Cleanup(func() {
@@ -219,7 +216,7 @@ func TestResetTeamSetting(t *testing.T) {
 		updateReq := map[string]any{
 			"value": "light", // 使用 light 而非 dark
 		}
-		_, err := manualtest.Put[team.TeamSettingDTO](
+		_, err := manualtest.Put[team.SettingsItemDTO](
 			c,
 			teamSettingPath(testOrgID, testTeamID, testKey),
 			updateReq,
@@ -227,21 +224,20 @@ func TestResetTeamSetting(t *testing.T) {
 		require.NoError(t, err, "创建团队自定义值应成功")
 
 		// 验证自定义值存在
-		customResult, err := manualtest.Get[team.TeamSettingDTO](
+		customResult, err := manualtest.Get[team.SettingsItemDTO](
 			c,
 			teamSettingPath(testOrgID, testTeamID, testKey),
 			nil,
 		)
 		require.NoError(t, err, "获取团队设置应成功")
 		assert.True(t, customResult.IsCustomized, "创建后 is_customized 应为 true")
-		assert.Equal(t, "team", customResult.InheritedFrom, "inherited_from 应为 team")
 
 		// 重置团队配置
 		err = c.Delete(teamSettingPath(testOrgID, testTeamID, testKey))
 		require.NoError(t, err, "重置应成功")
 
 		// 验证恢复为组织配置或系统默认值
-		defaultResult, err := manualtest.Get[team.TeamSettingDTO](
+		defaultResult, err := manualtest.Get[team.SettingsItemDTO](
 			c,
 			teamSettingPath(testOrgID, testTeamID, testKey),
 			nil,
@@ -249,7 +245,6 @@ func TestResetTeamSetting(t *testing.T) {
 		require.NoError(t, err, "获取重置后的值应成功")
 		assert.False(t, defaultResult.IsCustomized, "重置后 is_customized 应为 false")
 		assert.NotEqual(t, "light", defaultResult.Value, "值应恢复为默认值")
-		assert.NotEqual(t, "team", defaultResult.InheritedFrom, "inherited_from 不应为 team")
 
 		// Cleanup: 确保没有残留的自定义值
 		t.Cleanup(func() {
@@ -272,7 +267,7 @@ func TestTeamSettingsConfigurableOnly(t *testing.T) {
 			"value": "dark",
 		}
 
-		result, err := manualtest.Put[team.TeamSettingDTO](
+		result, err := manualtest.Put[team.SettingsItemDTO](
 			c,
 			teamSettingPath(testOrgID, testTeamID, "general.theme"),
 			updateReq,
@@ -292,7 +287,7 @@ func TestTeamSettingsConfigurableOnly(t *testing.T) {
 			"value": "Test Site",
 		}
 
-		_, err := manualtest.Put[team.TeamSettingDTO](
+		_, err := manualtest.Put[team.SettingsItemDTO](
 			c,
 			teamSettingPath(testOrgID, testTeamID, "general.site_name"),
 			updateReq,
@@ -311,7 +306,7 @@ func TestTeamSettingsVisibility(t *testing.T) {
 	c := manualtest.LoginAsAdmin(t)
 
 	t.Run("验证返回的设置包含正确的 VisibleAt", func(t *testing.T) {
-		result, _, err := manualtest.GetList[team.TeamSettingDTO](
+		result, _, err := manualtest.GetList[team.SettingsItemDTO](
 			c,
 			teamSettingsPath(testOrgID, testTeamID),
 			nil,
@@ -366,7 +361,7 @@ func TestTeamSettingsPermission(t *testing.T) {
 		nonMemberClient := manualtest.LoginAs(t, "test_non_org_member_team", "Test123456!")
 
 		// 尝试访问团队设置（应被拒绝）
-		_, _, err = manualtest.GetList[team.TeamSettingDTO](
+		_, _, err = manualtest.GetList[team.SettingsItemDTO](
 			nonMemberClient,
 			teamSettingsPath(testOrgID, testTeamID),
 			nil,
@@ -411,7 +406,7 @@ func TestTeamSettingsPermission(t *testing.T) {
 
 		// 尝试访问团队设置
 		// 注意：根据权限配置，组织成员可能可以查看团队设置，但不能修改
-		_, _, err = manualtest.GetList[team.TeamSettingDTO](
+		_, _, err = manualtest.GetList[team.SettingsItemDTO](
 			orgOnlyClient,
 			teamSettingsPath(testOrgID, testTeamID),
 			nil,
@@ -426,7 +421,7 @@ func TestTeamSettingsPermission(t *testing.T) {
 
 	t.Run("团队成员可以访问团队设置", func(t *testing.T) {
 		// admin 用户是团队成员
-		result, _, err := manualtest.GetList[team.TeamSettingDTO](
+		result, _, err := manualtest.GetList[team.SettingsItemDTO](
 			adminClient,
 			teamSettingsPath(testOrgID, testTeamID),
 			nil,
@@ -484,7 +479,7 @@ func TestTeamSettingsPermission(t *testing.T) {
 		teamMemberClient := manualtest.LoginAs(t, "test_team_member", "Test123456!")
 
 		// 团队 member 角色无法读取团队设置（需要 lead/admin 角色）
-		_, _, err = manualtest.GetList[team.TeamSettingDTO](
+		_, _, err = manualtest.GetList[team.SettingsItemDTO](
 			teamMemberClient,
 			teamSettingsPath(testOrgID, testTeamID),
 			nil,
@@ -543,7 +538,7 @@ func TestTeamSettingsPermission(t *testing.T) {
 		teamLeadClient := manualtest.LoginAs(t, "test_team_lead", "Test123456!")
 
 		// 团队 lead 角色无法读取团队设置（需要系统级 RBAC 权限）
-		_, _, err = manualtest.GetList[team.TeamSettingDTO](
+		_, _, err = manualtest.GetList[team.SettingsItemDTO](
 			teamLeadClient,
 			teamSettingsPath(testOrgID, testTeamID),
 			nil,
@@ -555,7 +550,7 @@ func TestTeamSettingsPermission(t *testing.T) {
 	t.Run("系统管理员（团队创建者）可以读取和修改设置", func(t *testing.T) {
 		// admin 用户（系统管理员）是团队的创建者
 		// 只有系统级 RBAC 权限才能访问团队设置
-		result, _, err := manualtest.GetList[team.TeamSettingDTO](
+		result, _, err := manualtest.GetList[team.SettingsItemDTO](
 			adminClient,
 			teamSettingsPath(testOrgID, testTeamID),
 			nil,
@@ -567,7 +562,7 @@ func TestTeamSettingsPermission(t *testing.T) {
 		updateReq := map[string]any{
 			"value": "dark",
 		}
-		_, err = manualtest.Put[team.TeamSettingDTO](
+		_, err = manualtest.Put[team.SettingsItemDTO](
 			adminClient,
 			teamSettingPath(testOrgID, testTeamID, "general.theme"),
 			updateReq,

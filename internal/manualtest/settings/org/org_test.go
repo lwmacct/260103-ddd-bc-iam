@@ -34,7 +34,7 @@ func TestListOrgSettings(t *testing.T) {
 	c := manualtest.LoginAsAdmin(t)
 
 	t.Run("获取组织设置列表应成功", func(t *testing.T) {
-		result, _, err := manualtest.GetList[org.OrgSettingDTO](
+		result, _, err := manualtest.GetList[org.SettingsItemDTO](
 			c,
 			orgSettingsPath(testOrgID),
 			nil,
@@ -47,7 +47,7 @@ func TestListOrgSettings(t *testing.T) {
 	})
 
 	t.Run("验证设置包含必要字段", func(t *testing.T) {
-		result, _, err := manualtest.GetList[org.OrgSettingDTO](
+		result, _, err := manualtest.GetList[org.SettingsItemDTO](
 			c,
 			orgSettingsPath(testOrgID),
 			nil,
@@ -64,7 +64,7 @@ func TestListOrgSettings(t *testing.T) {
 	})
 
 	t.Run("系统默认值 is_customized 应为 false", func(t *testing.T) {
-		result, _, err := manualtest.GetList[org.OrgSettingDTO](
+		result, _, err := manualtest.GetList[org.SettingsItemDTO](
 			c,
 			orgSettingsPath(testOrgID),
 			nil,
@@ -92,7 +92,7 @@ func TestGetOrgSetting(t *testing.T) {
 
 	t.Run("获取存在的设置", func(t *testing.T) {
 		// 使用种子数据中的 general.theme 设置
-		result, err := manualtest.Get[org.OrgSettingDTO](
+		result, err := manualtest.Get[org.SettingsItemDTO](
 			c,
 			orgSettingPath(testOrgID, "general.theme"),
 			nil,
@@ -106,7 +106,7 @@ func TestGetOrgSetting(t *testing.T) {
 	})
 
 	t.Run("获取不存在的设置应返回错误", func(t *testing.T) {
-		_, err := manualtest.Get[org.OrgSettingDTO](
+		_, err := manualtest.Get[org.SettingsItemDTO](
 			c,
 			orgSettingPath(testOrgID, "nonexistent.setting"),
 			nil,
@@ -130,7 +130,7 @@ func TestSetOrgSetting(t *testing.T) {
 			"value": "dark",
 		}
 
-		result, err := manualtest.Put[org.OrgSettingDTO](
+		result, err := manualtest.Put[org.SettingsItemDTO](
 			c,
 			orgSettingPath(testOrgID, testKey),
 			updateReq,
@@ -150,7 +150,7 @@ func TestSetOrgSetting(t *testing.T) {
 
 	t.Run("验证自定义值覆盖系统默认值", func(t *testing.T) {
 		// 先获取当前值
-		original, err := manualtest.Get[org.OrgSettingDTO](
+		original, err := manualtest.Get[org.SettingsItemDTO](
 			c,
 			orgSettingPath(testOrgID, "general.language"),
 			nil,
@@ -161,7 +161,7 @@ func TestSetOrgSetting(t *testing.T) {
 		updateReq := map[string]any{
 			"value": "en-US",
 		}
-		_, err = manualtest.Put[org.OrgSettingDTO](
+		_, err = manualtest.Put[org.SettingsItemDTO](
 			c,
 			orgSettingPath(testOrgID, "general.language"),
 			updateReq,
@@ -169,7 +169,7 @@ func TestSetOrgSetting(t *testing.T) {
 		require.NoError(t, err, "更新应成功")
 
 		// 验证自定义值
-		updated, err := manualtest.Get[org.OrgSettingDTO](
+		updated, err := manualtest.Get[org.SettingsItemDTO](
 			c,
 			orgSettingPath(testOrgID, "general.language"),
 			nil,
@@ -206,7 +206,7 @@ func TestResetOrgSetting(t *testing.T) {
 		updateReq := map[string]any{
 			"value": "dark",
 		}
-		_, err := manualtest.Put[org.OrgSettingDTO](
+		_, err := manualtest.Put[org.SettingsItemDTO](
 			c,
 			orgSettingPath(testOrgID, testKey),
 			updateReq,
@@ -214,7 +214,7 @@ func TestResetOrgSetting(t *testing.T) {
 		require.NoError(t, err, "创建组织自定义值应成功")
 
 		// 验证自定义值存在
-		customResult, err := manualtest.Get[org.OrgSettingDTO](
+		customResult, err := manualtest.Get[org.SettingsItemDTO](
 			c,
 			orgSettingPath(testOrgID, testKey),
 			nil,
@@ -227,7 +227,7 @@ func TestResetOrgSetting(t *testing.T) {
 		require.NoError(t, err, "重置应成功")
 
 		// 验证恢复为系统默认值
-		defaultResult, err := manualtest.Get[org.OrgSettingDTO](
+		defaultResult, err := manualtest.Get[org.SettingsItemDTO](
 			c,
 			orgSettingPath(testOrgID, testKey),
 			nil,
@@ -258,7 +258,7 @@ func TestOrgSettingsIsolation(t *testing.T) {
 
 	t.Run("访问不存在的组织应返回错误", func(t *testing.T) {
 		invalidOrgID := uint(99999)
-		_, err := manualtest.Get[org.OrgSettingDTO](
+		_, err := manualtest.Get[org.SettingsItemDTO](
 			c,
 			orgSettingPath(invalidOrgID, testKey),
 			nil,
@@ -296,7 +296,7 @@ func TestOrgSettingsPermission(t *testing.T) {
 		nonMemberClient := manualtest.LoginAs(t, "test_non_org_member", "Test123456!")
 
 		// 尝试访问组织设置（应被拒绝）
-		_, _, err = manualtest.GetList[org.OrgSettingDTO](
+		_, _, err = manualtest.GetList[org.SettingsItemDTO](
 			nonMemberClient,
 			orgSettingsPath(testOrgID),
 			nil,
@@ -307,7 +307,7 @@ func TestOrgSettingsPermission(t *testing.T) {
 
 	t.Run("组织成员可以访问组织设置", func(t *testing.T) {
 		// admin 用户是 testOrgID (acme) 的 owner
-		result, _, err := manualtest.GetList[org.OrgSettingDTO](
+		result, _, err := manualtest.GetList[org.SettingsItemDTO](
 			adminClient,
 			orgSettingsPath(testOrgID),
 			nil,
@@ -351,7 +351,7 @@ func TestOrgSettingsPermission(t *testing.T) {
 		memberClient := manualtest.LoginAs(t, "test_org_member", "Test123456!")
 
 		// member 角色无法读取组织设置（需要 owner/admin 角色）
-		_, _, err = manualtest.GetList[org.OrgSettingDTO](
+		_, _, err = manualtest.GetList[org.SettingsItemDTO](
 			memberClient,
 			orgSettingsPath(testOrgID),
 			nil,
@@ -396,7 +396,7 @@ func TestOrgSettingsPermission(t *testing.T) {
 		orgAdminClient := manualtest.LoginAs(t, "test_org_admin", "Test123456!")
 
 		// org admin 角色无法读取组织设置（需要 owner 角色 + RBAC 权限）
-		_, _, err = manualtest.GetList[org.OrgSettingDTO](
+		_, _, err = manualtest.GetList[org.SettingsItemDTO](
 			orgAdminClient,
 			orgSettingsPath(testOrgID),
 			nil,
@@ -408,7 +408,7 @@ func TestOrgSettingsPermission(t *testing.T) {
 	t.Run("组织 Owner 可以读取和修改设置", func(t *testing.T) {
 		// admin 用户（系统管理员）是 testOrgID 的 owner
 		// 只有 owner 角色 + 系统 RBAC 权限才能访问组织设置
-		result, _, err := manualtest.GetList[org.OrgSettingDTO](
+		result, _, err := manualtest.GetList[org.SettingsItemDTO](
 			adminClient,
 			orgSettingsPath(testOrgID),
 			nil,
@@ -420,7 +420,7 @@ func TestOrgSettingsPermission(t *testing.T) {
 		updateReq := map[string]any{
 			"value": "dark",
 		}
-		_, err = manualtest.Put[org.OrgSettingDTO](
+		_, err = manualtest.Put[org.SettingsItemDTO](
 			adminClient,
 			orgSettingPath(testOrgID, "general.theme"),
 			updateReq,
@@ -450,7 +450,7 @@ func TestOrgSettingsValueTypes(t *testing.T) {
 			"value": "dark",
 		}
 
-		result, err := manualtest.Put[org.OrgSettingDTO](
+		result, err := manualtest.Put[org.SettingsItemDTO](
 			c,
 			orgSettingPath(testOrgID, "general.theme"),
 			updateReq,
@@ -458,7 +458,7 @@ func TestOrgSettingsValueTypes(t *testing.T) {
 		require.NoError(t, err, "更新字符串设置应成功")
 		require.NotNil(t, result, "响应不应为空")
 
-		getResult, err := manualtest.Get[org.OrgSettingDTO](
+		getResult, err := manualtest.Get[org.SettingsItemDTO](
 			c,
 			orgSettingPath(testOrgID, "general.theme"),
 			nil,
@@ -473,7 +473,7 @@ func TestOrgSettingsValueTypes(t *testing.T) {
 			"value": true,
 		}
 
-		result, err := manualtest.Put[org.OrgSettingDTO](
+		result, err := manualtest.Put[org.SettingsItemDTO](
 			c,
 			orgSettingPath(testOrgID, "notification.enable_email"),
 			updateReq,
@@ -481,7 +481,7 @@ func TestOrgSettingsValueTypes(t *testing.T) {
 		require.NoError(t, err, "更新布尔设置应成功")
 		require.NotNil(t, result, "响应不应为空")
 
-		getResult, err := manualtest.Get[org.OrgSettingDTO](
+		getResult, err := manualtest.Get[org.SettingsItemDTO](
 			c,
 			orgSettingPath(testOrgID, "notification.enable_email"),
 			nil,

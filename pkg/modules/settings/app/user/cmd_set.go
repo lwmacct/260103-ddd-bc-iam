@@ -10,18 +10,21 @@ import (
 
 // SetHandler 设置用户配置命令处理器
 type SetHandler struct {
-	settingQueryRepo settingdomain.QueryRepository // 跨 BC 依赖：Settings BC
-	cmdRepo          user.CommandRepository
+	settingQueryRepo  settingdomain.QueryRepository // 跨 BC 依赖：Settings BC
+	categoryQueryRepo settingdomain.SettingCategoryQueryRepository
+	cmdRepo           user.CommandRepository
 }
 
 // NewSetHandler 创建设置命令处理器
 func NewSetHandler(
 	settingQueryRepo settingdomain.QueryRepository,
+	categoryQueryRepo settingdomain.SettingCategoryQueryRepository,
 	cmdRepo user.CommandRepository,
 ) *SetHandler {
 	return &SetHandler{
-		settingQueryRepo: settingQueryRepo,
-		cmdRepo:          cmdRepo,
+		settingQueryRepo:  settingQueryRepo,
+		categoryQueryRepo: categoryQueryRepo,
+		cmdRepo:           cmdRepo,
 	}
 }
 
@@ -32,7 +35,7 @@ func NewSetHandler(
 //  2. ValueType 类型校验
 //  3. InputType 格式校验（email/url/password 等）
 //  4. Upsert 用户配置
-func (h *SetHandler) Handle(ctx context.Context, cmd SetCommand) (*UserSettingDTO, error) {
+func (h *SetHandler) Handle(ctx context.Context, cmd SetCommand) (*SettingsItemDTO, error) {
 	// 1. 校验配置定义存在
 	def, err := h.settingQueryRepo.FindByKey(ctx, cmd.Key)
 	if err != nil {
@@ -63,5 +66,15 @@ func (h *SetHandler) Handle(ctx context.Context, cmd SetCommand) (*UserSettingDT
 		return nil, fmt.Errorf("failed to save user setting: %w", err)
 	}
 
-	return ToUserSettingDTO(def, us), nil
+	// 6. 获取 category key
+	category, err := h.categoryQueryRepo.FindByID(ctx, def.CategoryID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to find category: %w", err)
+	}
+	categoryKey := ""
+	if category != nil {
+		categoryKey = category.Key
+	}
+
+	return ToSettingsItemDTO(def, us, categoryKey), nil
 }

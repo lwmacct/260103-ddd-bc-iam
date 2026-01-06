@@ -8,35 +8,42 @@ import (
 	settingdomain "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/domain/setting"
 )
 
-// ToUserSettingDTO 将配置定义和用户配置合并为 DTO
+// ToSettingsItemDTO 将配置定义和用户配置合并为扁平结构 DTO
 //
 // 参数：
 //   - def: 配置定义（来自 Settings BC）
 //   - us: 用户配置（可为 nil，表示使用默认值）
+//   - categoryKey: 分类 Key（用于前端分组）
 //
 // 返回：
-//   - 合并后的 UserSettingDTO
-func ToUserSettingDTO(def *settingdomain.Setting, us *user.UserSetting) *UserSettingDTO {
+//   - 合并后的 SettingsItemDTO（复用上游类型）
+func ToSettingsItemDTO(def *settingdomain.Setting, us *user.UserSetting, categoryKey string) *setting.SettingsItemDTO {
 	if def == nil {
 		return nil
 	}
 
-	dto := &UserSettingDTO{
-		Key:          def.Key,
-		Value:        def.DefaultValue, // 默认使用系统默认值
-		DefaultValue: def.DefaultValue,
-		IsCustomized: false,
-		CategoryID:   def.CategoryID,
-		Group:        def.Group,
-		ValueType:    def.ValueType,
-		Label:        def.Label,
-		Order:        def.Order,
-		InputType:    def.InputType,
-		Validation:   def.Validation,
-		UIConfig:     parseUIConfig(def.UIConfig),
+	group := def.Group
+	if group == "" {
+		group = "default"
 	}
 
-	// 如果用户有自定义值，使用用户值
+	dto := &setting.SettingsItemDTO{
+		Key:            def.Key,
+		Category:       categoryKey,
+		Group:          group,
+		Value:          def.DefaultValue,
+		DefaultValue:   def.DefaultValue,
+		IsCustomized:   false,
+		VisibleAt:      def.VisibleAt,
+		ConfigurableAt: def.ConfigurableAt,
+		ValueType:      def.ValueType,
+		Label:          def.Label,
+		Order:          def.Order,
+		InputType:      def.InputType,
+		Validation:     def.Validation,
+		UIConfig:       parseUIConfig(def.UIConfig),
+	}
+
 	if us != nil {
 		dto.Value = us.Value
 		dto.IsCustomized = true

@@ -467,21 +467,24 @@ definitions:
       updated_at:
         type: string
     type: object
-  org.OrgSettingDTO:
+  org.SettingsItemDTO:
     properties:
-      category_id:
-        type: integer
+      category:
+        description: 分类 Key（前端按需分组）
+        type: string
       configurable_at:
         description: 最大可配置级别
         type: string
       default_value:
         description: 系统默认值
       group:
+        description: 分组名称
         type: string
       input_type:
+        description: 控件类型
         type: string
       is_customized:
-        description: 是否组织自定义
+        description: 是否用户自定义
         type: boolean
       key:
         type: string
@@ -490,10 +493,13 @@ definitions:
       order:
         type: integer
       ui_config:
-        $ref: '#/definitions/setting.UIConfigDTO'
-      validation: {}
+        allOf:
+        - $ref: '#/definitions/setting.UIConfigDTO'
+        description: hint/options/depends_on
+      validation:
+        description: JSON Logic 规则
       value:
-        description: 实际生效值（组织值 > 默认值）
+        description: 实际生效值
       value_type:
         type: string
       visible_at:
@@ -696,7 +702,7 @@ definitions:
       user_id:
         type: integer
     type: object
-  response.DataResponse-array_org_OrgSettingDTO:
+  response.DataResponse-array_org_SettingsItemDTO:
     properties:
       code:
         description: HTTP 状态码
@@ -704,7 +710,7 @@ definitions:
       data:
         description: 响应数据
         items:
-          $ref: '#/definitions/org.OrgSettingDTO'
+          $ref: '#/definitions/org.SettingsItemDTO'
         type: array
       error:
         description: 错误详情（仅失败时）
@@ -792,7 +798,7 @@ definitions:
         description: 消息描述
         type: string
     type: object
-  response.DataResponse-array_setting_PublicSettingsCategoryDTO:
+  response.DataResponse-array_setting_PublicSettingItemDTO:
     properties:
       code:
         description: HTTP 状态码
@@ -800,7 +806,7 @@ definitions:
       data:
         description: 响应数据
         items:
-          $ref: '#/definitions/setting.PublicSettingsCategoryDTO'
+          $ref: '#/definitions/setting.PublicSettingItemDTO'
         type: array
       error:
         description: 错误详情（仅失败时）
@@ -808,7 +814,7 @@ definitions:
         description: 消息描述
         type: string
     type: object
-  response.DataResponse-array_setting_SettingsCategoryDTO:
+  response.DataResponse-array_setting_SettingsItemDTO:
     properties:
       code:
         description: HTTP 状态码
@@ -816,7 +822,7 @@ definitions:
       data:
         description: 响应数据
         items:
-          $ref: '#/definitions/setting.SettingsCategoryDTO'
+          $ref: '#/definitions/setting.SettingsItemDTO'
         type: array
       error:
         description: 错误详情（仅失败时）
@@ -824,7 +830,7 @@ definitions:
         description: 消息描述
         type: string
     type: object
-  response.DataResponse-array_team_TeamSettingDTO:
+  response.DataResponse-array_team_SettingsItemDTO:
     properties:
       code:
         description: HTTP 状态码
@@ -832,7 +838,7 @@ definitions:
       data:
         description: 响应数据
         items:
-          $ref: '#/definitions/team.TeamSettingDTO'
+          $ref: '#/definitions/team.SettingsItemDTO'
         type: array
       error:
         description: 错误详情（仅失败时）
@@ -856,7 +862,7 @@ definitions:
         description: 消息描述
         type: string
     type: object
-  response.DataResponse-array_user_UserSettingDTO:
+  response.DataResponse-array_user_SettingsItemDTO:
     properties:
       code:
         description: HTTP 状态码
@@ -864,7 +870,7 @@ definitions:
       data:
         description: 响应数据
         items:
-          $ref: '#/definitions/user.UserSettingDTO'
+          $ref: '#/definitions/user.SettingsItemDTO'
         type: array
       error:
         description: 错误详情（仅失败时）
@@ -992,14 +998,14 @@ definitions:
         description: 消息描述
         type: string
     type: object
-  response.DataResponse-org_OrgSettingDTO:
+  response.DataResponse-org_SettingsItemDTO:
     properties:
       code:
         description: HTTP 状态码
         type: integer
       data:
         allOf:
-        - $ref: '#/definitions/org.OrgSettingDTO'
+        - $ref: '#/definitions/org.SettingsItemDTO'
         description: 响应数据
       error:
         description: 错误详情（仅失败时）
@@ -1112,14 +1118,14 @@ definitions:
         description: 消息描述
         type: string
     type: object
-  response.DataResponse-team_TeamSettingDTO:
+  response.DataResponse-team_SettingsItemDTO:
     properties:
       code:
         description: HTTP 状态码
         type: integer
       data:
         allOf:
-        - $ref: '#/definitions/team.TeamSettingDTO'
+        - $ref: '#/definitions/team.SettingsItemDTO'
         description: 响应数据
       error:
         description: 错误详情（仅失败时）
@@ -1187,14 +1193,14 @@ definitions:
         description: 消息描述
         type: string
     type: object
-  response.DataResponse-user_UserSettingDTO:
+  response.DataResponse-user_SettingsItemDTO:
     properties:
       code:
         description: HTTP 状态码
         type: integer
       data:
         allOf:
-        - $ref: '#/definitions/user.UserSettingDTO'
+        - $ref: '#/definitions/user.SettingsItemDTO'
         description: 响应数据
       error:
         description: 错误详情（仅失败时）
@@ -1514,26 +1520,6 @@ definitions:
         type: string
       value: {}
     type: object
-  setting.PublicSettingsCategoryDTO:
-    properties:
-      category:
-        type: string
-      groups:
-        items:
-          $ref: '#/definitions/setting.PublicSettingsGroupDTO'
-        type: array
-      label:
-        type: string
-    type: object
-  setting.PublicSettingsGroupDTO:
-    properties:
-      name:
-        type: string
-      settings:
-        items:
-          $ref: '#/definitions/setting.PublicSettingItemDTO'
-        type: array
-    type: object
   setting.SelectOptionDTO:
     properties:
       label:
@@ -1579,36 +1565,19 @@ definitions:
         description: 最小可见级别：system | org | team | user
         type: string
     type: object
-  setting.SettingsCategoryDTO:
-    properties:
-      category:
-        type: string
-      groups:
-        items:
-          $ref: '#/definitions/setting.SettingsGroupDTO'
-        type: array
-      icon:
-        type: string
-      label:
-        type: string
-    type: object
-  setting.SettingsGroupDTO:
-    properties:
-      name:
-        description: 分组名称（如 "基本设置"）
-        type: string
-      settings:
-        items:
-          $ref: '#/definitions/setting.SettingsItemDTO'
-        type: array
-    type: object
   setting.SettingsItemDTO:
     properties:
+      category:
+        description: 分类 Key（前端按需分组）
+        type: string
       configurable_at:
         description: 最大可配置级别
         type: string
       default_value:
         description: 系统默认值
+      group:
+        description: 分组名称
+        type: string
       input_type:
         description: 控件类型
         type: string
@@ -1650,27 +1619,24 @@ definitions:
           $ref: '#/definitions/setting.SelectOptionDTO'
         type: array
     type: object
-  team.TeamSettingDTO:
+  team.SettingsItemDTO:
     properties:
-      category_id:
-        type: integer
+      category:
+        description: 分类 Key（前端按需分组）
+        type: string
       configurable_at:
         description: 最大可配置级别
         type: string
       default_value:
         description: 系统默认值
       group:
-        type: string
-      inherited_from:
-        description: '继承来源: "team" | "org" | "system"'
+        description: 分组名称
         type: string
       input_type:
+        description: 控件类型
         type: string
       is_customized:
-        description: 是否团队自定义
-        type: boolean
-      is_team_default:
-        description: 是否为团队可配置的默认值（User 可覆盖）
+        description: 是否用户自定义
         type: boolean
       key:
         type: string
@@ -1678,13 +1644,14 @@ definitions:
         type: string
       order:
         type: integer
-      org_value:
-        description: 组织配置值
       ui_config:
-        $ref: '#/definitions/setting.UIConfigDTO'
-      validation: {}
+        allOf:
+        - $ref: '#/definitions/setting.UIConfigDTO'
+        description: hint/options/depends_on
+      validation:
+        description: JSON Logic 规则
       value:
-        description: 实际生效值（团队 > 组织 > 默认值）
+        description: 实际生效值
       value_type:
         type: string
       visible_at:
@@ -1887,6 +1854,45 @@ definitions:
       name:
         type: string
     type: object
+  user.SettingsItemDTO:
+    properties:
+      category:
+        description: 分类 Key（前端按需分组）
+        type: string
+      configurable_at:
+        description: 最大可配置级别
+        type: string
+      default_value:
+        description: 系统默认值
+      group:
+        description: 分组名称
+        type: string
+      input_type:
+        description: 控件类型
+        type: string
+      is_customized:
+        description: 是否用户自定义
+        type: boolean
+      key:
+        type: string
+      label:
+        type: string
+      order:
+        type: integer
+      ui_config:
+        allOf:
+        - $ref: '#/definitions/setting.UIConfigDTO'
+        description: hint/options/depends_on
+      validation:
+        description: JSON Logic 规则
+      value:
+        description: 实际生效值
+      value_type:
+        type: string
+      visible_at:
+        description: 最小可见级别
+        type: string
+    type: object
   user.UpdateDTO:
     properties:
       avatar:
@@ -1916,33 +1922,6 @@ definitions:
       username:
         maxLength: 50
         minLength: 3
-        type: string
-    type: object
-  user.UserSettingDTO:
-    properties:
-      category_id:
-        type: integer
-      default_value:
-        description: 系统默认值
-      group:
-        type: string
-      input_type:
-        type: string
-      is_customized:
-        description: 是否用户自定义
-        type: boolean
-      key:
-        type: string
-      label:
-        type: string
-      order:
-        type: integer
-      ui_config:
-        $ref: '#/definitions/setting.UIConfigDTO'
-      validation: {}
-      value:
-        description: 实际生效值（用户值 > 默认值）
-      value_type:
         type: string
     type: object
   user.UserWithRolesDTO:
@@ -2618,7 +2597,7 @@ paths:
     get:
       consumes:
       - application/json
-      description: 获取按 Category → Group → Settings 层级组织的配置数据，用于前端动态渲染设置页面。支持按分类过滤（懒加载）。
+      description: 获取配置数据，扁平结构（每个 item 包含 category 和 group 字段供前端分组）。支持按分类过滤（懒加载）。
       parameters:
       - in: query
         name: category
@@ -2627,9 +2606,9 @@ paths:
       - application/json
       responses:
         "200":
-          description: 配置列表（层级结构）
+          description: 配置列表（扁平结构）
           schema:
-            $ref: '#/definitions/response.DataResponse-array_setting_SettingsCategoryDTO'
+            $ref: '#/definitions/response.DataResponse-array_setting_SettingsItemDTO'
         "401":
           description: 未授权
           schema:
@@ -3810,7 +3789,7 @@ paths:
         "200":
           description: 配置列表
           schema:
-            $ref: '#/definitions/response.DataResponse-array_org_OrgSettingDTO'
+            $ref: '#/definitions/response.DataResponse-array_org_SettingsItemDTO'
         "401":
           description: 未授权
           schema:
@@ -3889,7 +3868,7 @@ paths:
         "200":
           description: 配置信息
           schema:
-            $ref: '#/definitions/response.DataResponse-org_OrgSettingDTO'
+            $ref: '#/definitions/response.DataResponse-org_SettingsItemDTO'
         "400":
           description: 无效的键名
           schema:
@@ -3938,7 +3917,7 @@ paths:
         "200":
           description: 设置成功
           schema:
-            $ref: '#/definitions/response.DataResponse-org_OrgSettingDTO'
+            $ref: '#/definitions/response.DataResponse-org_SettingsItemDTO'
         "400":
           description: 参数错误
           schema:
@@ -4290,7 +4269,7 @@ paths:
         "200":
           description: 配置列表
           schema:
-            $ref: '#/definitions/response.DataResponse-array_team_TeamSettingDTO'
+            $ref: '#/definitions/response.DataResponse-array_team_SettingsItemDTO'
         "401":
           description: 未授权
           schema:
@@ -4379,7 +4358,7 @@ paths:
         "200":
           description: 配置信息
           schema:
-            $ref: '#/definitions/response.DataResponse-team_TeamSettingDTO'
+            $ref: '#/definitions/response.DataResponse-team_SettingsItemDTO'
         "400":
           description: 无效的键名
           schema:
@@ -4433,7 +4412,7 @@ paths:
         "200":
           description: 设置成功
           schema:
-            $ref: '#/definitions/response.DataResponse-team_TeamSettingDTO'
+            $ref: '#/definitions/response.DataResponse-team_SettingsItemDTO'
         "400":
           description: 参数错误
           schema:
@@ -4470,7 +4449,7 @@ paths:
         "200":
           description: 公开配置列表
           schema:
-            $ref: '#/definitions/response.DataResponse-array_setting_PublicSettingsCategoryDTO'
+            $ref: '#/definitions/response.DataResponse-array_setting_PublicSettingItemDTO'
         "404":
           description: 分类不存在
           schema:
@@ -4638,9 +4617,9 @@ paths:
       - application/json
       responses:
         "200":
-          description: 配置列表
+          description: 配置列表（扁平结构）
           schema:
-            $ref: '#/definitions/response.DataResponse-array_user_UserSettingDTO'
+            $ref: '#/definitions/response.DataResponse-array_user_SettingsItemDTO'
         "401":
           description: 未授权
           schema:
@@ -4701,7 +4680,7 @@ paths:
         "200":
           description: 配置信息
           schema:
-            $ref: '#/definitions/response.DataResponse-user_UserSettingDTO'
+            $ref: '#/definitions/response.DataResponse-user_SettingsItemDTO'
         "400":
           description: 无效的键名
           schema:
@@ -4741,7 +4720,7 @@ paths:
         "200":
           description: 设置成功
           schema:
-            $ref: '#/definitions/response.DataResponse-user_UserSettingDTO'
+            $ref: '#/definitions/response.DataResponse-user_SettingsItemDTO'
         "400":
           description: 参数错误
           schema:
@@ -4777,7 +4756,7 @@ paths:
         "200":
           description: 设置成功
           schema:
-            $ref: '#/definitions/response.DataResponse-array_user_UserSettingDTO'
+            $ref: '#/definitions/response.DataResponse-array_user_SettingsItemDTO'
         "400":
           description: 参数错误
           schema:

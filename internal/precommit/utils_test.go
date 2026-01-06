@@ -360,11 +360,22 @@ func loadDTOTypes(t *testing.T) map[string]bool {
 					if !ok {
 						continue
 					}
+					// 检查类型名是否以 DTO 结尾
+					if !strings.HasSuffix(typeSpec.Name.Name, "DTO") {
+						continue
+					}
+					fullName := pkgName + "." + typeSpec.Name.Name
+
+					// 支持 struct 类型
 					if _, isStruct := typeSpec.Type.(*ast.StructType); isStruct {
-						if strings.HasSuffix(typeSpec.Name.Name, "DTO") {
-							fullName := pkgName + "." + typeSpec.Name.Name
-							dtoTypes[fullName] = true
-						}
+						dtoTypes[fullName] = true
+						continue
+					}
+
+					// 支持类型别名 (type X = Y)
+					// 类型别名的 Assign 位置不为 0（ast.TypeSpec.Assign != token.NoPos）
+					if typeSpec.Assign.IsValid() {
+						dtoTypes[fullName] = true
 					}
 				}
 			}

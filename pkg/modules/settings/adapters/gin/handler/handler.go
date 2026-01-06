@@ -44,7 +44,7 @@ func NewUserSettingHandler(useCases *app.UseCases) *UserSettingHandler {
 //	@Produce		json
 //	@Security		BearerAuth
 //	@Param			params	query		user.ListQuery	false	"查询参数"
-//	@Success		200		{object}	response.DataResponse[[]user.UserSettingDTO]	"配置列表"
+//	@Success		200		{object}	response.DataResponse[[]user.SettingsItemDTO]	"配置列表（扁平结构）"
 //	@Failure		401		{object}	response.ErrorResponse	"未授权"
 //	@Failure		500		{object}	response.ErrorResponse	"服务器内部错误"
 //	@Router			/api/user/settings [get]
@@ -112,7 +112,7 @@ func (h *UserSettingHandler) ListCategories(c *gin.Context) {
 //	@Produce		json
 //	@Security		BearerAuth
 //	@Param			key		path		string	true	"配置键名"
-//	@Success		200		{object}	response.DataResponse[user.UserSettingDTO]	"配置信息"
+//	@Success		200		{object}	response.DataResponse[user.SettingsItemDTO]	"配置信息"
 //	@Failure		400		{object}	response.ErrorResponse	"无效的键名"
 //	@Failure		401		{object}	response.ErrorResponse	"未授权"
 //	@Failure		404		{object}	response.ErrorResponse	"配置不存在"
@@ -153,7 +153,7 @@ func (h *UserSettingHandler) Get(c *gin.Context) {
 //	@Security		BearerAuth
 //	@Param			key		path		string		true	"配置键名"
 //	@Param			request	body		SetRequest	true	"设置请求"
-//	@Success		200		{object}	response.DataResponse[user.UserSettingDTO]	"设置成功"
+//	@Success		200		{object}	response.DataResponse[user.SettingsItemDTO]	"设置成功"
 //	@Failure		400		{object}	response.ErrorResponse	"参数错误"
 //	@Failure		401		{object}	response.ErrorResponse	"未授权"
 //	@Failure		500		{object}	response.ErrorResponse	"服务器内部错误"
@@ -208,7 +208,7 @@ func (h *UserSettingHandler) Set(c *gin.Context) {
 //	@Produce		json
 //	@Security		BearerAuth
 //	@Param			request	body		BatchSetRequest	true	"批量设置请求"
-//	@Success		200		{object}	response.DataResponse[[]user.UserSettingDTO]	"设置成功"
+//	@Success		200		{object}	response.DataResponse[[]user.SettingsItemDTO]	"设置成功"
 //	@Failure		400		{object}	response.ErrorResponse	"参数错误"
 //	@Failure		401		{object}	response.ErrorResponse	"未授权"
 //	@Failure		500		{object}	response.ErrorResponse	"服务器内部错误"

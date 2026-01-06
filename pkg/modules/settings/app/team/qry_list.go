@@ -3,6 +3,7 @@ package team
 import (
 	"context"
 	"fmt"
+	"sort"
 
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/domain/org"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/domain/team"
@@ -34,36 +35,24 @@ func NewListHandler(
 
 // Handle 处理获取团队配置列表查询
 //
-// 返回合并后的配置列表，优先级：团队配置 > 组织配置 > 系统默认值
-func (h *ListHandler) Handle(ctx context.Context, query ListQuery) ([]*TeamSettingDTO, error) {
+// 返回扁平结构的配置列表，每个 item 包含 category 和 group 字段供前端分组
+// 优先级：团队配置 > 组织配置 > 系统默认值
+func (h *ListHandler) Handle(ctx context.Context, query ListQuery) ([]SettingsItemDTO, error) {
 	// 1. 获取配置定义列表
-	var defs []*settingdomain.Setting
-	var err error
-
-	if query.Category != "" {
-		// 根据 category key 查找分类 ID
-		category, catErr := h.categoryQueryRepo.FindByKey(ctx, query.Category)
-		if catErr != nil {
-			return nil, fmt.Errorf("category not found: %s", query.Category)
-		}
-		defs, err = h.settingQueryRepo.FindByCategoryID(ctx, category.ID)
-	} else {
-		// 获取所有 Team 可配置的设置
-		defs, err = h.settingQueryRepo.FindByConfigurableAt(ctx, settingdomain.ScopeLevelTeam)
-	}
+	defs, err := h.fetchSettings(ctx, query.Category)
 	if err != nil {
-		return nil, fmt.Errorf("failed to find settings: %w", err)
+		return nil, err
 	}
 
 	if len(defs) == 0 {
-		return []*TeamSettingDTO{}, nil
+		return []SettingsItemDTO{}, nil
 	}
 
-	// 2. 确保只返回对 Team 可见的设置
+	// 2. 确保只返回对 Team 可配置的设置
 	defs = FilterByConfigurableAt(defs, settingdomain.ScopeLevelTeam)
 
 	if len(defs) == 0 {
-		return []*TeamSettingDTO{}, nil
+		return []SettingsItemDTO{}, nil
 	}
 
 	// 3. 批量获取团队和组织配置
@@ -86,13 +75,75 @@ func (h *ListHandler) Handle(ctx context.Context, query ListQuery) ([]*TeamSetti
 		orgMap[os.SettingKey] = os
 	}
 
-	// 5. 合并返回
-	result := make([]*TeamSettingDTO, 0, len(defs))
-	for _, def := range defs {
-		ts := teamMap[def.Key]
-		os := orgMap[def.Key]
-		result = append(result, ToTeamSettingDTO(def, ts, os))
+	// 5. 获取所有分类元数据（用于填充 category key）
+	categories, err := h.categoryQueryRepo.FindAll(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("failed to fetch categories: %w", err)
 	}
 
+	// 6. 构建 CategoryID -> Key 映射
+	categoryKeyByID := make(map[uint]string, len(categories))
+	categoryOrderByKey := make(map[string]int, len(categories))
+	for _, cat := range categories {
+		categoryKeyByID[cat.ID] = cat.Key
+		categoryOrderByKey[cat.Key] = cat.Order
+	}
+
+	// 7. 转换为扁平 DTO 列表
+	result := make([]SettingsItemDTO, 0, len(defs))
+	for _, def := range defs {
+		categoryKey := categoryKeyByID[def.CategoryID]
+		ts := teamMap[def.Key]
+		os := orgMap[def.Key]
+		dto := ToSettingsItemDTO(def, ts, os, categoryKey)
+		if dto != nil {
+			result = append(result, *dto)
+		}
+	}
+
+	// 8. 按 Category Order + Group + Setting Order 排序
+	sort.Slice(result, func(i, j int) bool {
+		catOrderI := categoryOrderByKey[result[i].Category]
+		catOrderJ := categoryOrderByKey[result[j].Category]
+		if catOrderI != catOrderJ {
+			return catOrderI < catOrderJ
+		}
+		if result[i].Group != result[j].Group {
+			if result[i].Group == "default" {
+				return false
+			}
+			if result[j].Group == "default" {
+				return true
+			}
+			return result[i].Group < result[j].Group
+		}
+		return result[i].Order < result[j].Order
+	})
+
 	return result, nil
+}
+
+// fetchSettings 根据 Category 获取配置定义列表
+func (h *ListHandler) fetchSettings(ctx context.Context, categoryKey string) ([]*settingdomain.Setting, error) {
+	if categoryKey == "" {
+		defs, err := h.settingQueryRepo.FindByConfigurableAt(ctx, settingdomain.ScopeLevelTeam)
+		if err != nil {
+			return nil, fmt.Errorf("failed to find settings: %w", err)
+		}
+		return defs, nil
+	}
+
+	category, err := h.categoryQueryRepo.FindByKey(ctx, categoryKey)
+	if err != nil {
+		return nil, fmt.Errorf("failed to find category by key %q: %w", categoryKey, err)
+	}
+	if category == nil {
+		return nil, fmt.Errorf("category not found: %s", categoryKey)
+	}
+
+	defs, err := h.settingQueryRepo.FindByCategoryID(ctx, category.ID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to find settings by category: %w", err)
+	}
+	return defs, nil
 }

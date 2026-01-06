@@ -21,7 +21,7 @@ func TestListSettings(t *testing.T) {
 	c := manualtest.LoginAsAdmin(t)
 
 	t.Run("登录用户可获取设置列表", func(t *testing.T) {
-		result, _, err := manualtest.GetList[user.UserSettingDTO](
+		result, _, err := manualtest.GetList[user.SettingsItemDTO](
 			c,
 			"/api/user/settings",
 			nil,
@@ -39,7 +39,7 @@ func TestListSettings(t *testing.T) {
 	})
 
 	t.Run("系统默认值is_customized应为false", func(t *testing.T) {
-		result, _, err := manualtest.GetList[user.UserSettingDTO](
+		result, _, err := manualtest.GetList[user.SettingsItemDTO](
 			c,
 			"/api/user/settings",
 			nil,
@@ -67,7 +67,7 @@ func TestGetSetting(t *testing.T) {
 
 	t.Run("获取存在的设置", func(t *testing.T) {
 		// 使用种子数据中的 general.theme 设置
-		result, err := manualtest.Get[user.UserSettingDTO](
+		result, err := manualtest.Get[user.SettingsItemDTO](
 			c,
 			"/api/user/settings/general.theme",
 			nil,
@@ -98,7 +98,7 @@ func TestUpdateSetting(t *testing.T) {
 			"value": "dark",
 		}
 
-		result, err := manualtest.Put[user.UserSettingDTO](
+		result, err := manualtest.Put[user.SettingsItemDTO](
 			c,
 			"/api/user/settings/"+testKey,
 			updateReq,
@@ -107,7 +107,7 @@ func TestUpdateSetting(t *testing.T) {
 		require.NotNil(t, result, "响应不应为空")
 
 		// 验证更新后的值
-		getResult, err := manualtest.Get[user.UserSettingDTO](
+		getResult, err := manualtest.Get[user.SettingsItemDTO](
 			c,
 			"/api/user/settings/"+testKey,
 			nil,
@@ -125,7 +125,7 @@ func TestUpdateSetting(t *testing.T) {
 
 	t.Run("验证自定义值覆盖系统默认值", func(t *testing.T) {
 		// 先获取原始值
-		original, err := manualtest.Get[user.UserSettingDTO](
+		original, err := manualtest.Get[user.SettingsItemDTO](
 			c,
 			"/api/user/settings/general.language",
 			nil,
@@ -137,7 +137,7 @@ func TestUpdateSetting(t *testing.T) {
 		updateReq := map[string]any{
 			"value": "en-US",
 		}
-		_, err = manualtest.Put[user.UserSettingDTO](
+		_, err = manualtest.Put[user.SettingsItemDTO](
 			c,
 			"/api/user/settings/general.language",
 			updateReq,
@@ -145,7 +145,7 @@ func TestUpdateSetting(t *testing.T) {
 		require.NoError(t, err, "更新应成功")
 
 		// 验证自定义值
-		updated, err := manualtest.Get[user.UserSettingDTO](
+		updated, err := manualtest.Get[user.SettingsItemDTO](
 			c,
 			"/api/user/settings/general.language",
 			nil,
@@ -178,7 +178,7 @@ func TestDeleteSetting(t *testing.T) {
 		updateReq := map[string]any{
 			"value": "dark",
 		}
-		_, err := manualtest.Put[user.UserSettingDTO](
+		_, err := manualtest.Put[user.SettingsItemDTO](
 			c,
 			"/api/user/settings/"+testKey,
 			updateReq,
@@ -186,7 +186,7 @@ func TestDeleteSetting(t *testing.T) {
 		require.NoError(t, err, "创建自定义值应成功")
 
 		// 验证自定义值存在
-		customResult, err := manualtest.Get[user.UserSettingDTO](
+		customResult, err := manualtest.Get[user.SettingsItemDTO](
 			c,
 			"/api/user/settings/"+testKey,
 			nil,
@@ -199,7 +199,7 @@ func TestDeleteSetting(t *testing.T) {
 		require.NoError(t, err, "删除应成功")
 
 		// 验证恢复为系统默认值
-		defaultResult, err := manualtest.Get[user.UserSettingDTO](
+		defaultResult, err := manualtest.Get[user.SettingsItemDTO](
 			c,
 			"/api/user/settings/"+testKey,
 			nil,
@@ -237,7 +237,7 @@ func TestSettingsValueTypes(t *testing.T) {
 			"value": "dark",
 		}
 
-		result, err := manualtest.Put[user.UserSettingDTO](
+		result, err := manualtest.Put[user.SettingsItemDTO](
 			c,
 			"/api/user/settings/general.theme",
 			updateReq,
@@ -245,7 +245,7 @@ func TestSettingsValueTypes(t *testing.T) {
 		require.NoError(t, err, "更新字符串设置应成功")
 		require.NotNil(t, result, "响应不应为空")
 
-		getResult, err := manualtest.Get[user.UserSettingDTO](
+		getResult, err := manualtest.Get[user.SettingsItemDTO](
 			c,
 			"/api/user/settings/general.theme",
 			nil,
@@ -260,7 +260,7 @@ func TestSettingsValueTypes(t *testing.T) {
 			"value": true,
 		}
 
-		result, err := manualtest.Put[user.UserSettingDTO](
+		result, err := manualtest.Put[user.SettingsItemDTO](
 			c,
 			"/api/user/settings/notification.enable_email",
 			updateReq,
@@ -268,7 +268,7 @@ func TestSettingsValueTypes(t *testing.T) {
 		require.NoError(t, err, "更新布尔设置应成功")
 		require.NotNil(t, result, "响应不应为空")
 
-		getResult, err := manualtest.Get[user.UserSettingDTO](
+		getResult, err := manualtest.Get[user.SettingsItemDTO](
 			c,
 			"/api/user/settings/notification.enable_email",
 			nil,
@@ -348,7 +348,7 @@ func TestBatchSet(t *testing.T) {
 		require.NoError(t, err, "批量设置应成功")
 
 		// 验证 theme 设置
-		themeResult, err := manualtest.Get[user.UserSettingDTO](
+		themeResult, err := manualtest.Get[user.SettingsItemDTO](
 			c,
 			"/api/user/settings/general.theme",
 			nil,
@@ -358,7 +358,7 @@ func TestBatchSet(t *testing.T) {
 		assert.True(t, themeResult.IsCustomized, "theme 应为自定义值")
 
 		// 验证 language 设置
-		langResult, err := manualtest.Get[user.UserSettingDTO](
+		langResult, err := manualtest.Get[user.SettingsItemDTO](
 			c,
 			"/api/user/settings/general.language",
 			nil,
@@ -393,7 +393,7 @@ func TestResetAll(t *testing.T) {
 		require.NoError(t, err, "创建自定义值应成功")
 
 		// 验证自定义值存在
-		themeBeforeReset, err := manualtest.Get[user.UserSettingDTO](
+		themeBeforeReset, err := manualtest.Get[user.SettingsItemDTO](
 			c,
 			"/api/user/settings/general.theme",
 			nil,
@@ -410,7 +410,7 @@ func TestResetAll(t *testing.T) {
 		require.NoError(t, err, "重置所有配置应成功")
 
 		// 验证所有配置已恢复默认值
-		themeAfterReset, err := manualtest.Get[user.UserSettingDTO](
+		themeAfterReset, err := manualtest.Get[user.SettingsItemDTO](
 			c,
 			"/api/user/settings/general.theme",
 			nil,
@@ -418,7 +418,7 @@ func TestResetAll(t *testing.T) {
 		require.NoError(t, err, "获取设置应成功")
 		assert.False(t, themeAfterReset.IsCustomized, "重置后 theme 应为系统默认值")
 
-		langAfterReset, err := manualtest.Get[user.UserSettingDTO](
+		langAfterReset, err := manualtest.Get[user.SettingsItemDTO](
 			c,
 			"/api/user/settings/general.language",
 			nil,
@@ -468,7 +468,7 @@ func TestSettingsIsolation(t *testing.T) {
 		adminUpdateReq := map[string]any{
 			"value": "dark",
 		}
-		_, err = manualtest.Put[user.UserSettingDTO](
+		_, err = manualtest.Put[user.SettingsItemDTO](
 			adminClient,
 			"/api/user/settings/"+testKey,
 			adminUpdateReq,
@@ -479,7 +479,7 @@ func TestSettingsIsolation(t *testing.T) {
 		testUserUpdateReq := map[string]any{
 			"value": "light",
 		}
-		_, err = manualtest.Put[user.UserSettingDTO](
+		_, err = manualtest.Put[user.SettingsItemDTO](
 			testUserClient,
 			"/api/user/settings/"+testKey,
 			testUserUpdateReq,
@@ -487,7 +487,7 @@ func TestSettingsIsolation(t *testing.T) {
 		require.NoError(t, err, "测试用户更新设置应成功")
 
 		// 验证 Admin 的值
-		adminResult, err := manualtest.Get[user.UserSettingDTO](
+		adminResult, err := manualtest.Get[user.SettingsItemDTO](
 			adminClient,
 			"/api/user/settings/"+testKey,
 			nil,
@@ -496,7 +496,7 @@ func TestSettingsIsolation(t *testing.T) {
 		assert.Equal(t, "dark", adminResult.Value, "Admin应看到自己的值")
 
 		// 验证测试用户的值
-		testUserResult, err := manualtest.Get[user.UserSettingDTO](
+		testUserResult, err := manualtest.Get[user.SettingsItemDTO](
 			testUserClient,
 			"/api/user/settings/"+testKey,
 			nil,

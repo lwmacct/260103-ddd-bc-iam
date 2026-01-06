@@ -145,10 +145,8 @@ github.com/lwmacct/251207-go-pkg-cfgm v0.2.4 h1:qp9nPOser2rqS9/PxpYCwJIHO65ie5Xw
 github.com/lwmacct/251207-go-pkg-cfgm v0.2.4/go.mod h1:7IdZUoDbAYLjcxr3foSs0DrIOdTG7BQMraJei6YnoDY=
 github.com/lwmacct/251219-go-pkg-logm v0.1.8 h1:JuQHvZVZj5YpuPEDMjLrSxrGY9HKJljp95eTqFaVe9o=
 github.com/lwmacct/251219-go-pkg-logm v0.1.8/go.mod h1:Kw/aSDYy5d9VRAl5gwENiP0hqLzkkCjz91yw2gsMS/4=
-github.com/lwmacct/260103-ddd-bc-settings v0.7.260106 h1:Nc8O8xxMGispfTOfKNnTt8GpVCPQAdekclamXoY4vRs=
-github.com/lwmacct/260103-ddd-bc-settings v0.7.260106/go.mod h1:VM/hb5VmaTJDi30tXPFHOUmCxesDZvCA/AjsH/osb5c=
-github.com/lwmacct/260103-ddd-bc-settings v0.10.260106 h1:fIewfeQpQjZFsi+vnzm6Hm/s4zkkpq1I+LFNyZ54o3c=
-github.com/lwmacct/260103-ddd-bc-settings v0.10.260106/go.mod h1:LG7eMbHCnbFE9CK1grtLuzOQvET6AByrXdIj9UznI7Y=
+github.com/lwmacct/260103-ddd-bc-settings v0.11.260106 h1:Dc7FfumP82eYnoOfDdJp4wdW/A4IbS+AR+Dx8eX6ZIc=
+github.com/lwmacct/260103-ddd-bc-settings v0.11.260106/go.mod h1:LG7eMbHCnbFE9CK1grtLuzOQvET6AByrXdIj9UznI7Y=
 github.com/lwmacct/260103-ddd-shared v0.6.260106 h1:ybwh5xDseoBV6jzbjwa1TfVjVjLKgHOnSg3uGjmPgQw=
 github.com/lwmacct/260103-ddd-shared v0.6.260106/go.mod h1:vx5L1qdU3tp1guW4JKG+GWh7j66j4OYTzALmYTG8ncQ=
 github.com/mattn/go-isatty v0.0.20 h1:xfD0iDuEKnDkl03q4limB+vH+GxLEtL/jb4xVJSWWEY=
