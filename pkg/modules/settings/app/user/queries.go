@@ -8,8 +8,8 @@ type GetQuery struct {
 
 // ListQuery 获取配置列表查询
 type ListQuery struct {
-	UserID     uint `form:"-"`                               // 从上下文获取，不绑定
-	CategoryID uint `form:"category_id" binding:"omitempty"` // 可选：按分类 ID 过滤
+	UserID   uint   `form:"-" swaggerignore:"true"`       // 从上下文获取，不绑定
+	Category string `form:"category" binding:"omitempty"` // 可选：按分类 Key 过滤（如 "general"）
 }
 
 // ListCategoriesQuery 获取分类列表查询

@@ -10,18 +10,21 @@ import (
 
 // ListHandler 获取用户配置列表查询处理器
 type ListHandler struct {
-	settingQueryRepo settingdomain.QueryRepository
-	queryRepo        user.QueryRepository
+	settingQueryRepo  settingdomain.QueryRepository
+	categoryQueryRepo settingdomain.SettingCategoryQueryRepository
+	queryRepo         user.QueryRepository
 }
 
 // NewListHandler 创建获取配置列表查询处理器
 func NewListHandler(
 	settingQueryRepo settingdomain.QueryRepository,
+	categoryQueryRepo settingdomain.SettingCategoryQueryRepository,
 	queryRepo user.QueryRepository,
 ) *ListHandler {
 	return &ListHandler{
-		settingQueryRepo: settingQueryRepo,
-		queryRepo:        queryRepo,
+		settingQueryRepo:  settingQueryRepo,
+		categoryQueryRepo: categoryQueryRepo,
+		queryRepo:         queryRepo,
 	}
 }
 
@@ -33,8 +36,13 @@ func (h *ListHandler) Handle(ctx context.Context, query ListQuery) ([]*UserSetti
 	var defs []*settingdomain.Setting
 	var err error
 
-	if query.CategoryID != 0 {
-		defs, err = h.settingQueryRepo.FindByCategoryID(ctx, query.CategoryID)
+	if query.Category != "" {
+		// 根据 category key 查找分类 ID
+		category, catErr := h.categoryQueryRepo.FindByKey(ctx, query.Category)
+		if catErr != nil {
+			return nil, fmt.Errorf("category not found: %s", query.Category)
+		}
+		defs, err = h.settingQueryRepo.FindByCategoryID(ctx, category.ID)
 	} else {
 		defs, err = h.settingQueryRepo.FindVisibleToUser(ctx)
 	}

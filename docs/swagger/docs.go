@@ -2829,15 +2829,9 @@ const docTemplate = `{
                         "required": true
                     },
                     {
-                        "type": "integer",
-                        "description": "从上下文获取，不绑定",
-                        "name": "-",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "可选：按分类 ID 过滤",
-                        "name": "category_id",
+                        "type": "string",
+                        "description": "可选：按分类 Key 过滤（如 \"general\"）",
+                        "name": "category",
                         "in": "query"
                     }
                 ],
@@ -3563,15 +3557,9 @@ const docTemplate = `{
                         "required": true
                     },
                     {
-                        "type": "integer",
-                        "description": "从上下文获取，不绑定",
-                        "name": "-",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "可选：按分类 ID 过滤",
-                        "name": "category_id",
+                        "type": "string",
+                        "description": "可选：按分类 Key 过滤（如 \"general\"）",
+                        "name": "category",
                         "in": "query"
                     }
                 ],
@@ -4115,15 +4103,9 @@ const docTemplate = `{
                 "summary": "配置列表",
                 "parameters": [
                     {
-                        "type": "integer",
-                        "description": "从上下文获取，不绑定",
-                        "name": "-",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "description": "可选：按分类 ID 过滤",
-                        "name": "category_id",
+                        "type": "string",
+                        "description": "可选：按分类 Key 过滤（如 \"general\"）",
+                        "name": "category",
                         "in": "query"
                     }
                 ],

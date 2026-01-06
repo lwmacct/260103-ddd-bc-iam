@@ -11,21 +11,24 @@ import (
 
 // ListHandler 获取团队配置列表查询处理器
 type ListHandler struct {
-	settingQueryRepo settingdomain.QueryRepository
-	teamQueryRepo    team.QueryRepository
-	orgQueryRepo     org.QueryRepository // 用于继承查询
+	settingQueryRepo  settingdomain.QueryRepository
+	categoryQueryRepo settingdomain.SettingCategoryQueryRepository
+	teamQueryRepo     team.QueryRepository
+	orgQueryRepo      org.QueryRepository // 用于继承查询
 }
 
 // NewListHandler 创建获取配置列表查询处理器
 func NewListHandler(
 	settingQueryRepo settingdomain.QueryRepository,
+	categoryQueryRepo settingdomain.SettingCategoryQueryRepository,
 	teamQueryRepo team.QueryRepository,
 	orgQueryRepo org.QueryRepository,
 ) *ListHandler {
 	return &ListHandler{
-		settingQueryRepo: settingQueryRepo,
-		teamQueryRepo:    teamQueryRepo,
-		orgQueryRepo:     orgQueryRepo,
+		settingQueryRepo:  settingQueryRepo,
+		categoryQueryRepo: categoryQueryRepo,
+		teamQueryRepo:     teamQueryRepo,
+		orgQueryRepo:      orgQueryRepo,
 	}
 }
 
@@ -37,8 +40,13 @@ func (h *ListHandler) Handle(ctx context.Context, query ListQuery) ([]*TeamSetti
 	var defs []*settingdomain.Setting
 	var err error
 
-	if query.CategoryID != 0 {
-		defs, err = h.settingQueryRepo.FindByCategoryID(ctx, query.CategoryID)
+	if query.Category != "" {
+		// 根据 category key 查找分类 ID
+		category, catErr := h.categoryQueryRepo.FindByKey(ctx, query.Category)
+		if catErr != nil {
+			return nil, fmt.Errorf("category not found: %s", query.Category)
+		}
+		defs, err = h.settingQueryRepo.FindByCategoryID(ctx, category.ID)
 	} else {
 		// 获取所有 Team 可配置的设置
 		defs, err = h.settingQueryRepo.FindByConfigurableAt(ctx, settingdomain.ScopeLevelTeam)

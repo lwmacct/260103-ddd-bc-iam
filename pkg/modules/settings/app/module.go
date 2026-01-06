@@ -65,19 +65,19 @@ func newUseCases(p useCasesParams) *UseCases {
 		Reset:          user.NewResetHandler(p.Repos.Command),
 		ResetAll:       user.NewResetAllHandler(p.Repos.Command),
 		Get:            user.NewGetHandler(settingQueryRepo, p.Repos.Query),
-		List:           user.NewListHandler(settingQueryRepo, p.Repos.Query),
+		List:           user.NewListHandler(settingQueryRepo, categoryQueryRepo, p.Repos.Query),
 		ListCategories: user.NewListCategoriesHandler(categoryQueryRepo),
 
 		// Org Settings
 		OrgSet:   org.NewSetHandler(settingQueryRepo, p.OrgRepos.Command),
 		OrgReset: org.NewResetHandler(p.OrgRepos.Command),
 		OrgGet:   org.NewGetHandler(settingQueryRepo, p.OrgRepos.Query),
-		OrgList:  org.NewListHandler(settingQueryRepo, p.OrgRepos.Query),
+		OrgList:  org.NewListHandler(settingQueryRepo, categoryQueryRepo, p.OrgRepos.Query),
 
 		// Team Settings
 		TeamSet:   team.NewSetHandler(settingQueryRepo, p.TeamRepos.Command),
 		TeamReset: team.NewResetHandler(p.TeamRepos.Command),
 		TeamGet:   team.NewGetHandler(settingQueryRepo, p.TeamRepos.Query, p.OrgRepos.Query),
-		TeamList:  team.NewListHandler(settingQueryRepo, p.TeamRepos.Query, p.OrgRepos.Query),
+		TeamList:  team.NewListHandler(settingQueryRepo, categoryQueryRepo, p.TeamRepos.Query, p.OrgRepos.Query),
 	}
 }

@@ -3800,14 +3800,10 @@ paths:
         name: org_id
         required: true
         type: integer
-      - description: 从上下文获取，不绑定
+      - description: 可选：按分类 Key 过滤（如 "general"）
         in: query
-        name: '-'
-        type: integer
-      - description: 可选：按分类 ID 过滤
-        in: query
-        name: category_id
-        type: integer
+        name: category
+        type: string
       produces:
       - application/json
       responses:
@@ -4284,14 +4280,10 @@ paths:
         name: team_id
         required: true
         type: integer
-      - description: 从上下文获取，不绑定
+      - description: 可选：按分类 Key 过滤（如 "general"）
         in: query
-        name: '-'
-        type: integer
-      - description: 可选：按分类 ID 过滤
-        in: query
-        name: category_id
-        type: integer
+        name: category
+        type: string
       produces:
       - application/json
       responses:
@@ -4638,14 +4630,10 @@ paths:
       - application/json
       description: 获取当前用户的配置列表（系统默认值+用户自定义值合并视图）
       parameters:
-      - description: 从上下文获取，不绑定
+      - description: 可选：按分类 Key 过滤（如 "general"）
         in: query
-        name: '-'
-        type: integer
-      - description: 可选：按分类 ID 过滤
-        in: query
-        name: category_id
-        type: integer
+        name: category
+        type: string
       produces:
       - application/json
       responses:
