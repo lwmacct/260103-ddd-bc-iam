@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/org"
 	orgDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/org"
 	userDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
@@ -37,15 +38,11 @@ type TeamMemberHandler struct {
 }
 
 // NewTeamMemberHandler 创建团队成员管理 Handler
-func NewTeamMemberHandler(
-	addMemberHandler *org.TeamMemberAddHandler,
-	removeMemberHandler *org.TeamMemberRemoveHandler,
-	listMembersHandler *org.TeamMemberListHandler,
-) *TeamMemberHandler {
+func NewTeamMemberHandler(useCases *app.TeamMemberUseCases) *TeamMemberHandler {
 	return &TeamMemberHandler{
-		addMemberHandler:    addMemberHandler,
-		removeMemberHandler: removeMemberHandler,
-		listMembersHandler:  listMembersHandler,
+		addMemberHandler:    useCases.Add,
+		removeMemberHandler: useCases.Remove,
+		listMembersHandler:  useCases.List,
 	}
 }
 

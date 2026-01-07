@@ -4,6 +4,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/org"
 	authDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/auth"
 	orgDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/org"
@@ -18,13 +19,10 @@ type UserOrgHandler struct {
 }
 
 // NewUserOrgHandler 创建用户视角组织 Handler
-func NewUserOrgHandler(
-	userOrgsHandler *org.UserOrgsHandler,
-	userTeamsHandler *org.UserTeamsHandler,
-) *UserOrgHandler {
+func NewUserOrgHandler(useCases *app.UserOrgUseCases) *UserOrgHandler {
 	return &UserOrgHandler{
-		userOrgsHandler:  userOrgsHandler,
-		userTeamsHandler: userTeamsHandler,
+		userOrgsHandler:  useCases.ListOrgs,
+		userTeamsHandler: useCases.ListTeams,
 	}
 }
 

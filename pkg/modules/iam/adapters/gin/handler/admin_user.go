@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/user"
 	userDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/response"
@@ -39,23 +40,15 @@ type AdminUserHandler struct {
 }
 
 // NewAdminUserHandler creates a new AdminUserHandler instance
-func NewAdminUserHandler(
-	createUserHandler *user.CreateHandler,
-	updateUserHandler *user.UpdateHandler,
-	deleteUserHandler *user.DeleteHandler,
-	assignRolesHandler *user.AssignRolesHandler,
-	batchCreateUserHandler *user.BatchCreateHandler,
-	getUserHandler *user.GetHandler,
-	listUsersHandler *user.ListHandler,
-) *AdminUserHandler {
+func NewAdminUserHandler(useCases *app.UserUseCases) *AdminUserHandler {
 	return &AdminUserHandler{
-		createUserHandler:      createUserHandler,
-		updateUserHandler:      updateUserHandler,
-		deleteUserHandler:      deleteUserHandler,
-		assignRolesHandler:     assignRolesHandler,
-		batchCreateUserHandler: batchCreateUserHandler,
-		getUserHandler:         getUserHandler,
-		listUsersHandler:       listUsersHandler,
+		createUserHandler:      useCases.Create,
+		updateUserHandler:      useCases.Update,
+		deleteUserHandler:      useCases.Delete,
+		assignRolesHandler:     useCases.AssignRoles,
+		batchCreateUserHandler: useCases.BatchCreate,
+		getUserHandler:         useCases.Get,
+		listUsersHandler:       useCases.List,
 	}
 }
 

@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/pat"
 	authDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/auth"
 	patDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/pat"
@@ -27,21 +28,14 @@ type PATHandler struct {
 }
 
 // NewPATHandler creates a new PAT handler
-func NewPATHandler(
-	createHandler *pat.CreateHandler,
-	deleteHandler *pat.DeleteHandler,
-	disableHandler *pat.DisableHandler,
-	enableHandler *pat.EnableHandler,
-	getHandler *pat.GetHandler,
-	listHandler *pat.ListHandler,
-) *PATHandler {
+func NewPATHandler(useCases *app.PATUseCases) *PATHandler {
 	return &PATHandler{
-		createHandler:  createHandler,
-		deleteHandler:  deleteHandler,
-		disableHandler: disableHandler,
-		enableHandler:  enableHandler,
-		getHandler:     getHandler,
-		listHandler:    listHandler,
+		createHandler:  useCases.Create,
+		deleteHandler:  useCases.Delete,
+		disableHandler: useCases.Disable,
+		enableHandler:  useCases.Enable,
+		getHandler:     useCases.Get,
+		listHandler:    useCases.List,
 	}
 }
 

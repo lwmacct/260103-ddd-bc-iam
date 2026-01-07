@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/org"
 	orgDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/org"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/ctxutil"
@@ -38,19 +39,13 @@ type TeamHandler struct {
 }
 
 // NewTeamHandler 创建团队管理 Handler
-func NewTeamHandler(
-	createHandler *org.TeamCreateHandler,
-	updateHandler *org.TeamUpdateHandler,
-	deleteHandler *org.TeamDeleteHandler,
-	getHandler *org.TeamGetHandler,
-	listHandler *org.TeamListHandler,
-) *TeamHandler {
+func NewTeamHandler(useCases *app.TeamUseCases) *TeamHandler {
 	return &TeamHandler{
-		createHandler: createHandler,
-		updateHandler: updateHandler,
-		deleteHandler: deleteHandler,
-		getHandler:    getHandler,
-		listHandler:   listHandler,
+		createHandler: useCases.Create,
+		updateHandler: useCases.Update,
+		deleteHandler: useCases.Delete,
+		getHandler:    useCases.Get,
+		listHandler:   useCases.List,
 	}
 }
 

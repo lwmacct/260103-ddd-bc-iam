@@ -29,107 +29,45 @@ type Handlers struct {
 
 // HandlerModule 提供 IAM 模块的所有 HTTP 处理器。
 var HandlerModule = fx.Module("iam.handler",
-	fx.Provide(newAllHandlers),
+	fx.Provide(NewHandlers),
 )
 
-// handlersParams 聚合创建 Handler 所需的依赖。
-type handlersParams struct {
+// HandlersParams 聚合创建 Handler 所需的依赖。
+type HandlersParams struct {
 	fx.In
 
 	IAMConfig *config.Config
 
-	// IAM 模块用例
-	Auth         *app.AuthUseCases
-	User         *app.UserUseCases
-	Role         *app.RoleUseCases
-	PAT          *app.PATUseCases
-	TwoFA        *app.TwoFAUseCases
-	Audit        *app.AuditUseCases
-	Captcha      *app.CaptchaUseCases
-	Organization *app.OrganizationUseCases
+	// IAM 模块用例（12 个清晰的领域聚合）
+	Auth       *app.AuthUseCases
+	User       *app.UserUseCases
+	Role       *app.RoleUseCases
+	PAT        *app.PATUseCases
+	TwoFA      *app.TwoFAUseCases
+	Audit      *app.AuditUseCases
+	Captcha    *app.CaptchaUseCases
+	Org        *app.OrgUseCases
+	OrgMember  *app.OrgMemberUseCases
+	Team       *app.TeamUseCases
+	TeamMember *app.TeamMemberUseCases
+	UserOrg    *app.UserOrgUseCases
 }
 
-func newAllHandlers(p handlersParams) *Handlers {
+// NewHandlers 创建所有 IAM HTTP 处理器。
+func NewHandlers(p HandlersParams) *Handlers {
 	return &Handlers{
-		Auth: NewAuthHandler(
-			p.Auth.Login,
-			p.Auth.Login2FA,
-			p.Auth.Register,
-			p.Auth.RefreshToken,
-		),
-		UserProfile: NewUserProfileHandler(
-			p.User.Get,
-			p.User.Update,
-			p.User.ChangePassword,
-			p.User.Delete,
-		),
-		AdminUser: NewAdminUserHandler(
-			p.User.Create,
-			p.User.Update,
-			p.User.Delete,
-			p.User.AssignRoles,
-			p.User.BatchCreate,
-			p.User.Get,
-			p.User.List,
-		),
-		Role: NewRoleHandler(
-			p.Role.Create,
-			p.Role.Update,
-			p.Role.Delete,
-			p.Role.SetPermissions,
-			p.Role.Get,
-			p.Role.List,
-		),
-		PAT: NewPATHandler(
-			p.PAT.Create,
-			p.PAT.Delete,
-			p.PAT.Disable,
-			p.PAT.Enable,
-			p.PAT.Get,
-			p.PAT.List,
-		),
-		TwoFA: NewTwoFAHandler(
-			p.TwoFA.Setup,
-			p.TwoFA.VerifyEnable,
-			p.TwoFA.Disable,
-			p.TwoFA.GetStatus,
-		),
-		UserOrg: NewUserOrgHandler(
-			p.Organization.UserOrgs,
-			p.Organization.UserTeams,
-		),
-		Audit: NewAuditHandler(
-			p.Audit.List,
-			p.Audit.Get,
-		),
-		Captcha: NewCaptchaHandler(
-			p.Captcha.Generate,
-			p.IAMConfig.Auth.DevSecret,
-		),
-		Org: NewOrgHandler(
-			p.Organization.Create,
-			p.Organization.Update,
-			p.Organization.Delete,
-			p.Organization.Get,
-			p.Organization.List,
-		),
-		OrgMember: NewOrgMemberHandler(
-			p.Organization.MemberAdd,
-			p.Organization.MemberRemove,
-			p.Organization.MemberUpdateRole,
-			p.Organization.MemberList,
-		),
-		Team: NewTeamHandler(
-			p.Organization.TeamCreate,
-			p.Organization.TeamUpdate,
-			p.Organization.TeamDelete,
-			p.Organization.TeamGet,
-			p.Organization.TeamList,
-		),
-		TeamMember: NewTeamMemberHandler(
-			p.Organization.TeamMemberAdd,
-			p.Organization.TeamMemberRemove,
-			p.Organization.TeamMemberList,
-		),
+		Auth:        NewAuthHandler(p.Auth),
+		UserProfile: NewUserProfileHandler(p.User),
+		AdminUser:   NewAdminUserHandler(p.User),
+		Role:        NewRoleHandler(p.Role),
+		PAT:         NewPATHandler(p.PAT),
+		TwoFA:       NewTwoFAHandler(p.TwoFA),
+		UserOrg:     NewUserOrgHandler(p.UserOrg),
+		Audit:       NewAuditHandler(p.Audit),
+		Captcha:     NewCaptchaHandler(p.Captcha, p.IAMConfig.Auth.DevSecret),
+		Org:         NewOrgHandler(p.Org),
+		OrgMember:   NewOrgMemberHandler(p.OrgMember),
+		Team:        NewTeamHandler(p.Team),
+		TeamMember:  NewTeamMemberHandler(p.TeamMember),
 	}
 }

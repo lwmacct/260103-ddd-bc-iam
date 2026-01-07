@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/registry"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/audit"
 	auditDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/audit"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/response"
@@ -64,13 +65,10 @@ type AuditHandler struct {
 }
 
 // NewAuditHandler creates a new AuditHandler instance
-func NewAuditHandler(
-	listHandler *audit.ListHandler,
-	getHandler *audit.GetHandler,
-) *AuditHandler {
+func NewAuditHandler(useCases *app.AuditUseCases) *AuditHandler {
 	return &AuditHandler{
-		listHandler: listHandler,
-		getHandler:  getHandler,
+		listHandler: useCases.List,
+		getHandler:  useCases.Get,
 	}
 }
 

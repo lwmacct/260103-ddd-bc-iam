@@ -3,6 +3,7 @@ package handler
 import (
 	"github.com/gin-gonic/gin"
 
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/captcha"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/response"
 )
@@ -15,11 +16,11 @@ type CaptchaHandler struct {
 
 // NewCaptchaHandler 创建验证码处理器
 func NewCaptchaHandler(
-	generateHandler *captcha.GenerateHandler,
+	useCases *app.CaptchaUseCases,
 	devSecret string,
 ) *CaptchaHandler {
 	return &CaptchaHandler{
-		generateHandler: generateHandler,
+		generateHandler: useCases.Generate,
 		devSecret:       devSecret,
 	}
 }

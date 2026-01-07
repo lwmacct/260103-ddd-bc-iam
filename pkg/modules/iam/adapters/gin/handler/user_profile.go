@@ -4,6 +4,7 @@ import (
 	"errors"
 
 	"github.com/gin-gonic/gin"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/user"
 	userDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/ctxutil"
@@ -19,17 +20,12 @@ type UserProfileHandler struct {
 }
 
 // NewUserProfileHandler creates a new UserProfileHandler instance
-func NewUserProfileHandler(
-	getUserHandler *user.GetHandler,
-	updateUserHandler *user.UpdateHandler,
-	changePasswordHandler *user.ChangePasswordHandler,
-	deleteUserHandler *user.DeleteHandler,
-) *UserProfileHandler {
+func NewUserProfileHandler(useCases *app.UserUseCases) *UserProfileHandler {
 	return &UserProfileHandler{
-		getUserHandler:        getUserHandler,
-		updateUserHandler:     updateUserHandler,
-		changePasswordHandler: changePasswordHandler,
-		deleteUserHandler:     deleteUserHandler,
+		getUserHandler:        useCases.Get,
+		updateUserHandler:     useCases.Update,
+		changePasswordHandler: useCases.ChangePassword,
+		deleteUserHandler:     useCases.Delete,
 	}
 }
 

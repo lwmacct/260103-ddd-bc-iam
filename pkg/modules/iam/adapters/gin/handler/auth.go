@@ -4,6 +4,7 @@ import (
 	"errors"
 
 	"github.com/gin-gonic/gin"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/auth"
 	authDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/auth"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/response"
@@ -18,17 +19,12 @@ type AuthHandler struct {
 }
 
 // NewAuthHandler 创建认证处理器
-func NewAuthHandler(
-	loginHandler *auth.LoginHandler,
-	login2FAHandler *auth.Login2FAHandler,
-	registerHandler *auth.RegisterHandler,
-	refreshTokenHandler *auth.RefreshTokenHandler,
-) *AuthHandler {
+func NewAuthHandler(useCases *app.AuthUseCases) *AuthHandler {
 	return &AuthHandler{
-		loginHandler:        loginHandler,
-		login2FAHandler:     login2FAHandler,
-		registerHandler:     registerHandler,
-		refreshTokenHandler: refreshTokenHandler,
+		loginHandler:        useCases.Login,
+		login2FAHandler:     useCases.Login2FA,
+		registerHandler:     useCases.Register,
+		refreshTokenHandler: useCases.RefreshToken,
 	}
 }
 

@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/org"
 	orgDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/org"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/ctxutil"
@@ -39,19 +40,13 @@ type OrgHandler struct {
 }
 
 // NewOrgHandler 创建组织管理 Handler
-func NewOrgHandler(
-	createHandler *org.CreateHandler,
-	updateHandler *org.UpdateHandler,
-	deleteHandler *org.DeleteHandler,
-	getHandler *org.GetHandler,
-	listHandler *org.ListHandler,
-) *OrgHandler {
+func NewOrgHandler(useCases *app.OrgUseCases) *OrgHandler {
 	return &OrgHandler{
-		createHandler: createHandler,
-		updateHandler: updateHandler,
-		deleteHandler: deleteHandler,
-		getHandler:    getHandler,
-		listHandler:   listHandler,
+		createHandler: useCases.Create,
+		updateHandler: useCases.Update,
+		deleteHandler: useCases.Delete,
+		getHandler:    useCases.Get,
+		listHandler:   useCases.List,
 	}
 }
 

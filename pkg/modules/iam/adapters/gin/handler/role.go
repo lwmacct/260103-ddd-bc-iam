@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/role"
 	roleDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/role"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/response"
@@ -37,21 +38,14 @@ type RoleHandler struct {
 }
 
 // NewRoleHandler creates a new RoleHandler instance
-func NewRoleHandler(
-	createRoleHandler *role.CreateHandler,
-	updateRoleHandler *role.UpdateHandler,
-	deleteRoleHandler *role.DeleteHandler,
-	setPermissionsHandler *role.SetPermissionsHandler,
-	getRoleHandler *role.GetHandler,
-	listRolesHandler *role.ListHandler,
-) *RoleHandler {
+func NewRoleHandler(useCases *app.RoleUseCases) *RoleHandler {
 	return &RoleHandler{
-		createRoleHandler:     createRoleHandler,
-		updateRoleHandler:     updateRoleHandler,
-		deleteRoleHandler:     deleteRoleHandler,
-		setPermissionsHandler: setPermissionsHandler,
-		getRoleHandler:        getRoleHandler,
-		listRolesHandler:      listRolesHandler,
+		createRoleHandler:     useCases.Create,
+		updateRoleHandler:     useCases.Update,
+		deleteRoleHandler:     useCases.Delete,
+		setPermissionsHandler: useCases.SetPermissions,
+		getRoleHandler:        useCases.Get,
+		listRolesHandler:      useCases.List,
 	}
 }
 
