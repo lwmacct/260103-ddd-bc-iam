@@ -11,8 +11,8 @@ var HandlerModule = fx.Module("settings.handler",
 	fx.Provide(NewAllHandlers),
 )
 
-// HandlerParams Handler 构造参数（供外部 Fx 注入使用）
-type HandlerParams struct {
+// HandlersParams Handler 构造参数（供外部 Fx 注入使用）
+type HandlersParams struct {
 	fx.In
 
 	UserUseCases *app.UserUseCases
@@ -31,7 +31,7 @@ type Handlers struct {
 }
 
 // NewAllHandlers 创建所有 Handler
-func NewAllHandlers(p HandlerParams) *Handlers {
+func NewAllHandlers(p HandlersParams) *Handlers {
 	return &Handlers{
 		UserSetting: NewUserSettingHandler(p.UserUseCases),
 		OrgSetting:  NewOrgSettingHandler(p.OrgUseCases),
