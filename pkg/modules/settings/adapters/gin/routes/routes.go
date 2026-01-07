@@ -1,4 +1,10 @@
 // Package routes 定义 Settings 模块的 HTTP 路由。
+//
+// 本包遵循 DDD 架构原则，路由通过 fx Module 自动装配。
+//
+// # Fx 模块装配
+//
+//	settings.Module() 包含 routes.RoutesModule，通过 fx 自动注入 Handlers 聚合
 package routes
 
 import (
@@ -7,15 +13,6 @@ import (
 
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/handler"
 )
-
-// All 返回 Settings 模块的所有路由
-func All(h *handler.UserSettingHandler, orgH *handler.OrgSettingHandler, teamH *handler.TeamSettingHandler) []routes.Route {
-	userRoutes := AllUser(h)
-	orgRoutes := OrgSettings(orgH)
-	teamRoutes := TeamSettings(teamH)
-
-	return append(userRoutes, append(orgRoutes, teamRoutes...)...)
-}
 
 // AllUser 返回用户配置的所有路由
 func AllUser(h *handler.UserSettingHandler) []routes.Route {

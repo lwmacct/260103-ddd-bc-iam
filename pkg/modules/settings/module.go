@@ -33,6 +33,7 @@ import (
 	"go.uber.org/fx"
 
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/handler"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/routes"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/app"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/infra/cache"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/infra/persistence"
@@ -45,5 +46,6 @@ func Module() fx.Option {
 		persistence.RepositoryModule,
 		app.UseCaseModule,
 		handler.HandlerModule,
+		routes.RoutesModule,
 	)
 }

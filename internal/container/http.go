@@ -23,11 +23,8 @@ import (
 	settingsHandler "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/handler"
 	settingsconfig "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/config"
 
-	// Handlers (injected via fx.In from their modules)
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
-	userSettingsHandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/handler"
-
 	ginHttp "github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin"
+	ginroutes "github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/routes"
 )
 
 // HTTPModule 提供 HTTP 路由和服务器。
@@ -90,13 +87,13 @@ type routerParams struct {
 	TeamRepos       persistence.TeamRepositories
 	TeamMemberRepos persistence.TeamMemberRepositories
 
-	// IAM Handlers（聚合注入）
-	IAM *handler.Handlers
+	// IAM Routes (fx Module 自动注入)
+	IAMRoutes []ginroutes.Route `name:"iam"`
 
-	// Settings BC Handlers（聚合注入）
-	SettingsBC *userSettingsHandler.Handlers
+	// Settings BC Routes (fx Module 自动注入)
+	SettingsRoutes []ginroutes.Route `name:"settings"`
 
-	// Settings Handlers
+	// Settings Handlers (external dependency)
 	Setting     *settingsHandler.SettingHandler
 	SettingsCfg settingsconfig.Config
 }
@@ -105,18 +102,13 @@ func newRouter(p routerParams) *gin.Engine {
 	// Create Gin Engine using bootstrap
 	engine := bootstrap.NewEngine()
 
-	// Get all routes from modules using the new routes function
-	allRoutes := AllRoutes(
-		// IAM Handlers（聚合）
-		p.IAM,
-
-		// Settings BC Handlers（聚合）
-		p.SettingsBC,
-
-		// Settings Handlers
-		p.Setting,
-		p.SettingsCfg,
-	)
+	// Get all routes from modules
+	allRoutes := AllRoutes(AllRoutesParams{
+		IAMRoutes:      p.IAMRoutes,
+		SettingsRoutes: p.SettingsRoutes,
+		SettingHandler: p.Setting,
+		SettingsCfg:    p.SettingsCfg,
+	})
 
 	// Create MiddlewareInjector with all dependencies
 	injector := NewMiddlewareInjector(RouterDepsParams{

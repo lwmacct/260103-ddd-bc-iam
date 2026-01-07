@@ -1,16 +1,10 @@
 package container
 
 import (
+	"go.uber.org/fx"
+
 	"github.com/gin-gonic/gin"
 	ginroutes "github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/routes"
-
-	// IAM
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/routes"
-
-	// Settings BC
-	userSettingsHandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/handler"
-	settingsRoutes "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/routes"
 
 	// Settings (external dependency)
 	settingsHandler "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/handler"
@@ -18,58 +12,42 @@ import (
 	settingsconfig "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/config"
 )
 
+// AllRoutesParams 聚合所有模块的路由依赖（通过 fx 注入）。
+type AllRoutesParams struct {
+	fx.In
+
+	// IAM 路由（通过 fx Module 自动注入）
+	IAMRoutes []ginroutes.Route `name:"iam"`
+
+	// Settings BC 路由（通过 fx Module 自动注入）
+	SettingsRoutes []ginroutes.Route `name:"settings"`
+
+	// Settings Handlers (external dependency)
+	SettingHandler *settingsHandler.SettingHandler
+	SettingsCfg    settingsconfig.Config
+}
+
 // AllRoutes 聚合所有模块的路由定义。
 //
 // 职责：
 //  1. 从 IAM、Settings BC 模块收集路由定义
 //  2. 返回统一的路由列表供注册使用
-func AllRoutes(
-	// IAM Handlers（聚合）
-	iam *handler.Handlers,
+//
+// 架构演进：
+//   - IAM: 已迁移到 fx Module 模式（自动注入）
+//   - Settings BC: 已迁移到 fx Module 模式（自动注入）
+//   - Settings (external): 外部依赖（手动聚合）
+func AllRoutes(p AllRoutesParams) []ginroutes.Route {
+	// IAM 域路由（已通过 fx 自动注入）
+	allRoutes := p.IAMRoutes
 
-	// Settings BC Handlers（聚合）
-	settingsBC *userSettingsHandler.Handlers,
-
-	// Settings Handlers (external dependency)
-	settingHandler *settingsHandler.SettingHandler,
-	settingsCfg settingsconfig.Config,
-) []ginroutes.Route {
-	// IAM 域路由
-	iamRoutes := routes.All(
-		// Auth module
-		iam.Auth,
-		iam.Captcha,
-		iam.TwoFA,
-		// User module
-		iam.UserProfile,
-		iam.AdminUser,
-		iam.UserOrg,
-		// PAT module
-		iam.PAT,
-		// Role module
-		iam.Role,
-		// Audit module
-		iam.Audit,
-		// Org module
-		iam.Org,
-		iam.OrgMember,
-		iam.Team,
-		iam.TeamMember,
-	)
-
-	// Settings BC 路由（User + Org + Team）
-	settingsRouteList := settingsRoutes.All(
-		settingsBC.UserSetting,
-		settingsBC.OrgSetting,
-		settingsBC.TeamSetting,
-	)
+	// Settings BC 路由（已通过 fx 自动注入）
+	allRoutes = append(allRoutes, p.SettingsRoutes...)
 
 	// Settings 路由 (external dependency)
-	settingsBCRouteList := settingsBCRoutes.Admin(settingHandler, &settingsCfg)
+	settingsBCRouteList := settingsBCRoutes.Admin(p.SettingHandler, &p.SettingsCfg)
 
 	// 合并所有路由
-	allRoutes := iamRoutes
-	allRoutes = append(allRoutes, settingsRouteList...)
 	return append(allRoutes, settingsBCRouteList...)
 }
 

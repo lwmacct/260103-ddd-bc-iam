@@ -11,6 +11,7 @@
 //   - cache.CacheModule: IAM 专属缓存服务
 //   - app.UseCaseModule: 用例层（业务逻辑编排）
 //   - handler.HandlerModule: HTTP 处理器层
+//   - routes.RoutesModule: 路由层（通过 fx 自动装配）
 //
 // 注意：User Settings 功能已迁移到独立的 User Settings BC。
 //
@@ -29,6 +30,7 @@ import (
 	"go.uber.org/fx"
 
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/routes"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/cache"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
@@ -43,10 +45,10 @@ import (
 //  4. RepositoryModule (本模块) - 仓储层
 //  5. UseCaseModule (本模块) - 用例层
 //  6. HandlerModule (本模块) - HTTP 处理器层
+//  7. RoutesModule (本模块) - 路由层（自动注入 Handlers 聚合）
 //
 // 注意：
 //   - 认证中间件（Auth, RBAC）在 adapters/gin/middleware 包中
-//   - 路由注册由顶层容器处理，不在模块内部
 //   - User Settings 功能已迁移到独立的 User Settings BC
 func Module() fx.Option {
 	return fx.Module("iam",
@@ -55,5 +57,6 @@ func Module() fx.Option {
 		persistence.RepositoryModule,
 		app.UseCaseModule,
 		handler.HandlerModule,
+		routes.RoutesModule,
 	)
 }
