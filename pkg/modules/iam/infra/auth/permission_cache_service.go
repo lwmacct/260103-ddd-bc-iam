@@ -7,7 +7,6 @@ import (
 	"slices"
 
 	appauth "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/auth"
-	appuser "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/user"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/role"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
 )
@@ -51,7 +50,7 @@ func mergePermissions(base, additional []role.Permission) []role.Permission {
 // 底层缓存操作委托给 [appauth.PermissionCacheService] 接口实现。
 type PermissionCacheService struct {
 	cache         appauth.PermissionCacheService
-	userCache     appuser.UserWithRolesCacheService
+	userCache     user.UserWithRolesCacheService
 	userQueryRepo user.QueryRepository
 	roleQueryRepo role.QueryRepository // 用于查询默认角色权限
 }
@@ -59,7 +58,7 @@ type PermissionCacheService struct {
 // NewPermissionCacheService 创建权限缓存服务
 func NewPermissionCacheService(
 	cacheService appauth.PermissionCacheService,
-	userCacheService appuser.UserWithRolesCacheService,
+	userCacheService user.UserWithRolesCacheService,
 	userQueryRepo user.QueryRepository,
 	roleQueryRepo role.QueryRepository,
 ) *PermissionCacheService {

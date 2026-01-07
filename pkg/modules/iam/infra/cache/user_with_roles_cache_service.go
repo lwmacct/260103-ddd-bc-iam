@@ -9,7 +9,6 @@ import (
 
 	"github.com/redis/go-redis/v9"
 
-	appuser "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/user"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
 )
 
@@ -28,7 +27,7 @@ type userWithRolesCacheService struct {
 }
 
 // NewUserWithRolesCacheService 创建用户实体缓存服务。
-func NewUserWithRolesCacheService(client *redis.Client, keyPrefix string) appuser.UserWithRolesCacheService {
+func NewUserWithRolesCacheService(client *redis.Client, keyPrefix string) user.UserWithRolesCacheService {
 	return &userWithRolesCacheService{
 		client:    client,
 		keyPrefix: keyPrefix,
@@ -86,4 +85,4 @@ func (s *userWithRolesCacheService) buildKey(userID uint) string {
 	return fmt.Sprintf("%suser:entity:%d", s.keyPrefix, userID)
 }
 
-var _ appuser.UserWithRolesCacheService = (*userWithRolesCacheService)(nil)
+var _ user.UserWithRolesCacheService = (*userWithRolesCacheService)(nil)

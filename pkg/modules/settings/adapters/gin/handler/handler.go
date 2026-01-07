@@ -4,7 +4,6 @@ import (
 	"errors"
 
 	"github.com/gin-gonic/gin"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/app"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/app/user"
 	userDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/domain/user"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/ctxutil"
@@ -23,7 +22,7 @@ type UserSettingHandler struct {
 }
 
 // NewUserSettingHandler 创建用户配置 Handler
-func NewUserSettingHandler(useCases *app.UseCases) *UserSettingHandler {
+func NewUserSettingHandler(useCases *user.UserUseCases) *UserSettingHandler {
 	return &UserSettingHandler{
 		setHandler:      useCases.Set,
 		batchSetHandler: useCases.BatchSet,

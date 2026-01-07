@@ -2,6 +2,8 @@ package twofa
 
 import (
 	"go.uber.org/fx"
+
+	twofaDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/twofa"
 )
 
 // TwoFAUseCases 双因素认证用例处理器聚合
@@ -14,29 +16,20 @@ type TwoFAUseCases struct {
 
 // Module 注册 TwoFA 子模块依赖
 var Module = fx.Module("iam.twofa",
-	fx.Provide(
-		NewSetupHandler,
-		NewVerifyEnableHandler,
-		NewDisableHandler,
-		NewGetStatusHandler,
-		newTwoFAUseCases,
-	),
+	fx.Provide(newTwoFAUseCases),
 )
 
 type twofaUseCasesParams struct {
 	fx.In
 
-	Setup        *SetupHandler
-	VerifyEnable *VerifyEnableHandler
-	Disable      *DisableHandler
-	GetStatus    *GetStatusHandler
+	TwoFASvc twofaDomain.Service
 }
 
 func newTwoFAUseCases(p twofaUseCasesParams) *TwoFAUseCases {
 	return &TwoFAUseCases{
-		Setup:        p.Setup,
-		VerifyEnable: p.VerifyEnable,
-		Disable:      p.Disable,
-		GetStatus:    p.GetStatus,
+		Setup:        NewSetupHandler(p.TwoFASvc),
+		VerifyEnable: NewVerifyEnableHandler(p.TwoFASvc),
+		Disable:      NewDisableHandler(p.TwoFASvc),
+		GetStatus:    NewGetStatusHandler(p.TwoFASvc),
 	}
 }

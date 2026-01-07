@@ -4,10 +4,10 @@ import (
 	"go.uber.org/fx"
 
 	appauth "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/auth"
-	appuser "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/user"
 	config "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/config"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/auth"
 	twofaDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/twofa"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
 	persistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
 	twofaInfra "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/twofa"
 	infracaptcha "github.com/lwmacct/260103-ddd-shared/pkg/shared/captcha/infrastructure"
@@ -45,7 +45,7 @@ func newJWTManager(iamCfg *config.Config) *authInfra.JWTManager {
 
 func newAuthPermissionCacheService(
 	permissionCache appauth.PermissionCacheService,
-	userWithRolesCache appuser.UserWithRolesCacheService,
+	userWithRolesCache user.UserWithRolesCacheService,
 	userRepos persistence.UserRepositories,
 	roleRepos persistence.RoleRepositories,
 ) *authInfra.PermissionCacheService {

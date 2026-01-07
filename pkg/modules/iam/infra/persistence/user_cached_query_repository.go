@@ -4,7 +4,6 @@ import (
 	"context"
 	"log/slog"
 
-	appuser "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/user"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
 )
 
@@ -17,13 +16,13 @@ import (
 //  3. 同步回写缓存
 type cachedUserQueryRepository struct {
 	delegate user.QueryRepository
-	cache    appuser.UserWithRolesCacheService
+	cache    user.UserWithRolesCacheService
 }
 
 // NewCachedUserQueryRepository 创建带缓存的用户查询仓储。
 func NewCachedUserQueryRepository(
 	delegate user.QueryRepository,
-	cache appuser.UserWithRolesCacheService,
+	cache user.UserWithRolesCacheService,
 ) user.QueryRepository {
 	return &cachedUserQueryRepository{
 		delegate: delegate,

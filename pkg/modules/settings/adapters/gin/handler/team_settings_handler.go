@@ -19,17 +19,12 @@ type TeamSettingHandler struct {
 }
 
 // NewTeamSettingHandler 创建团队配置 Handler
-func NewTeamSettingHandler(
-	setHandler *team.SetHandler,
-	resetHandler *team.ResetHandler,
-	getHandler *team.GetHandler,
-	listHandler *team.ListHandler,
-) *TeamSettingHandler {
+func NewTeamSettingHandler(useCases *team.TeamUseCases) *TeamSettingHandler {
 	return &TeamSettingHandler{
-		setHandler:   setHandler,
-		resetHandler: resetHandler,
-		getHandler:   getHandler,
-		listHandler:  listHandler,
+		setHandler:   useCases.Set,
+		resetHandler: useCases.Reset,
+		getHandler:   useCases.Get,
+		listHandler:  useCases.List,
 	}
 }
 

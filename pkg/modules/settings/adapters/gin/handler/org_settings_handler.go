@@ -19,17 +19,12 @@ type OrgSettingHandler struct {
 }
 
 // NewOrgSettingHandler 创建组织配置 Handler
-func NewOrgSettingHandler(
-	setHandler *org.SetHandler,
-	resetHandler *org.ResetHandler,
-	getHandler *org.GetHandler,
-	listHandler *org.ListHandler,
-) *OrgSettingHandler {
+func NewOrgSettingHandler(useCases *org.OrgUseCases) *OrgSettingHandler {
 	return &OrgSettingHandler{
-		setHandler:   setHandler,
-		resetHandler: resetHandler,
-		getHandler:   getHandler,
-		listHandler:  listHandler,
+		setHandler:   useCases.Set,
+		resetHandler: useCases.Reset,
+		getHandler:   useCases.Get,
+		listHandler:  useCases.List,
 	}
 }
 

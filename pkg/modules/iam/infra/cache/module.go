@@ -5,8 +5,8 @@ import (
 	"go.uber.org/fx"
 
 	appauth "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/auth"
-	appuser "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/user"
 	config "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/config"
+	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
 )
 
 // CacheModule 提供 IAM 模块的专属缓存服务。
@@ -23,6 +23,6 @@ func newPermissionCacheService(client *redis.Client, iamCfg *config.Config) appa
 }
 
 // newUserWithRolesCacheService 创建用户实体缓存服务。
-func newUserWithRolesCacheService(client *redis.Client, iamCfg *config.Config) appuser.UserWithRolesCacheService {
+func newUserWithRolesCacheService(client *redis.Client, iamCfg *config.Config) user.UserWithRolesCacheService {
 	return NewUserWithRolesCacheService(client, iamCfg.Redis.KeyPrefix)
 }

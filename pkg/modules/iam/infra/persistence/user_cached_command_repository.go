@@ -4,7 +4,6 @@ import (
 	"context"
 	"log/slog"
 
-	appuser "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/user"
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
 )
 
@@ -20,13 +19,13 @@ import (
 //   - UpdateStatus: 状态变更
 type cachedUserCommandRepository struct {
 	delegate user.CommandRepository
-	cache    appuser.UserWithRolesCacheService
+	cache    user.UserWithRolesCacheService
 }
 
 // NewCachedUserCommandRepository 创建带缓存失效的用户命令仓储。
 func NewCachedUserCommandRepository(
 	delegate user.CommandRepository,
-	cache appuser.UserWithRolesCacheService,
+	cache user.UserWithRolesCacheService,
 ) user.CommandRepository {
 	return &cachedUserCommandRepository{
 		delegate: delegate,

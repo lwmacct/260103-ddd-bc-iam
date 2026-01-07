@@ -8,16 +8,16 @@ import (
 
 // HandlerModule Handler Fx 模块
 var HandlerModule = fx.Module("settings.handler",
-	fx.Provide(
-		NewAllHandlers,
-	),
+	fx.Provide(NewAllHandlers),
 )
 
 // HandlerParams Handler 构造参数（供外部 Fx 注入使用）
 type HandlerParams struct {
 	fx.In
 
-	UseCases *app.UseCases
+	UserUseCases *app.UserUseCases
+	OrgUseCases  *app.OrgUseCases
+	TeamUseCases *app.TeamUseCases
 }
 
 // Handlers 聚合 Settings BC 模块的所有 HTTP 处理器。
@@ -33,8 +33,8 @@ type Handlers struct {
 // NewAllHandlers 创建所有 Handler
 func NewAllHandlers(p HandlerParams) *Handlers {
 	return &Handlers{
-		UserSetting: NewUserSettingHandler(p.UseCases),
-		OrgSetting:  NewOrgSettingHandler(p.UseCases.OrgSet, p.UseCases.OrgReset, p.UseCases.OrgGet, p.UseCases.OrgList),
-		TeamSetting: NewTeamSettingHandler(p.UseCases.TeamSet, p.UseCases.TeamReset, p.UseCases.TeamGet, p.UseCases.TeamList),
+		UserSetting: NewUserSettingHandler(p.UserUseCases),
+		OrgSetting:  NewOrgSettingHandler(p.OrgUseCases),
+		TeamSetting: NewTeamSettingHandler(p.TeamUseCases),
 	}
 }

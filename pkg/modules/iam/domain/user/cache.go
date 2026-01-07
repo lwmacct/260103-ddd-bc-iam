@@ -2,8 +2,6 @@ package user
 
 import (
 	"context"
-
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
 )
 
 // UserWithRolesCacheService 用户实体缓存服务接口。
@@ -18,16 +16,16 @@ import (
 //   - 用户信息变更时主动失效
 //   - 用户角色变更时主动失效
 //
-// 实现位于 [infrastructure/cache.userWithRolesCacheService]。
+// 实现位于 infrastructure/cache 包。
 type UserWithRolesCacheService interface {
 	// GetUserWithRoles 获取缓存的用户实体（含角色和权限）。
 	// 缓存未命中返回 nil, nil（不返回错误）。
 	// 缓存数据损坏时自动清除并返回 nil, nil。
-	GetUserWithRoles(ctx context.Context, userID uint) (*user.User, error)
+	GetUserWithRoles(ctx context.Context, userID uint) (*User, error)
 
 	// SetUserWithRoles 设置用户实体缓存。
 	// 使用默认 TTL（5 分钟）。
-	SetUserWithRoles(ctx context.Context, u *user.User) error
+	SetUserWithRoles(ctx context.Context, u *User) error
 
 	// InvalidateUser 失效单个用户缓存。
 	// 用于用户信息变更、角色变更等场景。
