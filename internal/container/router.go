@@ -36,15 +36,21 @@ func AllRoutes(
 ) []ginroutes.Route {
 	// IAM 域路由
 	iamRoutes := routes.All(
+		// Auth module
 		iam.Auth,
-		iam.TwoFA,
 		iam.Captcha,
+		iam.TwoFA,
+		// User module
 		iam.UserProfile,
-		iam.UserOrg,
 		iam.AdminUser,
-		iam.Role,
+		iam.UserOrg,
+		// PAT module
 		iam.PAT,
+		// Role module
+		iam.Role,
+		// Audit module
 		iam.Audit,
+		// Org module
 		iam.Org,
 		iam.OrgMember,
 		iam.Team,

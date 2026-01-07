@@ -7,44 +7,48 @@ import (
 	handler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
 )
 
-// Auth
-func Auth(twoFAHandler *handler.TwoFAHandler) []routes.Route {
+// Auth 返回认证模块的所有路由
+func Auth(authHandler *handler.AuthHandler) []routes.Route {
 	return []routes.Route{
 		{
 			Method:      routes.POST,
-			Path:        "/api/auth/2fa/setup",
-			Handlers:    []gin.HandlerFunc{twoFAHandler.Setup},
-			OperationID: "self:2fa:setup",
-			Tags:        []string{"auth-2fa"},
-			Summary:     "设置 2FA",
-			Description: "设置两步验证",
+			Path:        "/api/auth/register",
+			Handlers:    []gin.HandlerFunc{authHandler.Register},
+			OperationID: "public:auth:register",
+			Tags:        []string{"auth"},
+			Summary:     "注册",
+			Description: "用户注册",
+			Public:      true,
 		},
 		{
 			Method:      routes.POST,
-			Path:        "/api/auth/2fa/verify",
-			Handlers:    []gin.HandlerFunc{twoFAHandler.VerifyAndEnable},
-			OperationID: "self:2fa:enable",
-			Tags:        []string{"auth-2fa"},
-			Summary:     "启用 2FA",
-			Description: "验证并启用两步验证",
+			Path:        "/api/auth/login",
+			Handlers:    []gin.HandlerFunc{authHandler.Login},
+			OperationID: "public:auth:login",
+			Tags:        []string{"auth"},
+			Summary:     "登录",
+			Description: "用户登录",
+			Public:      true,
 		},
 		{
 			Method:      routes.POST,
-			Path:        "/api/auth/2fa/disable",
-			Handlers:    []gin.HandlerFunc{twoFAHandler.Disable},
-			OperationID: "self:2fa:disable",
-			Tags:        []string{"auth-2fa"},
-			Summary:     "禁用 2FA",
-			Description: "禁用两步验证",
+			Path:        "/api/auth/login/2fa",
+			Handlers:    []gin.HandlerFunc{authHandler.Login2FA},
+			OperationID: "public:auth:login2fa",
+			Tags:        []string{"auth"},
+			Summary:     "2FA 登录",
+			Description: "两步验证登录",
+			Public:      true,
 		},
 		{
-			Method:      routes.GET,
-			Path:        "/api/auth/2fa/status",
-			Handlers:    []gin.HandlerFunc{twoFAHandler.GetStatus},
-			OperationID: "self:2fa:status",
-			Tags:        []string{"auth-2fa"},
-			Summary:     "2FA 状态",
-			Description: "获取两步验证状态",
+			Method:      routes.POST,
+			Path:        "/api/auth/refresh",
+			Handlers:    []gin.HandlerFunc{authHandler.RefreshToken},
+			OperationID: "public:auth:refresh",
+			Tags:        []string{"auth"},
+			Summary:     "刷新令牌",
+			Description: "使用 refresh token 获取新的 access token",
+			Public:      true,
 		},
 	}
 }

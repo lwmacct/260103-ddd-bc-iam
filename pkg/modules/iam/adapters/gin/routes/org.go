@@ -2,19 +2,71 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	handler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/routes"
+
+	handler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
 )
 
-// Org 返回 Org 域路由
-// 包含：Org 域成员管理、Org 域团队管理、Org 域团队成员管理
+// Org 返回组织模块的所有路由
 func Org(
+	orgHandler *handler.OrgHandler,
 	orgMemberHandler *handler.OrgMemberHandler,
 	teamHandler *handler.TeamHandler,
 	teamMemberHandler *handler.TeamMemberHandler,
 ) []routes.Route {
-	return []routes.Route{
-		// ==================== Org 域 - 成员管理 ====================
+	var allRoutes []routes.Route
+
+	// ==================== 组织管理（管理员）====================
+	allRoutes = append(allRoutes, []routes.Route{
+		{
+			Method:      routes.GET,
+			Path:        "/api/admin/orgs",
+			Handlers:    []gin.HandlerFunc{orgHandler.List},
+			OperationID: "admin:orgs:list",
+			Tags:        []string{"admin-org"},
+			Summary:     "组织列表",
+			Description: "获取组织列表",
+		},
+		{
+			Method:      routes.POST,
+			Path:        "/api/admin/orgs",
+			Handlers:    []gin.HandlerFunc{orgHandler.Create},
+			OperationID: "admin:orgs:create",
+			Tags:        []string{"admin-org"},
+			Summary:     "创建组织",
+			Description: "创建新组织",
+		},
+		{
+			Method:      routes.GET,
+			Path:        "/api/admin/orgs/{id}",
+			Handlers:    []gin.HandlerFunc{orgHandler.Get},
+			OperationID: "admin:orgs:get",
+			Tags:        []string{"admin-org"},
+			Summary:     "组织详情",
+			Description: "获取组织详细信息",
+		},
+		{
+			Method:      routes.PUT,
+			Path:        "/api/admin/orgs/{id}",
+			Handlers:    []gin.HandlerFunc{orgHandler.Update},
+			OperationID: "admin:orgs:update",
+			Tags:        []string{"admin-org"},
+			Summary:     "更新组织",
+			Description: "更新组织信息",
+		},
+		{
+			Method:      routes.DELETE,
+			Path:        "/api/admin/orgs/{id}",
+			Handlers:    []gin.HandlerFunc{orgHandler.Delete},
+			OperationID: "admin:orgs:delete",
+			Tags:        []string{"admin-org"},
+			Summary:     "删除组织",
+			Description: "删除组织",
+		},
+	}...)
+
+	// ==================== 组织成员管理 ====================
+	allRoutes = append(allRoutes, []routes.Route{
 		{
 			Method:      routes.GET,
 			Path:        "/api/org/{org_id}/members",
@@ -51,8 +103,10 @@ func Org(
 			Summary:     "更新成员角色",
 			Description: "更新组织成员角色",
 		},
+	}...)
 
-		// ==================== Org 域 - 团队管理 ====================
+	// ==================== 团队管理 ====================
+	allRoutes = append(allRoutes, []routes.Route{
 		{
 			Method:      routes.POST,
 			Path:        "/api/org/{org_id}/teams",
@@ -98,8 +152,10 @@ func Org(
 			Summary:     "删除团队",
 			Description: "删除团队",
 		},
+	}...)
 
-		// ==================== Org 域 - 团队成员管理 ====================
+	// ==================== 团队成员管理 ====================
+	allRoutes = append(allRoutes, []routes.Route{
 		{
 			Method:      routes.GET,
 			Path:        "/api/org/{org_id}/teams/{team_id}/members",
@@ -127,5 +183,7 @@ func Org(
 			Summary:     "移除团队成员",
 			Description: "移除团队成员",
 		},
-	}
+	}...)
+
+	return allRoutes
 }
