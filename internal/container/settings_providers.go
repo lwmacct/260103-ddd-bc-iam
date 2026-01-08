@@ -6,7 +6,6 @@ import (
 
 	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/config"
 	settingApp "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/app/setting"
-	settingDomain "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/domain/setting"
 	settingsCache "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/infra/cache"
 )
 
@@ -15,7 +14,6 @@ type SettingsCacheResult struct {
 	fx.Out
 
 	SettingsCacheService settingApp.SettingsCacheService
-	CacheInvalidator     settingDomain.CacheInvalidator
 }
 
 // newSettingsCacheService 创建 Settings 缓存服务。
@@ -26,6 +24,5 @@ func newSettingsCacheService(client *redis.Client, iamCfg *config.Config) Settin
 
 	return SettingsCacheResult{
 		SettingsCacheService: service,
-		CacheInvalidator:     service,
 	}
 }
