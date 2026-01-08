@@ -147,8 +147,8 @@ github.com/lwmacct/251219-go-pkg-logm v0.1.8 h1:JuQHvZVZj5YpuPEDMjLrSxrGY9HKJljp
 github.com/lwmacct/251219-go-pkg-logm v0.1.8/go.mod h1:Kw/aSDYy5d9VRAl5gwENiP0hqLzkkCjz91yw2gsMS/4=
 github.com/lwmacct/260103-ddd-bc-settings v0.16.260108 h1:cICW7CNsuo9eTYOWLTnOuz03wWLDKR/V+E5ahBC49RA=
 github.com/lwmacct/260103-ddd-bc-settings v0.16.260108/go.mod h1:LG7eMbHCnbFE9CK1grtLuzOQvET6AByrXdIj9UznI7Y=
-github.com/lwmacct/260103-ddd-shared v0.8.260108 h1:bqCqawBp0fkvoxExYgV2Ki4lU5xWIl5xoSMNMZEfxFc=
-github.com/lwmacct/260103-ddd-shared v0.8.260108/go.mod h1:vx5L1qdU3tp1guW4JKG+GWh7j66j4OYTzALmYTG8ncQ=
+github.com/lwmacct/260103-ddd-shared v0.9.260108 h1:lD4dDL9bqiMF1z3d9W04g7W8LzqRso88evNn8ShXUYY=
+github.com/lwmacct/260103-ddd-shared v0.9.260108/go.mod h1:cx5Ch/DdhEmf6k4eVUuN5F175K8LcJh7tUHmahfcR9Q=
 github.com/mattn/go-isatty v0.0.20 h1:xfD0iDuEKnDkl03q4limB+vH+GxLEtL/jb4xVJSWWEY=
 github.com/mattn/go-isatty v0.0.20/go.mod h1:W+V8PltTTMOvKvAeJH7IuucS94S2C6jfK/D7dTCTo3Y=
 github.com/mattn/go-sqlite3 v1.14.32 h1:JD12Ag3oLy1zQA+BNn74xRgaBbdhbNIDYvQUEuuErjs=
