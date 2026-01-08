@@ -291,7 +291,11 @@ func (h *UserSettingHandler) Reset(c *gin.Context) {
 		return
 	}
 
-	response.OK(c, gin.H{"key": key, "message": "setting reset to default"})
+	result := user.ResetResultDTO{
+		Key:     key,
+		Message: "setting reset to default",
+	}
+	response.OK(c, result)
 }
 
 // ResetAll 重置所有配置

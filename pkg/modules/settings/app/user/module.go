@@ -18,8 +18,8 @@ type UserUseCases struct {
 	ListCategories *ListCategoriesHandler
 }
 
-// UseCaseModule 用户配置用例 Fx 模块
-var UseCaseModule = fx.Module("settings.user.usecase",
+// Module 用户配置用例 Fx 模块
+var Module = fx.Module("settings.user",
 	fx.Provide(newUserUseCases),
 )
 

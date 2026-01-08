@@ -1,9 +1,8 @@
 // Package auth 实现认证相关的应用层用例。
 //
-// 本包仅提供 Command Handler（认证操作均为写操作）：
+// # Overview
 //
-// # Command（写操作）
-//
+// 本包提供认证相关的 Command Handler（认证操作均为写操作）：
 //   - [command.LoginHandler]: 用户登录（返回 JWT Token）
 //   - [command.RegisterHandler]: 用户注册
 //   - [command.RefreshTokenHandler]: 刷新访问令牌
@@ -19,20 +18,41 @@
 //   - [LoginResponse]: 登录成功响应（含 Token 和过期时间）
 //   - [RegisterResponse]: 注册成功响应
 //
+// # Usage
+//
+//	// 用户登录
+//	loginCmd := auth.LoginCommand{
+//	    Username: "alice",
+//	    Password: "password123",
+//	}
+//	result, err := loginHandler.Handle(ctx, loginCmd)
+//
+//	// 用户注册
+//	registerCmd := auth.RegisterCommand{
+//	    Username: "bob",
+//	    Email:    "bob@example.com",
+//	    Password: "securepassword",
+//	}
+//	result, err := registerHandler.Handle(ctx, registerCmd)
+//
 // 认证流程：
 //  1. 用户提交凭据（用户名 + 密码）
 //  2. 验证凭据有效性（密码哈希比对）
 //  3. 检查用户状态（是否激活、是否禁用）
 //  4. 生成 JWT Token 并返回
 //
-// 安全特性：
+// # Thread Safety
+//
+// 所有 Handler 都是无状态的，仅依赖注入的 Repository（通过 Fx 管理）。
+// Handler 本身是并发安全的，可以安全地在多个 goroutine 中调用。
+//
+// # 安全特性
+//
 //   - 密码通过 BCrypt 哈希存储
 //   - JWT Token 有过期时间
 //   - 支持 Token 刷新机制
 //
-// 依赖：
-//   - [domain/auth.Service]: 认证领域服务接口
-//   - [domain/user.QueryRepository]: 用户查询仓储
+// # 依赖关系
 //
-// 依赖注入：所有 Handler 通过 [bootstrap.Container] 注册。
+// 本包依赖 Domain 层的 [domain/auth.Service] 和 [domain/user.QueryRepository]。
 package auth

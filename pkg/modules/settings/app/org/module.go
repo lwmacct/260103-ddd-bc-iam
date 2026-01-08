@@ -15,8 +15,8 @@ type OrgUseCases struct {
 	List  *ListHandler
 }
 
-// UseCaseModule 组织配置用例 Fx 模块
-var UseCaseModule = fx.Module("settings.org.usecase",
+// Module 组织配置用例 Fx 模块
+var Module = fx.Module("settings.org",
 	fx.Provide(newOrgUseCases),
 )
 

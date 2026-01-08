@@ -26,3 +26,9 @@ type SettingItemDTO struct {
 	Key   string `json:"key"`
 	Value any    `json:"value"`
 }
+
+// ResetResultDTO 配置重置结果
+type ResetResultDTO struct {
+	Key     string `json:"key"`
+	Message string `json:"message"`
+}

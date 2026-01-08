@@ -199,5 +199,9 @@ func (h *OrgSettingHandler) Reset(c *gin.Context) {
 		return
 	}
 
-	response.OK(c, gin.H{"key": key, "message": "setting reset to default"})
+	result := org.ResetResultDTO{
+		Key:     key,
+		Message: "setting reset to default",
+	}
+	response.OK(c, result)
 }

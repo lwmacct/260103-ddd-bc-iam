@@ -17,7 +17,7 @@ type (
 
 // UseCaseModule 用例 Fx 模块 - 聚合所有子模块
 var UseCaseModule = fx.Module("settings.usecase",
-	user.UseCaseModule,
-	org.UseCaseModule,
-	team.UseCaseModule,
+	user.Module,
+	org.Module,
+	team.Module,
 )

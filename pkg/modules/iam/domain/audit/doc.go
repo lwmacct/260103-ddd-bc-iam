@@ -1,5 +1,7 @@
 // Package audit 定义审计领域模型和派生逻辑。
 //
+// # Overview
+//
 // 本包整合了审计日志实体、审计类型定义和 URN 派生逻辑：
 //   - [Audit]: 审计日志实体
 //   - [Operation]: 审计操作类型 (create, update, delete, access, authenticate)
@@ -32,7 +34,29 @@
 //	op := audit.DeriveOperation("create")    // OpCreate
 //	action := audit.DeriveAction("users", "create")  // "user.create"
 //
-// # 依赖倒置
+// # Usage
+//
+//	// 创建审计日志实体
+//	log := &audit.Audit{
+//	    UserID:    123,
+//	    Action:    "user.create",
+//	    Category:  audit.CatUser,
+//	    Operation: audit.OpCreate,
+//	    Resource:  "user:456",
+//	    Details:   `{"username": "alice"}`,
+//	}
+//
+//	// 从 URN 派生审计信息
+//	cat := audit.DeriveCategory("users")
+//	op := audit.DeriveOperation("create")
+//	action := audit.DeriveAction("users", "create")
+//
+// # Thread Safety
+//
+// 审计日志实体和派生函数都是值类型或纯函数，是并发安全的。
+// Repository 接口的实现需要保证并发安全性（由基础设施层负责）。
+//
+// # 依赖关系
 //
 // 本包仅定义接口，实现位于 infrastructure/persistence 包。
 package audit

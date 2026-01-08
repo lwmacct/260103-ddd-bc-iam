@@ -44,7 +44,7 @@ func NewUserProfileHandler(useCases *app.UserUseCases) *UserProfileHandler {
 func (h *UserProfileHandler) GetProfile(c *gin.Context) {
 	uid, ok := ctxutil.Get[uint](c, ctxutil.UserID)
 	if !ok {
-		response.Unauthorized(c, "")
+		response.Unauthorized(c, response.MsgAuthenticationRequired)
 		return
 	}
 
@@ -91,7 +91,7 @@ type UpdateProfileRequest struct {
 func (h *UserProfileHandler) UpdateProfile(c *gin.Context) {
 	uid, ok := ctxutil.Get[uint](c, ctxutil.UserID)
 	if !ok {
-		response.Unauthorized(c, "")
+		response.Unauthorized(c, response.MsgAuthenticationRequired)
 		return
 	}
 
@@ -143,7 +143,7 @@ func (h *UserProfileHandler) UpdateProfile(c *gin.Context) {
 func (h *UserProfileHandler) ChangePassword(c *gin.Context) {
 	uid, ok := ctxutil.Get[uint](c, ctxutil.UserID)
 	if !ok {
-		response.Unauthorized(c, "")
+		response.Unauthorized(c, response.MsgAuthenticationRequired)
 		return
 	}
 
@@ -180,7 +180,7 @@ func (h *UserProfileHandler) ChangePassword(c *gin.Context) {
 func (h *UserProfileHandler) DeleteAccount(c *gin.Context) {
 	uid, ok := ctxutil.Get[uint](c, ctxutil.UserID)
 	if !ok {
-		response.Unauthorized(c, "")
+		response.Unauthorized(c, response.MsgAuthenticationRequired)
 		return
 	}
 

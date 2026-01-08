@@ -15,8 +15,8 @@ type TeamUseCases struct {
 	List  *ListHandler
 }
 
-// UseCaseModule 团队配置用例 Fx 模块
-var UseCaseModule = fx.Module("settings.team.usecase",
+// Module 团队配置用例 Fx 模块
+var Module = fx.Module("settings.team",
 	fx.Provide(newTeamUseCases),
 )
 
