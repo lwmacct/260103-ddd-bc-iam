@@ -37,23 +37,6 @@ func NewService(twofaCommandRepo domainTwoFA.CommandRepository, twofaQueryRepo d
 	}
 }
 
-// SetupResponse 设置 2FA 返回数据
-//
-// Deprecated: 请使用 domainTwoFA.SetupResult
-type SetupResponse = domainTwoFA.SetupResult
-
-// EnableResponse 启用 2FA 返回数据
-type EnableResponse struct {
-	RecoveryCodes []string `json:"recovery_codes"` // 恢复码列表
-	Message       string   `json:"message"`        // 提示消息
-}
-
-// StatusResponse 2FA 状态返回数据
-type StatusResponse struct {
-	Enabled            bool `json:"enabled"`              // 是否启用
-	RecoveryCodesCount int  `json:"recovery_codes_count"` // 剩余恢复码数量
-}
-
 // Setup 设置 2FA（生成密钥和二维码）
 func (s *Service) Setup(ctx context.Context, userID uint) (*domainTwoFA.SetupResult, error) {
 	// 查找用户
