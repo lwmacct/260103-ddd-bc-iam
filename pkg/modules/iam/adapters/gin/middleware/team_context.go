@@ -27,7 +27,7 @@ func TeamContext(
 ) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// 1. 获取组织上下文（必须先通过 OrgContext）
-		orgID, exists := c.Get("org_id")
+		orgID, exists := c.Get(ctxutil.OrgID)
 		if !exists {
 			response.InternalError(c, "org context not found, OrgContext middleware required")
 			c.Abort()
@@ -62,12 +62,12 @@ func TeamContext(
 		}
 
 		// 4. 检查用户权限
-		userID := c.MustGet("user_id").(uint)
-		orgRole := c.MustGet("org_role").(string)
+		userID := c.MustGet(ctxutil.UserID).(uint)
+		orgRole := c.MustGet(ctxutil.OrgRole).(string)
 
 		// 组织管理员可以访问所有团队
 		if orgRole == "owner" || orgRole == "admin" {
-			c.Set("team_id", uint(teamID))
+			c.Set(ctxutil.TeamID, uint(teamID))
 			c.Next()
 			return
 		}
@@ -81,8 +81,8 @@ func TeamContext(
 		}
 
 		// 5. 注入团队上下文
-		c.Set("team_id", uint(teamID))
-		c.Set("team_role", string(teamMember.Role))
+		c.Set(ctxutil.TeamID, uint(teamID))
+		c.Set(ctxutil.TeamRole, string(teamMember.Role))
 
 		// 6. 动态注入基于 team_role 的权限
 		// 团队负责人获得团队配置管理权限

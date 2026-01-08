@@ -23,7 +23,7 @@ import (
 func OrgContext(memberQuery org.MemberQueryRepository) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// 1. 获取当前用户 ID
-		userID, exists := c.Get("user_id")
+		userID, exists := c.Get(ctxutil.UserID)
 		if !exists {
 			response.Unauthorized(c, "user not authenticated")
 			c.Abort()
@@ -59,8 +59,8 @@ func OrgContext(memberQuery org.MemberQueryRepository) gin.HandlerFunc {
 		}
 
 		// 4. 注入组织上下文
-		c.Set("org_id", uint(orgID))
-		c.Set("org_role", string(member.Role))
+		c.Set(ctxutil.OrgID, uint(orgID))
+		c.Set(ctxutil.OrgRole, string(member.Role))
 
 		// 5. 动态注入基于 org_role 的权限
 		// 组织管理员获得组织级操作权限，无需在全局 RBAC 中预配置
