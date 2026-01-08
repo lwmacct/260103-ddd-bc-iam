@@ -27,7 +27,7 @@
 //	    // ... 其他模块
 //	)
 //
-// 每个 Handler 对应一个或多个 HTTP 端点，路由定义见 [routes](github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/routes) 包。
+// 每个 Handler 对应一个或多个 HTTP 端点，路由定义见 [routes](github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/adapters/gin/routes) 包。
 //
 // # Thread Safety
 //
@@ -36,6 +36,6 @@
 //
 // # 依赖关系
 //
-// 本包依赖 Application 层的 UseCase（见 [app](github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app)），
+// 本包依赖 Application 层的 UseCase（见 [app](github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app)），
 // 不直接访问 Domain 或 Infrastructure 层。
 package handler

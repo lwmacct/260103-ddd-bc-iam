@@ -3,8 +3,8 @@ package user
 import (
 	"go.uber.org/fx"
 
-	authDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/auth"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
+	authDomain "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/auth"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/infra/persistence"
 	"github.com/lwmacct/260103-ddd-shared/pkg/shared/event"
 )
 

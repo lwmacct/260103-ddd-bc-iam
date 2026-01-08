@@ -8,8 +8,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	settings "github.com/lwmacct/260103-ddd-bc-iam/internal/apitest/settings"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/app/org"
+	settings "github.com/lwmacct/260103-ddd-iam-bc/internal/apitest/settings"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/app/org"
 	"github.com/lwmacct/260103-ddd-shared/pkg/shared/apitest"
 )
 

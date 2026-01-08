@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/org"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/org"
 )
 
 // TeamMemberAddHandler 添加团队成员命令处理器

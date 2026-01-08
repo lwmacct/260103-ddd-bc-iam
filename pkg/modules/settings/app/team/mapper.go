@@ -3,10 +3,10 @@ package team
 import (
 	"encoding/json"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/domain/org"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/domain/team"
 	setting "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/app/setting"
 	settingdomain "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/domain/setting"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/domain/org"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/domain/team"
 )
 
 // ToSettingsItemDTO 将配置定义、团队配置和组织配置合并为扁平结构 DTO

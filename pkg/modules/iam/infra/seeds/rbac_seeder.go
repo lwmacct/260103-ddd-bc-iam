@@ -6,8 +6,8 @@ import (
 	"errors"
 	"log/slog"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
-	persistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/user"
+	persistence "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/infra/persistence"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"

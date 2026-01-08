@@ -3,7 +3,7 @@ package org
 import (
 	"go.uber.org/fx"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/infra/persistence"
 )
 
 // OrgUseCases 组织管理用例处理器

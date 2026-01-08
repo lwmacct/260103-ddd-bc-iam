@@ -7,7 +7,7 @@ import (
 	"errors"
 	"log/slog"
 
-	persistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/infra/persistence"
+	persistence "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/infra/persistence"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 )

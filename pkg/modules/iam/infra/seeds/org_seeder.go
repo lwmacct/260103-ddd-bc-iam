@@ -5,7 +5,7 @@ import (
 	"log/slog"
 	"time"
 
-	persistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
+	persistence "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/infra/persistence"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 )

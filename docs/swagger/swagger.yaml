@@ -1965,7 +1965,7 @@ host: localhost:8080
 info:
   contact:
     name: API Support
-    url: https://github.com/lwmacct/260103-ddd-bc-iam
+    url: https://github.com/lwmacct/260103-ddd-iam-bc
   description: 基于 DDD + CQRS 架构的可复用模块库
   license:
     name: MIT

@@ -8,8 +8,8 @@ import (
 	"github.com/lwmacct/260103-ddd-shared/pkg/shared/apitest"
 	"github.com/stretchr/testify/require"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/role"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/user"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app/role"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app/user"
 )
 
 // CreateTestUser 创建测试用户并自动注册清理。

@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/auth"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/auth"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/user"
 )
 
 // RegisterHandler 注册命令处理器

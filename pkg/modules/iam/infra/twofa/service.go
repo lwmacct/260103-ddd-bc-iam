@@ -12,8 +12,8 @@ import (
 	"github.com/pquerna/otp/totp"
 	"github.com/skip2/go-qrcode"
 
-	domainTwoFA "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/twofa"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
+	domainTwoFA "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/twofa"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/user"
 )
 
 // Service 2FA 服务

@@ -3,7 +3,7 @@ package handler
 import (
 	"go.uber.org/fx"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/app"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/app"
 )
 
 // HandlerModule Handler Fx 模块

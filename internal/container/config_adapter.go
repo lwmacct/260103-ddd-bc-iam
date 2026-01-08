@@ -1,8 +1,8 @@
 package container
 
 import (
-	internalConfig "github.com/lwmacct/260103-ddd-bc-iam/internal/config"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/config"
+	internalConfig "github.com/lwmacct/260103-ddd-iam-bc/internal/config"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/config"
 )
 
 // ToIAMConfig 从通用配置转换到 IAM 专属配置。

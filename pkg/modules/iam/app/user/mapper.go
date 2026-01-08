@@ -1,7 +1,7 @@
 package user
 
 import (
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/user"
 )
 
 // stringPtrValue 将 *string 转换为 string，nil 返回空字符串

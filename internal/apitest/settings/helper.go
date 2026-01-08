@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/lwmacct/251207-go-pkg-cfgm/pkg/cfgm"
-	"github.com/lwmacct/260103-ddd-bc-iam/internal/apitest/iam"
-	internalConfig "github.com/lwmacct/260103-ddd-bc-iam/internal/config"
+	"github.com/lwmacct/260103-ddd-iam-bc/internal/apitest/iam"
+	internalConfig "github.com/lwmacct/260103-ddd-iam-bc/internal/config"
 	"github.com/lwmacct/260103-ddd-shared/pkg/shared/apitest"
 )
 

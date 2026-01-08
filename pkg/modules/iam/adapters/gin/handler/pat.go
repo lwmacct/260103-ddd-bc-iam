@@ -6,10 +6,10 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/pat"
-	authDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/auth"
-	patDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/pat"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app/pat"
+	authDomain "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/auth"
+	patDomain "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/pat"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/ctxutil"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/response"
 )

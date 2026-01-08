@@ -3,8 +3,8 @@ package handler
 import (
 	"go.uber.org/fx"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/config"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/config"
 )
 
 // Handlers 聚合 IAM 模块的所有 HTTP 处理器。

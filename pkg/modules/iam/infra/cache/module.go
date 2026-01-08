@@ -4,9 +4,9 @@ import (
 	"github.com/redis/go-redis/v9"
 	"go.uber.org/fx"
 
-	appauth "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/auth"
-	config "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/config"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
+	appauth "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app/auth"
+	config "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/config"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/user"
 )
 
 // CacheModule 提供 IAM 模块的专属缓存服务。

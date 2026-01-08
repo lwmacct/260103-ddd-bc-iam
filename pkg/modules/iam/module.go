@@ -29,11 +29,11 @@ package iam
 import (
 	"go.uber.org/fx"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/routes"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/cache"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/adapters/gin/handler"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/adapters/gin/routes"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/infra/cache"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/infra/persistence"
 )
 
 // Module 返回 IAM 模块的完整 Fx 配置。

@@ -4,7 +4,7 @@ import (
 	"context"
 	"log/slog"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/user"
 )
 
 // cachedUserQueryRepository 带缓存的用户查询仓储（装饰器模式）。

@@ -10,14 +10,14 @@ import (
 	"github.com/redis/go-redis/v9"
 	"go.uber.org/fx"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/internal/bootstrap"
-	"github.com/lwmacct/260103-ddd-bc-iam/internal/config"
+	"github.com/lwmacct/260103-ddd-iam-bc/internal/bootstrap"
+	"github.com/lwmacct/260103-ddd-iam-bc/internal/config"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/health"
 
 	// Application UseCases (only for middleware dependencies)
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/auth"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/infra/auth"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/infra/persistence"
 
 	// Settings 模块 Handler
 	settingsHandler "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/handler"

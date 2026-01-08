@@ -6,9 +6,9 @@ import (
 	"log/slog"
 	"slices"
 
-	appauth "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/auth"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/role"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
+	appauth "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app/auth"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/role"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/user"
 )
 
 // mergePermissions 合并权限列表（去重）。

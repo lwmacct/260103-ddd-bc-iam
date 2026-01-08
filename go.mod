@@ -1,4 +1,4 @@
-module github.com/lwmacct/260103-ddd-bc-iam
+module github.com/lwmacct/260103-ddd-iam-bc
 
 go 1.25.5
 

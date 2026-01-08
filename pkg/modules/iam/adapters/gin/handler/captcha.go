@@ -3,8 +3,8 @@ package handler
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/captcha"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app/captcha"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/response"
 )
 

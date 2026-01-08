@@ -17,10 +17,10 @@ import (
 	"github.com/lwmacct/251219-go-pkg-logm/pkg/logm"
 	"github.com/lwmacct/251219-go-pkg-logm/pkg/logm/formatter"
 	"github.com/lwmacct/251219-go-pkg-logm/pkg/logm/writer"
-	"github.com/lwmacct/260103-ddd-bc-iam/internal/config"
-	"github.com/lwmacct/260103-ddd-bc-iam/internal/container"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings"
+	"github.com/lwmacct/260103-ddd-iam-bc/internal/config"
+	"github.com/lwmacct/260103-ddd-iam-bc/internal/container"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings"
 	_ "github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/response"
 )
 

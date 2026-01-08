@@ -32,11 +32,11 @@ package settings
 import (
 	"go.uber.org/fx"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/handler"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/routes"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/app"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/infra/cache"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/infra/persistence"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/adapters/gin/handler"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/adapters/gin/routes"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/app"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/infra/cache"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/infra/persistence"
 )
 
 // Module 返回 User Settings BC 的 Fx 模块

@@ -8,7 +8,7 @@ import (
 	"github.com/lwmacct/260103-ddd-shared/pkg/shared/apitest"
 	"github.com/stretchr/testify/require"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/app/user"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/app/user"
 )
 
 // CreateTestUserSetting 创建测试用户设置值并自动注册清理。

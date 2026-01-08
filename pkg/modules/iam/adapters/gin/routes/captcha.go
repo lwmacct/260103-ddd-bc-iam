@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/routes"
 
-	handler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
+	handler "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/adapters/gin/handler"
 )
 
 // Captcha 返回验证码模块的所有路由

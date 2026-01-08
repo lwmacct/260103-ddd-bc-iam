@@ -3,14 +3,14 @@ package app
 import (
 	"go.uber.org/fx"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/audit"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/auth"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/captcha"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/org"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/pat"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/role"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/twofa"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/user"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app/audit"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app/auth"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app/captcha"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app/org"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app/pat"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app/role"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app/twofa"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app/user"
 )
 
 // UseCases 类型别名：为 Handler 层提供便捷访问

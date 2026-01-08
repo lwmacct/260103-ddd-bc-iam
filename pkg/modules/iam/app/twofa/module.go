@@ -3,7 +3,7 @@ package twofa
 import (
 	"go.uber.org/fx"
 
-	twofaDomain "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/twofa"
+	twofaDomain "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/twofa"
 )
 
 // TwoFAUseCases 双因素认证用例处理器聚合

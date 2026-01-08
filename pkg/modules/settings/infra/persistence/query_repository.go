@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/domain/user"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/domain/user"
 	"gorm.io/gorm"
 )
 

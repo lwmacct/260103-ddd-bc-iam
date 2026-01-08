@@ -44,5 +44,5 @@
 //
 // # 依赖关系
 //
-// 本包依赖 Domain 层的 [TwoFA](github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/twofa) 实体和 Repository 接口。
+// 本包依赖 Domain 层的 [TwoFA](github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/twofa) 实体和 Repository 接口。
 package twofa

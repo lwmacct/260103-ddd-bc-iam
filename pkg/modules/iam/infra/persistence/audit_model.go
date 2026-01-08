@@ -3,7 +3,7 @@ package persistence
 import (
 	"time"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/audit"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/audit"
 	"gorm.io/gorm"
 )
 

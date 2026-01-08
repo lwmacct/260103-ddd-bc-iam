@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/org"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/org"
 )
 
 // MemberUpdateRoleHandler 更新成员角色命令处理器

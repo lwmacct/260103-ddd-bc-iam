@@ -8,11 +8,11 @@ import (
 	"go.uber.org/fx"
 	"gorm.io/gorm"
 
-	eventhandler "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/eventhandler"
-	persistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
-	iamSeeds "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/seeds"
-	localSeeds "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/infra/seeds"
 	settingsSeeds "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/infra/seeds"
+	eventhandler "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/infra/eventhandler"
+	persistence "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/infra/persistence"
+	iamSeeds "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/infra/seeds"
+	localSeeds "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/infra/seeds"
 	dbpkg "github.com/lwmacct/260103-ddd-shared/pkg/platform/db"
 	"github.com/lwmacct/260103-ddd-shared/pkg/shared/event"
 )

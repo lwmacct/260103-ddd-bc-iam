@@ -3,8 +3,8 @@ package user
 import (
 	"go.uber.org/fx"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/infra/persistence"
 	settingpersistence "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/infra/persistence"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/infra/persistence"
 )
 
 // UserUseCases 用户配置用例处理器聚合

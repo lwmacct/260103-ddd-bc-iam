@@ -5,7 +5,7 @@ import (
 
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/routes"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/adapters/gin/handler"
 )
 
 // RoutesModule 注册 IAM 模块的所有路由

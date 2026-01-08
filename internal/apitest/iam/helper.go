@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/lwmacct/251207-go-pkg-cfgm/pkg/cfgm"
-	internalConfig "github.com/lwmacct/260103-ddd-bc-iam/internal/config"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/config"
+	internalConfig "github.com/lwmacct/260103-ddd-iam-bc/internal/config"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/config"
 	"github.com/stretchr/testify/require"
 )
 

@@ -3,7 +3,7 @@ package role
 import (
 	"context"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/role"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/role"
 )
 
 // GetHandler 获取角色查询处理器

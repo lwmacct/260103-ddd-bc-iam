@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/pat"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/pat"
 )
 
 // ListHandler 获取 Token 列表查询处理器

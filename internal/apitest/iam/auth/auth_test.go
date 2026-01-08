@@ -7,9 +7,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/internal/apitest/iam"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/auth"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/user"
+	"github.com/lwmacct/260103-ddd-iam-bc/internal/apitest/iam"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app/auth"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app/user"
 	"github.com/lwmacct/260103-ddd-shared/pkg/shared/apitest"
 )
 

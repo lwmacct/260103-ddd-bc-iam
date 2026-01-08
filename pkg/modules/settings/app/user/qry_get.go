@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/domain/user"
 	settingdomain "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/domain/setting"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/domain/user"
 )
 
 // GetHandler 获取单个配置查询处理器

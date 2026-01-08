@@ -7,8 +7,8 @@ import (
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/response"
 	"github.com/lwmacct/260103-ddd-shared/pkg/shared/apitest"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/auth"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/app/captcha"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app/auth"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app/captcha"
 )
 
 // Client IAM 模块的测试客户端。

@@ -33,7 +33,7 @@ air
 
 ```bash
 # 1. 添加依赖
-go get github.com/lwmacct/260103-ddd-bc-iam
+go get github.com/lwmacct/260103-ddd-iam-bc
 go get github.com/lwmacct/260103-ddd-bc-settings  # Settings BC（被 IAM 依赖）
 go get github.com/lwmacct/260103-ddd-shared       # Platform & Shared 层
 

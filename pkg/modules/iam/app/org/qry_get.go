@@ -3,7 +3,7 @@ package org
 import (
 	"context"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/org"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/org"
 )
 
 // GetHandler 获取组织查询处理器

@@ -3,7 +3,7 @@ package audit
 import (
 	"go.uber.org/fx"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/infra/persistence"
 )
 
 // AuditUseCases 审计日志用例处理器聚合

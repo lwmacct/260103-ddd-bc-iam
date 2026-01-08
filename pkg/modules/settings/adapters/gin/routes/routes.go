@@ -11,7 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/routes"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/adapters/gin/handler"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/adapters/gin/handler"
 )
 
 // AllUser 返回用户配置的所有路由

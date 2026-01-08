@@ -3,9 +3,9 @@ package app
 import (
 	"go.uber.org/fx"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/app/org"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/app/team"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/app/user"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/app/org"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/app/team"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/app/user"
 )
 
 // 类型别名 - 向后兼容（供 Handler 层便捷访问）

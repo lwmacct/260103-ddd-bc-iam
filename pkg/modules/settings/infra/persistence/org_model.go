@@ -3,7 +3,7 @@ package persistence
 import (
 	"encoding/json"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/domain/org"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/domain/org"
 	"gorm.io/datatypes"
 )
 

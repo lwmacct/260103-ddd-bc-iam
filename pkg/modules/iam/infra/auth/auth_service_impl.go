@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	domainAuth "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/auth"
+	domainAuth "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/auth"
 	"golang.org/x/crypto/bcrypt"
 )
 

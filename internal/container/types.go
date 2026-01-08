@@ -1,9 +1,9 @@
 package container
 
 import (
-	iamPersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
-	userSettingsPersistence "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/settings/infra/persistence"
 	settingsPersistence "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/infra/persistence"
+	iamPersistence "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/infra/persistence"
+	userSettingsPersistence "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/infra/persistence"
 )
 
 // ContainerOptions 容器初始化选项。

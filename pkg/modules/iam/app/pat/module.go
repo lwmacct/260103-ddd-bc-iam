@@ -3,8 +3,8 @@ package pat
 import (
 	"go.uber.org/fx"
 
-	authInfra "github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/auth"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/infra/persistence"
+	authInfra "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/infra/auth"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/infra/persistence"
 )
 
 // PATUseCases 个人访问令牌用例处理器聚合

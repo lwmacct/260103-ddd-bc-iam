@@ -5,8 +5,8 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/internal/command/db"
-	"github.com/lwmacct/260103-ddd-bc-iam/internal/command/server"
+	"github.com/lwmacct/260103-ddd-iam-bc/internal/command/db"
+	"github.com/lwmacct/260103-ddd-iam-bc/internal/command/server"
 	"github.com/urfave/cli/v3"
 )
 

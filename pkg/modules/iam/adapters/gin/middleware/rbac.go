@@ -5,10 +5,10 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/role"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/ctxutil"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/permission"
 	"github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/response"
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/role"
 )
 
 // RequireOperation 检查用户是否有执行指定 Operation 的权限。

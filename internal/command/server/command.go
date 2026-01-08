@@ -9,7 +9,7 @@
 //	@BasePath        /
 //
 //	@contact.name    API Support
-//	@contact.url     https://github.com/lwmacct/260103-ddd-bc-iam
+//	@contact.url     https://github.com/lwmacct/260103-ddd-iam-bc
 //
 //	@license.name    MIT
 //	@license.url     https://opensource.org/licenses/MIT
@@ -22,7 +22,7 @@ package server
 
 import (
 	// Swagger docs - 空白导入触发 docs.go 的 init() 函数
-	_ "github.com/lwmacct/260103-ddd-bc-iam/docs/swagger"
+	_ "github.com/lwmacct/260103-ddd-iam-bc/docs/swagger"
 
 	"github.com/urfave/cli/v3"
 )

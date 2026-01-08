@@ -3,7 +3,7 @@ package auth
 import (
 	"context"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/role"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/role"
 )
 
 // PermissionCacheService 权限缓存服务接口。

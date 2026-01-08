@@ -42,6 +42,6 @@
 //
 // # 依赖关系
 //
-// 本包依赖 Handler 层（见 [handler](github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/adapters/gin/handler)），
-// 被 Router 容器（见 [internal/container/router](github.com/lwmacct/260103-ddd-bc-iam/internal/container/router)）消费。
+// 本包依赖 Handler 层（见 [handler](github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/adapters/gin/handler)），
+// 被 Router 容器（见 [internal/container/router](github.com/lwmacct/260103-ddd-iam-bc/internal/container/router)）消费。
 package routes

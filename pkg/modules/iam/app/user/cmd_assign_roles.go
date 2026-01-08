@@ -3,7 +3,7 @@ package user
 import (
 	"context"
 
-	"github.com/lwmacct/260103-ddd-bc-iam/pkg/modules/iam/domain/user"
+	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/user"
 	"github.com/lwmacct/260103-ddd-shared/pkg/shared/event"
 )
 
