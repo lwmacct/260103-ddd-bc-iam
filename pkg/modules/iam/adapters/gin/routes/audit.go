@@ -21,6 +21,15 @@ func Audit(auditHandler *handler.AuditHandler) []routes.Route {
 		},
 		{
 			Method:      routes.GET,
+			Path:        "/api/admin/audit/actions",
+			Handlers:    []gin.HandlerFunc{auditHandler.GetActions},
+			OperationID: "admin:audit:actions",
+			Tags:        []string{"admin-audit"},
+			Summary:     "审计操作定义",
+			Description: "获取所有审计操作的定义、分类和操作类型，供前端筛选器使用",
+		},
+		{
+			Method:      routes.GET,
 			Path:        "/api/admin/audit/{id}",
 			Handlers:    []gin.HandlerFunc{auditHandler.GetLog},
 			OperationID: "admin:audit:get",
