@@ -145,8 +145,8 @@ github.com/lwmacct/251207-go-pkg-cfgm v0.2.4 h1:qp9nPOser2rqS9/PxpYCwJIHO65ie5Xw
 github.com/lwmacct/251207-go-pkg-cfgm v0.2.4/go.mod h1:7IdZUoDbAYLjcxr3foSs0DrIOdTG7BQMraJei6YnoDY=
 github.com/lwmacct/251219-go-pkg-logm v0.1.8 h1:JuQHvZVZj5YpuPEDMjLrSxrGY9HKJljp95eTqFaVe9o=
 github.com/lwmacct/251219-go-pkg-logm v0.1.8/go.mod h1:Kw/aSDYy5d9VRAl5gwENiP0hqLzkkCjz91yw2gsMS/4=
-github.com/lwmacct/260103-ddd-bc-settings v0.20.260108 h1:5cdtNeKLd7PTgzVdahTNDJghRHi/j7gr+TLfLzFpeO0=
-github.com/lwmacct/260103-ddd-bc-settings v0.20.260108/go.mod h1:0Yj8YlkBESZpbPi18bM6dPRrYkkuzIt6p1RQvlOvlRA=
+github.com/lwmacct/260103-ddd-settings-bc v0.21.260109 h1:7CX9w0dR+lblEjNf0A6CnmSRq6N1qSFxD+4l5VqKHOc=
+github.com/lwmacct/260103-ddd-settings-bc v0.21.260109/go.mod h1:ALTdOt6qK6UTynf9OHGDKlVgSTxRm1+usv/bQSxr8KE=
 github.com/lwmacct/260103-ddd-shared v0.9.260108 h1:lD4dDL9bqiMF1z3d9W04g7W8LzqRso88evNn8ShXUYY=
 github.com/lwmacct/260103-ddd-shared v0.9.260108/go.mod h1:cx5Ch/DdhEmf6k4eVUuN5F175K8LcJh7tUHmahfcR9Q=
 github.com/mattn/go-isatty v0.0.20 h1:xfD0iDuEKnDkl03q4limB+vH+GxLEtL/jb4xVJSWWEY=

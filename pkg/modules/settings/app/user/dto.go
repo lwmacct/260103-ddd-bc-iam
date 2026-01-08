@@ -3,7 +3,7 @@ package user
 import (
 	"time"
 
-	setting "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/app/setting"
+	setting "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/app/setting"
 )
 
 // SettingsItemDTO 用户配置项响应（复用上游扁平结构类型）

@@ -20,8 +20,8 @@ import (
 	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/infra/persistence"
 
 	// Settings 模块 Handler
-	settingsHandler "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/handler"
-	settingsconfig "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/config"
+	settingsHandler "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/adapters/gin/handler"
+	settingsconfig "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/config"
 
 	ginHttp "github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin"
 	ginroutes "github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/routes"

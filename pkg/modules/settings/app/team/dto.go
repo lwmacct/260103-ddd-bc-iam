@@ -1,6 +1,6 @@
 package team
 
-import setting "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/app/setting"
+import setting "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/app/setting"
 
 // SettingsItemDTO 团队配置项响应（复用上游扁平结构类型）
 //

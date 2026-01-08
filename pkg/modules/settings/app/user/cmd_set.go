@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	settingdomain "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/domain/setting"
 	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/domain/user"
+	settingdomain "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/domain/setting"
 )
 
 // SetHandler 设置用户配置命令处理器

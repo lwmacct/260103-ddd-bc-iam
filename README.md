@@ -34,7 +34,7 @@ air
 ```bash
 # 1. 添加依赖
 go get github.com/lwmacct/260103-ddd-iam-bc
-go get github.com/lwmacct/260103-ddd-bc-settings  # Settings BC（被 IAM 依赖）
+go get github.com/lwmacct/260103-ddd-settings-bc  # Settings BC（被 IAM 依赖）
 go get github.com/lwmacct/260103-ddd-shared       # Platform & Shared 层
 
 # 2. 复制 Container 配置
@@ -103,7 +103,7 @@ pkg/modules/
     └── adapters/gin/           # 适配器层
 
 # 外部依赖 BC：
-# - github.com/lwmacct/260103-ddd-bc-settings
+# - github.com/lwmacct/260103-ddd-settings-bc
 #   └── 提供 Setting Schema 定义和校验逻辑
 # - github.com/lwmacct/260103-ddd-shared
 #   ├── pkg/platform/              # 纯技术基础设施（DB、Redis、EventBus、Queue、Telemetry）

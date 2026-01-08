@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"sort"
 
-	settingdomain "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/domain/setting"
 	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/domain/user"
+	settingdomain "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/domain/setting"
 )
 
 // ListHandler 获取用户配置列表查询处理器

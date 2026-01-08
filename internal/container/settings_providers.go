@@ -4,10 +4,10 @@ import (
 	"github.com/redis/go-redis/v9"
 	"go.uber.org/fx"
 
-	settingApp "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/app/setting"
-	settingDomain "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/domain/setting"
-	settingsCache "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/infra/cache"
 	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/config"
+	settingApp "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/app/setting"
+	settingDomain "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/domain/setting"
+	settingsCache "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/infra/cache"
 )
 
 // SettingsCacheResult 使用 fx.Out 提供缓存服务接口。

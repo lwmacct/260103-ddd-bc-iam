@@ -7,9 +7,9 @@ import (
 	ginroutes "github.com/lwmacct/260103-ddd-shared/pkg/platform/http/gin/routes"
 
 	// Settings (external dependency)
-	settingsHandler "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/handler"
-	settingsBCRoutes "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/adapters/gin/routes"
-	settingsconfig "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/config"
+	settingsHandler "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/adapters/gin/handler"
+	settingsBCRoutes "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/adapters/gin/routes"
+	settingsconfig "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/config"
 )
 
 // AllRoutesParams 聚合所有模块的路由依赖（通过 fx 注入）。

@@ -1,7 +1,7 @@
 package user
 
 import (
-	settingdomain "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/domain/setting"
+	settingdomain "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/domain/setting"
 )
 
 // FilterByVisibleToUser 过滤出对普通用户可见的设置

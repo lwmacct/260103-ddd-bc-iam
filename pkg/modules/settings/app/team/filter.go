@@ -1,7 +1,7 @@
 package team
 
 import (
-	settingdomain "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/domain/setting"
+	settingdomain "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/domain/setting"
 )
 
 // FilterByConfigurableAt 过滤出在指定级别可配置的设置

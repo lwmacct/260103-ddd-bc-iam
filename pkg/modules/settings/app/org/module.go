@@ -3,8 +3,8 @@ package org
 import (
 	"go.uber.org/fx"
 
-	settingpersistence "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/infra/persistence"
 	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/infra/persistence"
+	settingpersistence "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/infra/persistence"
 )
 
 // OrgUseCases 组织配置用例处理器聚合

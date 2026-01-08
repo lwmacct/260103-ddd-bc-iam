@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"sort"
 
-	settingdomain "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/domain/setting"
 	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/domain/org"
 	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/domain/team"
+	settingdomain "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/domain/setting"
 )
 
 // ListHandler 获取团队配置列表查询处理器

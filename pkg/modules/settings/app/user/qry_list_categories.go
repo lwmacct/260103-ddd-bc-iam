@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	settingdomain "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/domain/setting"
+	settingdomain "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/domain/setting"
 )
 
 // ListCategoriesHandler 获取分类列表查询处理器

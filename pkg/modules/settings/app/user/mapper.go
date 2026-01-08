@@ -3,9 +3,9 @@ package user
 import (
 	"encoding/json"
 
-	setting "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/app/setting"
-	settingdomain "github.com/lwmacct/260103-ddd-bc-settings/pkg/modules/settings/domain/setting"
 	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/settings/domain/user"
+	setting "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/app/setting"
+	settingdomain "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/domain/setting"
 )
 
 // ToSettingsItemDTO 将配置定义和用户配置合并为扁平结构 DTO
