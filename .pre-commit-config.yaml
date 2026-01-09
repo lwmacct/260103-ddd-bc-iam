@@ -7,17 +7,10 @@ repos:
       # ========== 后端检查 ==========
       - id: swagger-generate
         name: Generate Swagger docs
-        entry: pnpm run gen:swagger
+        entry: pnpm run gen
         language: system
         pass_filenames: false
         files: (internal/command/server/[^/]+$|^go\.mod$)
-
-      - id: openapi-generator
-        name: Generate TypeScript SDK
-        entry: pnpm run gen:openapi
-        language: system
-        pass_filenames: false
-        files: gen/swagger/swagger\.json
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
