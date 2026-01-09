@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "gen:swagger": "swag init -g internal/command/server/command.go -o gen/swagger --parseDependencyLevel 3 --parseInternal",
+    "gen:openapi": "rm -rf gen/openapi && openapi-generator-cli generate -i gen/swagger/swagger.json -g typescript-axios -o gen/openapi --additional-properties=supportsES6=true,withSeparateModelsAndApi=true,apiPackage=api,modelPackage=models",
+    "gen": "npm run gen:swagger && npm run gen:openapi"
+  },
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.26.0"
+  }
+}
