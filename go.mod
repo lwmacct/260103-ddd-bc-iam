@@ -8,8 +8,8 @@ require (
 	github.com/go-resty/resty/v2 v2.17.1
 	github.com/golang-jwt/jwt/v5 v5.3.0
 	github.com/google/uuid v1.6.0
-	github.com/lwmacct/251207-go-pkg-cfgm v0.2.4
-	github.com/lwmacct/251219-go-pkg-logm v0.1.8
+	github.com/lwmacct/251207-go-pkg-cfgm v0.2.260109
+	github.com/lwmacct/251219-go-pkg-logm v0.2.260114
 	github.com/lwmacct/260103-ddd-settings-bc v0.21.260109
 	github.com/lwmacct/260103-ddd-shared v0.9.260108
 	github.com/pquerna/otp v1.5.0
