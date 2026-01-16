@@ -10,8 +10,8 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/lwmacct/251207-go-pkg-cfgm v0.2.260109
 	github.com/lwmacct/251219-go-pkg-logm v0.2.260114
-	github.com/lwmacct/260103-ddd-settings-bc v0.21.260109
-	github.com/lwmacct/260103-ddd-shared v0.9.260108
+	github.com/lwmacct/260103-ddd-settings-bc v0.22.260116
+	github.com/lwmacct/260103-ddd-shared v0.13.260116
 	github.com/pquerna/otp v1.5.0
 	github.com/redis/go-redis/v9 v9.17.2
 	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e
