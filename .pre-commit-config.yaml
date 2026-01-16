@@ -4,10 +4,9 @@ fail_fast: true
 repos:
   - repo: local
     hooks:
-      # ========== 后端检查 ==========
-      - id: swagger-generate
+      - id: gen-swagger
         name: Generate Swagger docs
-        entry: pnpm run gen
+        entry: swag init -g internal/command/server/command.go -o gen/swagger --parseDependencyLevel 3 --parseInternal
         language: system
         pass_filenames: false
         files: (internal/command/server/[^/]+$|^go\.mod$)
