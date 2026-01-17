@@ -88,13 +88,8 @@ func (h *RoleHandler) CreateRole(c *gin.Context) {
 		return
 	}
 
-	// 转换为 DTO 响应
-	resp := role.CreateResultDTO{
-		RoleID:      result.RoleID,
-		Name:        result.Name,
-		DisplayName: result.DisplayName,
-	}
-	response.Created(c, resp)
+	// 直接使用 Application 层返回的 DTO
+	response.Created(c, result)
 }
 
 // ListRoles lists all roles

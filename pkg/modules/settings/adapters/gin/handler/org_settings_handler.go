@@ -32,7 +32,7 @@ func NewOrgSettingHandler(useCases *org.OrgUseCases) *OrgSettingHandler {
 //
 //	@Summary		组织配置列表
 //	@Description	获取当前组织的配置列表（系统默认值+组织自定义值合并视图）
-//	@Tags			settings-org
+//	@Tags			org-setting
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -70,7 +70,7 @@ func (h *OrgSettingHandler) List(c *gin.Context) {
 //
 //	@Summary		获取组织配置
 //	@Description	获取指定配置项的值（系统默认值或组织自定义值）
-//	@Tags			settings-org
+//	@Tags			org-setting
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -112,7 +112,7 @@ func (h *OrgSettingHandler) Get(c *gin.Context) {
 //
 //	@Summary		设置组织配置
 //	@Description	设置指定配置项的值（组织自定义覆盖）
-//	@Tags			settings-org
+//	@Tags			org-setting
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -170,7 +170,7 @@ func (h *OrgSettingHandler) Set(c *gin.Context) {
 //
 //	@Summary		重置组织配置
 //	@Description	重置指定配置项（删除组织自定义值，恢复系统默认值）
-//	@Tags			settings-org
+//	@Tags			org-setting
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth

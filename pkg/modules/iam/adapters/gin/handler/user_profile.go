@@ -102,7 +102,7 @@ func (h *UserProfileHandler) UpdateProfile(c *gin.Context) {
 		return
 	}
 
-	if _, err := h.updateUserHandler.Handle(c.Request.Context(), user.UpdateCommand{
+	updatedUser, err := h.updateUserHandler.Handle(c.Request.Context(), user.UpdateCommand{
 		UserID:    uid,
 		RealName:  req.RealName,
 		Nickname:  req.Nickname,
@@ -110,14 +110,6 @@ func (h *UserProfileHandler) UpdateProfile(c *gin.Context) {
 		Signature: req.Signature,
 		Avatar:    req.Avatar,
 		Bio:       req.Bio,
-	}); err != nil {
-		response.InternalError(c, err.Error())
-		return
-	}
-
-	updatedUser, err := h.getUserHandler.Handle(c.Request.Context(), user.GetQuery{
-		UserID:    uid,
-		WithRoles: true,
 	})
 	if err != nil {
 		response.InternalError(c, err.Error())

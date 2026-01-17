@@ -8,10 +8,15 @@ import (
 // ToIAMConfig 从通用配置转换到 IAM 专属配置。
 func ToIAMConfig(cfg *config.Config) iamconfig.Config {
 	return iamconfig.Config{
-		JWT:  cfg.JWT,
-		Auth: cfg.Auth,
-		Redis: iamconfig.Redis{
-			KeyPrefix: cfg.Data.RedisKeyPrefix,
+		JWT: iamconfig.JWT{
+			Secret:             cfg.JWT.Secret,
+			AccessTokenExpiry:  cfg.JWT.AccessTokenExpiry,
+			RefreshTokenExpiry: cfg.JWT.RefreshTokenExpiry,
+		},
+		Auth: iamconfig.Auth{
+			DevSecret:       cfg.Auth.DevSecret,
+			TwoFAIssuer:     cfg.Auth.TwoFAIssuer,
+			CaptchaRequired: cfg.Auth.CaptchaRequired,
 		},
 	}
 }

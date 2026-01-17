@@ -16,14 +16,8 @@ type Auth struct {
 	CaptchaRequired bool   `koanf:"captcha-required"`
 }
 
-// Redis
-type Redis struct {
-	KeyPrefix string `koanf:"key-prefix"`
-}
-
 // Config IAM 模块配置
 type Config struct {
-	JWT   JWT   `koanf:"jwt"`
-	Auth  Auth  `koanf:"auth"`
-	Redis Redis `koanf:"redis"`
+	JWT  JWT  `koanf:"jwt"`
+	Auth Auth `koanf:"auth"`
 }

@@ -15,8 +15,5 @@ func DefaultConfig() Config {
 			TwoFAIssuer:     "Go-DDD-Package-Lib",
 			CaptchaRequired: true,
 		},
-		Redis: Redis{
-			KeyPrefix: "app:",
-		},
 	}
 }

@@ -31,7 +31,7 @@ import (
 // 组件：
 //   - OpenTelemetry 链路追踪
 //   - PostgreSQL 数据库连接
-//   - Redis 客户端
+//   - Redis 客户端 + KeyPrefix
 //   - 内存事件总线
 //
 // 生命周期：
@@ -42,6 +42,7 @@ var InfraModule = fx.Module("infra",
 		newTelemetry,
 		newDatabase,
 		newRedisClient,
+		newRedisKeyPrefix,
 		newEventBus,
 		newIAMConfig,
 		newSettingsCacheService,
@@ -236,6 +237,11 @@ func newRedisClient(lc fx.Lifecycle, cfg *config.Config) (*redis.Client, error) 
 	})
 
 	return client, nil
+}
+
+// newRedisKeyPrefix 提供 Redis key 前缀配置。
+func newRedisKeyPrefix(cfg *config.Config) string {
+	return cfg.Data.RedisKeyPrefix
 }
 
 func newEventBus(lc fx.Lifecycle) event.EventBus {

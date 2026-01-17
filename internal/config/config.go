@@ -4,8 +4,6 @@ package config
 import (
 	"strings"
 	"time"
-
-	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/config"
 )
 
 // Server 服务器配置
@@ -33,14 +31,27 @@ type Telemetry struct {
 	SampleRate   float64 `koanf:"sample-rate" desc:"采样率 (0.0-1.0)，1.0 表示全部采样"`
 }
 
+// JWT
+type JWT struct {
+	Secret             string        `koanf:"secret" desc:"JWT 签名密钥"`
+	AccessTokenExpiry  time.Duration `koanf:"access-token-expiry" desc:"访问令牌过期时间"`
+	RefreshTokenExpiry time.Duration `koanf:"refresh-token-expiry" desc:"刷新令牌过期时间"`
+}
+
+// Auth 认证配置
+type Auth struct {
+	DevSecret       string `koanf:"dev-secret" desc:"开发环境密钥"`
+	TwoFAIssuer     string `koanf:"twofa-issuer" desc:"双因素认证颁发者"`
+	CaptchaRequired bool   `koanf:"captcha-required" desc:"是否需要验证码"`
+}
+
 // Config 应用配置
 type Config struct {
-	Server    Server       `koanf:"server" desc:"服务器配置"`
-	Data      Data         `koanf:"data" desc:"数据源配置"`
-	JWT       config.JWT   `koanf:"jwt" desc:"JWT 认证配置"`
-	Auth      config.Auth  `koanf:"auth" desc:"认证配置"`
-	Telemetry Telemetry    `koanf:"telemetry" desc:"OpenTelemetry 追踪配置"`
-	Redis     config.Redis `koanf:"redis" desc:"Redis 配置"`
+	Server    Server    `koanf:"server" desc:"服务器配置"`
+	Data      Data      `koanf:"data" desc:"数据源配置"`
+	JWT       JWT       `koanf:"jwt" desc:"JWT 认证配置"`
+	Auth      Auth      `koanf:"auth" desc:"认证配置"`
+	Telemetry Telemetry `koanf:"telemetry" desc:"OpenTelemetry 追踪配置"`
 }
 
 // GetBaseUrl 返回服务的基础URL
@@ -75,12 +86,12 @@ func DefaultConfig() Config {
 			RedisKeyPrefix: "app:",
 			AutoMigrate:    false, // 默认关闭自动迁移，生产环境使用 migrate 命令
 		},
-		JWT: config.JWT{
+		JWT: JWT{
 			Secret:             "change-me-in-production",
 			AccessTokenExpiry:  15 * time.Minute,
 			RefreshTokenExpiry: 7 * 24 * time.Hour,
 		},
-		Auth: config.Auth{
+		Auth: Auth{
 			DevSecret:       "dev-secret-change-me",
 			TwoFAIssuer:     "Go-DDD-Package-Lib",
 			CaptchaRequired: true, // 默认开启验证码
@@ -90,9 +101,6 @@ func DefaultConfig() Config {
 			ExporterType: "none", // 默认不导出
 			OTLPEndpoint: "localhost:4317",
 			SampleRate:   1.0, // 默认全部采样
-		},
-		Redis: config.Redis{
-			KeyPrefix: "app:",
 		},
 	}
 }

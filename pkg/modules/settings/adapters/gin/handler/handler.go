@@ -38,7 +38,7 @@ func NewUserSettingHandler(useCases *user.UserUseCases) *UserSettingHandler {
 //
 //	@Summary		配置列表
 //	@Description	获取当前用户的配置列表（系统默认值+用户自定义值合并视图）
-//	@Tags			settings-user
+//	@Tags			user-setting
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -50,7 +50,7 @@ func NewUserSettingHandler(useCases *user.UserUseCases) *UserSettingHandler {
 func (h *UserSettingHandler) List(c *gin.Context) {
 	uid, ok := ctxutil.Get[uint](c, ctxutil.UserID)
 	if !ok {
-		response.Unauthorized(c, "user not authenticated")
+		response.Unauthorized(c, response.MsgAuthenticationRequired)
 		return
 	}
 
@@ -74,7 +74,7 @@ func (h *UserSettingHandler) List(c *gin.Context) {
 //
 //	@Summary		分类列表
 //	@Description	获取配置分类列表
-//	@Tags			settings-user
+//	@Tags			user-setting
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -85,7 +85,7 @@ func (h *UserSettingHandler) List(c *gin.Context) {
 func (h *UserSettingHandler) ListCategories(c *gin.Context) {
 	uid, ok := ctxutil.Get[uint](c, ctxutil.UserID)
 	if !ok {
-		response.Unauthorized(c, "user not authenticated")
+		response.Unauthorized(c, response.MsgAuthenticationRequired)
 		return
 	}
 
@@ -106,7 +106,7 @@ func (h *UserSettingHandler) ListCategories(c *gin.Context) {
 //
 //	@Summary		获取配置
 //	@Description	获取指定配置项的值（系统默认值或用户自定义值）
-//	@Tags			settings-user
+//	@Tags			user-setting
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -119,7 +119,7 @@ func (h *UserSettingHandler) ListCategories(c *gin.Context) {
 func (h *UserSettingHandler) Get(c *gin.Context) {
 	uid, ok := ctxutil.Get[uint](c, ctxutil.UserID)
 	if !ok {
-		response.Unauthorized(c, "user not authenticated")
+		response.Unauthorized(c, response.MsgAuthenticationRequired)
 		return
 	}
 
@@ -146,7 +146,7 @@ func (h *UserSettingHandler) Get(c *gin.Context) {
 //
 //	@Summary		设置配置
 //	@Description	设置指定配置项的值（用户自定义覆盖）
-//	@Tags			settings-user
+//	@Tags			user-setting
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -160,7 +160,7 @@ func (h *UserSettingHandler) Get(c *gin.Context) {
 func (h *UserSettingHandler) Set(c *gin.Context) {
 	uid, ok := ctxutil.Get[uint](c, ctxutil.UserID)
 	if !ok {
-		response.Unauthorized(c, "user not authenticated")
+		response.Unauthorized(c, response.MsgAuthenticationRequired)
 		return
 	}
 
@@ -202,7 +202,7 @@ func (h *UserSettingHandler) Set(c *gin.Context) {
 //
 //	@Summary		批量设置
 //	@Description	批量设置多个配置项的值
-//	@Tags			settings-user
+//	@Tags			user-setting
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -215,7 +215,7 @@ func (h *UserSettingHandler) Set(c *gin.Context) {
 func (h *UserSettingHandler) BatchSet(c *gin.Context) {
 	uid, ok := ctxutil.Get[uint](c, ctxutil.UserID)
 	if !ok {
-		response.Unauthorized(c, "user not authenticated")
+		response.Unauthorized(c, response.MsgAuthenticationRequired)
 		return
 	}
 
@@ -264,7 +264,7 @@ func (h *UserSettingHandler) BatchSet(c *gin.Context) {
 //
 //	@Summary		重置配置
 //	@Description	重置指定配置项（删除用户自定义值，恢复系统默认值）
-//	@Tags			settings-user
+//	@Tags			user-setting
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -276,7 +276,7 @@ func (h *UserSettingHandler) BatchSet(c *gin.Context) {
 func (h *UserSettingHandler) Reset(c *gin.Context) {
 	uid, ok := ctxutil.Get[uint](c, ctxutil.UserID)
 	if !ok {
-		response.Unauthorized(c, "user not authenticated")
+		response.Unauthorized(c, response.MsgAuthenticationRequired)
 		return
 	}
 
@@ -302,7 +302,7 @@ func (h *UserSettingHandler) Reset(c *gin.Context) {
 //
 //	@Summary		重置所有配置
 //	@Description	重置所有用户自定义配置（恢复系统默认值）
-//	@Tags			settings-user
+//	@Tags			user-setting
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -313,7 +313,7 @@ func (h *UserSettingHandler) Reset(c *gin.Context) {
 func (h *UserSettingHandler) ResetAll(c *gin.Context) {
 	uid, ok := ctxutil.Get[uint](c, ctxutil.UserID)
 	if !ok {
-		response.Unauthorized(c, "user not authenticated")
+		response.Unauthorized(c, response.MsgAuthenticationRequired)
 		return
 	}
 
@@ -326,5 +326,5 @@ func (h *UserSettingHandler) ResetAll(c *gin.Context) {
 		return
 	}
 
-	response.OK(c, gin.H{"message": "all settings reset to default"})
+	response.OK(c, nil)
 }

@@ -24,8 +24,8 @@ func NewUpdateHandler(
 	}
 }
 
-// Handle 处理更新用户命令
-func (h *UpdateHandler) Handle(ctx context.Context, cmd UpdateCommand) (*UpdateResultDTO, error) {
+// Handle 处理更新用户命令，返回完整用户信息（包含角色）
+func (h *UpdateHandler) Handle(ctx context.Context, cmd UpdateCommand) (*UserWithRolesDTO, error) {
 	// 1. 获取用户
 	u, err := h.userQueryRepo.GetByID(ctx, cmd.UserID)
 	if err != nil {
@@ -100,9 +100,14 @@ func (h *UpdateHandler) Handle(ctx context.Context, cmd UpdateCommand) (*UpdateR
 		return nil, fmt.Errorf("failed to update user: %w", err)
 	}
 
-	return &UpdateResultDTO{
-		UserID: u.ID,
-	}, nil
+	// 4. 获取更新后的完整用户信息（包含角色）
+	updatedUser, err := h.userQueryRepo.GetByIDWithRoles(ctx, u.ID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get updated user: %w", err)
+	}
+
+	// 5. 转换为 DTO
+	return ToUserWithRolesDTO(updatedUser), nil
 }
 
 // validateEmailChange 验证邮箱变更是否合法。

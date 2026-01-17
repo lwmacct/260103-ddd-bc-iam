@@ -32,7 +32,7 @@ func NewTeamSettingHandler(useCases *team.TeamUseCases) *TeamSettingHandler {
 //
 //	@Summary		团队配置列表
 //	@Description	获取当前团队的配置列表（支持三级继承：团队>组织>系统默认值）
-//	@Tags			settings-team
+//	@Tags			team-setting
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -78,7 +78,7 @@ func (h *TeamSettingHandler) List(c *gin.Context) {
 //
 //	@Summary		获取团队配置
 //	@Description	获取指定配置项的值（支持三级继承：团队>组织>系统默认值）
-//	@Tags			settings-team
+//	@Tags			team-setting
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -128,7 +128,7 @@ func (h *TeamSettingHandler) Get(c *gin.Context) {
 //
 //	@Summary		设置团队配置
 //	@Description	设置指定配置项的值（团队自定义覆盖）
-//	@Tags			settings-team
+//	@Tags			team-setting
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth
@@ -187,7 +187,7 @@ func (h *TeamSettingHandler) Set(c *gin.Context) {
 //
 //	@Summary		重置团队配置
 //	@Description	重置指定配置项（删除团队自定义值，恢复组织配置或系统默认值）
-//	@Tags			settings-team
+//	@Tags			team-setting
 //	@Accept			json
 //	@Produce		json
 //	@Security		BearerAuth

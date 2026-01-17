@@ -4,7 +4,6 @@ import (
 	"github.com/redis/go-redis/v9"
 	"go.uber.org/fx"
 
-	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/config"
 	settingApp "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/app/setting"
 	settingDomain "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/domain/setting"
 	settingsCache "github.com/lwmacct/260103-ddd-settings-bc/pkg/modules/settings/infra/cache"
@@ -23,14 +22,14 @@ type SettingsCacheResult struct {
 
 // newSettingsCacheService 创建 Settings 缓存服务。
 //
-// 绕过 Settings 包的 internal/config.Config 依赖，直接从 IAM 配置中提取 Redis Key Prefix。
+// Platform 配置（keyPrefix）由容器层直接注入。
 //
 // 导出两个接口：
 //   - SettingsCacheService：Application 层使用
 //   - SettingChangeNotifier：Infrastructure 层的缓存装饰器使用
-func newSettingsCacheService(client *redis.Client, iamCfg *config.Config) SettingsCacheResult {
+func newSettingsCacheService(client *redis.Client, keyPrefix string) SettingsCacheResult {
 	// 创建缓存服务（内部类型）
-	service := settingsCache.NewSettingsCacheService(client, iamCfg.Redis.KeyPrefix)
+	service := settingsCache.NewSettingsCacheService(client, keyPrefix)
 
 	// 类型断言：确保实现了 SettingChangeNotifier 接口
 	// （外部模块的 settingsCacheService 实现了该接口）

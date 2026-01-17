@@ -1,4 +1,4 @@
-// Package auditlog 实现审计日志的应用层用例。
+// Package audit 实现审计日志的应用层用例。
 //
 // 本包仅提供 Query Handler（审计日志只读）：
 //

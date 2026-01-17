@@ -74,16 +74,7 @@ func (h *AdminUserHandler) CreateUser(c *gin.Context) {
 		return
 	}
 
-	result, err := h.createUserHandler.Handle(c.Request.Context(), user.CreateCommand(dto))
-	if err != nil {
-		response.InternalError(c, err.Error())
-		return
-	}
-
-	createdUser, err := h.getUserHandler.Handle(c.Request.Context(), user.GetQuery{
-		UserID:    result.UserID,
-		WithRoles: true,
-	})
+	createdUser, err := h.createUserHandler.Handle(c.Request.Context(), user.CreateCommand(dto))
 	if err != nil {
 		response.InternalError(c, err.Error())
 		return
@@ -191,7 +182,7 @@ func (h *AdminUserHandler) UpdateUser(c *gin.Context) {
 		return
 	}
 
-	_, err = h.updateUserHandler.Handle(c.Request.Context(), user.UpdateCommand{
+	updatedUser, err := h.updateUserHandler.Handle(c.Request.Context(), user.UpdateCommand{
 		UserID:    uint(id),
 		Username:  dto.Username,
 		Email:     dto.Email,
@@ -202,15 +193,6 @@ func (h *AdminUserHandler) UpdateUser(c *gin.Context) {
 		Avatar:    dto.Avatar,
 		Bio:       dto.Bio,
 		Status:    dto.Status,
-	})
-	if err != nil {
-		response.InternalError(c, err.Error())
-		return
-	}
-
-	updatedUser, err := h.getUserHandler.Handle(c.Request.Context(), user.GetQuery{
-		UserID:    uint(id),
-		WithRoles: true,
 	})
 	if err != nil {
 		response.InternalError(c, err.Error())
@@ -283,18 +265,9 @@ func (h *AdminUserHandler) AssignRoles(c *gin.Context) {
 		return
 	}
 
-	if err = h.assignRolesHandler.Handle(c.Request.Context(), user.AssignRolesCommand{
+	updatedUser, err := h.assignRolesHandler.Handle(c.Request.Context(), user.AssignRolesCommand{
 		UserID:  uint(id),
 		RoleIDs: req.RoleIDs,
-	}); err != nil {
-		response.InternalError(c, err.Error())
-		return
-	}
-
-	// 获取更新后的用户信息（包含角色）
-	updatedUser, err := h.getUserHandler.Handle(c.Request.Context(), user.GetQuery{
-		UserID:    uint(id),
-		WithRoles: true,
 	})
 	if err != nil {
 		response.InternalError(c, err.Error())

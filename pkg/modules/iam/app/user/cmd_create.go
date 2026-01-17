@@ -28,8 +28,8 @@ func NewCreateHandler(
 	}
 }
 
-// Handle 处理创建用户命令
-func (h *CreateHandler) Handle(ctx context.Context, cmd CreateCommand) (*CreateResultDTO, error) {
+// Handle 处理创建用户命令，返回完整用户信息（包含角色）
+func (h *CreateHandler) Handle(ctx context.Context, cmd CreateCommand) (*UserWithRolesDTO, error) {
 	// 1. 验证密码策略
 	if err := h.authService.ValidatePasswordPolicy(ctx, cmd.Password); err != nil {
 		return nil, err
@@ -98,9 +98,12 @@ func (h *CreateHandler) Handle(ctx context.Context, cmd CreateCommand) (*CreateR
 		}
 	}
 
-	return &CreateResultDTO{
-		UserID:   newUser.ID,
-		Username: newUser.Username,
-		Email:    stringPtrValue(newUser.Email),
-	}, nil
+	// 8. 获取完整用户信息（包含角色）
+	createdUser, err := h.userQueryRepo.GetByIDWithRoles(ctx, newUser.ID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get created user: %w", err)
+	}
+
+	// 9. 转换为 DTO
+	return ToUserWithRolesDTO(createdUser), nil
 }

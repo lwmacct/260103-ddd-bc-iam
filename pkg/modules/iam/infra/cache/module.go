@@ -5,7 +5,6 @@ import (
 	"go.uber.org/fx"
 
 	appauth "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/app/auth"
-	config "github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/config"
 	"github.com/lwmacct/260103-ddd-iam-bc/pkg/modules/iam/domain/user"
 )
 
@@ -18,11 +17,13 @@ var CacheModule = fx.Module("iam.cache",
 )
 
 // newPermissionCacheService 创建权限缓存服务。
-func newPermissionCacheService(client *redis.Client, iamCfg *config.Config) appauth.PermissionCacheService {
-	return NewPermissionCacheService(client, iamCfg.Redis.KeyPrefix)
+// Platform 配置（keyPrefix）由容器层直接注入。
+func newPermissionCacheService(client *redis.Client, keyPrefix string) appauth.PermissionCacheService {
+	return NewPermissionCacheService(client, keyPrefix)
 }
 
 // newUserWithRolesCacheService 创建用户实体缓存服务。
-func newUserWithRolesCacheService(client *redis.Client, iamCfg *config.Config) user.UserWithRolesCacheService {
-	return NewUserWithRolesCacheService(client, iamCfg.Redis.KeyPrefix)
+// Platform 配置（keyPrefix）由容器层直接注入。
+func newUserWithRolesCacheService(client *redis.Client, keyPrefix string) user.UserWithRolesCacheService {
+	return NewUserWithRolesCacheService(client, keyPrefix)
 }

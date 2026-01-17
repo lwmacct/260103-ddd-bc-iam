@@ -44,7 +44,7 @@ func (h *TwoFAHandler) Setup(c *gin.Context) {
 
 	userID, ok := ctxutil.Get[uint](c, ctxutil.UserID)
 	if !ok {
-		response.Unauthorized(c, "No user ID found")
+		response.Unauthorized(c, response.MsgAuthenticationRequired)
 		return
 	}
 
@@ -56,13 +56,8 @@ func (h *TwoFAHandler) Setup(c *gin.Context) {
 		return
 	}
 
-	// 转换为 DTO
-	resp := twofa.SetupDTO{
-		Secret:    result.Secret,
-		QRCodeURL: result.QRCodeURL,
-		QRCodeImg: result.QRCodeImg,
-	}
-	response.OK(c, resp)
+	// 直接使用 Application 层返回的 DTO（字段与 SetupDTO 完全相同）
+	response.OK(c, result)
 }
 
 // VerifyAndEnable 验证 TOTP 代码并启用 2FA
@@ -83,7 +78,7 @@ func (h *TwoFAHandler) VerifyAndEnable(c *gin.Context) {
 
 	userID, ok := ctxutil.Get[uint](c, ctxutil.UserID)
 	if !ok {
-		response.Unauthorized(c, "No user ID found")
+		response.Unauthorized(c, response.MsgAuthenticationRequired)
 		return
 	}
 
@@ -102,6 +97,7 @@ func (h *TwoFAHandler) VerifyAndEnable(c *gin.Context) {
 		return
 	}
 
+	// 构建响应 DTO（添加 Message 字段）
 	resp := twofa.EnableDTO{
 		RecoveryCodes: result.RecoveryCodes,
 		Message:       "Please save these recovery codes in a safe place. You won't be able to see them again.",
@@ -126,7 +122,7 @@ func (h *TwoFAHandler) Disable(c *gin.Context) {
 
 	userID, ok := ctxutil.Get[uint](c, ctxutil.UserID)
 	if !ok {
-		response.Unauthorized(c, "No user ID found")
+		response.Unauthorized(c, response.MsgAuthenticationRequired)
 		return
 	}
 
@@ -157,7 +153,7 @@ func (h *TwoFAHandler) GetStatus(c *gin.Context) {
 
 	userID, ok := ctxutil.Get[uint](c, ctxutil.UserID)
 	if !ok {
-		response.Unauthorized(c, "No user ID found")
+		response.Unauthorized(c, response.MsgAuthenticationRequired)
 		return
 	}
 
@@ -169,9 +165,6 @@ func (h *TwoFAHandler) GetStatus(c *gin.Context) {
 		return
 	}
 
-	resp := twofa.StatusDTO{
-		Enabled:            result.Enabled,
-		RecoveryCodesCount: result.RecoveryCodesCount,
-	}
-	response.OK(c, resp)
+	// 直接使用 Application 层返回的 DTO（字段与 StatusDTO 完全相同）
+	response.OK(c, result)
 }
