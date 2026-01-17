@@ -81,7 +81,7 @@ func NewMiddlewareInjector(p RouterDepsParams) *MiddlewareInjector {
 	// Audit 中间件工厂（可选）
 	if p.AuditCreateHandler != nil {
 		injector.auditFactory = func(operation string) gin.HandlerFunc {
-			return nil // TODO: 实现 AuditMiddleware
+			return middleware.Audit(p.AuditCreateHandler, operation)
 		}
 	}
 

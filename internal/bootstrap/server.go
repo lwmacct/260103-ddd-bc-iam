@@ -2,6 +2,7 @@ package bootstrap
 
 import (
 	"context"
+	"log/slog"
 	"net/http"
 	"time"
 
@@ -13,6 +14,7 @@ import (
 type Server struct {
 	engine *gin.Engine
 	addr   string
+	srv    *http.Server
 }
 
 // NewServer 创建 HTTP Server
@@ -25,16 +27,19 @@ func NewServer(engine *gin.Engine, cfg *config.Config) *Server {
 
 // Start 启动 HTTP Server
 func (s *Server) Start() error {
-	srv := &http.Server{
+	s.srv = &http.Server{
 		Addr:              s.addr,
 		Handler:           s.engine,
 		ReadHeaderTimeout: 10 * time.Second, // 防止 Slowloris 攻击
 	}
-	return srv.ListenAndServe()
+	return s.srv.ListenAndServe()
 }
 
 // Stop 优雅关闭 HTTP Server
 func (s *Server) Stop(ctx context.Context) error {
-	// TODO: 实现优雅关闭
-	return nil
+	if s.srv == nil {
+		return nil
+	}
+	slog.Info("Shutting down HTTP server gracefully")
+	return s.srv.Shutdown(ctx)
 }
